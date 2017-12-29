@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.yczbj.ycrefreshview">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".first.RefreshAndMoreActivity"/>
+        <activity android:name=".second.HeaderFooterActivity"/>
+        <activity android:name=".three.ThirdInsertActivity"/>
+        <activity android:name=".four.FourHorizontalActivity"/>
+        <activity android:name=".five.FiveMultiStyleActivity"/>
+        <activity android:name=".six.SixStickyHeaderActivity"/>
+        <activity android:name=".seven.SevenStaggeredGridActivity"/>
+        <activity android:name=".eight.EightCollapsingActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+    </application>
+
+</manifest>
