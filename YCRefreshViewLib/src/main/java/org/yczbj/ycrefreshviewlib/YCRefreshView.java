@@ -92,8 +92,8 @@ public class YCRefreshView extends FrameLayout {
             mPaddingBottom = (int) a.getDimension(R.styleable.YCRefreshView_recyclerPaddingBottom, 0.0f);
             mPaddingLeft = (int) a.getDimension(R.styleable.YCRefreshView_recyclerPaddingLeft, 0.0f);
             mPaddingRight = (int) a.getDimension(R.styleable.YCRefreshView_recyclerPaddingRight, 0.0f);
-            mScrollbarStyle = a.getInteger(R.styleable.YCRefreshView_scrollbarStyle, -1);
-            mScrollbar = a.getInteger(R.styleable.YCRefreshView_scrollbars, -1);
+            mScrollbarStyle = a.getInteger(R.styleable.YCRefreshView_ycScrollbarStyle, -1);
+            mScrollbar = a.getInteger(R.styleable.YCRefreshView_ycScrollbars, -1);
             mEmptyId = a.getResourceId(R.styleable.YCRefreshView_layout_empty, 0);
             mProgressId = a.getResourceId(R.styleable.YCRefreshView_layout_progress, 0);
             mErrorId = a.getResourceId(R.styleable.YCRefreshView_layout_error, 0);
