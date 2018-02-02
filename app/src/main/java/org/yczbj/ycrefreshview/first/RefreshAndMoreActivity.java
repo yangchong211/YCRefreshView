@@ -52,19 +52,12 @@ public class RefreshAndMoreActivity extends AppCompatActivity implements
                 (int)Utils.convertDpToPixel(1,this), this.getResources().getColor(R.color.colorAccent));
         recyclerView.addItemDecoration(line);
 
-//        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<Person>(this) {
-//            @Override
-//            public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-//                return new PersonViewHolder(parent);
-//            }
-//        });
-        recyclerView.setAdapter(adapter = new RecyclerArrayAdapter<Person>(this) {
+        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<Person>(this) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 return new PersonViewHolder(parent);
             }
         });
-        recyclerView.showProgress();
         adapter.setMore(R.layout.view_more, this);
         adapter.setNoMore(R.layout.view_nomore);
         adapter.setOnItemLongClickListener(new RecyclerArrayAdapter.OnItemLongClickListener() {
@@ -110,7 +103,6 @@ public class RefreshAndMoreActivity extends AppCompatActivity implements
                 }
                 adapter.addAll(DataProvider.getPersonList(page));
                 page++;
-                recyclerView.showRecycler();
             }
         }, 2000);
     }
@@ -129,7 +121,6 @@ public class RefreshAndMoreActivity extends AppCompatActivity implements
                 }
                 adapter.addAll(DataProvider.getPersonList(page));
                 page=1;
-                recyclerView.showRecycler();
             }
         }, 2000);
     }

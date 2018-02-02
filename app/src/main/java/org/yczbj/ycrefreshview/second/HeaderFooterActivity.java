@@ -1,5 +1,6 @@
 package org.yczbj.ycrefreshview.second;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,12 +22,14 @@ import com.jude.rollviewpager.hintview.ColorPointHintView;
 
 import org.yczbj.ycrefreshview.other.DataProvider;
 import org.yczbj.ycrefreshview.R;
+import org.yczbj.ycrefreshview.other.Person;
 import org.yczbj.ycrefreshview.other.Utils;
 import org.yczbj.ycrefreshview.first.PersonAdapter;
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.item.DividerViewItemLine;
 import org.yczbj.ycrefreshviewlib.item.SpaceViewItemLine;
+import org.yczbj.ycrefreshviewlib.swipeMenu.OnSwipeMenuListener;
 
 
 public class HeaderFooterActivity extends AppCompatActivity {
@@ -40,7 +43,8 @@ public class HeaderFooterActivity extends AppCompatActivity {
         recyclerView = (YCRefreshView) findViewById(R.id.recyclerView);
         recyclerView.setAdapter(adapter = new PersonAdapter(this));
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
         DividerViewItemLine itemDecoration = new DividerViewItemLine(Color.GRAY, Util.dip2px(this,0.5f),
                 Util.dip2px(this,72),0);
         itemDecoration.setDrawLastItem(true);
@@ -85,6 +89,7 @@ public class HeaderFooterActivity extends AppCompatActivity {
             public View onCreateView(ViewGroup parent) {
                 RecyclerView recyclerView = new RecyclerView(parent.getContext()){
                     //为了不打扰横向RecyclerView的滑动操作，可以这样处理
+                    @SuppressLint("ClickableViewAccessibility")
                     @Override
                     public boolean onTouchEvent(MotionEvent event) {
                         super.onTouchEvent(event);
@@ -141,6 +146,29 @@ public class HeaderFooterActivity extends AppCompatActivity {
             }
         });
         adapter.addAll(DataProvider.getPersonList(0));
+
+        adapter.setOnSwipeMenuListener(new OnSwipeMenuListener() {
+            @Override
+            public void toDelete(int position) {
+                adapter.getAllData().remove(position);
+                adapter.notifyItemRemoved(position);//推荐用这个
+            }
+
+            @Override
+            public void toTop(int position) {
+                //先移除那个位置的数据，然后将其添加到索引为0的位置，然后刷新数据
+                if (position > 0 && adapter.getAllData().size()>position) {
+                    Person person = adapter.getAllData().get(position);
+                    adapter.getAllData().remove(person);
+                    adapter.notifyItemInserted(0);
+                    adapter.getAllData().add(0, person);
+                    adapter.notifyItemRemoved(position + 1);
+                    if (linearLayoutManager.findFirstVisibleItemPosition() == 0) {
+                        recyclerView.scrollToPosition(0);
+                    }
+                }
+            }
+        });
     }
 
 

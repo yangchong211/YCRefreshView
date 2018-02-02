@@ -1,39 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<org.yczbj.ycrefreshviewlib.swipeMenu.YCSwipeMenu
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="72dp"
-    android:gravity="center_vertical"
-    android:foreground="?android:attr/selectableItemBackground"
-    android:background="@android:color/white">
-    <ImageView
-        android:id="@+id/person_face"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginLeft="16dp"
-        android:layout_centerVertical="true"
-        />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_toRightOf="@+id/person_face"
-        android:gravity="center_vertical"
-        android:layout_marginLeft="16dp"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/person_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:gravity="center_vertical"
-            />
-        <TextView
-            android:id="@+id/person_sign"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:textColor="@android:color/darker_gray"
-            />
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
 
-    </LinearLayout>
-</RelativeLayout>
+    <!--item内容-->
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:gravity="center_vertical"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:background="@android:color/white">
+        <ImageView
+            android:id="@+id/person_face"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="16dp"
+            android:layout_centerVertical="true" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/person_face"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="16dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/person_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:gravity="center_vertical" />
+            <TextView
+                android:id="@+id/person_sign"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textColor="@android:color/darker_gray" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <!-- 侧滑菜单 -->
+    <Button
+        android:id="@+id/btn_del"
+        android:layout_width="70dp"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:text="删除"
+        android:textColor="@android:color/white"/>
+
+    <Button
+        android:id="@+id/btn_top"
+        android:layout_width="70dp"
+        android:layout_height="match_parent"
+        android:background="@color/colorAccent"
+        android:text="置顶"
+        android:textColor="@android:color/white"/>
+
+</org.yczbj.ycrefreshviewlib.swipeMenu.YCSwipeMenu>

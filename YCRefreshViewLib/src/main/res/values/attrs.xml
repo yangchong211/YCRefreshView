@@ -11,18 +11,23 @@
         <attr name="recyclerPaddingBottom" format="dimension" />
         <attr name="recyclerPaddingLeft" format="dimension" />
         <attr name="recyclerPaddingRight" format="dimension" />
-        <attr name="ycScrollbarStyle">
+        <attr name="scrollbarStyle">
             <enum name="insideOverlay" value="0x0" />
             <enum name="insideInset" value="0x01000000" />
             <enum name="outsideOverlay" value="0x02000000" />
             <enum name="outsideInset" value="0x03000000" />
         </attr>
-        <attr name="ycScrollbars">
+        <attr name="scrollbars">
             <enum name="vertical" value="1"/>
             <enum name="horizontal" value="0"/>
             <enum name="none" value="2"/>
         </attr>
     </declare-styleable>
 
+    <declare-styleable name="YCSwipeMenu">
+        <attr name="swipeEnable" format="boolean"/>
+        <attr name="ios" format="boolean"/>
+        <attr name="leftSwipe" format="boolean"/>
+    </declare-styleable>
 
 </resources>
