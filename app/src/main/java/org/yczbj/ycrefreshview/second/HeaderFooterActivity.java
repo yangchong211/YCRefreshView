@@ -148,12 +148,14 @@ public class HeaderFooterActivity extends AppCompatActivity {
         adapter.addAll(DataProvider.getPersonList(0));
 
         adapter.setOnSwipeMenuListener(new OnSwipeMenuListener() {
+            //删除功能
             @Override
             public void toDelete(int position) {
                 adapter.getAllData().remove(position);
                 adapter.notifyItemRemoved(position);//推荐用这个
             }
 
+            //置顶功能
             @Override
             public void toTop(int position) {
                 //先移除那个位置的数据，然后将其添加到索引为0的位置，然后刷新数据

@@ -27,6 +27,7 @@ public class EasyDataObserver extends RecyclerView.AdapterDataObserver {
                 || position >= adapter.getHeaderCount() + adapter.getCount());
     }
 
+
     @Override
     public void onItemRangeChanged(int positionStart, int itemCount) {
         super.onItemRangeChanged(positionStart, itemCount);
@@ -54,13 +55,15 @@ public class EasyDataObserver extends RecyclerView.AdapterDataObserver {
     @Override
     public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
         super.onItemRangeMoved(fromPosition, toPosition, itemCount);
-        update();//header&footer不会有移动操作
+        //header&footer不会有移动操作
+        update();
     }
 
     @Override
     public void onChanged() {
         super.onChanged();
-        update();//header&footer不会引起changed
+        //header&footer不会引起changed
+        update();
     }
 
 

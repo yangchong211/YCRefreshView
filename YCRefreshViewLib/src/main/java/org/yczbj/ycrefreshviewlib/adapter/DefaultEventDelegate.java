@@ -49,23 +49,33 @@ public class DefaultEventDelegate implements EventDelegate {
     }
 
     private void onMoreViewClicked() {
-        if (onMoreListener !=null) onMoreListener.onMoreClick();
+        if (onMoreListener !=null){
+            onMoreListener.onMoreClick();
+        }
     }
 
     private void onErrorViewShowed() {
-        if (onErrorListener!=null)onErrorListener.onErrorShow();
+        if (onErrorListener!=null){
+            onErrorListener.onErrorShow();
+        }
     }
 
     private void onErrorViewClicked() {
-        if (onErrorListener!=null)onErrorListener.onErrorClick();
+        if (onErrorListener!=null){
+            onErrorListener.onErrorClick();
+        }
     }
 
     private void onNoMoreViewShowed() {
-        if (onNoMoreListener!=null)onNoMoreListener.onNoMoreShow();
+        if (onNoMoreListener!=null){
+            onNoMoreListener.onNoMoreShow();
+        }
     }
 
     private void onNoMoreViewClicked() {
-        if (onNoMoreListener!=null)onNoMoreListener.onNoMoreClick();
+        if (onNoMoreListener!=null){
+            onNoMoreListener.onNoMoreClick();
+        }
     }
 
     //-------------------5个状态触发事件-------------------

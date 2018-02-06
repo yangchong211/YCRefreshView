@@ -36,6 +36,7 @@ import java.lang.reflect.Field;
  *                  然后这个ViewHolder就完全独立。adapter在new的时候只需将parentView传进来。
  *                  View的生成与管理由ViewHolder执行。
  *                  实现setData来实现UI修改。Adapter会在onCreateViewHolder里自动调用。
+ *                  目前findViewById有两种方式，建议使用第二种方式
  */
 abstract public class BaseViewHolder<M> extends RecyclerView.ViewHolder {
 
@@ -65,6 +66,7 @@ abstract public class BaseViewHolder<M> extends RecyclerView.ViewHolder {
     public void setData(M data) {}
 
     /**
+     * 第一种findViewById方式
      * 根据 ID 来获取 View
      */
     @SuppressWarnings("unchecked")
@@ -73,6 +75,7 @@ abstract public class BaseViewHolder<M> extends RecyclerView.ViewHolder {
     }
 
     /**
+     * 第二种findViewById方式
      * 根据 ID 来获取 View
      * @param viewId viewID
      * @param <T>    泛型
@@ -91,11 +94,19 @@ abstract public class BaseViewHolder<M> extends RecyclerView.ViewHolder {
     }
 
 
+    /**
+     * 获取上下文context
+     * @return          context
+     */
     protected Context getContext(){
         return itemView.getContext();
     }
 
 
+    /**
+     * 获取数据索引的位置
+     * @return          position
+     */
     protected int getDataPosition(){
         RecyclerView.Adapter adapter = getOwnerAdapter();
         if (adapter!=null && adapter instanceof RecyclerArrayAdapter){
@@ -105,6 +116,11 @@ abstract public class BaseViewHolder<M> extends RecyclerView.ViewHolder {
     }
 
 
+    /**
+     * 获取adapter对象
+     * @param <T>
+     * @return                  adapter
+     */
     @Nullable
     private  <T extends RecyclerView.Adapter> T getOwnerAdapter(){
         RecyclerView recyclerView = getOwnerRecyclerView();
