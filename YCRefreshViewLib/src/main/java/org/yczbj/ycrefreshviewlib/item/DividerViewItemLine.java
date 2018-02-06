@@ -131,5 +131,7 @@ public class DividerViewItemLine extends RecyclerView.ItemDecoration{
                 }
             }
         }
-  }
+    }
+
+
 }
