@@ -39,7 +39,7 @@ public class HeaderFooterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recyclerview);
+        setContentView(R.layout.activity_refresh_view);
         recyclerView = (YCRefreshView) findViewById(R.id.recyclerView);
         recyclerView.setAdapter(adapter = new PersonAdapter(this));
 

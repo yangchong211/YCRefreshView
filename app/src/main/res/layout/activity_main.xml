@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:layout_marginTop="10dp"
+        android:background="@android:color/darker_gray"
         android:text="1.常用下拉刷新，上拉加载更多"/>
 
     <TextView
@@ -23,6 +24,7 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:layout_marginTop="10dp"
+        android:background="@android:color/darker_gray"
         android:text="2.支持头部和底部自定义布局的刷新控件"/>
 
 
@@ -32,6 +34,7 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:layout_marginTop="10dp"
+        android:background="@android:color/darker_gray"
         android:text="3.支持插入或者删除数据"/>
 
     <TextView
@@ -40,6 +43,7 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:layout_marginTop="10dp"
+        android:background="@android:color/darker_gray"
         android:text="4.横向的滑动list"/>
 
     <TextView
@@ -48,6 +52,7 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:layout_marginTop="10dp"
+        android:background="@android:color/darker_gray"
         android:text="5.支持不同类型布局"/>
 
     <TextView
@@ -56,6 +61,7 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:layout_marginTop="10dp"
+        android:background="@android:color/darker_gray"
         android:text="6.粘贴头部list"/>
 
 
@@ -65,6 +71,7 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:layout_marginTop="10dp"
+        android:background="@android:color/darker_gray"
         android:text="7.不规则瀑布流效果"/>
 
     <TextView
@@ -73,6 +80,16 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:layout_marginTop="10dp"
-        android:text="8."/>
+        android:background="@android:color/darker_gray"
+        android:text="8.CoordinatorLayout炫酷的效果"/>
+
+    <TextView
+        android:id="@+id/tv_9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/darker_gray"
+        android:text="9.RecyclerView实现条目Item拖拽排序与滑动删除"/>
 
 </LinearLayout>

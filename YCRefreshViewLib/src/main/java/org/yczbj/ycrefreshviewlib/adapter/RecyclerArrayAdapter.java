@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
-import org.yczbj.ycrefreshviewlib.inter.EventDelegate;
+import org.yczbj.ycrefreshviewlib.inter.EventDelegateAble;
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
 
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ import java.util.List;
 abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseViewHolder>   {
 
     private List<T> mObjects;
-    private EventDelegate mEventDelegate;
+    private EventDelegateAble mEventDelegate;
     private ArrayList<ItemView> headers = new ArrayList<>();
     private ArrayList<ItemView> footers = new ArrayList<>();
     private OnItemClickListener mItemClickListener;
@@ -44,6 +44,9 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
          void onBindView(View headerView);
     }
 
+    /**
+     * 加载更多监听
+     */
     public interface OnLoadMoreListener{
         void onLoadMore();
     }
@@ -52,6 +55,7 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         void onMoreShow();
         void onMoreClick();
     }
+
 
     public interface OnNoMoreListener{
         void onNoMoreShow();
@@ -190,7 +194,7 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
     }
 
 
-    private EventDelegate getEventDelegate(){
+    private EventDelegateAble getEventDelegate(){
         if (mEventDelegate == null)mEventDelegate  = new DefaultEventDelegate(this);
         return mEventDelegate;
     }
@@ -273,6 +277,24 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         registerAdapterDataObserver(new FixDataObserver(mRecyclerView));
     }
 
+    private class FixDataObserver extends RecyclerView.AdapterDataObserver {
+
+        private RecyclerView recyclerView;
+        FixDataObserver(RecyclerView recyclerView) {
+            this.recyclerView = recyclerView;
+        }
+
+
+        @Override
+        public void onItemRangeInserted(int positionStart, int itemCount) {
+            if (recyclerView.getAdapter() instanceof RecyclerArrayAdapter) {
+                RecyclerArrayAdapter adapter = (RecyclerArrayAdapter) recyclerView.getAdapter();
+                if (adapter.getFooterCount() > 0 && adapter.getCount() == itemCount) {
+                    recyclerView.scrollToPosition(0);
+                }
+            }
+        }
+    }
 
     /**
      * 添加数据

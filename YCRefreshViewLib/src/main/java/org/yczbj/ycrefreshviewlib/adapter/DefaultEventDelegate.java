@@ -7,14 +7,14 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
-import org.yczbj.ycrefreshviewlib.inter.EventDelegate;
+import org.yczbj.ycrefreshviewlib.inter.EventDelegateAble;
 
 /**
  * @author          杨充
  * @version         1.0
  * @date            2017/4/29
  */
-public class DefaultEventDelegate implements EventDelegate {
+public class DefaultEventDelegate implements EventDelegateAble {
 
     private RecyclerArrayAdapter adapter;
     private EventFooter footer ;
@@ -284,29 +284,37 @@ public class DefaultEventDelegate implements EventDelegate {
             log("footer showError");
             skipError = true;
             flag = ShowError;
-            if (adapter.getItemCount()>0)
+            //noinspection deprecation
+            if (adapter.getItemCount()>0){
                 adapter.notifyItemChanged(adapter.getItemCount()-1);
+            }
         }
         void showMore(){
             log("footer showMore");
             flag = ShowMore;
-            if (adapter.getItemCount()>0)
+            //noinspection deprecation
+            if (adapter.getItemCount()>0){
                 adapter.notifyItemChanged(adapter.getItemCount()-1);
+            }
         }
         void showNoMore(){
             log("footer showNoMore");
             skipNoMore = true;
             flag = ShowNoMore;
-            if (adapter.getItemCount()>0)
+            //noinspection deprecation
+            if (adapter.getItemCount()>0){
                 adapter.notifyItemChanged(adapter.getItemCount()-1);
+            }
         }
 
         //初始化
         void hide(){
             log("footer hide");
             flag = Hide;
-            if (adapter.getItemCount()>0)
+            //noinspection deprecation
+            if (adapter.getItemCount()>0){
                 adapter.notifyItemChanged(adapter.getItemCount()-1);
+            }
         }
 
         void setMoreView(View moreView) {

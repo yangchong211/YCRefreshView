@@ -10,8 +10,7 @@ import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
  * @date            2017/4/28
  *                  接口
  */
-public interface EventDelegate {
-
+public interface EventDelegateAble {
     void addData(int length);
     void clear();
 

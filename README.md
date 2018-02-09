@@ -1,17 +1,21 @@
 # YCRefreshView
-- 自定义支持上拉加载更多，下拉刷新，支持自由切换状态【加载中，加载成功，加载失败，没网络等状态】的控件。
-具体使用方法，可以直接参考demo。
+- **自定义支持上拉加载更多，下拉刷新，支持自由切换状态【加载中，加载成功，加载失败，没网络等状态】的控件，拓展功能[支持长按拖拽，侧滑删除]可以选择性添加
+。具体使用方法，可以直接参考demo。**
 - 轻量级侧滑删除菜单，支持recyclerView，listView，直接嵌套item布局即可使用，整个侧滑菜单思路是：跟随手势将item向左滑动
-- 该库已经用到了实际开发项目中，会持续更新并且修改bug。如果觉得可以，可以star一下，多谢支持！
+- 该库已经用到了实际开发项目中，会持续更新并且修改bug。如果觉得可以，**可以star一下**，多谢支持！
+- 感谢前辈大神们案例及开源分享精神。
+- 一行代码集成：compile 'org.yczbj:YCRefreshViewLib:2.2'
 
 ## 目录介绍
-- 1.关于EasyRecycleView开源库
+- 1.关于复杂页面封装库介绍
 - 2.关于该开源库的思路
-- 3.如何使用
-- 4.该库的优点
+- 3.如何使用介绍
+- 4.关于该状态切换工具优点分析
 - 5.实现效果
 - 6.版本更新说明
-- 7.其他
+- 7.参考资料说明
+
+
 
 ###  1.关于复杂页面封装库介绍
 - 1.1 支持上拉加载，下拉刷新，可以自定义foot底部布局
@@ -21,9 +25,10 @@
 - 1.5 轻量级侧滑删除菜单，直接嵌套item布局即可使用，使用十分简单。
 
 
-###  2.关于该开源库
+###  2.关于该开源库的思路
 - 2.0 参考并借鉴了大量的优秀开源库，由于后期业务需求发生变化，因此做了一些功能的延伸与定制。继续完善并修改库bug！！！已经用于实际开发中。
 - 2.1 先来看看布局，实际上只是在recyclerView基础上做了大量拓展……
+
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.SwipeRefreshLayout
@@ -69,8 +74,8 @@
 ```
 
 
-###  3.如何使用
-- 3.1 首先在集成：compile 'org.yczbj:YCRefreshViewLib:2.1'
+###  3.如何使用介绍
+- 3.1 首先在集成：compile 'org.yczbj:YCRefreshViewLib:2.2'
 - 3.2 在布局中：
 ```
   <org.yczbj.ycrefreshviewlib.YCRefreshView
@@ -259,6 +264,38 @@ adapter.setOnSwipeMenuListener(new OnSwipeMenuListener() {
 });
 ```
 
+- 处理长按拖拽，滑动删除的功能。轻量级，自由选择是否实现。
+```
+mCallback = new DefaultItemTouchHelpCallback(new DefaultItemTouchHelpCallback.OnItemTouchCallbackListener() {
+    @Override
+    public void onSwiped(int adapterPosition) {
+        // 滑动删除的时候，从数据库、数据源移除，并刷新UI
+        if (personList != null) {
+            personList.remove(adapterPosition);
+            adapter.notifyItemRemoved(adapterPosition);
+        }
+    }
+
+    @Override
+    public boolean onMove(int srcPosition, int targetPosition) {
+        if (personList != null) {
+            // 更换数据库中的数据Item的位置
+            boolean isPlus = srcPosition < targetPosition;
+            // 更换数据源中的数据Item的位置
+            Collections.swap(personList, srcPosition, targetPosition);
+            // 更新UI中的Item的位置，主要是给用户看到交互效果
+            adapter.notifyItemMoved(srcPosition, targetPosition);
+            return true;
+        }
+        return false;
+    }
+});
+mCallback.setDragEnable(true);
+mCallback.setSwipeEnable(true);
+ItemTouchHelper itemTouchHelper = new ItemTouchHelper(mCallback);
+itemTouchHelper.attachToRecyclerView(recyclerView);
+```
+
 ###  4.关于该状态切换工具优点分析
 - 4.1 不仅可以实现上拉加载，下拉刷新。还可以根据获取数据来切换页面的状态，可以自定义状态页面，如下所示：
 
@@ -300,7 +337,7 @@ ll_set_network.setOnClickListener(new View.OnClickListener() {
     }
 });
 
-``` 
+```
 
 
 ###  5.实现效果
@@ -312,4 +349,13 @@ ll_set_network.setOnClickListener(new View.OnClickListener() {
 - v1.0 更新于2017年4月22日
 - v1.1 更新于2017年8月9日
 - v1.…… 更新于2018年1月5日
-- v2.2 更新于2018年2月6日
+- v2.2 更新于2018年1月17日
+- v2.3 更新于2018年2月9日
+
+
+###  7.参考资料说明
+- **非常感谢前辈大神的封装思路和代码案例，感谢！！！**
+- BGARefreshLayout-Android：https://github.com/bingoogolapple/BGARefreshLayout-Android
+- Android-PullToRefresh：https://github.com/chrisbanes/Android-PullToRefresh
+- Jude95/EasyRecyclerView：https://github.com/Jude95/EasyRecyclerView
+- 严正杰大神， RecyclerView实现条目Item拖拽排序与滑动删除：http://blog.csdn.net/yanzhenjie1003/article/details/51935982

@@ -9,6 +9,7 @@ import org.yczbj.ycrefreshview.eight.EightCollapsingActivity;
 import org.yczbj.ycrefreshview.first.RefreshAndMoreActivity;
 import org.yczbj.ycrefreshview.five.FiveMultiStyleActivity;
 import org.yczbj.ycrefreshview.four.FourHorizontalActivity;
+import org.yczbj.ycrefreshview.night.NightTouchMoveActivity;
 import org.yczbj.ycrefreshview.second.HeaderFooterActivity;
 import org.yczbj.ycrefreshview.seven.SevenStaggeredGridActivity;
 import org.yczbj.ycrefreshview.six.SixStickyHeaderActivity;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.tv_6).setOnClickListener(this);
         findViewById(R.id.tv_7).setOnClickListener(this);
         findViewById(R.id.tv_8).setOnClickListener(this);
+        findViewById(R.id.tv_9).setOnClickListener(this);
     }
 
 
@@ -62,6 +64,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.tv_8:
                 startActivity(new Intent(this, EightCollapsingActivity.class));
+                break;
+            case R.id.tv_9:
+                startActivity(new Intent(this, NightTouchMoveActivity.class));
                 break;
         }
     }

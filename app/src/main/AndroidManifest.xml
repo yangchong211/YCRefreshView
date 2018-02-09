@@ -25,6 +25,7 @@
         <activity android:name=".seven.SevenStaggeredGridActivity"/>
         <activity android:name=".eight.EightCollapsingActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".night.NightTouchMoveActivity"/>
     </application>
 
 </manifest>

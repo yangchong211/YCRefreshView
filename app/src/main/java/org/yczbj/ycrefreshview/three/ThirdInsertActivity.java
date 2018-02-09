@@ -32,7 +32,7 @@ public class ThirdInsertActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recyclerview);
+        setContentView(R.layout.activity_refresh_view);
         recyclerView = (YCRefreshView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         DividerViewItemLine itemDecoration = new DividerViewItemLine(Color.GRAY, Util.dip2px(this, 0.5f), Util.dip2px(this, 72), 0);

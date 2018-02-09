@@ -1,5 +1,6 @@
 package org.yczbj.ycrefreshviewlib.item;
 
+import android.annotation.SuppressLint;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.support.v4.view.ViewCompat;
@@ -39,6 +40,7 @@ public class StickyHeaderItemLine extends RecyclerView.ItemDecoration {
     }
 
 
+    @SuppressLint("UseSparseArrays")
     public StickyHeaderItemLine(IStickyHeaderAdapter adapter, boolean renderInline) {
         mAdapter = adapter;
         mHeaderCache = new HashMap<>();
