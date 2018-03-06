@@ -37,45 +37,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--RecyclerView控件，支持添加头部和底部view-->
-    <android.support.v7.widget.RecyclerView
-        android:id="@android:id/list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical|horizontal"
-        android:clickable="true"
-        android:focusable="true" />
-
-    <!--加载数据为空时的布局-->
     <FrameLayout
-        android:id="@+id/empty"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clickable="true"
-        android:focusable="true"/>
+        android:layout_height="match_parent">
 
-    <!--正在加载数据中的布局-->
-    <FrameLayout
-        android:id="@+id/progress"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clickable="true"
-        android:focusable="true"/>
+        <!--RecyclerView控件，支持添加头部和底部view-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@android:id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical|horizontal"
+            android:clickable="true"
+            android:focusable="true" />
 
-    <!--加载错误时的布局：网络错误或者请求数据错误-->
-    <FrameLayout
-        android:id="@+id/error"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clickable="true"
-        android:focusable="true"/>
+        <!--加载数据为空时的布局-->
+        <FrameLayout
+            android:id="@+id/empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <!--正在加载数据中的布局-->
+        <FrameLayout
+            android:id="@+id/progress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <!--加载错误时的布局：网络错误或者请求数据错误-->
+        <FrameLayout
+            android:id="@+id/error"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"/>
+
+    </FrameLayout>
 
 </android.support.v4.widget.SwipeRefreshLayout>
 ```
 
 
 ###  3.如何使用介绍
-- 3.1 首先在集成：compile 'org.yczbj:YCRefreshViewLib:2.2'
+- 3.1 首先在集成：compile 'org.yczbj:YCRefreshViewLib:2.4'
 - 3.2 在布局中：
 ```
   <org.yczbj.ycrefreshviewlib.YCRefreshView
@@ -351,6 +357,7 @@ ll_set_network.setOnClickListener(new View.OnClickListener() {
 - v1.…… 更新于2018年1月5日
 - v2.2 更新于2018年1月17日
 - v2.3 更新于2018年2月9日
+- v2.4 更新于2018年3月6日
 
 
 ###  7.参考资料说明
