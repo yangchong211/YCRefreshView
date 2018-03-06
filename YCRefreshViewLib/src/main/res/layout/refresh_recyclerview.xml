@@ -5,37 +5,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--RecyclerView控件，支持添加头部和底部view-->
-    <android.support.v7.widget.RecyclerView
-        android:id="@android:id/list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical|horizontal"
-        android:clickable="true"
-        android:focusable="true" />
-
-    <!--加载数据为空时的布局-->
     <FrameLayout
-        android:id="@+id/empty"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clickable="true"
-        android:focusable="true"/>
+        android:layout_height="match_parent">
 
-    <!--正在加载数据中的布局-->
-    <FrameLayout
-        android:id="@+id/progress"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clickable="true"
-        android:focusable="true"/>
+        <!--RecyclerView控件，支持添加头部和底部view-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@android:id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical|horizontal"
+            android:clickable="true"
+            android:focusable="true" />
 
-    <!--加载错误时的布局：网络错误或者请求数据错误-->
-    <FrameLayout
-        android:id="@+id/error"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clickable="true"
-        android:focusable="true"/>
+        <!--加载数据为空时的布局-->
+        <FrameLayout
+            android:id="@+id/empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <!--正在加载数据中的布局-->
+        <FrameLayout
+            android:id="@+id/progress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <!--加载错误时的布局：网络错误或者请求数据错误-->
+        <FrameLayout
+            android:id="@+id/error"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"/>
+
+    </FrameLayout>
 
 </android.support.v4.widget.SwipeRefreshLayout>
