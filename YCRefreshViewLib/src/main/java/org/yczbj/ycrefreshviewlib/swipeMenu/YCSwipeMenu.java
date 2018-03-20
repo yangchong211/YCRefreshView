@@ -52,8 +52,6 @@ public class YCSwipeMenu extends ViewGroup {
     private int mMaxVelocity;
     //多点触摸只算第一根手指的速度
     private int mPointerId;
-    //自己的高度
-    private int mHeight;
     //右侧菜单宽度总和(最大滑动距离)
     private int mRightMenuWidths;
     //滑动判定临界值（右侧菜单宽度的40%） 手指抬起时，超过了展开，没超过收起menu
@@ -72,7 +70,7 @@ public class YCSwipeMenu extends ViewGroup {
     private PointF mFirstP = new PointF();
     private boolean isUserSwiped;
     //存储的是当前正在展开的View
-    public static YCSwipeMenu mViewCache;
+    public YCSwipeMenu mViewCache;
     //防止多只手指一起滑我的flag 在每次down里判断， touch事件结束清空
     private static boolean isTouching;
     //滑动速度变量
@@ -85,6 +83,10 @@ public class YCSwipeMenu extends ViewGroup {
     private boolean iosInterceptFlag;
     //左滑右滑的开关,默认左滑打开菜单
     private boolean isLeftSwipe;
+    //平滑展开和关闭的动画效果
+    private ValueAnimator mExpandAnim, mCloseAnim;
+    private boolean isExpand;//代表当前是否是展开状态 2016 11 03 add
+
 
     public YCSwipeMenu(Context context) {
         this(context, null);
@@ -105,8 +107,7 @@ public class YCSwipeMenu extends ViewGroup {
 
     /**
      * 设置侧滑功能开关
-     *
-     * @param swipeEnable
+     * @param swipeEnable           是否打开
      */
     public void setSwipeEnable(boolean swipeEnable) {
         isSwipeEnable = swipeEnable;
@@ -119,8 +120,6 @@ public class YCSwipeMenu extends ViewGroup {
 
     /**
      * 设置是否开启IOS阻塞式交互
-     *
-     * @param ios
      */
     public YCSwipeMenu setIos(boolean ios) {
         isIos = ios;
@@ -133,9 +132,7 @@ public class YCSwipeMenu extends ViewGroup {
 
     /**
      * 设置是否开启左滑出菜单，设置false 为右滑出菜单
-     *
-     * @param leftSwipe
-     * @return
+     * @param leftSwipe             是否画出左边菜单
      */
     public YCSwipeMenu setLeftSwipe(boolean leftSwipe) {
         isLeftSwipe = leftSwipe;
@@ -144,11 +141,10 @@ public class YCSwipeMenu extends ViewGroup {
 
     /**
      * 返回ViewCache
-     * @return
      */
-    public static YCSwipeMenu getViewCache() {
+    /*public static YCSwipeMenu getViewCache() {
         return mViewCache;
-    }
+    }*/
 
     private void init(Context context, AttributeSet attrs, int defStyleAttr) {
         mScaleTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
@@ -187,7 +183,7 @@ public class YCSwipeMenu extends ViewGroup {
         setClickable(true);//令自己可点击，从而获取触摸事件
 
         mRightMenuWidths = 0;//由于ViewHolder的复用机制，每次这里要手动恢复初始值
-        mHeight = 0;
+        int mHeight = 0;
         int contentWidth = 0;//2016 11 09 add,适配GridLayoutManager，将以第一个子Item(即ContentItem)的宽度为控件宽度
         int childCount = getChildCount();
 
@@ -467,12 +463,6 @@ public class YCSwipeMenu extends ViewGroup {
         return super.onInterceptTouchEvent(ev);
     }
 
-    /**
-     * 平滑展开
-     */
-    private ValueAnimator mExpandAnim, mCloseAnim;
-
-    private boolean isExpand;//代表当前是否是展开状态 2016 11 03 add
 
     public void smoothExpand() {
         //Log.d(TAG, "smoothExpand() called" + this);
@@ -591,10 +581,7 @@ public class YCSwipeMenu extends ViewGroup {
     //展开时，禁止长按
     @Override
     public boolean performLongClick() {
-        if (Math.abs(getScrollX()) > mScaleTouchSlop) {
-            return false;
-        }
-        return super.performLongClick();
+        return Math.abs(getScrollX()) <= mScaleTouchSlop && super.performLongClick();
     }
 
 

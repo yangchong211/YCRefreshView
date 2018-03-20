@@ -69,7 +69,11 @@ public class YCRefreshView extends FrameLayout {
         initView();
     }
 
-
+    /**
+     * 事件的分发
+     * @param ev            时间
+     * @return              是否分发事件
+     */
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         return mPtrLayout.dispatchTouchEvent(ev);
@@ -232,7 +236,10 @@ public class YCRefreshView extends FrameLayout {
         mRecycler.setPadding(mPaddingLeft, mPaddingTop, mPaddingRight, mPaddingBottom);
     }
 
-
+    /**
+     * 是否将剪辑设置为填充
+     * @param isClip            isClip
+     */
     @Override
     public void setClipToPadding(boolean isClip){
         mRecycler.setClipToPadding(isClip);
@@ -243,7 +250,9 @@ public class YCRefreshView extends FrameLayout {
      * @param position          位置
      */
     public void scrollToPosition(int position){
-        getRecyclerView().scrollToPosition(position);
+        if(getRecyclerView()!=null){
+            getRecyclerView().scrollToPosition(position);
+        }
     }
 
 

@@ -75,8 +75,10 @@ public class HeaderFooterActivity extends AppCompatActivity {
             //删除功能
             @Override
             public void toDelete(int position) {
-                adapter.getAllData().remove(position);
-                adapter.notifyItemRemoved(position);//推荐用这个
+                if(adapter.getAllData().size()>position && position>-1){
+                    adapter.getAllData().remove(position);
+                    adapter.notifyItemRemoved(position);//推荐用这个
+                }
             }
 
             //置顶功能

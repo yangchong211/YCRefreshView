@@ -81,4 +81,5 @@ public class EasyDataObserver extends RecyclerView.AdapterDataObserver {
             recyclerView.showRecycler();
         }
     }
+
 }

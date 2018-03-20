@@ -24,6 +24,8 @@ public class PersonViewHolder extends BaseViewHolder<Person> {
     private TextView tv_title;
     private ImageView iv_news_image;
     private TextView tv_content;
+    private Button btn_del;
+    private Button btn_top;
 
 
     public PersonViewHolder(ViewGroup parent) {
@@ -31,6 +33,8 @@ public class PersonViewHolder extends BaseViewHolder<Person> {
         iv_news_image = getView(R.id.iv_news_image);
         tv_title = getView(R.id.tv_title);
         tv_content = getView(R.id.tv_content);
+        btn_del = getView(R.id.btn_del);
+        btn_top = getView(R.id.btn_top);
     }
 
     @Override

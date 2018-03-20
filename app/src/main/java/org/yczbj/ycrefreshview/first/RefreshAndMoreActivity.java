@@ -112,6 +112,7 @@ public class RefreshAndMoreActivity extends AppCompatActivity implements SwipeRe
                 recyclerView.scrollToPosition(0);
             }
         });
+
         recyclerView.setRefreshListener(this);
         onRefresh();
     }
