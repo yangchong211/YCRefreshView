@@ -67,7 +67,9 @@ public class EasyDataObserver extends RecyclerView.AdapterDataObserver {
     }
 
 
-    //自动更改Container的样式
+    /**
+     * 自动更改Container的样式
+     */
     private void update() {
         int count;
         if (recyclerView.getAdapter() instanceof RecyclerArrayAdapter) {

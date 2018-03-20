@@ -11,6 +11,7 @@ import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
  *                  接口
  */
 public interface EventDelegateAble {
+
     void addData(int length);
     void clear();
 
@@ -24,4 +25,5 @@ public interface EventDelegateAble {
     void setMore(int res, RecyclerArrayAdapter.OnMoreListener listener);
     void setNoMore(int res, RecyclerArrayAdapter.OnNoMoreListener listener);
     void setErrorMore(int res, RecyclerArrayAdapter.OnErrorListener listener);
+
 }

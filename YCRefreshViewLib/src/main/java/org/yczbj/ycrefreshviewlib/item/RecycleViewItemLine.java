@@ -24,8 +24,14 @@ public class RecycleViewItemLine extends RecyclerView.ItemDecoration {
 
     private Paint mPaint;
     private Drawable mDivider;
-    private int mDividerHeight = 2;     //分割线高度，默认为1px
-    private int mOrientation;           //列表的方向：LinearLayoutManager.VERTICAL或LinearLayoutManager.HORIZONTAL
+    /**
+     * 分割线高度，默认为1px
+     */
+    private int mDividerHeight = 2;
+    /**
+     * 列表的方向：LinearLayoutManager.VERTICAL或LinearLayoutManager.HORIZONTAL
+     */
+    private int mOrientation;
     private static int[] ATTRS = new int[]{android.R.attr.listDivider};
 
     /**
@@ -57,7 +63,7 @@ public class RecycleViewItemLine extends RecyclerView.ItemDecoration {
 
     /**
      * 自定义分割线
-     * @param context
+     * @param context       上下文
      * @param orientation   列表方向
      * @param dividerHeight 分割线高度
      * @param dividerColor  分割线颜色
@@ -71,14 +77,18 @@ public class RecycleViewItemLine extends RecyclerView.ItemDecoration {
     }
 
 
-    //获取分割线尺寸
+    /**
+     * 获取分割线尺寸
+     */
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
         outRect.set(0, 0, 0, mDividerHeight);
     }
 
-    //绘制分割线
+    /**
+     * 绘制分割线
+     */
     @Override
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
         super.onDraw(c, parent, state);
@@ -89,7 +99,9 @@ public class RecycleViewItemLine extends RecyclerView.ItemDecoration {
         }
     }
 
-    //绘制横向 item 分割线
+    /**
+     * 绘制横向 item 分割线
+     */
     private void drawHorizontal(Canvas canvas, RecyclerView parent) {
         final int left = parent.getPaddingLeft();
         final int right = parent.getMeasuredWidth() - parent.getPaddingRight();
@@ -109,7 +121,9 @@ public class RecycleViewItemLine extends RecyclerView.ItemDecoration {
         }
     }
 
-    //绘制纵向 item 分割线
+    /**
+     * 绘制纵向 item 分割线
+     */
     private void drawVertical(Canvas canvas, RecyclerView parent) {
         final int top = parent.getPaddingTop();
         final int bottom = parent.getMeasuredHeight() - parent.getPaddingBottom();

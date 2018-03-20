@@ -38,6 +38,27 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
     private Context mContext;
 
 
+    public RecyclerArrayAdapter(Context context) {
+        init(context,  new ArrayList<T>());
+    }
+
+
+    public RecyclerArrayAdapter(Context context, T[] objects) {
+        init(context, Arrays.asList(objects));
+    }
+
+
+    public RecyclerArrayAdapter(Context context, List<T> objects) {
+        init(context, objects);
+    }
+
+
+    private void init(Context context , List<T> objects) {
+        mContext = context;
+        mObjects = new ArrayList<>(objects);
+    }
+
+
     public interface ItemView {
          View onCreateView(ViewGroup parent);
          void onBindView(View headerView);
@@ -74,7 +95,9 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         @Override
         public int getSpanSize(int position) {
             if (headers.size()!=0){
-                if (position<headers.size())return mMaxCount;
+                if (position<headers.size()) {
+                    return mMaxCount;
+                }
             }
             if (footers.size()!=0) {
                 int i = position - headers.size() - mObjects.size();
@@ -91,67 +114,40 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
     }
 
 
-    /**
-     * Constructor
-     *
-     * @param context The current context.
-     */
-    public RecyclerArrayAdapter(Context context) {
-        init(context,  new ArrayList<T>());
-    }
-
-
-    /**
-     * Constructor
-     *
-     * @param context The current context.
-     * @param objects The objects to represent in the ListView.
-     */
-    public RecyclerArrayAdapter(Context context, T[] objects) {
-        init(context, Arrays.asList(objects));
-    }
-
-    /**
-     * Constructor
-     *
-     * @param context The current context.
-     * @param objects The objects to represent in the ListView.
-     */
-    public RecyclerArrayAdapter(Context context, List<T> objects) {
-        init(context, objects);
-    }
-
-
-    private void init(Context context , List<T> objects) {
-        mContext = context;
-        mObjects = new ArrayList<>(objects);
-    }
-
-
     public void stopMore(){
-        if (mEventDelegate == null)throw new NullPointerException("You should invoking setLoadMore() first");
+        if (mEventDelegate == null) {
+            throw new NullPointerException("You should invoking setLoadMore() first");
+        }
         mEventDelegate.stopLoadMore();
     }
 
     public void pauseMore(){
-        if (mEventDelegate == null)throw new NullPointerException("You should invoking setLoadMore() first");
+        if (mEventDelegate == null) {
+            throw new NullPointerException("You should invoking setLoadMore() first");
+        }
         mEventDelegate.pauseLoadMore();
     }
 
     public void resumeMore(){
-        if (mEventDelegate == null)throw new NullPointerException("You should invoking setLoadMore() first");
+        if (mEventDelegate == null) {
+            throw new NullPointerException("You should invoking setLoadMore() first");
+        }
         mEventDelegate.resumeLoadMore();
     }
 
 
     public void addHeader(ItemView view){
-        if (view==null)throw new NullPointerException("ItemView can't be null");
+        if (view==null) {
+            throw new NullPointerException("ItemView can't be null");
+        }
         headers.add(view);
         notifyItemInserted(headers.size()-1);
     }
 
     public void addFooter(ItemView view){
-        if (view==null)throw new NullPointerException("ItemView can't be null");
+        if (view==null) {
+            throw new NullPointerException("ItemView can't be null");
+        }
         footers.add(view);
         notifyItemInserted(headers.size()+getCount()+footers.size()-1);
     }
@@ -194,7 +190,9 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
 
 
     private EventDelegateAble getEventDelegate(){
-        if (mEventDelegate == null)mEventDelegate  = new DefaultEventDelegate(this);
+        if (mEventDelegate == null) {
+            mEventDelegate = new DefaultEventDelegate(this);
+        }
         return mEventDelegate;
     }
 
@@ -298,13 +296,17 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
      * @param object            数据
      */
     public void add(T object) {
-        if (mEventDelegate!=null)mEventDelegate.addData(object == null ? 0 : 1);
+        if (mEventDelegate!=null) {
+            mEventDelegate.addData(object == null ? 0 : 1);
+        }
         if (object!=null){
             synchronized (mLock) {
                 mObjects.add(object);
             }
         }
-        if (mNotifyOnChange) notifyItemInserted(headers.size()+getCount());
+        if (mNotifyOnChange) {
+            notifyItemInserted(headers.size() + getCount());
+        }
         log("add notifyItemInserted "+(headers.size()+getCount()));
     }
 
@@ -313,14 +315,18 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
      * @param collection        Collection集合数据
      */
     public void addAll(Collection<? extends T> collection) {
-        if (mEventDelegate!=null)mEventDelegate.addData(collection == null ? 0 : collection.size());
+        if (mEventDelegate!=null) {
+            mEventDelegate.addData(collection == null ? 0 : collection.size());
+        }
         if (collection!=null&&collection.size()!=0){
             synchronized (mLock) {
                 mObjects.addAll(collection);
             }
         }
         int dataCount = collection==null?0:collection.size();
-        if (mNotifyOnChange) notifyItemRangeInserted(headers.size()+getCount()-dataCount,dataCount);
+        if (mNotifyOnChange) {
+            notifyItemRangeInserted(headers.size() + getCount() - dataCount, dataCount);
+        }
         log("addAll notifyItemRangeInserted "+(headers.size()+getCount()-dataCount)+","+(dataCount));
 
     }
@@ -330,14 +336,18 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
      * @param items            数据
      */
     public void addAll(T[] items) {
-        if (mEventDelegate!=null)mEventDelegate.addData(items==null?0:items.length);
+        if (mEventDelegate!=null) {
+            mEventDelegate.addData(items == null ? 0 : items.length);
+        }
         if (items!=null&&items.length!=0) {
             synchronized (mLock) {
                 Collections.addAll(mObjects, items);
             }
         }
         int dataCount = items==null?0:items.length;
-        if (mNotifyOnChange) notifyItemRangeInserted(headers.size()+getCount()-dataCount,dataCount);
+        if (mNotifyOnChange) {
+            notifyItemRangeInserted(headers.size() + getCount() - dataCount, dataCount);
+        }
         log("addAll notifyItemRangeInserted "+((headers.size()+getCount()-dataCount)+","+(dataCount)));
     }
 
@@ -350,7 +360,9 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         synchronized (mLock) {
             mObjects.add(index, object);
         }
-        if (mNotifyOnChange) notifyItemInserted(headers.size()+index);
+        if (mNotifyOnChange) {
+            notifyItemInserted(headers.size() + index);
+        }
         log("insert notifyItemRangeInserted "+(headers.size()+index));
     }
 
@@ -364,7 +376,9 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
             mObjects.addAll(index, Arrays.asList(object));
         }
         int dataCount = object.length;
-        if (mNotifyOnChange) notifyItemRangeInserted(headers.size()+index,dataCount);
+        if (mNotifyOnChange) {
+            notifyItemRangeInserted(headers.size() + index, dataCount);
+        }
         log("insertAll notifyItemRangeInserted "+((headers.size()+index)+","+(dataCount)));
     }
 
@@ -378,7 +392,9 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
             mObjects.addAll(index, object);
         }
         int dataCount = object==null?0:object.size();
-        if (mNotifyOnChange) notifyItemRangeInserted(headers.size()+index,dataCount);
+        if (mNotifyOnChange) {
+            notifyItemRangeInserted(headers.size() + index, dataCount);
+        }
         log("insertAll notifyItemRangeInserted "+((headers.size()+index)+","+(dataCount)));
     }
 
@@ -392,7 +408,9 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         synchronized (mLock) {
             mObjects.set(pos,object);
         }
-        if (mNotifyOnChange) notifyItemChanged(pos);
+        if (mNotifyOnChange) {
+            notifyItemChanged(pos);
+        }
         log("insertAll notifyItemChanged "+pos);
     }
 
@@ -404,7 +422,9 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         int position = mObjects.indexOf(object);
         synchronized (mLock) {
             if (mObjects.remove(object)){
-                if (mNotifyOnChange) notifyItemRemoved(headers.size()+position);
+                if (mNotifyOnChange) {
+                    notifyItemRemoved(headers.size() + position);
+                }
                 log("remove notifyItemRemoved "+(headers.size()+position));
             }
         }
@@ -418,7 +438,9 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         synchronized (mLock) {
             mObjects.remove(position);
         }
-        if (mNotifyOnChange) notifyItemRemoved(headers.size()+position);
+        if (mNotifyOnChange) {
+            notifyItemRemoved(headers.size() + position);
+        }
         log("remove notifyItemRemoved "+(headers.size()+position));
     }
 
@@ -431,11 +453,15 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
      */
     public void removeAll() {
         int count = mObjects.size();
-        if (mEventDelegate!=null)mEventDelegate.clear();
+        if (mEventDelegate!=null) {
+            mEventDelegate.clear();
+        }
         synchronized (mLock) {
             mObjects.clear();
         }
-        if (mNotifyOnChange) notifyItemRangeRemoved(headers.size(),count);
+        if (mNotifyOnChange) {
+            notifyItemRangeRemoved(headers.size(), count);
+        }
         log("clear notifyItemRangeRemoved "+(headers.size())+","+(count));
     }
 
@@ -444,55 +470,36 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
      */
     public void clear() {
         int count = mObjects.size();
-        if (mEventDelegate!=null)mEventDelegate.clear();
+        if (mEventDelegate!=null) {
+            mEventDelegate.clear();
+        }
         synchronized (mLock) {
             mObjects.clear();
         }
-        if (mNotifyOnChange) notifyDataSetChanged();
+        if (mNotifyOnChange) {
+            notifyDataSetChanged();
+        }
         log("clear notifyItemRangeRemoved "+(headers.size())+","+(count));
     }
 
     /**
-     * Sorts the content of this adapter using the specified comparator.
-     *
-     * @param comparator The comparator used to sort the objects contained
-     *        in this adapter.
+     * 使用指定的比较器对此适配器的内容进行排序
      */
     public void sort(Comparator<? super T> comparator) {
         synchronized (mLock) {
             Collections.sort(mObjects, comparator);
         }
-        if (mNotifyOnChange) notifyDataSetChanged();
+        if (mNotifyOnChange) {
+            notifyDataSetChanged();
+        }
     }
 
 
-    /**
-     * Control whether methods that change the list ({@link #add},
-     * {@link #insert}, {@link #remove}, {@link #clear}) automatically call
-     * {@link #notifyDataSetChanged}.  If set to false, caller must
-     * manually call notifyDataSetChanged() to have the changes
-     * reflected in the attached view.
-     *
-     * The default is true, and calling notifyDataSetChanged()
-     * resets the flag to true.
-     *
-     * @param notifyOnChange if true, modifications to the list will
-     *                       automatically call {@link
-     *                       #notifyDataSetChanged}
-     */
     public void setNotifyOnChange(boolean notifyOnChange) {
         mNotifyOnChange = notifyOnChange;
     }
 
 
-
-
-    /**
-     * Returns the context associated with this array adapter. The context is used
-     * to create views from the resource passed to the constructor.
-     *
-     * @return The Context associated with this adapter.
-     */
     public Context getContext() {
         return mContext;
     }
@@ -503,7 +510,6 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
 
     /**
      * 这个函数包含了头部和尾部view的个数，不是真正的item个数。
-     * @return
      */
     @Deprecated
     @Override
@@ -513,7 +519,6 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
 
     /**
      * 应该使用这个获取item个数
-     * @return
      */
     public int getCount(){
         return mObjects.size();
@@ -524,24 +529,26 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
             if (headerView.hashCode() == viewType){
                 View view = headerView.onCreateView(parent);
                 StaggeredGridLayoutManager.LayoutParams layoutParams;
-                if (view.getLayoutParams()!=null)
+                if (view.getLayoutParams()!=null) {
                     layoutParams = new StaggeredGridLayoutManager.LayoutParams(view.getLayoutParams());
-                else
+                } else {
                     layoutParams = new StaggeredGridLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                }
                 layoutParams.setFullSpan(true);
                 view.setLayoutParams(layoutParams);
                 return view;
             }
         }
 
-        for (ItemView footerview:footers){
-            if (footerview.hashCode() == viewType){
-                View view = footerview.onCreateView(parent);
+        for (ItemView footerView:footers){
+            if (footerView.hashCode() == viewType){
+                View view = footerView.onCreateView(parent);
                 StaggeredGridLayoutManager.LayoutParams layoutParams;
-                if (view.getLayoutParams()!=null)
+                if (view.getLayoutParams()!=null) {
                     layoutParams = new StaggeredGridLayoutManager.LayoutParams(view.getLayoutParams());
-                else
+                } else {
                     layoutParams = new StaggeredGridLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                }
                 layoutParams.setFullSpan(true);
                 view.setLayoutParams(layoutParams);
                 return view;
@@ -562,7 +569,8 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mItemClickListener.onItemClick(viewHolder.getAdapterPosition()-headers.size());
+                    mItemClickListener.onItemClick(
+                            viewHolder.getAdapterPosition()-headers.size());
                 }
             });
         }
@@ -570,14 +578,17 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
             viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    return mItemLongClickListener.onItemLongClick(viewHolder.getAdapterPosition()-headers.size());
+                    return mItemLongClickListener.onItemLongClick(
+                            viewHolder.getAdapterPosition()-headers.size());
                 }
             });
         }
         return viewHolder;
     }
 
-    //抽象方法，子类继承
+    /**
+     * 抽象方法，子类继承
+     */
     public abstract BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType);
 
 
@@ -608,7 +619,9 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
     @Override
     public final int getItemViewType(int position) {
         if (headers.size()!=0){
-            if (position<headers.size())return headers.get(position).hashCode();
+            if (position<headers.size()) {
+                return headers.get(position).hashCode();
+            }
         }
         if (footers.size()!=0){
             /*
@@ -634,30 +647,32 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         return 0;
     }
 
-
+    /**
+     * 获取所有的数据list集合
+     * @return
+     */
     public List<T> getAllData(){
         return new ArrayList<>(mObjects);
     }
 
     /**
-     * {@inheritDoc}
+     * 获取item
      */
     public T getItem(int position) {
         return mObjects.get(position);
     }
 
     /**
-     * Returns the position of the specified item in the array.
-     *
-     * @param item The item to retrieve the position of.
-     *
-     * @return The position of the specified item.
+     * 获取item索引位置
+     * @param item      item
+     * @return          索引位置
      */
     public int getPosition(T item) {
         return mObjects.indexOf(item);
     }
 
 
+    @Override
     public long getItemId(int position) {
         return position;
     }

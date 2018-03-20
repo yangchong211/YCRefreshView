@@ -121,11 +121,9 @@ public class DefaultItemTouchHelpCallback extends ItemTouchHelper.Callback {
 
     /**
      * 当Item被拖拽的时候被回调
-     *
      * @param recyclerView     recyclerView
      * @param srcViewHolder    拖拽的ViewHolder
      * @param targetViewHolder 目的地的viewHolder
-     * @return
      */
     @Override
     public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder srcViewHolder, RecyclerView.ViewHolder targetViewHolder) {

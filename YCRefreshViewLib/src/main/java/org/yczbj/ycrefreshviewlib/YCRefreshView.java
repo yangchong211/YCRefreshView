@@ -174,6 +174,9 @@ public class YCRefreshView extends FrameLayout {
         }
     }
 
+    /**
+     * 初始化滚动监听事件
+     */
     private void initScrollListener() {
         mInternalOnScrollListener = new RecyclerView.OnScrollListener() {
             @Override
@@ -549,6 +552,7 @@ public class YCRefreshView extends FrameLayout {
     }
 
 
+    @Override
     @SuppressLint("ClickableViewAccessibility")
     public void setOnTouchListener(OnTouchListener listener) {
         mRecycler.setOnTouchListener(listener);

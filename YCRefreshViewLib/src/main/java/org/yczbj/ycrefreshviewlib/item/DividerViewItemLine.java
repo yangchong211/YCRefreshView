@@ -74,6 +74,7 @@ public class DividerViewItemLine extends RecyclerView.ItemDecoration{
         }
     }
 
+    @Override
     public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
         if (parent.getAdapter() == null){
             return;
