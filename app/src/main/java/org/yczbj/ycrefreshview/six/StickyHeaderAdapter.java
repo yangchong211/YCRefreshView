@@ -13,13 +13,9 @@ import org.yczbj.ycrefreshview.R;
 import org.yczbj.ycrefreshviewlib.item.StickyHeaderItemLine;
 
 
-/**
- * 当前类注释：悬浮headerAdapter
- * PackageName：com.jude.dome.sticky
- * Created by Qyang on 16/11/4
- * Email: yczx27@163.com
- */
-public class StickyHeaderAdapter implements StickyHeaderItemLine.IStickyHeaderAdapter<StickyHeaderAdapter.HeaderHolder> {
+
+public class StickyHeaderAdapter implements
+        StickyHeaderItemLine.IStickyHeaderAdapter<StickyHeaderAdapter.HeaderHolder> {
 
     private LayoutInflater mInflater;
 
@@ -44,11 +40,11 @@ public class StickyHeaderAdapter implements StickyHeaderItemLine.IStickyHeaderAd
     }
 
     class HeaderHolder extends RecyclerView.ViewHolder {
-        public TextView header;
-
-        public HeaderHolder(View itemView) {
+        TextView header;
+        HeaderHolder(View itemView) {
             super(itemView);
             header = (TextView) itemView;
         }
     }
+
 }

@@ -182,7 +182,6 @@ public class StickyHeaderItemLine extends RecyclerView.ItemDecoration {
     }
 
 
-
     private int getHeaderTop(RecyclerView parent, View child, View header, int adapterPos, int layoutPos) {
         int headerHeight = getHeaderHeightForLayout(header);
         int top = ((int) child.getY()) - headerHeight;

@@ -19,10 +19,7 @@ import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 
-/**
- * Created by Mr.Jude on 2015/7/18.
- *
- */
+
 public class PersonAdapter extends RecyclerArrayAdapter<Person> {
 
     public PersonAdapter(Context context) {
