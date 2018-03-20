@@ -6,6 +6,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
+import org.yczbj.ycrefreshview.R;
 import org.yczbj.ycrefreshview.other.Picture;
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
 
@@ -31,7 +32,8 @@ public class ImageViewHolder extends BaseViewHolder<Picture> {
         params.height = height;
         imgPicture.setLayoutParams(params);
         Glide.with(getContext())
-                .load(data.getSrc()+"?imageView2/0/w/"+ width)
+                .load(data.getSrc())
+                .placeholder(R.drawable.bg_small_tree_min)
                 .into(imgPicture);
     }
 }
