@@ -12,7 +12,7 @@ import org.yczbj.ycrefreshviewlib.inter.EventDelegateAble;
 /**
  * @author          杨充
  * @version         1.0
- * @date            2017/4/29
+ * @date            2017/1/29
  */
 public class DefaultEventDelegate implements EventDelegateAble {
 

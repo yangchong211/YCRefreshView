@@ -10,8 +10,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
-import com.jude.rollviewpager.RollPagerView;
-import com.jude.rollviewpager.hintview.ColorPointHintView;
+
+import com.yc.cn.ycbannerlib.first.BannerView;
+import com.yc.cn.ycbannerlib.first.hintview.ColorPointHintView;
 
 import org.yczbj.ycrefreshview.other.DataProvider;
 import org.yczbj.ycrefreshview.R;
@@ -39,7 +40,7 @@ public class SevenStaggeredGridActivity extends AppCompatActivity {
         adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
-                RollPagerView header = new RollPagerView(SevenStaggeredGridActivity.this);
+                BannerView header = new BannerView(SevenStaggeredGridActivity.this);
                 header.setHintView(new ColorPointHintView(SevenStaggeredGridActivity.this, Color.YELLOW,Color.GRAY));
                 header.setHintPadding(0, 0, 0, (int) Utils.convertDpToPixel(8, SevenStaggeredGridActivity.this));
                 header.setPlayDelay(2000);

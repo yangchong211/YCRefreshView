@@ -1,5 +1,6 @@
 package org.yczbj.ycrefreshviewlib;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.ColorRes;
@@ -51,14 +52,6 @@ public class YCRefreshView extends FrameLayout {
     protected SwipeRefreshLayout mPtrLayout;
     protected SwipeRefreshLayout.OnRefreshListener mRefreshListener;
 
-    public SwipeRefreshLayout getSwipeToRefresh() {
-        return mPtrLayout;
-    }
-
-    public RecyclerView getRecyclerView() {
-        return mRecycler;
-    }
-
     public YCRefreshView(Context context) {
         super(context);
         initView();
@@ -82,7 +75,10 @@ public class YCRefreshView extends FrameLayout {
         return mPtrLayout.dispatchTouchEvent(ev);
     }
 
-
+    /**
+     * 初始化资源
+     * @param attrs         attrs
+     */
     protected void initAttrs(AttributeSet attrs) {
         TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.YCRefreshView);
         try {
@@ -102,7 +98,13 @@ public class YCRefreshView extends FrameLayout {
         }
     }
 
+    /**
+     * 2017年3月29日
+     * 欢迎访问GitHub：https://github.com/yangchong211
+     * 初始化
+     */
     private void initView() {
+        //使用isInEditMode解决可视化编辑器无法识别自定义控件的问题
         if (isInEditMode()) {
             return;
         }
@@ -111,38 +113,26 @@ public class YCRefreshView extends FrameLayout {
         mPtrLayout = (SwipeRefreshLayout) v.findViewById(R.id.ptr_layout);
         mPtrLayout.setEnabled(false);
 
+        //加载进度view
         mProgressView = (ViewGroup) v.findViewById(R.id.progress);
         if (mProgressId!=0){
             LayoutInflater.from(getContext()).inflate(mProgressId,mProgressView);
         }
+
+        //数据为空时view
         mEmptyView = (ViewGroup) v.findViewById(R.id.empty);
         if (mEmptyId!=0){
             LayoutInflater.from(getContext()).inflate(mEmptyId,mEmptyView);
         }
+
+        //数据加载错误view
         mErrorView = (ViewGroup) v.findViewById(R.id.error);
         if (mErrorId!=0){
             LayoutInflater.from(getContext()).inflate(mErrorId,mErrorView);
         }
+
+        //初始化
         initRecyclerView(v);
-    }
-
-
-    public void setRecyclerPadding(int left,int top,int right,int bottom){
-        this.mPaddingLeft = left;
-        this.mPaddingTop = top;
-        this.mPaddingRight = right;
-        this.mPaddingBottom = bottom;
-        mRecycler.setPadding(mPaddingLeft, mPaddingTop, mPaddingRight, mPaddingBottom);
-    }
-
-    @Override
-    public void setClipToPadding(boolean isClip){
-        mRecycler.setClipToPadding(isClip);
-    }
-
-
-    public void scrollToPosition(int position){
-        getRecyclerView().scrollToPosition(position);
     }
 
 
@@ -152,28 +142,8 @@ public class YCRefreshView extends FrameLayout {
         if (mRecycler != null) {
             mRecycler.setHasFixedSize(true);
             mRecycler.setClipToPadding(mClipToPadding);
-            mInternalOnScrollListener = new RecyclerView.OnScrollListener() {
-                @Override
-                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                    super.onScrolled(recyclerView, dx, dy);
-                    if (mExternalOnScrollListener != null){
-                        mExternalOnScrollListener.onScrolled(recyclerView, dx, dy);
-                    }
-                    for (RecyclerView.OnScrollListener listener : mExternalOnScrollListenerList) {
-                        listener.onScrolled(recyclerView, dx, dy);
-                    }
-                }
-                @Override
-                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                    super.onScrollStateChanged(recyclerView, newState);
-                    if (mExternalOnScrollListener != null){
-                        mExternalOnScrollListener.onScrollStateChanged(recyclerView, newState);
-                    }
-                    for (RecyclerView.OnScrollListener listener : mExternalOnScrollListenerList) {
-                        listener.onScrollStateChanged(recyclerView, newState);
-                    }
-                }
-            };
+            initScrollListener();
+            //添加滚动监听事件
             mRecycler.addOnScrollListener(mInternalOnScrollListener);
             if (mPadding != -1.0f) {
                 mRecycler.setPadding(mPadding, mPadding, mPadding, mPadding);
@@ -200,6 +170,83 @@ public class YCRefreshView extends FrameLayout {
         }
     }
 
+    private void initScrollListener() {
+        mInternalOnScrollListener = new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (mExternalOnScrollListener != null){
+                    mExternalOnScrollListener.onScrolled(recyclerView, dx, dy);
+                }
+                for (RecyclerView.OnScrollListener listener : mExternalOnScrollListenerList) {
+                    listener.onScrolled(recyclerView, dx, dy);
+                }
+            }
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (mExternalOnScrollListener != null){
+                    mExternalOnScrollListener.onScrollStateChanged(recyclerView, newState);
+                }
+                for (RecyclerView.OnScrollListener listener : mExternalOnScrollListenerList) {
+                    listener.onScrollStateChanged(recyclerView, newState);
+                }
+            }
+        };
+    }
+
+    /**--------------------------------------相关方法--------------------------------------------**/
+
+    /**
+     * 设置RecyclerView的LayoutManager
+     * @param manager           LayoutManager
+     */
+    public void setLayoutManager(RecyclerView.LayoutManager manager) {
+        mRecycler.setLayoutManager(manager);
+    }
+
+    /**
+     * 获取SwipeRefreshLayout对象
+     * @return              SwipeRefreshLayout对象
+     */
+    public SwipeRefreshLayout getSwipeToRefresh() {
+        return mPtrLayout;
+    }
+
+    /**
+     * 获取RecyclerView对象
+     * @return              RecyclerView对象
+     */
+    public RecyclerView getRecyclerView() {
+        return mRecycler;
+    }
+
+    /**
+     * 设置上下左右的边距
+     */
+    public void setRecyclerPadding(int left,int top,int right,int bottom){
+        this.mPaddingLeft = left;
+        this.mPaddingTop = top;
+        this.mPaddingRight = right;
+        this.mPaddingBottom = bottom;
+        mRecycler.setPadding(mPaddingLeft, mPaddingTop, mPaddingRight, mPaddingBottom);
+    }
+
+
+    @Override
+    public void setClipToPadding(boolean isClip){
+        mRecycler.setClipToPadding(isClip);
+    }
+
+    /**
+     * 设置滚动到索引为position的位置
+     * @param position          位置
+     */
+    public void scrollToPosition(int position){
+        getRecyclerView().scrollToPosition(position);
+    }
+
+
     @Override
     public void setVerticalScrollBarEnabled(boolean verticalScrollBarEnabled) {
         mRecycler.setVerticalScrollBarEnabled(verticalScrollBarEnabled);
@@ -208,14 +255,6 @@ public class YCRefreshView extends FrameLayout {
     @Override
     public void setHorizontalScrollBarEnabled(boolean horizontalScrollBarEnabled) {
         mRecycler.setHorizontalScrollBarEnabled(horizontalScrollBarEnabled);
-    }
-
-    /**
-     * 设置RecyclerView的LayoutManager
-     * @param manager           LayoutManager
-     */
-    public void setLayoutManager(RecyclerView.LayoutManager manager) {
-        mRecycler.setLayoutManager(manager);
     }
 
     /**
@@ -477,64 +516,108 @@ public class YCRefreshView extends FrameLayout {
         mExternalOnScrollListenerList.clear();
     }
 
-
+    /**
+     * 添加条目触摸监听器
+     * @param listener              OnItemTouchListener监听器
+     */
     public void addOnItemTouchListener(RecyclerView.OnItemTouchListener listener) {
         mRecycler.addOnItemTouchListener(listener);
     }
 
-
+    /**
+     * 移除条目触摸监听器
+     */
     public void removeOnItemTouchListener(RecyclerView.OnItemTouchListener listener) {
         mRecycler.removeOnItemTouchListener(listener);
     }
 
-
+    /**
+     * 获取RecyclerView的adapter适配器
+     * @return                      RecyclerView.Adapter对象
+     */
     public RecyclerView.Adapter getAdapter() {
         return mRecycler.getAdapter();
     }
 
 
+    @SuppressLint("ClickableViewAccessibility")
     public void setOnTouchListener(OnTouchListener listener) {
         mRecycler.setOnTouchListener(listener);
     }
 
-
+    /**
+     * 设置条目动画效果
+     * @param animator              ItemAnimator
+     */
     public void setItemAnimator(RecyclerView.ItemAnimator animator) {
         mRecycler.setItemAnimator(animator);
     }
 
 
+    /**
+     * 添加分割线
+     * @param itemDecoration        分割线
+     */
     public void addItemDecoration(RecyclerView.ItemDecoration itemDecoration) {
         mRecycler.addItemDecoration(itemDecoration);
     }
 
-
+    /**
+     * 在索引index出添加分割线
+     * @param itemDecoration        分割线
+     * @param index                 索引
+     */
     public void addItemDecoration(RecyclerView.ItemDecoration itemDecoration, int index) {
         mRecycler.addItemDecoration(itemDecoration, index);
     }
 
 
+    /**
+     * 移除分割线
+     * @param itemDecoration        分割线
+     */
     public void removeItemDecoration(RecyclerView.ItemDecoration itemDecoration) {
         mRecycler.removeItemDecoration(itemDecoration);
     }
 
-
+    /**
+     * 获取error视图view
+     * @return                      view
+     */
     public View getErrorView() {
-        if (mErrorView.getChildCount()>0)return mErrorView.getChildAt(0);
+        if (mErrorView.getChildCount()>0){
+            return mErrorView.getChildAt(0);
+        }
         return null;
     }
 
 
+    /**
+     * 获取Progress视图view
+     * @return                      view
+     */
     public View getProgressView() {
-        if (mProgressView.getChildCount()>0)return mProgressView.getChildAt(0);
+        if (mProgressView.getChildCount()>0){
+            return mProgressView.getChildAt(0);
+        }
         return null;
     }
 
-
+    /**
+     * 获取Empty视图view
+     * @return                      view
+     */
     public View getEmptyView() {
-        if (mEmptyView.getChildCount()>0)return mEmptyView.getChildAt(0);
+        if (mEmptyView.getChildCount()>0) {
+            return mEmptyView.getChildAt(0);
+        }
         return null;
     }
 
+    /**
+     * 日志打印
+     * @param content               打印内容
+     */
     private static void log(String content){
         if (DEBUG){
             Log.i(TAG,content);

@@ -9,7 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.jude.rollviewpager.Util;
+import com.yc.cn.ycbannerlib.first.util.SizeUtil;
 
 import org.yczbj.ycrefreshview.other.DataProvider;
 import org.yczbj.ycrefreshview.R;
@@ -35,7 +35,7 @@ public class ThirdInsertActivity extends AppCompatActivity {
         setContentView(R.layout.activity_refresh_view);
         recyclerView = (YCRefreshView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        DividerViewItemLine itemDecoration = new DividerViewItemLine(Color.GRAY, Util.dip2px(this, 0.5f), Util.dip2px(this, 72), 0);
+        DividerViewItemLine itemDecoration = new DividerViewItemLine(Color.GRAY, SizeUtil.dip2px(this, 0.5f), SizeUtil.dip2px(this, 72), 0);
         itemDecoration.setDrawLastItem(false);
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setAdapterWithProgress(adapter = new PersonAdapter(this));

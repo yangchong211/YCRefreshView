@@ -10,15 +10,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 
-import com.jude.rollviewpager.RollPagerView;
-import com.jude.rollviewpager.Util;
-import com.jude.rollviewpager.hintview.ColorPointHintView;
+import com.yc.cn.ycbannerlib.first.BannerView;
+import com.yc.cn.ycbannerlib.first.hintview.ColorPointHintView;
+import com.yc.cn.ycbannerlib.first.util.SizeUtil;
 
 import org.yczbj.ycrefreshview.other.DataProvider;
 import org.yczbj.ycrefreshview.R;
@@ -45,8 +46,8 @@ public class HeaderFooterActivity extends AppCompatActivity {
 
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        DividerViewItemLine itemDecoration = new DividerViewItemLine(Color.GRAY, Util.dip2px(this,0.5f),
-                Util.dip2px(this,72),0);
+        DividerViewItemLine itemDecoration = new DividerViewItemLine(Color.GRAY, SizeUtil.dip2px(this,0.5f),
+                SizeUtil.dip2px(this,72),0);
         itemDecoration.setDrawLastItem(true);
         itemDecoration.setDrawHeaderFooter(true);
         recyclerView.addItemDecoration(itemDecoration);
@@ -67,16 +68,61 @@ public class HeaderFooterActivity extends AppCompatActivity {
                 },1500);
             }
         });
+        initHeader();
+        adapter.addAll(DataProvider.getPersonList(0));
+
+        adapter.setOnSwipeMenuListener(new OnSwipeMenuListener() {
+            //删除功能
+            @Override
+            public void toDelete(int position) {
+                adapter.getAllData().remove(position);
+                adapter.notifyItemRemoved(position);//推荐用这个
+            }
+
+            //置顶功能
+            @Override
+            public void toTop(int position) {
+                //先移除那个位置的数据，然后将其添加到索引为0的位置，然后刷新数据
+                if (position > 0 && adapter.getAllData().size()>position) {
+                    Person person = adapter.getAllData().get(position);
+                    adapter.getAllData().remove(person);
+                    adapter.notifyItemInserted(0);
+                    adapter.getAllData().add(0, person);
+                    adapter.notifyItemRemoved(position + 1);
+                    if (linearLayoutManager.findFirstVisibleItemPosition() == 0) {
+                        recyclerView.scrollToPosition(0);
+                    }
+                }
+            }
+        });
+    }
+
+
+
+
+    private void initHeader() {
         adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
-                RollPagerView header = new RollPagerView(HeaderFooterActivity.this);
+                BannerView header = new BannerView(HeaderFooterActivity.this);
                 header.setHintView(new ColorPointHintView(HeaderFooterActivity.this, Color.YELLOW,Color.GRAY));
                 header.setHintPadding(0, 0, 0, (int) Utils.convertDpToPixel(8, HeaderFooterActivity.this));
                 header.setPlayDelay(2000);
                 header.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) Utils.convertDpToPixel(200, HeaderFooterActivity.this)));
                 header.setAdapter(new BannerAdapter(HeaderFooterActivity.this));
                 return header;
+            }
+
+            @Override
+            public void onBindView(View headerView) {
+
+            }
+        });
+        adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
+            @Override
+            public View onCreateView(ViewGroup parent) {
+                View inflate = LayoutInflater.from(HeaderFooterActivity.this).inflate(R.layout.header_view, null);
+                return inflate;
             }
 
             @Override
@@ -143,32 +189,6 @@ public class HeaderFooterActivity extends AppCompatActivity {
             @Override
             public void onBindView(View headerView) {
 
-            }
-        });
-        adapter.addAll(DataProvider.getPersonList(0));
-
-        adapter.setOnSwipeMenuListener(new OnSwipeMenuListener() {
-            //删除功能
-            @Override
-            public void toDelete(int position) {
-                adapter.getAllData().remove(position);
-                adapter.notifyItemRemoved(position);//推荐用这个
-            }
-
-            //置顶功能
-            @Override
-            public void toTop(int position) {
-                //先移除那个位置的数据，然后将其添加到索引为0的位置，然后刷新数据
-                if (position > 0 && adapter.getAllData().size()>position) {
-                    Person person = adapter.getAllData().get(position);
-                    adapter.getAllData().remove(person);
-                    adapter.notifyItemInserted(0);
-                    adapter.getAllData().add(0, person);
-                    adapter.notifyItemRemoved(position + 1);
-                    if (linearLayoutManager.findFirstVisibleItemPosition() == 0) {
-                        recyclerView.scrollToPosition(0);
-                    }
-                }
             }
         });
     }

@@ -14,10 +14,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.yc.cn.ycbannerlib.first.BannerView;
+import com.yc.cn.ycbannerlib.first.adapter.StaticPagerAdapter;
+import com.yc.cn.ycbannerlib.first.hintview.ColorPointHintView;
 
-import com.jude.rollviewpager.RollPagerView;
-import com.jude.rollviewpager.adapter.StaticPagerAdapter;
-import com.jude.rollviewpager.hintview.ColorPointHintView;
 
 import org.yczbj.ycrefreshview.other.DataProvider;
 import org.yczbj.ycrefreshview.R;
@@ -55,7 +55,7 @@ public class EightCollapsingActivity extends AppCompatActivity {
             }
         });
         adapter.addAll(DataProvider.getPersonList(0));
-        RollPagerView rollPagerView = (RollPagerView) findViewById(R.id.rollPagerView);
+        BannerView rollPagerView = (BannerView) findViewById(R.id.rollPagerView);
         rollPagerView.setHintView(new ColorPointHintView(this, Color.YELLOW,Color.GRAY));
         rollPagerView.setAdapter(new BannerAdapter());
     }

@@ -4,7 +4,10 @@
 - 轻量级侧滑删除菜单，支持recyclerView，listView，直接嵌套item布局即可使用，整个侧滑菜单思路是：跟随手势将item向左滑动
 - 该库已经用到了实际开发项目中，会持续更新并且修改bug。如果觉得可以，**可以star一下**，多谢支持！
 - 感谢前辈大神们案例及开源分享精神。
-- 一行代码集成：compile 'org.yczbj:YCRefreshViewLib:2.2'
+- 一行代码集成：compile 'org.yczbj:YCRefreshViewLib:2.4'
+- 项目地址：https://github.com/yangchong211/YCRefreshView
+- GitHub地址：https://github.com/yangchong211
+
 
 ## 目录介绍
 - 1.关于复杂页面封装库介绍
@@ -18,11 +21,15 @@
 
 
 ###  1.关于复杂页面封装库介绍
-- 1.1 支持上拉加载，下拉刷新，可以自定义foot底部布局
-- 1.2 支持切换不同的状态，比如加载中[目前是ProgressBar，后期要定制，加载成功，加载失败，加载错误等
-- 1.3 支持复杂界面使用，比如有的页面包含有轮播图，按钮组合，横向滑动，还有复杂list，那么用这个控件就可以搞定
-- 1.4 具体的使用可以直接参考Demo案例，非常感谢Jude大神的开源项目！
+- 1.1 支持上拉加载，下拉刷新，可以自定义foot底部布局，支持添加多个自定义header头部布局。
+- 1.2 支持切换不同的状态，比如加载中[目前是ProgressBar，加载成功，加载失败，加载错误等不同布局状态。当然也可以自定义这些状态的布局
+- 1.3 支持复杂界面使用，比如有的页面包含有轮播图，按钮组合，横向滑动，还有复杂list，那么用这个控件就可以搞定。
+- 1.4 已经用于实际开发项目投资界，新芽，沙丘大学中……
 - 1.5 轻量级侧滑删除菜单，直接嵌套item布局即可使用，使用十分简单。
+- 1.6 支持插入或者删除某条数据，支持CoordinatorLayout炫酷的效果
+- 1.7 支持粘贴头部的需求效果
+- 1.8 RecyclerView实现条目Item拖拽排序与滑动删除
+- 1.9 更多内容可以直接看案例代码
 
 
 ###  2.关于该开源库的思路
@@ -347,9 +354,27 @@ ll_set_network.setOnClickListener(new View.OnClickListener() {
 
 
 ###  5.实现效果
+#### 5.1 使用过YCRefreshView库的案例代码
 - 可以直接参考demo，或者直接参考的我其他案例，其中这几个案例中使用到了该库
 - https://github.com/yangchong211/LifeHelper
 - https://github.com/yangchong211/YCVideoPlayer
+- https://github.com/yangchong211/YCAudioPlayer
+
+#### 5.2 图片展示效果
+- demo效果图展示
+![image](https://upload-images.jianshu.io/upload_images/4432347-9944435ab48a4142.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image](https://upload-images.jianshu.io/upload_images/4432347-dc19e3a6345c38b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image](https://upload-images.jianshu.io/upload_images/4432347-ee2678e74b0e5ead.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image](https://upload-images.jianshu.io/upload_images/4432347-a7661526c66a8a7b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image](https://upload-images.jianshu.io/upload_images/4432347-629e88c4e0437966.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image](https://upload-images.jianshu.io/upload_images/4432347-6ed3754ba9d1bb95.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+- 案例图展示
+![image](https://upload-images.jianshu.io/upload_images/4432347-c3d1cd1c02f05be0.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/300)
+![image](https://upload-images.jianshu.io/upload_images/4432347-321ca95b07ceaa6d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700)
+![image](https://upload-images.jianshu.io/upload_images/4432347-ca314a2714877604.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/270)
+
 
 ###  6.版本更新说明
 - v1.0 更新于2017年4月22日
@@ -357,11 +382,13 @@ ll_set_network.setOnClickListener(new View.OnClickListener() {
 - v1.…… 更新于2018年1月5日
 - v2.2 更新于2018年1月17日
 - v2.3 更新于2018年2月9日
-- v2.4 更新于2018年3月6日
+- v2.4 更新于2018年3月19日
 
 
 ###  7.参考资料说明
 - **非常感谢前辈大神的封装思路和代码案例，感谢！！！**
+- https://github.com/XRecyclerView/XRecyclerView
+- 具体的使用可以直接参考Demo案例，非常感谢Jude大神的开源项目！
 - BGARefreshLayout-Android：https://github.com/bingoogolapple/BGARefreshLayout-Android
 - Android-PullToRefresh：https://github.com/chrisbanes/Android-PullToRefresh
 - Jude95/EasyRecyclerView：https://github.com/Jude95/EasyRecyclerView

@@ -1,5 +1,6 @@
 package org.yczbj.ycrefreshview.first;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -22,12 +23,12 @@ import org.yczbj.ycrefreshview.other.Utils;
 import org.yczbj.ycrefreshview.other.Person;
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
+import org.yczbj.ycrefreshviewlib.swipeMenu.OnSwipeMenuListener;
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 
-public class RefreshAndMoreActivity extends AppCompatActivity implements
-        RecyclerArrayAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener{
+public class RefreshAndMoreActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
 
     private YCRefreshView recyclerView;
     private FloatingActionButton top;
@@ -40,7 +41,7 @@ public class RefreshAndMoreActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_loadmore);
+        setContentView(R.layout.base_recyclerview);
 
         top = (FloatingActionButton) findViewById(R.id.top);
         recyclerView = (YCRefreshView) findViewById(R.id.recyclerView);
@@ -49,7 +50,7 @@ public class RefreshAndMoreActivity extends AppCompatActivity implements
 
 
         final RecycleViewItemLine line = new RecycleViewItemLine(this, LinearLayout.HORIZONTAL,
-                (int)Utils.convertDpToPixel(1,this), this.getResources().getColor(R.color.colorAccent));
+                (int)Utils.convertDpToPixel(1,this), Color.GRAY);
         recyclerView.addItemDecoration(line);
 
         recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<Person>(this) {
@@ -58,8 +59,34 @@ public class RefreshAndMoreActivity extends AppCompatActivity implements
                 return new PersonViewHolder(parent);
             }
         });
-        adapter.setMore(R.layout.view_more, this);
-        adapter.setNoMore(R.layout.view_nomore);
+        adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //刷新
+                        if (!hasNetWork) {
+                            adapter.pauseMore();
+                            return;
+                        }
+                        adapter.addAll(DataProvider.getPersonList(page));
+                        page++;
+                    }
+                }, 2000);
+            }
+        });
+        adapter.setNoMore(R.layout.view_nomore, new RecyclerArrayAdapter.OnNoMoreListener() {
+            @Override
+            public void onNoMoreShow() {
+                adapter.pauseMore();
+            }
+
+            @Override
+            public void onNoMoreClick() {
+
+            }
+        });
         adapter.setOnItemLongClickListener(new RecyclerArrayAdapter.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(int position) {
@@ -89,23 +116,6 @@ public class RefreshAndMoreActivity extends AppCompatActivity implements
         onRefresh();
     }
 
-    //第四页会返回空,意为数据加载结束
-    @Override
-    public void onLoadMore() {
-        Log.i("EasyRecyclerView","onLoadMore");
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                //刷新
-                if (!hasNetWork) {
-                    adapter.pauseMore();
-                    return;
-                }
-                adapter.addAll(DataProvider.getPersonList(page));
-                page++;
-            }
-        }, 2000);
-    }
 
     @Override
     public void onRefresh() {

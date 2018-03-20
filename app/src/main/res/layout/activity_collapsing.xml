@@ -22,11 +22,11 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
 
-            <com.jude.rollviewpager.RollPagerView
+            <com.yc.cn.ycbannerlib.first.BannerView
                 android:id="@+id/rollPagerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:rollviewpager_hint_paddingBottom="16dp"
+                app:hint_paddingBottom="16dp"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.7" />
 

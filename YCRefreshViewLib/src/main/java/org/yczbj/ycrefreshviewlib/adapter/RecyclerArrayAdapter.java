@@ -33,7 +33,6 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
     private ArrayList<ItemView> footers = new ArrayList<>();
     private OnItemClickListener mItemClickListener;
     private OnItemLongClickListener mItemLongClickListener;
-    private RecyclerView mRecyclerView;
     private final Object mLock = new Object();
     private boolean mNotifyOnChange = true;
     private Context mContext;
@@ -272,9 +271,8 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
-        this.mRecyclerView = recyclerView;
         //增加对RecyclerArrayAdapter奇葩操作的修复措施
-        registerAdapterDataObserver(new FixDataObserver(mRecyclerView));
+        registerAdapterDataObserver(new FixDataObserver(recyclerView));
     }
 
     private class FixDataObserver extends RecyclerView.AdapterDataObserver {
@@ -283,7 +281,6 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         FixDataObserver(RecyclerView recyclerView) {
             this.recyclerView = recyclerView;
         }
-
 
         @Override
         public void onItemRangeInserted(int positionStart, int itemCount) {
@@ -454,6 +451,7 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         if (mNotifyOnChange) notifyDataSetChanged();
         log("clear notifyItemRangeRemoved "+(headers.size())+","+(count));
     }
+
     /**
      * Sorts the content of this adapter using the specified comparator.
      *
@@ -580,7 +578,7 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
     }
 
     //抽象方法，子类继承
-    abstract public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType);
+    public abstract BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType);
 
 
     @Override

@@ -15,6 +15,4 @@ public interface OnSwipeMenuListener {
      */
     void toTop(int position);
 
-
-
 }

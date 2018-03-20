@@ -21,41 +21,28 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 public class PersonViewHolder extends BaseViewHolder<Person> {
 
-    private TextView mTv_name;
-    private ImageView mImg_face;
-    private TextView mTv_sign;
-    private Button btn_del;
-    private OnSwipeMenuListener listener;
-    public void setOnSwipeMenuListener(OnSwipeMenuListener listener) {
-        this.listener = listener;
-    }
+    private TextView tv_title;
+    private ImageView iv_news_image;
+    private TextView tv_content;
+
 
     public PersonViewHolder(ViewGroup parent) {
-        super(parent, R.layout.item_person);
-        mTv_name = getView(R.id.person_name);
-        mTv_sign = getView(R.id.person_sign);
-        mImg_face = getView(R.id.person_face);
-        btn_del = getView(R.id.btn_del);
+        super(parent, R.layout.item_news);
+        iv_news_image = getView(R.id.iv_news_image);
+        tv_title = getView(R.id.tv_title);
+        tv_content = getView(R.id.tv_content);
     }
 
     @Override
     public void setData(final Person person){
         Log.i("ViewHolder","position"+getDataPosition());
-        mTv_name.setText(person.getName());
-        mTv_sign.setText(person.getSign());
+        tv_title.setText(person.getName());
+        tv_content.setText(person.getSign());
         Glide.with(getContext())
                 .load(person.getFace())
+                .error(R.drawable.bg_small_tree_min)
                 .placeholder(R.drawable.default_image)
                 .bitmapTransform(new CropCircleTransformation(getContext()))
-                .into(mImg_face);
-
-        btn_del.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != listener) {
-                    listener.toDelete(getAdapterPosition());
-                }
-            }
-        });
+                .into(iv_news_image);
     }
 }

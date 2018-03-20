@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.jude.rollviewpager.adapter.StaticPagerAdapter;
+import com.yc.cn.ycbannerlib.first.adapter.StaticPagerAdapter;
 
 
 import org.yczbj.ycrefreshview.other.DataProvider;

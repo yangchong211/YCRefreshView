@@ -14,7 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import com.jude.rollviewpager.Util;
+
+import com.yc.cn.ycbannerlib.first.util.SizeUtil;
 
 import org.yczbj.ycrefreshview.other.DataProvider;
 import org.yczbj.ycrefreshview.R;
@@ -40,12 +41,13 @@ public class SixStickyHeaderActivity extends AppCompatActivity implements Recycl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_loadmore);
+        setContentView(R.layout.base_recyclerview);
 
         top = (FloatingActionButton) findViewById(R.id.top);
         recyclerView = (YCRefreshView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        DividerViewItemLine itemDecoration = new DividerViewItemLine(Color.GRAY, Util.dip2px(this, 0.5f), Util.dip2px(this, 72), 0);
+        DividerViewItemLine itemDecoration = new DividerViewItemLine(Color.GRAY,
+                SizeUtil.dip2px(this, 0.5f), SizeUtil.dip2px(this, 72), 0);
         itemDecoration.setDrawLastItem(false);
         recyclerView.addItemDecoration(itemDecoration);
 

@@ -37,6 +37,8 @@ import java.lang.reflect.Field;
  *                  View的生成与管理由ViewHolder执行。
  *                  实现setData来实现UI修改。Adapter会在onCreateViewHolder里自动调用。
  *                  目前findViewById有两种方式，建议使用第二种方式
+ *
+ *                  具体可以参考我的adapter封装库：https://github.com/yangchong211/YCBaseAdapter
  */
 abstract public class BaseViewHolder<M> extends RecyclerView.ViewHolder {
 
@@ -300,7 +302,7 @@ abstract public class BaseViewHolder<M> extends RecyclerView.ViewHolder {
     }
 
     public BaseViewHolder setChecked(int viewId, boolean checked) {
-        Checkable view = (Checkable) getView(viewId);
+        Checkable view = getView(viewId);
         view.setChecked(checked);
         return this;
     }

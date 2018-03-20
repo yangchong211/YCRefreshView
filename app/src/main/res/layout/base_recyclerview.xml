@@ -11,8 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:scrollbarStyle="insideOverlay"
-        app:layout_progress="@layout/view_progress"
-        app:layout_empty="@layout/view_empty" />
+        app:layout_progress="@layout/view_custom_loading_data"
+        app:layout_empty="@layout/view_custom_empty_data"
+        app:layout_error="@layout/view_custom_data_error"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/top"
