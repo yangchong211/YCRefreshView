@@ -12,6 +12,7 @@ import android.widget.TextView;
 import org.yczbj.ycrefreshview.R;
 import org.yczbj.ycrefreshviewlib.item.StickyHeaderItemLine;
 
+import java.util.ArrayList;
 
 
 public class StickyHeaderAdapter implements

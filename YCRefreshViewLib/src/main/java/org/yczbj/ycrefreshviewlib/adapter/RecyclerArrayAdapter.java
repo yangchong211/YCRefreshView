@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
-import org.yczbj.ycrefreshviewlib.inter.EventDelegateAble;
+import org.yczbj.ycrefreshviewlib.inter.AbsEventDelegate;
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
 
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ import java.util.List;
 abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseViewHolder>   {
 
     private List<T> mObjects;
-    private EventDelegateAble mEventDelegate;
+    private AbsEventDelegate mEventDelegate;
     private ArrayList<ItemView> headers = new ArrayList<>();
     private ArrayList<ItemView> footers = new ArrayList<>();
     private OnItemClickListener mItemClickListener;
@@ -189,7 +189,7 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
     }
 
 
-    private EventDelegateAble getEventDelegate(){
+    private AbsEventDelegate getEventDelegate(){
         if (mEventDelegate == null) {
             mEventDelegate = new DefaultEventDelegate(this);
         }

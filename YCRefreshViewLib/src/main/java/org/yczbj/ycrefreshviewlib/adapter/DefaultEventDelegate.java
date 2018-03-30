@@ -7,14 +7,14 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
-import org.yczbj.ycrefreshviewlib.inter.EventDelegateAble;
+import org.yczbj.ycrefreshviewlib.inter.AbsEventDelegate;
 
 /**
  * @author          杨充
  * @version         1.0
  * @date            2017/1/29
  */
-public class DefaultEventDelegate implements EventDelegateAble {
+public class DefaultEventDelegate implements AbsEventDelegate {
 
     private RecyclerArrayAdapter adapter;
     private EventFooter footer ;
@@ -79,6 +79,7 @@ public class DefaultEventDelegate implements EventDelegateAble {
     }
 
     //-------------------5个状态触发事件-------------------
+
     @Override
     public void addData(int length) {
         log("addData" + length);
@@ -232,10 +233,18 @@ public class DefaultEventDelegate implements EventDelegateAble {
                             onMoreViewShowed();
                             break;
                         case ShowNoMore:
-                            if (!skipNoMore)onNoMoreViewShowed();skipNoMore = false;
+                            if (!skipNoMore) {
+                                onNoMoreViewShowed();
+                            }
+                            skipNoMore = false;
                             break;
                         case ShowError:
-                            if (!skipError) onErrorViewShowed();skipError = false;
+                            if (!skipError) {
+                                onErrorViewShowed();
+                            }
+                            skipError = false;
+                            break;
+                        default:
                             break;
                     }
                 }
@@ -246,37 +255,56 @@ public class DefaultEventDelegate implements EventDelegateAble {
             View view = null;
             switch (flag){
                 case ShowMore:
-                    if (moreView!=null) view = moreView;
-                    else if (moreViewRes!=0)view = LayoutInflater.from(parent.getContext()).inflate(moreViewRes,parent,false);
-                    if (view!=null)view.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            onMoreViewClicked();
-                        }
-                    });
+                    if (moreView!=null) {
+                        view = moreView;
+                    } else if (moreViewRes!=0) {
+                        view = LayoutInflater.from(parent.getContext()).inflate(moreViewRes, parent, false);
+                    }
+                    if (view!=null) {
+                        view.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                onMoreViewClicked();
+                            }
+                        });
+                    }
                     break;
                 case ShowError:
-                    if (errorView!=null) view = errorView;
-                    else if (errorViewRes!=0)view = LayoutInflater.from(parent.getContext()).inflate(errorViewRes,parent,false);
-                    if (view!=null)view.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            onErrorViewClicked();
-                        }
-                    });
+                    if (errorView!=null) {
+                        view = errorView;
+                    } else if (errorViewRes!=0) {
+                        view = LayoutInflater.from(parent.getContext()).inflate(errorViewRes, parent, false);
+                    }
+                    if (view!=null) {
+                        view.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                onErrorViewClicked();
+                            }
+                        });
+                    }
                     break;
                 case ShowNoMore:
-                    if (noMoreView!=null) view = noMoreView;
-                    else if (noMoreViewRes!=0)view = LayoutInflater.from(parent.getContext()).inflate(noMoreViewRes,parent,false);
-                    if (view!=null)view.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            onNoMoreViewClicked();
-                        }
-                    });
+                    if (noMoreView!=null) {
+                        view = noMoreView;
+                    } else if (noMoreViewRes!=0) {
+                        view = LayoutInflater.from(parent.getContext()).inflate(noMoreViewRes, parent, false);
+                    }
+                    if (view!=null) {
+                        view.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                onNoMoreViewClicked();
+                            }
+                        });
+                    }
+                    break;
+                default:
                     break;
             }
-            if (view == null)view = new FrameLayout(parent.getContext());
+            if (view == null) {
+                view = new FrameLayout(parent.getContext());
+            }
             return view;
         }
 

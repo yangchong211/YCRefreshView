@@ -27,6 +27,8 @@ import org.yczbj.ycrefreshviewlib.item.DividerViewItemLine;
 import org.yczbj.ycrefreshviewlib.item.StickyHeaderItemLine;
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
 
+import java.util.ArrayList;
+
 
 public class SixStickyHeaderActivity extends AppCompatActivity implements RecyclerArrayAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
 
@@ -37,6 +39,7 @@ public class SixStickyHeaderActivity extends AppCompatActivity implements Recycl
 
     private int page = 0;
     private boolean hasNetWork = true;
+    private ArrayList<Integer> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
