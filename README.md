@@ -4,7 +4,7 @@
 - 轻量级侧滑删除菜单，支持recyclerView，listView，直接嵌套item布局即可使用，整个侧滑菜单思路是：跟随手势将item向左滑动
 - 该库已经用到了实际开发项目中，会持续更新并且修改bug。如果觉得可以，**可以star一下**，多谢支持！
 - 感谢前辈大神们案例及开源分享精神。
-- 一行代码集成：compile 'org.yczbj:YCRefreshViewLib:2.5.2'
+- 一行代码集成：compile 'org.yczbj:YCRefreshViewLib:2.5'
 - 项目地址：https://github.com/yangchong211/YCRefreshView
 - GitHub地址：https://github.com/yangchong211
 
