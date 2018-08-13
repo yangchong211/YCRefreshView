@@ -15,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.yc.cn.ycbannerlib.first.BannerView;
@@ -70,6 +71,19 @@ public class HeaderFooterActivity extends AppCompatActivity {
         });
         initHeader();
         adapter.addAll(DataProvider.getPersonList(0));
+        adapter.setOnItemChildClickListener(new RecyclerArrayAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(View view, int position) {
+                switch (view.getId()){
+                    case R.id.iv_news_image:
+                        Toast.makeText(HeaderFooterActivity.this,"点击图片了",Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.tv_title:
+                        Toast.makeText(HeaderFooterActivity.this,"点击标题",Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+        });
 
         adapter.setOnSwipeMenuListener(new OnSwipeMenuListener() {
             //删除功能

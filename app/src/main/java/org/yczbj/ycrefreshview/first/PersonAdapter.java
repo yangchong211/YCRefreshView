@@ -52,6 +52,9 @@ public class PersonAdapter extends RecyclerArrayAdapter<Person> {
             tv_content = getView(R.id.tv_content);
             btn_del = getView(R.id.btn_del);
             btn_top = getView(R.id.btn_top);
+
+            addOnClickListener(R.id.iv_news_image);
+            addOnClickListener(R.id.tv_title);
         }
 
         @Override

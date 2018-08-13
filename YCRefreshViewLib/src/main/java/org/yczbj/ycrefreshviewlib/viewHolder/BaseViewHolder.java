@@ -144,6 +144,29 @@ abstract public class BaseViewHolder<M> extends RecyclerView.ViewHolder {
         return null;
     }
 
+    /**
+     * 添加子控件的点击事件
+     * @param viewId                        控件id
+     */
+    protected void addOnClickListener(@IdRes final int viewId) {
+        final View view = getView(viewId);
+        if (view != null) {
+            if (!view.isClickable()) {
+                view.setClickable(true);
+            }
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(getOwnerAdapter()!=null){
+                        if (((RecyclerArrayAdapter)getOwnerAdapter()).getOnItemChildClickListener() != null) {
+                            ((RecyclerArrayAdapter)getOwnerAdapter()).getOnItemChildClickListener().onItemChildClick(v, getDataPosition());
+                        }
+                    }
+                }
+            });
+        }
+    }
+
 
 
     /**
