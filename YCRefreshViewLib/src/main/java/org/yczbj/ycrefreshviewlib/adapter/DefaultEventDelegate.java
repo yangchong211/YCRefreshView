@@ -8,6 +8,10 @@ import android.widget.FrameLayout;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.inter.AbsEventDelegate;
+import org.yczbj.ycrefreshviewlib.inter.ItemView;
+import org.yczbj.ycrefreshviewlib.inter.OnErrorListener;
+import org.yczbj.ycrefreshviewlib.inter.OnMoreListener;
+import org.yczbj.ycrefreshviewlib.inter.OnNoMoreListener;
 
 /**
  * @author          杨充
@@ -19,9 +23,9 @@ public class DefaultEventDelegate implements AbsEventDelegate {
     private RecyclerArrayAdapter adapter;
     private EventFooter footer ;
 
-    private RecyclerArrayAdapter.OnMoreListener onMoreListener;
-    private RecyclerArrayAdapter.OnNoMoreListener onNoMoreListener;
-    private RecyclerArrayAdapter.OnErrorListener onErrorListener;
+    private OnMoreListener onMoreListener;
+    private OnNoMoreListener onNoMoreListener;
+    private OnErrorListener onErrorListener;
 
     private boolean hasData = false;
     private boolean isLoadingMore = false;
@@ -141,7 +145,7 @@ public class DefaultEventDelegate implements AbsEventDelegate {
     //-------------------3种View设置-------------------
 
     @Override
-    public void setMore(View view, RecyclerArrayAdapter.OnMoreListener listener) {
+    public void setMore(View view, OnMoreListener listener) {
         this.footer.setMoreView(view);
         this.onMoreListener = listener;
         hasMore = true;
@@ -153,7 +157,7 @@ public class DefaultEventDelegate implements AbsEventDelegate {
     }
 
     @Override
-    public void setNoMore(View view, RecyclerArrayAdapter.OnNoMoreListener listener) {
+    public void setNoMore(View view, OnNoMoreListener listener) {
         this.footer.setNoMoreView(view);
         this.onNoMoreListener = listener;
         hasNoMore = true;
@@ -161,7 +165,7 @@ public class DefaultEventDelegate implements AbsEventDelegate {
     }
 
     @Override
-    public void setErrorMore(View view, RecyclerArrayAdapter.OnErrorListener listener) {
+    public void setErrorMore(View view, OnErrorListener listener) {
         this.footer.setErrorView(view);
         this.onErrorListener = listener;
         hasError = true;
@@ -169,7 +173,7 @@ public class DefaultEventDelegate implements AbsEventDelegate {
     }
 
     @Override
-    public void setMore(int res, RecyclerArrayAdapter.OnMoreListener listener) {
+    public void setMore(int res, OnMoreListener listener) {
         this.footer.setMoreViewRes(res);
         this.onMoreListener = listener;
         hasMore = true;
@@ -181,7 +185,7 @@ public class DefaultEventDelegate implements AbsEventDelegate {
     }
 
     @Override
-    public void setNoMore(int res, RecyclerArrayAdapter.OnNoMoreListener listener) {
+    public void setNoMore(int res, OnNoMoreListener listener) {
         this.footer.setNoMoreViewRes(res);
         this.onNoMoreListener = listener;
         hasNoMore = true;
@@ -189,7 +193,7 @@ public class DefaultEventDelegate implements AbsEventDelegate {
     }
 
     @Override
-    public void setErrorMore(int res, RecyclerArrayAdapter.OnErrorListener listener) {
+    public void setErrorMore(int res, OnErrorListener listener) {
         this.footer.setErrorViewRes(res);
         this.onErrorListener = listener;
         hasError = true;
@@ -198,7 +202,7 @@ public class DefaultEventDelegate implements AbsEventDelegate {
 
 
 
-    private class EventFooter implements RecyclerArrayAdapter.ItemView {
+    private class EventFooter implements ItemView {
 
         private View moreView = null;
         private View noMoreView = null;

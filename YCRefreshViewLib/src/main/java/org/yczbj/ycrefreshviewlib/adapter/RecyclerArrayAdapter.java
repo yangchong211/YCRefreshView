@@ -7,13 +7,14 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListView;
-
-
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.inter.AbsEventDelegate;
+import org.yczbj.ycrefreshviewlib.inter.ItemView;
+import org.yczbj.ycrefreshviewlib.inter.OnErrorListener;
+import org.yczbj.ycrefreshviewlib.inter.OnLoadMoreListener;
+import org.yczbj.ycrefreshviewlib.inter.OnMoreListener;
+import org.yczbj.ycrefreshviewlib.inter.OnNoMoreListener;
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -60,34 +61,96 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         mObjects = new ArrayList<>(objects);
     }
 
-
-    public interface ItemView {
-         View onCreateView(ViewGroup parent);
-         void onBindView(View headerView);
+    @Override
+    public final BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = createSpViewByType(parent, viewType);
+        if (view!=null){
+            return new StateViewHolder(view);
+        }
+        final BaseViewHolder viewHolder = OnCreateViewHolder(parent, viewType);
+        //itemView 的点击事件
+        if (mItemClickListener!=null) {
+            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mItemClickListener.onItemClick(
+                            viewHolder.getAdapterPosition()-headers.size());
+                }
+            });
+        }
+        if (mItemLongClickListener!=null){
+            viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    return mItemLongClickListener.onItemLongClick(
+                            viewHolder.getAdapterPosition()-headers.size());
+                }
+            });
+        }
+        return viewHolder;
     }
 
     /**
-     * 加载更多监听
+     * 抽象方法，子类继承
      */
-    public interface OnLoadMoreListener{
-        void onLoadMore();
-    }
-
-    public interface OnMoreListener{
-        void onMoreShow();
-        void onMoreClick();
-    }
+    public abstract BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType);
 
 
-    public interface OnNoMoreListener{
-        void onNoMoreShow();
-        void onNoMoreClick();
+    @Override
+    public final void onBindViewHolder(BaseViewHolder holder, int position) {
+        holder.itemView.setId(position);
+        if (headers.size()!=0 && position<headers.size()){
+            headers.get(position).onBindView(holder.itemView);
+            return ;
+        }
+
+        int i = position - headers.size() - mObjects.size();
+        if (footers.size()!=0 && i>=0){
+            footers.get(i).onBindView(holder.itemView);
+            return ;
+        }
+        OnBindViewHolder(holder,position-headers.size());
     }
 
-    public interface OnErrorListener{
-        void onErrorShow();
-        void onErrorClick();
+
+    @SuppressWarnings("unchecked")
+    private void OnBindViewHolder(BaseViewHolder holder, final int position){
+        holder.setData(getItem(position));
     }
+
+
+    @Deprecated
+    @Override
+    public final int getItemViewType(int position) {
+        if (headers.size()!=0){
+            if (position<headers.size()) {
+                return headers.get(position).hashCode();
+            }
+        }
+        if (footers.size()!=0){
+            /*
+            eg:
+            0:header1
+            1:header2   2
+            2:object1
+            3:object2
+            4:object3
+            5:object4
+            6:footer1   6(position) - 2 - 4 = 0
+            7:footer2
+             */
+            int i = position - headers.size() - mObjects.size();
+            if (i >= 0){
+                return footers.get(i).hashCode();
+            }
+        }
+        return getViewType(position-headers.size());
+    }
+
+    public int getViewType(int position){
+        return 0;
+    }
+
 
     public class GridSpanSizeLookup extends GridLayoutManager.SpanSizeLookup{
         private int mMaxCount;
@@ -527,7 +590,7 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
     }
 
     private View createSpViewByType(ViewGroup parent, int viewType){
-        for (ItemView headerView:headers){
+        for (ItemView headerView : headers){
             if (headerView.hashCode() == viewType){
                 View view = headerView.onCreateView(parent);
                 StaggeredGridLayoutManager.LayoutParams layoutParams;
@@ -541,8 +604,7 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
                 return view;
             }
         }
-
-        for (ItemView footerView:footers){
+        for (ItemView footerView : footers){
             if (footerView.hashCode() == viewType){
                 View view = footerView.onCreateView(parent);
                 StaggeredGridLayoutManager.LayoutParams layoutParams;
@@ -557,96 +619,6 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
             }
         }
         return null;
-    }
-
-    @Override
-    public final BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = createSpViewByType(parent, viewType);
-        if (view!=null){
-            return new StateViewHolder(view);
-        }
-        final BaseViewHolder viewHolder = OnCreateViewHolder(parent, viewType);
-        //itemView 的点击事件
-        if (mItemClickListener!=null) {
-            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mItemClickListener.onItemClick(
-                            viewHolder.getAdapterPosition()-headers.size());
-                }
-            });
-        }
-        if (mItemLongClickListener!=null){
-            viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    return mItemLongClickListener.onItemLongClick(
-                            viewHolder.getAdapterPosition()-headers.size());
-                }
-            });
-        }
-        return viewHolder;
-    }
-
-    /**
-     * 抽象方法，子类继承
-     */
-    public abstract BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType);
-
-
-    @Override
-    public final void onBindViewHolder(BaseViewHolder holder, int position) {
-        holder.itemView.setId(position);
-        if (headers.size()!=0 && position<headers.size()){
-            headers.get(position).onBindView(holder.itemView);
-            return ;
-        }
-
-        int i = position - headers.size() - mObjects.size();
-        if (footers.size()!=0 && i>=0){
-            footers.get(i).onBindView(holder.itemView);
-            return ;
-        }
-        OnBindViewHolder(holder,position-headers.size());
-    }
-
-
-    @SuppressWarnings("unchecked")
-    private void OnBindViewHolder(BaseViewHolder holder, final int position){
-        holder.setData(getItem(position));
-    }
-
-
-    @Deprecated
-    @Override
-    public final int getItemViewType(int position) {
-        if (headers.size()!=0){
-            if (position<headers.size()) {
-                return headers.get(position).hashCode();
-            }
-        }
-        if (footers.size()!=0){
-            /*
-            eg:
-            0:header1
-            1:header2   2
-            2:object1
-            3:object2
-            4:object3
-            5:object4
-            6:footer1   6(position) - 2 - 4 = 0
-            7:footer2
-             */
-            int i = position - headers.size() - mObjects.size();
-            if (i >= 0){
-                return footers.get(i).hashCode();
-            }
-        }
-        return getViewType(position-headers.size());
-    }
-
-    public int getViewType(int position){
-        return 0;
     }
 
     /**

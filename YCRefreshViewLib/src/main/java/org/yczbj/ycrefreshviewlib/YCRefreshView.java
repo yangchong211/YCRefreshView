@@ -79,6 +79,18 @@ public class YCRefreshView extends FrameLayout {
         return mPtrLayout.dispatchTouchEvent(ev);
     }
 
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+    }
+
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+    }
+
+
     /**
      * 初始化资源
      * @param attrs         attrs

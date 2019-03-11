@@ -40,7 +40,7 @@ import java.lang.reflect.Field;
  *
  *                  具体可以参考我的adapter封装库：https://github.com/yangchong211/YCBaseAdapter
  */
-abstract public class BaseViewHolder<M> extends RecyclerView.ViewHolder {
+public abstract class BaseViewHolder<M> extends RecyclerView.ViewHolder {
 
 
     // SparseArray 比 HashMap 更省内存，在某些条件下性能更好，只能存储 key 为 int 类型的数据，
@@ -67,15 +67,6 @@ abstract public class BaseViewHolder<M> extends RecyclerView.ViewHolder {
      * @param data
      */
     public void setData(M data) {}
-
-    /**
-     * 第一种findViewById方式
-     * 根据 ID 来获取 View
-     */
-    @SuppressWarnings("unchecked")
-    protected <T extends View> T $(@IdRes int id) {
-        return (T) itemView.findViewById(id);
-    }
 
     /**
      * 第二种findViewById方式
@@ -112,7 +103,7 @@ abstract public class BaseViewHolder<M> extends RecyclerView.ViewHolder {
      */
     protected int getDataPosition(){
         RecyclerView.Adapter adapter = getOwnerAdapter();
-        if (adapter!=null && adapter instanceof RecyclerArrayAdapter){
+        if (adapter instanceof RecyclerArrayAdapter){
             return getAdapterPosition() - ((RecyclerArrayAdapter) adapter).getHeaderCount();
         }
         return getAdapterPosition();

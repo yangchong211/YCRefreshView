@@ -139,6 +139,11 @@ public class YCSwipeMenu extends ViewGroup {
         return this;
     }
 
+
+    public boolean isExpand() {
+        return isExpand;
+    }
+
     /**
      * 返回ViewCache
      */
