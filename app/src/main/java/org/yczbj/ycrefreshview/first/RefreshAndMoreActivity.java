@@ -22,6 +22,10 @@ import org.yczbj.ycrefreshview.R;
 import org.yczbj.ycrefreshview.other.Utils;
 import org.yczbj.ycrefreshview.other.Person;
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.inter.OnErrorListener;
+import org.yczbj.ycrefreshviewlib.inter.OnItemLongClickListener;
+import org.yczbj.ycrefreshviewlib.inter.OnLoadMoreListener;
+import org.yczbj.ycrefreshviewlib.inter.OnNoMoreListener;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import org.yczbj.ycrefreshviewlib.swipeMenu.OnSwipeMenuListener;
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
@@ -59,7 +63,7 @@ public class RefreshAndMoreActivity extends AppCompatActivity implements SwipeRe
                 return new PersonViewHolder(parent);
             }
         });
-        adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnLoadMoreListener() {
+        adapter.setMore(R.layout.view_more, new OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
                 handler.postDelayed(new Runnable() {
@@ -76,7 +80,7 @@ public class RefreshAndMoreActivity extends AppCompatActivity implements SwipeRe
                 }, 2000);
             }
         });
-        adapter.setNoMore(R.layout.view_nomore, new RecyclerArrayAdapter.OnNoMoreListener() {
+        adapter.setNoMore(R.layout.view_nomore, new OnNoMoreListener() {
             @Override
             public void onNoMoreShow() {
                 adapter.pauseMore();
@@ -87,14 +91,14 @@ public class RefreshAndMoreActivity extends AppCompatActivity implements SwipeRe
 
             }
         });
-        adapter.setOnItemLongClickListener(new RecyclerArrayAdapter.OnItemLongClickListener() {
+        adapter.setOnItemLongClickListener(new OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(int position) {
                 adapter.remove(position);
                 return true;
             }
         });
-        adapter.setError(R.layout.view_error, new RecyclerArrayAdapter.OnErrorListener() {
+        adapter.setError(R.layout.view_error, new OnErrorListener() {
             @Override
             public void onErrorShow() {
                 adapter.resumeMore();

@@ -11,6 +11,9 @@ import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.inter.AbsEventDelegate;
 import org.yczbj.ycrefreshviewlib.inter.ItemView;
 import org.yczbj.ycrefreshviewlib.inter.OnErrorListener;
+import org.yczbj.ycrefreshviewlib.inter.OnItemChildClickListener;
+import org.yczbj.ycrefreshviewlib.inter.OnItemClickListener;
+import org.yczbj.ycrefreshviewlib.inter.OnItemLongClickListener;
 import org.yczbj.ycrefreshviewlib.inter.OnLoadMoreListener;
 import org.yczbj.ycrefreshviewlib.inter.OnMoreListener;
 import org.yczbj.ycrefreshviewlib.inter.OnNoMoreListener;
@@ -27,7 +30,7 @@ import java.util.List;
  * @version         1.0
  * @date            2017/5/2
  */
-abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseViewHolder>   {
+public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseViewHolder>   {
 
     private List<T> mObjects;
     private AbsEventDelegate mEventDelegate;
@@ -657,17 +660,6 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         }
     }
 
-    public interface OnItemClickListener {
-        void onItemClick(int position);
-    }
-
-    public interface OnItemLongClickListener {
-        boolean onItemLongClick(int position);
-    }
-
-    public interface OnItemChildClickListener {
-        void onItemChildClick(View view, int position);
-    }
     /**
      * 设置条目点击事件
      * @param listener              监听器
