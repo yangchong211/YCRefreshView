@@ -1,13 +1,11 @@
 package org.yczbj.ycrefreshview.first;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,17 +15,16 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 
 
-import org.yczbj.ycrefreshview.other.DataProvider;
+import org.yczbj.ycrefreshview.data.DataProvider;
 import org.yczbj.ycrefreshview.R;
-import org.yczbj.ycrefreshview.other.Utils;
-import org.yczbj.ycrefreshview.other.Person;
+import org.yczbj.ycrefreshview.data.AppUtils;
+import org.yczbj.ycrefreshview.data.PersonData;
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.inter.OnErrorListener;
 import org.yczbj.ycrefreshviewlib.inter.OnItemLongClickListener;
 import org.yczbj.ycrefreshviewlib.inter.OnLoadMoreListener;
 import org.yczbj.ycrefreshviewlib.inter.OnNoMoreListener;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
-import org.yczbj.ycrefreshviewlib.swipeMenu.OnSwipeMenuListener;
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
@@ -36,7 +33,7 @@ public class RefreshAndMoreActivity extends AppCompatActivity implements SwipeRe
 
     private YCRefreshView recyclerView;
     private FloatingActionButton top;
-    private RecyclerArrayAdapter<Person> adapter;
+    private RecyclerArrayAdapter<PersonData> adapter;
     private Handler handler = new Handler();
 
     private int page = 0;
@@ -54,10 +51,11 @@ public class RefreshAndMoreActivity extends AppCompatActivity implements SwipeRe
 
 
         final RecycleViewItemLine line = new RecycleViewItemLine(this, LinearLayout.HORIZONTAL,
-                (int)Utils.convertDpToPixel(1,this), Color.GRAY);
+                (int)AppUtils.convertDpToPixel(1,this),
+                this.getResources().getColor(R.color.color_f9f9f9));
         recyclerView.addItemDecoration(line);
 
-        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<Person>(this) {
+        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<PersonData>(this) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 return new PersonViewHolder(parent);

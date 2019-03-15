@@ -1,8 +1,6 @@
 package org.yczbj.ycrefreshview.second;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -11,16 +9,16 @@ import com.bumptech.glide.Glide;
 import com.yc.cn.ycbannerlib.first.adapter.StaticPagerAdapter;
 
 
-import org.yczbj.ycrefreshview.other.DataProvider;
+import org.yczbj.ycrefreshview.data.DataProvider;
 import org.yczbj.ycrefreshview.R;
-import org.yczbj.ycrefreshview.other.Ad;
+import org.yczbj.ycrefreshview.data.AdData;
 
 import java.util.List;
 
 public class BannerAdapter extends StaticPagerAdapter {
 
     private Context ctx;
-    private List<Ad> list;
+    private List<AdData> list;
        public BannerAdapter(Context ctx){
            this.ctx = ctx;
             list = DataProvider.getAdList();
@@ -40,7 +38,6 @@ public class BannerAdapter extends StaticPagerAdapter {
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ctx.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(list.get(position).getUrl())));
                 }
             });
             return imageView;

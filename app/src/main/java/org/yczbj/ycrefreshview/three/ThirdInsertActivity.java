@@ -11,9 +11,9 @@ import android.view.MenuItem;
 
 import com.yc.cn.ycbannerlib.first.util.SizeUtil;
 
-import org.yczbj.ycrefreshview.other.DataProvider;
+import org.yczbj.ycrefreshview.data.DataProvider;
 import org.yczbj.ycrefreshview.R;
-import org.yczbj.ycrefreshview.other.Person;
+import org.yczbj.ycrefreshview.data.PersonData;
 import org.yczbj.ycrefreshview.first.PersonAdapter;
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.item.DividerViewItemLine;
@@ -55,7 +55,7 @@ public class ThirdInsertActivity extends AppCompatActivity {
             public void toTop(int position) {
                 //先移除那个位置的数据，然后将其添加到索引为0的位置，然后刷新数据
                 if (position > 0 && adapter.getAllData().size()>position) {
-                    Person person = adapter.getAllData().get(position);
+                    PersonData person = adapter.getAllData().get(position);
                     adapter.getAllData().remove(person);
                     adapter.notifyItemInserted(0);
                     adapter.getAllData().add(0, person);
@@ -67,7 +67,7 @@ public class ThirdInsertActivity extends AppCompatActivity {
             }
         });
 
-        List<Person> persons = DataProvider.getPersonList(0);
+        List<PersonData> persons = DataProvider.getPersonList(0);
         adapter.addAll(persons.subList(0, 3));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
@@ -85,8 +85,8 @@ public class ThirdInsertActivity extends AppCompatActivity {
         if (len > 0) {
             int pos = random.nextInt(len);
 //        int pos = 0;
-            List<Person> persons = DataProvider.getPersonList(0);
-            Person data = persons.get(random.nextInt(persons.size()));
+            List<PersonData> persons = DataProvider.getPersonList(0);
+            PersonData data = persons.get(random.nextInt(persons.size()));
             switch (item.getItemId()) {
                 case R.id.ic_add:
                     adapter.insert(data, pos);

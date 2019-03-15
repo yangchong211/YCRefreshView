@@ -8,7 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import com.yc.cn.ycbannerlib.first.util.SizeUtil;
 
-import org.yczbj.ycrefreshview.other.DataProvider;
+import org.yczbj.ycrefreshview.data.DataProvider;
 import org.yczbj.ycrefreshview.R;
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.item.DividerViewItemLine;

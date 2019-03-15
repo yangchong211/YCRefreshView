@@ -1,7 +1,6 @@
 package org.yczbj.ycrefreshview.first;
 
 import android.util.Log;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -11,15 +10,11 @@ import com.bumptech.glide.Glide;
 
 
 import org.yczbj.ycrefreshview.R;
-import org.yczbj.ycrefreshview.other.Person;
-import org.yczbj.ycrefreshviewlib.swipeMenu.OnSwipeMenuListener;
+import org.yczbj.ycrefreshview.data.PersonData;
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
 
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
-
-
-public class PersonViewHolder extends BaseViewHolder<Person> {
+public class PersonViewHolder extends BaseViewHolder<PersonData> {
 
     private TextView tv_title;
     private ImageView iv_news_image;
@@ -38,15 +33,13 @@ public class PersonViewHolder extends BaseViewHolder<Person> {
     }
 
     @Override
-    public void setData(final Person person){
+    public void setData(final PersonData person){
         Log.i("ViewHolder","position"+getDataPosition());
         tv_title.setText(person.getName());
         tv_content.setText(person.getSign());
         Glide.with(getContext())
-                .load(person.getFace())
+                .load(person.getImage())
                 .error(R.drawable.bg_small_tree_min)
-                .placeholder(R.drawable.default_image)
-                .bitmapTransform(new CropCircleTransformation(getContext()))
                 .into(iv_news_image);
     }
 }

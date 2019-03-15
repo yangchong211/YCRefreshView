@@ -7,11 +7,11 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 
 import org.yczbj.ycrefreshview.R;
-import org.yczbj.ycrefreshview.other.Picture;
+import org.yczbj.ycrefreshview.data.PictureData;
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
 
 
-public class ImageViewHolder extends BaseViewHolder<Picture> {
+public class ImageViewHolder extends BaseViewHolder<PictureData> {
     ImageView imgPicture;
 
     public ImageViewHolder(ViewGroup parent) {
@@ -22,7 +22,7 @@ public class ImageViewHolder extends BaseViewHolder<Picture> {
     }
 
     @Override
-    public void setData(Picture data) {
+    public void setData(PictureData data) {
         ViewGroup.LayoutParams params = imgPicture.getLayoutParams();
 
         DisplayMetrics dm = getContext().getResources().getDisplayMetrics();
@@ -32,7 +32,7 @@ public class ImageViewHolder extends BaseViewHolder<Picture> {
         params.height = height;
         imgPicture.setLayoutParams(params);
         Glide.with(getContext())
-                .load(data.getSrc())
+                .load(data.getImage())
                 .placeholder(R.drawable.bg_small_tree_min)
                 .into(imgPicture);
     }

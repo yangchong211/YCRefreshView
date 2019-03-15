@@ -4,8 +4,8 @@ import android.content.Context;
 import android.view.ViewGroup;
 
 
-import org.yczbj.ycrefreshview.other.Ad;
-import org.yczbj.ycrefreshview.other.Person;
+import org.yczbj.ycrefreshview.data.AdData;
+import org.yczbj.ycrefreshview.data.PersonData;
 import org.yczbj.ycrefreshview.first.PersonViewHolder;
 import org.yczbj.ycrefreshview.seven.AdViewHolder;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
@@ -25,9 +25,9 @@ public class PersonWithAdAdapter extends RecyclerArrayAdapter<Object> {
 
     @Override
     public int getViewType(int position) {
-        if(getItem(position) instanceof Ad){
+        if(getItem(position) instanceof AdData){
             return TYPE_AD;
-        }else if (getItem(position) instanceof Person){
+        }else if (getItem(position) instanceof PersonData){
             return TYPE_PERSON;
         }
         return TYPE_INVALID;

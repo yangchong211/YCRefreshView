@@ -14,12 +14,13 @@ import android.view.ViewGroup;
 import com.yc.cn.ycbannerlib.first.BannerView;
 import com.yc.cn.ycbannerlib.first.hintview.ColorPointHintView;
 
-import org.yczbj.ycrefreshview.other.DataProvider;
+import org.yczbj.ycrefreshview.data.DataProvider;
 import org.yczbj.ycrefreshview.R;
-import org.yczbj.ycrefreshview.other.Utils;
+import org.yczbj.ycrefreshview.data.AppUtils;
 import org.yczbj.ycrefreshview.second.BannerAdapter;
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
-import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.inter.ItemView;
+import org.yczbj.ycrefreshviewlib.inter.OnMoreListener;
 import org.yczbj.ycrefreshviewlib.item.SpaceViewItemLine;
 
 public class SevenStaggeredGridActivity extends AppCompatActivity {
@@ -37,14 +38,14 @@ public class SevenStaggeredGridActivity extends AppCompatActivity {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,4);
         gridLayoutManager.setSpanSizeLookup(adapter.obtainGridSpanSizeLookUp(4));
         recyclerView.setLayoutManager(gridLayoutManager);
-        adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
+        adapter.addHeader(new ItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
                 BannerView header = new BannerView(SevenStaggeredGridActivity.this);
                 header.setHintView(new ColorPointHintView(SevenStaggeredGridActivity.this, Color.YELLOW,Color.GRAY));
-                header.setHintPadding(0, 0, 0, (int) Utils.convertDpToPixel(8, SevenStaggeredGridActivity.this));
+                header.setHintPadding(0, 0, 0, (int) AppUtils.convertDpToPixel(8, SevenStaggeredGridActivity.this));
                 header.setPlayDelay(2000);
-                header.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) Utils.convertDpToPixel(200, SevenStaggeredGridActivity.this)));
+                header.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) AppUtils.convertDpToPixel(200, SevenStaggeredGridActivity.this)));
                 header.setAdapter(new BannerAdapter(SevenStaggeredGridActivity.this));
                 return header;
             }
@@ -54,12 +55,12 @@ public class SevenStaggeredGridActivity extends AppCompatActivity {
 
             }
         });
-        SpaceViewItemLine itemDecoration = new SpaceViewItemLine((int) Utils.convertDpToPixel(8,this));
+        SpaceViewItemLine itemDecoration = new SpaceViewItemLine((int) AppUtils.convertDpToPixel(8,this));
         itemDecoration.setPaddingEdgeSide(true);
         itemDecoration.setPaddingStart(true);
         itemDecoration.setPaddingHeaderFooter(true);
         recyclerView.addItemDecoration(itemDecoration);
-        adapter.setMore(R.layout.view_more, new RecyclerArrayAdapter.OnMoreListener() {
+        adapter.setMore(R.layout.view_more, new OnMoreListener() {
             @Override
             public void onMoreShow() {
                 addData();

@@ -17,12 +17,16 @@ import android.widget.CompoundButton;
 
 import com.yc.cn.ycbannerlib.first.util.SizeUtil;
 
-import org.yczbj.ycrefreshview.other.DataProvider;
+import org.yczbj.ycrefreshview.data.DataProvider;
 import org.yczbj.ycrefreshview.R;
-import org.yczbj.ycrefreshview.other.Person;
+import org.yczbj.ycrefreshview.data.PersonData;
 import org.yczbj.ycrefreshview.first.PersonViewHolder;
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.inter.OnErrorListener;
+import org.yczbj.ycrefreshviewlib.inter.OnItemLongClickListener;
+import org.yczbj.ycrefreshviewlib.inter.OnLoadMoreListener;
+import org.yczbj.ycrefreshviewlib.inter.OnNoMoreListener;
 import org.yczbj.ycrefreshviewlib.item.DividerViewItemLine;
 import org.yczbj.ycrefreshviewlib.item.StickyHeaderItemLine;
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
@@ -30,11 +34,11 @@ import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
 import java.util.ArrayList;
 
 
-public class SixStickyHeaderActivity extends AppCompatActivity implements RecyclerArrayAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
+public class SixStickyHeaderActivity extends AppCompatActivity implements OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
 
     private YCRefreshView recyclerView;
     private FloatingActionButton top;
-    private RecyclerArrayAdapter<Person> adapter;
+    private RecyclerArrayAdapter<PersonData> adapter;
     private Handler handler = new Handler();
 
     private int page = 0;
@@ -55,14 +59,14 @@ public class SixStickyHeaderActivity extends AppCompatActivity implements Recycl
         recyclerView.addItemDecoration(itemDecoration);
 
 
-        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<Person>(this) {
+        recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<PersonData>(this) {
             @Override
             public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                 return new PersonViewHolder(parent);
             }
         });
         adapter.setMore(R.layout.view_more, this);
-        adapter.setNoMore(R.layout.view_nomore, new RecyclerArrayAdapter.OnNoMoreListener() {
+        adapter.setNoMore(R.layout.view_nomore, new OnNoMoreListener() {
             @Override
             public void onNoMoreShow() {
                 adapter.resumeMore();
@@ -73,14 +77,14 @@ public class SixStickyHeaderActivity extends AppCompatActivity implements Recycl
                 adapter.resumeMore();
             }
         });
-        adapter.setOnItemLongClickListener(new RecyclerArrayAdapter.OnItemLongClickListener() {
+        adapter.setOnItemLongClickListener(new OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(int position) {
                 adapter.remove(position);
                 return true;
             }
         });
-        adapter.setError(R.layout.view_error, new RecyclerArrayAdapter.OnErrorListener() {
+        adapter.setError(R.layout.view_error, new OnErrorListener() {
             @Override
             public void onErrorShow() {
                 adapter.resumeMore();

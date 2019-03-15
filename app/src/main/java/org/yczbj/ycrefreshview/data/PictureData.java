@@ -1,16 +1,16 @@
-package org.yczbj.ycrefreshview.other;
+package org.yczbj.ycrefreshview.data;
 
 
-public class Picture {
+public class PictureData {
 
     private int width;
     private int height;
-    private String src;
+    private int image;
 
-    public Picture(int width, int height, String src) {
+    public PictureData(int width, int height, int image) {
         this.width = width;
         this.height = height;
-        this.src = src;
+        this.image = image;
     }
 
     public int getWidth() {
@@ -29,11 +29,12 @@ public class Picture {
         this.height = height;
     }
 
-    public String getSrc() {
-        return src;
+
+    public int getImage() {
+        return image;
     }
 
-    public void setSrc(String src) {
-        this.src = src;
+    public void setImage(int image) {
+        this.image = image;
     }
 }

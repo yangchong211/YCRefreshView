@@ -10,10 +10,9 @@ import android.widget.LinearLayout;
 
 import org.yczbj.ycrefreshview.R;
 import org.yczbj.ycrefreshview.first.PersonAdapter;
-import org.yczbj.ycrefreshview.other.DataProvider;
-import org.yczbj.ycrefreshview.other.Person;
-import org.yczbj.ycrefreshview.other.Utils;
-import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshview.data.DataProvider;
+import org.yczbj.ycrefreshview.data.PersonData;
+import org.yczbj.ycrefreshview.data.AppUtils;
 import org.yczbj.ycrefreshviewlib.callback.DefaultItemTouchHelpCallback;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
@@ -30,7 +29,7 @@ public class NightTouchMoveActivity extends AppCompatActivity{
     private RecyclerView recyclerView;
     private PersonAdapter adapter;
     private DefaultItemTouchHelpCallback mCallback;
-    private List<Person> personList;
+    private List<PersonData> personList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,7 +44,8 @@ public class NightTouchMoveActivity extends AppCompatActivity{
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         final RecycleViewItemLine line = new RecycleViewItemLine(this, LinearLayout.HORIZONTAL,
-                (int) Utils.convertDpToPixel(1,this), this.getResources().getColor(R.color.colorAccent));
+                (int) AppUtils.convertDpToPixel(1,this),
+                this.getResources().getColor(R.color.color_f9f9f9));
         recyclerView.addItemDecoration(line);
         recyclerView.setAdapter(adapter = new PersonAdapter(this));
         personList = DataProvider.getPersonList(0);

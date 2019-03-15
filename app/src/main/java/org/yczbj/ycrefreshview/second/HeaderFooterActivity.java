@@ -22,13 +22,15 @@ import com.yc.cn.ycbannerlib.first.BannerView;
 import com.yc.cn.ycbannerlib.first.hintview.ColorPointHintView;
 import com.yc.cn.ycbannerlib.first.util.SizeUtil;
 
-import org.yczbj.ycrefreshview.other.DataProvider;
+import org.yczbj.ycrefreshview.data.DataProvider;
 import org.yczbj.ycrefreshview.R;
-import org.yczbj.ycrefreshview.other.Person;
-import org.yczbj.ycrefreshview.other.Utils;
+import org.yczbj.ycrefreshview.data.PersonData;
+import org.yczbj.ycrefreshview.data.AppUtils;
 import org.yczbj.ycrefreshview.first.PersonAdapter;
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
-import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.inter.ItemView;
+import org.yczbj.ycrefreshviewlib.inter.OnItemChildClickListener;
+import org.yczbj.ycrefreshviewlib.inter.OnLoadMoreListener;
 import org.yczbj.ycrefreshviewlib.item.DividerViewItemLine;
 import org.yczbj.ycrefreshviewlib.item.SpaceViewItemLine;
 import org.yczbj.ycrefreshviewlib.swipeMenu.OnSwipeMenuListener;
@@ -71,7 +73,7 @@ public class HeaderFooterActivity extends AppCompatActivity {
         });
         initHeader();
         adapter.addAll(DataProvider.getPersonList(0));
-        adapter.setOnItemChildClickListener(new RecyclerArrayAdapter.OnItemChildClickListener() {
+        adapter.setOnItemChildClickListener(new OnItemChildClickListener() {
             @Override
             public void onItemChildClick(View view, int position) {
                 switch (view.getId()){
@@ -100,7 +102,7 @@ public class HeaderFooterActivity extends AppCompatActivity {
             public void toTop(int position) {
                 //先移除那个位置的数据，然后将其添加到索引为0的位置，然后刷新数据
                 if (position > 0 && adapter.getAllData().size()>position) {
-                    Person person = adapter.getAllData().get(position);
+                    PersonData person = adapter.getAllData().get(position);
                     adapter.getAllData().remove(person);
                     adapter.notifyItemInserted(0);
                     adapter.getAllData().add(0, person);
@@ -117,14 +119,14 @@ public class HeaderFooterActivity extends AppCompatActivity {
 
 
     private void initHeader() {
-        adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
+        adapter.addHeader(new ItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
                 BannerView header = new BannerView(HeaderFooterActivity.this);
                 header.setHintView(new ColorPointHintView(HeaderFooterActivity.this, Color.YELLOW,Color.GRAY));
-                header.setHintPadding(0, 0, 0, (int) Utils.convertDpToPixel(8, HeaderFooterActivity.this));
+                header.setHintPadding(0, 0, 0, (int) AppUtils.convertDpToPixel(8, HeaderFooterActivity.this));
                 header.setPlayDelay(2000);
-                header.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) Utils.convertDpToPixel(200, HeaderFooterActivity.this)));
+                header.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) AppUtils.convertDpToPixel(200, HeaderFooterActivity.this)));
                 header.setAdapter(new BannerAdapter(HeaderFooterActivity.this));
                 return header;
             }
@@ -134,7 +136,7 @@ public class HeaderFooterActivity extends AppCompatActivity {
 
             }
         });
-        adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
+        adapter.addHeader(new ItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
                 View inflate = LayoutInflater.from(HeaderFooterActivity.this).inflate(R.layout.header_view, null);
@@ -146,7 +148,7 @@ public class HeaderFooterActivity extends AppCompatActivity {
 
             }
         });
-        adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
+        adapter.addHeader(new ItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
                 RecyclerView recyclerView = new RecyclerView(parent.getContext()){
@@ -158,7 +160,7 @@ public class HeaderFooterActivity extends AppCompatActivity {
                         return true;
                     }
                 };
-                recyclerView.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,(int) Utils.convertDpToPixel(300, HeaderFooterActivity.this)));
+                recyclerView.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,(int) AppUtils.convertDpToPixel(300, HeaderFooterActivity.this)));
                 final NarrowImageAdapter adapter;
                 recyclerView.setAdapter(adapter = new NarrowImageAdapter(parent.getContext()));
                 recyclerView.setLayoutManager(new LinearLayoutManager(parent.getContext(), LinearLayoutManager.HORIZONTAL,false));
@@ -168,9 +170,9 @@ public class HeaderFooterActivity extends AppCompatActivity {
                         HeaderFooterActivity.this.getResources().getColor(R.color.colorAccent));
                 recyclerView.addItemDecoration(line);*/
 
-                recyclerView.addItemDecoration(new SpaceViewItemLine((int) Utils.convertDpToPixel(8,parent.getContext())));
+                recyclerView.addItemDecoration(new SpaceViewItemLine((int) AppUtils.convertDpToPixel(8,parent.getContext())));
 
-                adapter.setMore(R.layout.view_more_horizontal, new RecyclerArrayAdapter.OnLoadMoreListener() {
+                adapter.setMore(R.layout.view_more_horizontal, new OnLoadMoreListener() {
                     @Override
                     public void onLoadMore() {
                         new Handler().postDelayed(new Runnable() {
@@ -191,11 +193,11 @@ public class HeaderFooterActivity extends AppCompatActivity {
                 ((ViewGroup)headerView).requestDisallowInterceptTouchEvent(true);
             }
         });
-        adapter.addFooter(new RecyclerArrayAdapter.ItemView() {
+        adapter.addFooter(new ItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
                 TextView tv = new TextView(HeaderFooterActivity.this);
-                tv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) Utils.convertDpToPixel(56,HeaderFooterActivity.this)));
+                tv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) AppUtils.convertDpToPixel(56,HeaderFooterActivity.this)));
                 tv.setGravity(Gravity.CENTER);
                 tv.setTextSize(TypedValue.COMPLEX_UNIT_SP,16);
                 tv.setText("(-_-)/~~~死宅真是恶心");

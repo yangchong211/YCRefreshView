@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import org.yczbj.ycrefreshview.other.Utils;
+import org.yczbj.ycrefreshview.data.AppUtils;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
 
@@ -28,7 +28,7 @@ public class NarrowImageAdapter extends RecyclerArrayAdapter<Integer> {
             super(new ImageView(parent.getContext()));
             imgPicture = (ImageView) itemView;
             imgPicture.setLayoutParams(new ViewGroup.LayoutParams((int)
-                    Utils.convertDpToPixel(72f,getContext()), ViewGroup.LayoutParams.MATCH_PARENT));
+                    AppUtils.convertDpToPixel(72f,getContext()), ViewGroup.LayoutParams.MATCH_PARENT));
             imgPicture.setScaleType(ImageView.ScaleType.CENTER_CROP);
         }
 

@@ -7,11 +7,11 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 
-import org.yczbj.ycrefreshview.other.DataProvider;
+import org.yczbj.ycrefreshview.data.DataProvider;
 import org.yczbj.ycrefreshview.R;
-import org.yczbj.ycrefreshview.other.Utils;
+import org.yczbj.ycrefreshview.data.AppUtils;
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
-import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.inter.OnLoadMoreListener;
 import org.yczbj.ycrefreshviewlib.item.SpaceViewItemLine;
 
 
@@ -25,8 +25,8 @@ public class FourHorizontalActivity extends AppCompatActivity {
         recyclerView = (YCRefreshView) findViewById(R.id.recyclerView);
         recyclerView.setAdapter(adapter = new NarrowImageAdapter(this));
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
-        recyclerView.addItemDecoration(new SpaceViewItemLine((int) Utils.convertDpToPixel(8,this)));
-        adapter.setMore(R.layout.view_more_horizontal, new RecyclerArrayAdapter.OnLoadMoreListener() {
+        recyclerView.addItemDecoration(new SpaceViewItemLine((int) AppUtils.convertDpToPixel(8,this)));
+        adapter.setMore(R.layout.view_more_horizontal, new OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
                 new Handler().postDelayed(new Runnable() {
