@@ -11,6 +11,7 @@ import java.util.List;
  * Created by Mr.Jude on 2016/1/6.
  */
 public class DataProvider {
+
     public static List<Person> getPersonList(int page){
         ArrayList<Person> arr = new ArrayList<>();
         if (page >= 4){
