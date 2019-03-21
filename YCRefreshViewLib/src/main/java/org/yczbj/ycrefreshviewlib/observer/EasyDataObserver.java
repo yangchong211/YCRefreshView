@@ -2,7 +2,7 @@ package org.yczbj.ycrefreshviewlib.observer;
 
 import android.support.v7.widget.RecyclerView;
 
-import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.view.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 /**

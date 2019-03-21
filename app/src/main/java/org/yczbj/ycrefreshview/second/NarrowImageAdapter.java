@@ -12,7 +12,7 @@ import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
 public class NarrowImageAdapter extends RecyclerArrayAdapter<Integer> {
 
 
-    NarrowImageAdapter(Context context) {
+    public NarrowImageAdapter(Context context) {
         super(context);
     }
 
@@ -28,7 +28,8 @@ public class NarrowImageAdapter extends RecyclerArrayAdapter<Integer> {
             super(new ImageView(parent.getContext()));
             imgPicture = (ImageView) itemView;
             imgPicture.setLayoutParams(new ViewGroup.LayoutParams((int)
-                    AppUtils.convertDpToPixel(72f,getContext()), ViewGroup.LayoutParams.MATCH_PARENT));
+                    AppUtils.convertDpToPixel(80.0f,getContext()),
+                    ViewGroup.LayoutParams.MATCH_PARENT));
             imgPicture.setScaleType(ImageView.ScaleType.CENTER_CROP);
         }
 

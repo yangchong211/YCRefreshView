@@ -21,7 +21,7 @@ import org.yczbj.ycrefreshview.data.DataProvider;
 import org.yczbj.ycrefreshview.R;
 import org.yczbj.ycrefreshview.data.AdData;
 import org.yczbj.ycrefreshview.first.PersonAdapter;
-import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.view.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.inter.OnLoadMoreListener;
 
 import java.util.List;
@@ -67,7 +67,8 @@ public class EightCollapsingActivity extends AppCompatActivity {
         @Override
         public View getView(ViewGroup container, final int position) {
             ImageView imageView = new ImageView(EightCollapsingActivity.this);
-            imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             //加载图片
             Glide.with(EightCollapsingActivity.this)

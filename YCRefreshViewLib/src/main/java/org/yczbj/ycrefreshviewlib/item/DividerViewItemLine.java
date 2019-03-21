@@ -112,9 +112,11 @@ public class DividerViewItemLine extends RecyclerView.ItemDecoration{
         for (int i = 0; i < childCount; i++) {
             View child = parent.getChildAt(i);
             int position = parent.getChildAdapterPosition(child);
-            if (position>=dataStartPosition&&position<dataEndPosition-1//数据项除了最后一项
-                    ||(position == dataEndPosition-1&&mDrawLastItem)//数据项最后一项
-                    ||(!(position>=dataStartPosition&&position<dataEndPosition)&&mDrawHeaderFooter)//header&footer且可绘制
+            //数据项除了最后一项 数据项最后一项
+            //header&footer且可绘制
+            if (position>=dataStartPosition&&position<dataEndPosition-1
+                    ||(position == dataEndPosition-1&&mDrawLastItem)
+                    ||(!(position>=dataStartPosition&&position<dataEndPosition)&&mDrawHeaderFooter)
                     ){
 
                 if (orientation == OrientationHelper.VERTICAL){

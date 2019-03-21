@@ -1,85 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<org.yczbj.ycrefreshviewlib.swipeMenu.YCSwipeMenu
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_width="match_parent">
+    android:background="@android:color/white"
+    android:padding="10dp">
 
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/iv_news_image"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:scaleType="fitXY"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/bg_small_tree_min"/>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:padding="10dp">
+        android:layout_toEndOf="@+id/iv_news_image"
+        android:layout_marginStart="10dp"
+        android:textSize="14sp"
+        android:text="吴文杰是个大神级别的人物"/>
 
-        <ImageView
-            android:id="@+id/iv_news_image"
-            android:layout_width="100dp"
-            android:layout_height="80dp"
-            android:scaleType="fitXY"
-            android:layout_gravity="center_vertical"
-            android:background="@drawable/bg_small_tree_min"/>
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/iv_news_image"
+        android:layout_marginStart="10dp"
+        android:layout_below="@+id/tv_title"
+        android:layout_marginTop="5dp"
+        android:textSize="12sp"
+        android:text="吴文杰是个大神级别的人物吴文杰是个大神级别的人物"/>
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/iv_news_image"
+        android:layout_marginStart="10dp"
+        android:layout_below="@+id/tv_content"
+        android:layout_marginTop="3dp"
+        android:textSize="11sp"
+        android:text="15分30秒"/>
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/iv_news_image"
-            android:layout_marginStart="10dp"
-            android:textSize="14sp"
-            android:text="吴文杰是个大神级别的人物"/>
+    <TextView
+        android:id="@+id/tv_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_below="@+id/tv_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="3dp"
+        android:textSize="11sp"
+        android:text="15人命币"/>
 
-        <TextView
-            android:id="@+id/tv_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/iv_news_image"
-            android:layout_marginStart="10dp"
-            android:layout_below="@+id/tv_title"
-            android:layout_marginTop="5dp"
-            android:textSize="12sp"
-            android:text="吴文杰是个大神级别的人物吴文杰是个大神级别的人物"/>
-        <TextView
-            android:id="@+id/tv_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/iv_news_image"
-            android:layout_marginStart="10dp"
-            android:layout_below="@+id/tv_content"
-            android:layout_marginTop="3dp"
-            android:textSize="11sp"
-            android:text="15分30秒"/>
-
-        <TextView
-            android:id="@+id/tv_money"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_below="@+id/tv_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="3dp"
-            android:textSize="11sp"
-            android:text="15人命币"/>
-
-    </RelativeLayout>
-
-
-    <!-- 侧滑菜单 -->
-    <Button
-        android:id="@+id/btn_del"
-        android:layout_width="70dp"
-        android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
-        android:text="删除"
-        android:textColor="@android:color/white"/>
-
-    <Button
-        android:id="@+id/btn_top"
-        android:layout_width="70dp"
-        android:layout_height="match_parent"
-        android:background="@color/colorAccent"
-        android:text="置顶"
-        android:textColor="@android:color/white"/>
-
-</org.yczbj.ycrefreshviewlib.swipeMenu.YCSwipeMenu>
+</RelativeLayout>

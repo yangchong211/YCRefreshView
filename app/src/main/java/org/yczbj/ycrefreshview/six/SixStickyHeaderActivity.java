@@ -1,6 +1,5 @@
 package org.yczbj.ycrefreshview.six;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -21,7 +20,7 @@ import org.yczbj.ycrefreshview.data.DataProvider;
 import org.yczbj.ycrefreshview.R;
 import org.yczbj.ycrefreshview.data.PersonData;
 import org.yczbj.ycrefreshview.first.PersonViewHolder;
-import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.view.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.inter.OnErrorListener;
 import org.yczbj.ycrefreshviewlib.inter.OnItemLongClickListener;
@@ -50,11 +49,13 @@ public class SixStickyHeaderActivity extends AppCompatActivity implements OnLoad
         super.onCreate(savedInstanceState);
         setContentView(R.layout.base_recyclerview);
 
-        top = (FloatingActionButton) findViewById(R.id.top);
-        recyclerView = (YCRefreshView) findViewById(R.id.recyclerView);
+        top = findViewById(R.id.top);
+        recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        DividerViewItemLine itemDecoration = new DividerViewItemLine(Color.GRAY,
-                SizeUtil.dip2px(this, 0.5f), SizeUtil.dip2px(this, 72), 0);
+        DividerViewItemLine itemDecoration = new DividerViewItemLine(
+                this.getResources().getColor(R.color.color_f9f9f9),
+                SizeUtil.dip2px(this, 0.5f),
+                SizeUtil.dip2px(this, 72), 0);
         itemDecoration.setDrawLastItem(false);
         recyclerView.addItemDecoration(itemDecoration);
 

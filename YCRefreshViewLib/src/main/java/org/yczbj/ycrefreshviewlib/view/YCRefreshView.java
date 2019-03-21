@@ -1,4 +1,4 @@
-package org.yczbj.ycrefreshviewlib;
+package org.yczbj.ycrefreshviewlib.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 
+import org.yczbj.ycrefreshviewlib.R;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.observer.EasyDataObserver;
 

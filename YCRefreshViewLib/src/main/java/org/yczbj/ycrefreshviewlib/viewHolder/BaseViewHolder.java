@@ -24,6 +24,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.inter.OnItemChildClickListener;
+import org.yczbj.ycrefreshviewlib.utils.RefreshLogUtils;
 
 import java.lang.reflect.Field;
 
@@ -104,7 +106,9 @@ public abstract class BaseViewHolder<M> extends RecyclerView.ViewHolder {
     protected int getDataPosition(){
         RecyclerView.Adapter adapter = getOwnerAdapter();
         if (adapter instanceof RecyclerArrayAdapter){
-            return getAdapterPosition() - ((RecyclerArrayAdapter) adapter).getHeaderCount();
+            int headerCount = ((RecyclerArrayAdapter) adapter).getHeaderCount();
+            //注意需要减去header的count，否则造成索引错乱
+            return getAdapterPosition() - headerCount;
         }
         return getAdapterPosition();
     }
@@ -123,14 +127,19 @@ public abstract class BaseViewHolder<M> extends RecyclerView.ViewHolder {
     }
 
 
+    @SuppressWarnings("CatchMayIgnoreException")
     @Nullable
     private RecyclerView getOwnerRecyclerView(){
         try {
+            //使用反射
             Field field = RecyclerView.ViewHolder.class.getDeclaredField("mOwnerRecyclerView");
+            //设置暴力访问权限
             field.setAccessible(true);
             return (RecyclerView) field.get(this);
         } catch (NoSuchFieldException ignored) {
+            RefreshLogUtils.e(ignored.getLocalizedMessage());
         } catch (IllegalAccessException ignored) {
+            RefreshLogUtils.e(ignored.getLocalizedMessage());
         }
         return null;
     }
@@ -149,8 +158,10 @@ public abstract class BaseViewHolder<M> extends RecyclerView.ViewHolder {
                 @Override
                 public void onClick(View v) {
                     if(getOwnerAdapter()!=null){
-                        if (((RecyclerArrayAdapter)getOwnerAdapter()).getOnItemChildClickListener() != null) {
-                            ((RecyclerArrayAdapter)getOwnerAdapter()).getOnItemChildClickListener().onItemChildClick(v, getDataPosition());
+                        OnItemChildClickListener onItemChildClickListener = ((RecyclerArrayAdapter)
+                                getOwnerAdapter()).getOnItemChildClickListener();
+                        if (onItemChildClickListener != null) {
+                            onItemChildClickListener.onItemChildClick(v, getDataPosition());
                         }
                     }
                 }

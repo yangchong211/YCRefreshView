@@ -1,4 +1,4 @@
-package org.yczbj.ycrefreshview.first;
+package org.yczbj.ycrefreshview.ten;
 
 import android.content.Context;
 import android.util.Log;
@@ -12,17 +12,16 @@ import com.bumptech.glide.Glide;
 
 import org.yczbj.ycrefreshview.R;
 import org.yczbj.ycrefreshview.data.PersonData;
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.swipeMenu.OnSwipeMenuListener;
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
-import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 
+public class DeleteAdapter extends RecyclerArrayAdapter<PersonData> {
 
-public class PersonAdapter extends RecyclerArrayAdapter<PersonData> {
-
-    public PersonAdapter(Context context) {
+    public DeleteAdapter(Context context) {
         super(context);
     }
 
@@ -31,18 +30,27 @@ public class PersonAdapter extends RecyclerArrayAdapter<PersonData> {
         return new PersonViewHolder(parent);
     }
 
+    private OnSwipeMenuListener listener;
+    public void setOnSwipeMenuListener(OnSwipeMenuListener listener) {
+        this.listener = listener;
+    }
+
     public class PersonViewHolder extends BaseViewHolder<PersonData> {
 
         private TextView tv_title;
         private ImageView iv_news_image;
         private TextView tv_content;
+        private Button btn_del;
+        private Button btn_top;
 
 
         PersonViewHolder(ViewGroup parent) {
-            super(parent, R.layout.item_news);
+            super(parent, R.layout.item_news_del);
             iv_news_image = getView(R.id.iv_news_image);
             tv_title = getView(R.id.tv_title);
             tv_content = getView(R.id.tv_content);
+            btn_del = getView(R.id.btn_del);
+            btn_top = getView(R.id.btn_top);
 
             addOnClickListener(R.id.iv_news_image);
             addOnClickListener(R.id.tv_title);
@@ -59,6 +67,28 @@ public class PersonAdapter extends RecyclerArrayAdapter<PersonData> {
                     .placeholder(R.drawable.bg_small_tree_min)
                     .into(iv_news_image);
 
+            View.OnClickListener clickListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    switch (v.getId()){
+                        case R.id.btn_del:
+                            if (null != listener) {
+                                listener.toDelete(getAdapterPosition());
+                            }
+                            break;
+                        case R.id.btn_top:
+                            if (null != listener) {
+                                listener.toTop(getAdapterPosition());
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            };
+
+            btn_del.setOnClickListener(clickListener);
+            btn_top.setOnClickListener(clickListener);
         }
     }
 

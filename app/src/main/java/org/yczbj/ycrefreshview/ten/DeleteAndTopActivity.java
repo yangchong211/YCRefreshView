@@ -1,4 +1,4 @@
-package org.yczbj.ycrefreshview.second;
+package org.yczbj.ycrefreshview.ten;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
@@ -18,15 +18,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.yc.cn.ycbannerlib.first.BannerView;
 import com.yc.cn.ycbannerlib.first.hintview.ColorPointHintView;
 import com.yc.cn.ycbannerlib.first.util.SizeUtil;
 
-import org.yczbj.ycrefreshview.data.DataProvider;
 import org.yczbj.ycrefreshview.R;
 import org.yczbj.ycrefreshview.data.AppUtils;
-import org.yczbj.ycrefreshview.first.PersonAdapter;
+import org.yczbj.ycrefreshview.data.DataProvider;
+import org.yczbj.ycrefreshview.data.PersonData;
+import org.yczbj.ycrefreshview.second.BannerAdapter;
+import org.yczbj.ycrefreshview.second.NarrowImageAdapter;
 import org.yczbj.ycrefreshviewlib.view.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.inter.ItemView;
 import org.yczbj.ycrefreshviewlib.inter.OnItemChildClickListener;
@@ -34,21 +35,20 @@ import org.yczbj.ycrefreshviewlib.inter.OnLoadMoreListener;
 import org.yczbj.ycrefreshviewlib.item.DividerViewItemLine;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import org.yczbj.ycrefreshviewlib.item.SpaceViewItemLine;
+import org.yczbj.ycrefreshviewlib.swipeMenu.OnSwipeMenuListener;
 
-import jp.wasabeef.glide.transformations.internal.Utils;
 
-
-public class HeaderFooterActivity extends AppCompatActivity {
+public class DeleteAndTopActivity extends AppCompatActivity {
 
     private YCRefreshView recyclerView;
-    private PersonAdapter adapter;
+    private DeleteAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_refresh_view);
         recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setAdapter(adapter = new PersonAdapter(this));
+        recyclerView.setAdapter(adapter = new DeleteAdapter(this));
 
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -60,8 +60,8 @@ public class HeaderFooterActivity extends AppCompatActivity {
         itemDecoration.setDrawHeaderFooter(true);
         recyclerView.addItemDecoration(itemDecoration);
 
-        final RecycleViewItemLine line = new RecycleViewItemLine(this,
-                LinearLayout.HORIZONTAL, 1, getResources().getColor(R.color.colorAccent));
+        final RecycleViewItemLine line = new RecycleViewItemLine(this, LinearLayout.HORIZONTAL,
+                1, this.getResources().getColor(R.color.colorAccent));
         recyclerView.addItemDecoration(line);
 
         recyclerView.setRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -76,22 +76,48 @@ public class HeaderFooterActivity extends AppCompatActivity {
                 },1500);
             }
         });
-        initHeader();
         adapter.addAll(DataProvider.getPersonList(0));
         adapter.setOnItemChildClickListener(new OnItemChildClickListener() {
             @Override
             public void onItemChildClick(View view, int position) {
                 switch (view.getId()){
                     case R.id.iv_news_image:
-                        Toast.makeText(HeaderFooterActivity.this,
-                                "点击图片了",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DeleteAndTopActivity.this,"点击图片了",Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.tv_title:
-                        Toast.makeText(HeaderFooterActivity.this,
-                                "点击标题",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DeleteAndTopActivity.this,"点击标题",Toast.LENGTH_SHORT).show();
                         break;
                     default:
                         break;
+                }
+            }
+        });
+
+        adapter.setOnSwipeMenuListener(new OnSwipeMenuListener() {
+            //删除功能
+            @Override
+            public void toDelete(int position) {
+                if(adapter.getAllData().size()>position && position>-1){
+                    //移除数据
+                    adapter.getAllData().remove(position);
+                    //推荐用这个，刷新adapter
+                    adapter.notifyItemRemoved(position);
+                }
+            }
+
+            //置顶功能
+            @Override
+            public void toTop(int position) {
+                //先移除那个位置的数据，然后将其添加到索引为0的位置，然后刷新数据
+                if (position > 0 && adapter.getAllData().size()>position) {
+                    PersonData person = adapter.getAllData().get(position);
+                    adapter.getAllData().remove(person);
+                    adapter.notifyItemInserted(0);
+                    adapter.getAllData().add(0, person);
+                    adapter.notifyItemRemoved(position + 1);
+                    if (linearLayoutManager.findFirstVisibleItemPosition() == 0) {
+                        recyclerView.scrollToPosition(0);
+                    }
                 }
             }
         });
@@ -104,16 +130,12 @@ public class HeaderFooterActivity extends AppCompatActivity {
         adapter.addHeader(new ItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
-                BannerView header = new BannerView(HeaderFooterActivity.this);
-                header.setHintView(new ColorPointHintView(HeaderFooterActivity.this,
-                        Color.YELLOW,Color.GRAY));
-                header.setHintPadding(0, 0, 0, (int) AppUtils.convertDpToPixel(
-                        8, HeaderFooterActivity.this));
+                BannerView header = new BannerView(DeleteAndTopActivity.this);
+                header.setHintView(new ColorPointHintView(DeleteAndTopActivity.this, Color.YELLOW,Color.GRAY));
+                header.setHintPadding(0, 0, 0, (int) AppUtils.convertDpToPixel(8, DeleteAndTopActivity.this));
                 header.setPlayDelay(2000);
-                header.setLayoutParams(new RecyclerView.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT,
-                        (int) AppUtils.convertDpToPixel(200, HeaderFooterActivity.this)));
-                header.setAdapter(new BannerAdapter(HeaderFooterActivity.this));
+                header.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) AppUtils.convertDpToPixel(200, DeleteAndTopActivity.this)));
+                header.setAdapter(new BannerAdapter(DeleteAndTopActivity.this));
                 return header;
             }
 
@@ -125,8 +147,7 @@ public class HeaderFooterActivity extends AppCompatActivity {
         adapter.addHeader(new ItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
-                View inflate = LayoutInflater.from(HeaderFooterActivity.this)
-                        .inflate(R.layout.header_view, null);
+                View inflate = LayoutInflater.from(DeleteAndTopActivity.this).inflate(R.layout.header_view, null);
                 return inflate;
             }
 
@@ -147,16 +168,13 @@ public class HeaderFooterActivity extends AppCompatActivity {
                         return true;
                     }
                 };
-                recyclerView.setLayoutParams(new RecyclerView.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT,
-                        (int) AppUtils.convertDpToPixel(200, HeaderFooterActivity.this)));
+                recyclerView.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,(int) AppUtils.convertDpToPixel(300, DeleteAndTopActivity.this)));
                 final NarrowImageAdapter adapter;
                 recyclerView.setAdapter(adapter = new NarrowImageAdapter(parent.getContext()));
-                recyclerView.setLayoutManager(new LinearLayoutManager(parent.getContext(),
-                        LinearLayoutManager.HORIZONTAL,false));
+                recyclerView.setLayoutManager(new LinearLayoutManager(parent.getContext(), LinearLayoutManager.HORIZONTAL,false));
 
-                recyclerView.addItemDecoration(new SpaceViewItemLine((int)
-                        AppUtils.convertDpToPixel(8,parent.getContext())));
+
+                recyclerView.addItemDecoration(new SpaceViewItemLine((int) AppUtils.convertDpToPixel(8,parent.getContext())));
 
                 adapter.setMore(R.layout.view_more_horizontal, new OnLoadMoreListener() {
                     @Override
@@ -182,9 +200,8 @@ public class HeaderFooterActivity extends AppCompatActivity {
         adapter.addFooter(new ItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
-                TextView tv = new TextView(HeaderFooterActivity.this);
-                tv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                        (int) AppUtils.convertDpToPixel(56,HeaderFooterActivity.this)));
+                TextView tv = new TextView(DeleteAndTopActivity.this);
+                tv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) AppUtils.convertDpToPixel(56,DeleteAndTopActivity.this)));
                 tv.setGravity(Gravity.CENTER);
                 tv.setTextSize(TypedValue.COMPLEX_UNIT_SP,16);
                 tv.setText("(-_-)/~~~死宅真是恶心");

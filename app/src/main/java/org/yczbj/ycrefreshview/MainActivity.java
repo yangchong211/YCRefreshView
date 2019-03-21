@@ -13,6 +13,7 @@ import org.yczbj.ycrefreshview.night.NightTouchMoveActivity;
 import org.yczbj.ycrefreshview.second.HeaderFooterActivity;
 import org.yczbj.ycrefreshview.seven.SevenStaggeredGridActivity;
 import org.yczbj.ycrefreshview.six.SixStickyHeaderActivity;
+import org.yczbj.ycrefreshview.ten.DeleteAndTopActivity;
 import org.yczbj.ycrefreshview.three.ThirdInsertActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.tv_7).setOnClickListener(this);
         findViewById(R.id.tv_8).setOnClickListener(this);
         findViewById(R.id.tv_9).setOnClickListener(this);
+        findViewById(R.id.tv_10).setOnClickListener(this);
     }
 
 
@@ -66,6 +68,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.tv_9:
                 startActivity(new Intent(this, NightTouchMoveActivity.class));
+                break;
+            case R.id.tv_10:
+                startActivity(new Intent(this, DeleteAndTopActivity.class));
                 break;
             default:
                 break;

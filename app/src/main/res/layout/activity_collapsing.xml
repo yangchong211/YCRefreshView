@@ -39,7 +39,7 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <org.yczbj.ycrefreshviewlib.YCRefreshView
+    <org.yczbj.ycrefreshviewlib.view.YCRefreshView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

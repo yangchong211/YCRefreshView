@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="这个是标题header"/>
+        android:text="逗比，这个是标题header"/>
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="100dp"

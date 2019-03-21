@@ -4,10 +4,9 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import org.yczbj.ycrefreshviewlib.YCRefreshView;
+
 import org.yczbj.ycrefreshviewlib.inter.AbsEventDelegate;
 import org.yczbj.ycrefreshviewlib.inter.ItemView;
 import org.yczbj.ycrefreshviewlib.inter.OnErrorListener;
@@ -17,6 +16,7 @@ import org.yczbj.ycrefreshviewlib.inter.OnItemLongClickListener;
 import org.yczbj.ycrefreshviewlib.inter.OnLoadMoreListener;
 import org.yczbj.ycrefreshviewlib.inter.OnMoreListener;
 import org.yczbj.ycrefreshviewlib.inter.OnNoMoreListener;
+import org.yczbj.ycrefreshviewlib.utils.RefreshLogUtils;
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -375,7 +375,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         if (mNotifyOnChange) {
             notifyItemInserted(headers.size() + getCount());
         }
-        log("add notifyItemInserted "+(headers.size()+getCount()));
+        RefreshLogUtils.d("add notifyItemInserted "+(headers.size()+getCount()));
     }
 
     /**
@@ -395,7 +395,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         if (mNotifyOnChange) {
             notifyItemRangeInserted(headers.size() + getCount() - dataCount, dataCount);
         }
-        log("addAll notifyItemRangeInserted "+(headers.size()+getCount()-dataCount)+","+(dataCount));
+        RefreshLogUtils.d("addAll notifyItemRangeInserted "+(headers.size()+getCount()-dataCount)+","+(dataCount));
 
     }
 
@@ -416,7 +416,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         if (mNotifyOnChange) {
             notifyItemRangeInserted(headers.size() + getCount() - dataCount, dataCount);
         }
-        log("addAll notifyItemRangeInserted "+((headers.size()+getCount()-dataCount)+","+(dataCount)));
+        RefreshLogUtils.d("addAll notifyItemRangeInserted "+((headers.size()+getCount()-dataCount)+","+(dataCount)));
     }
 
     /**
@@ -431,7 +431,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         if (mNotifyOnChange) {
             notifyItemInserted(headers.size() + index);
         }
-        log("insert notifyItemRangeInserted "+(headers.size()+index));
+        RefreshLogUtils.d("insert notifyItemRangeInserted "+(headers.size()+index));
     }
 
     /**
@@ -447,7 +447,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         if (mNotifyOnChange) {
             notifyItemRangeInserted(headers.size() + index, dataCount);
         }
-        log("insertAll notifyItemRangeInserted "+((headers.size()+index)+","+(dataCount)));
+        RefreshLogUtils.d("insertAll notifyItemRangeInserted "+((headers.size()+index)+","+(dataCount)));
     }
 
     /**
@@ -463,7 +463,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         if (mNotifyOnChange) {
             notifyItemRangeInserted(headers.size() + index, dataCount);
         }
-        log("insertAll notifyItemRangeInserted "+((headers.size()+index)+","+(dataCount)));
+        RefreshLogUtils.d("insertAll notifyItemRangeInserted "+((headers.size()+index)+","+(dataCount)));
     }
 
 
@@ -479,7 +479,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         if (mNotifyOnChange) {
             notifyItemChanged(pos);
         }
-        log("insertAll notifyItemChanged "+pos);
+        RefreshLogUtils.d("insertAll notifyItemChanged "+pos);
     }
 
     /**
@@ -493,7 +493,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
                 if (mNotifyOnChange) {
                     notifyItemRemoved(headers.size() + position);
                 }
-                log("remove notifyItemRemoved "+(headers.size()+position));
+                RefreshLogUtils.d("remove notifyItemRemoved "+(headers.size()+position));
             }
         }
     }
@@ -509,7 +509,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         if (mNotifyOnChange) {
             notifyItemRemoved(headers.size() + position);
         }
-        log("remove notifyItemRemoved "+(headers.size()+position));
+        RefreshLogUtils.d("remove notifyItemRemoved "+(headers.size()+position));
     }
 
 
@@ -530,7 +530,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         if (mNotifyOnChange) {
             notifyItemRangeRemoved(headers.size(), count);
         }
-        log("clear notifyItemRangeRemoved "+(headers.size())+","+(count));
+        RefreshLogUtils.d("clear notifyItemRangeRemoved "+(headers.size())+","+(count));
     }
 
     /**
@@ -547,7 +547,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         if (mNotifyOnChange) {
             notifyDataSetChanged();
         }
-        log("clear notifyItemRangeRemoved "+(headers.size())+","+(count));
+        RefreshLogUtils.d("clear notifyItemRangeRemoved "+(headers.size())+","+(count));
     }
 
     /**
@@ -562,11 +562,9 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         }
     }
 
-
     public void setNotifyOnChange(boolean notifyOnChange) {
         mNotifyOnChange = notifyOnChange;
     }
-
 
     public Context getContext() {
         return mContext;
@@ -688,13 +686,5 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         return mOnItemChildClickListener;
     }
 
-    /**
-     * 打印日志
-     * @param content               内容
-     */
-    private static void log(String content){
-        if (YCRefreshView.DEBUG){
-            Log.i(YCRefreshView.TAG,content);
-        }
-    }
+
 }

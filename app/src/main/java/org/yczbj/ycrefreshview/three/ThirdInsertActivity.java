@@ -1,6 +1,5 @@
 package org.yczbj.ycrefreshview.three;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -15,9 +14,8 @@ import org.yczbj.ycrefreshview.data.DataProvider;
 import org.yczbj.ycrefreshview.R;
 import org.yczbj.ycrefreshview.data.PersonData;
 import org.yczbj.ycrefreshview.first.PersonAdapter;
-import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.view.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.item.DividerViewItemLine;
-import org.yczbj.ycrefreshviewlib.swipeMenu.OnSwipeMenuListener;
 
 import java.util.List;
 import java.util.Random;
@@ -33,39 +31,17 @@ public class ThirdInsertActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_refresh_view);
-        recyclerView = (YCRefreshView) findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerView);
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        DividerViewItemLine itemDecoration = new DividerViewItemLine(Color.GRAY, SizeUtil.dip2px(this, 0.5f), SizeUtil.dip2px(this, 72), 0);
+        DividerViewItemLine itemDecoration = new
+                DividerViewItemLine( this.getResources().getColor(R.color.color_f9f9f9)
+                , SizeUtil.dip2px(this, 0.5f),
+                SizeUtil.dip2px(this, 72), 0);
         itemDecoration.setDrawLastItem(false);
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setAdapterWithProgress(adapter = new PersonAdapter(this));
-        adapter.setOnSwipeMenuListener(new OnSwipeMenuListener() {
-            //删除功能
-            @Override
-            public void toDelete(int position) {
-                if(adapter.getAllData().size()>position && position>-1){
-                    adapter.getAllData().remove(position);
-                    adapter.notifyItemRemoved(position);//推荐用这个
-                }
-            }
 
-            //置顶功能
-            @Override
-            public void toTop(int position) {
-                //先移除那个位置的数据，然后将其添加到索引为0的位置，然后刷新数据
-                if (position > 0 && adapter.getAllData().size()>position) {
-                    PersonData person = adapter.getAllData().get(position);
-                    adapter.getAllData().remove(person);
-                    adapter.notifyItemInserted(0);
-                    adapter.getAllData().add(0, person);
-                    adapter.notifyItemRemoved(position + 1);
-                    if (linearLayoutManager.findFirstVisibleItemPosition() == 0) {
-                        recyclerView.scrollToPosition(0);
-                    }
-                }
-            }
-        });
 
         List<PersonData> persons = DataProvider.getPersonList(0);
         adapter.addAll(persons.subList(0, 3));
@@ -84,7 +60,6 @@ public class ThirdInsertActivity extends AppCompatActivity {
         int len = adapter.getCount();
         if (len > 0) {
             int pos = random.nextInt(len);
-//        int pos = 0;
             List<PersonData> persons = DataProvider.getPersonList(0);
             PersonData data = persons.get(random.nextInt(persons.size()));
             switch (item.getItemId()) {
@@ -96,6 +71,8 @@ public class ThirdInsertActivity extends AppCompatActivity {
                     break;
                 case R.id.ic_refresh:
                     adapter.update(data, pos);
+                    break;
+                default:
                     break;
             }
         }

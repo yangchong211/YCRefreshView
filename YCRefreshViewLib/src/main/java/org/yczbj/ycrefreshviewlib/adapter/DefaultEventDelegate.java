@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.view.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.inter.AbsEventDelegate;
 import org.yczbj.ycrefreshviewlib.inter.ItemView;
 import org.yczbj.ycrefreshviewlib.inter.OnErrorListener;

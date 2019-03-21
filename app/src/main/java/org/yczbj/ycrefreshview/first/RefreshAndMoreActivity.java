@@ -19,7 +19,7 @@ import org.yczbj.ycrefreshview.data.DataProvider;
 import org.yczbj.ycrefreshview.R;
 import org.yczbj.ycrefreshview.data.AppUtils;
 import org.yczbj.ycrefreshview.data.PersonData;
-import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.view.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.inter.OnErrorListener;
 import org.yczbj.ycrefreshviewlib.inter.OnItemLongClickListener;
 import org.yczbj.ycrefreshviewlib.inter.OnLoadMoreListener;
@@ -44,8 +44,59 @@ public class RefreshAndMoreActivity extends AppCompatActivity implements SwipeRe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.base_recyclerview);
 
-        top = (FloatingActionButton) findViewById(R.id.top);
-        recyclerView = (YCRefreshView) findViewById(R.id.recyclerView);
+        initView();
+        initListener();
+        onRefresh();
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (handler!=null){
+            handler.removeCallbacksAndMessages(null);
+            handler = null;
+        }
+    }
+
+    @Override
+    public void onRefresh() {
+        page = 0;
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                adapter.clear();
+                //刷新
+                if (!hasNetWork) {
+                    adapter.pauseMore();
+                    return;
+                }
+                adapter.addAll(DataProvider.getPersonList(page));
+                page=1;
+            }
+        }, 2000);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuItem item = menu.findItem(R.id.checkbox);
+        CheckBox box = (CheckBox) item.getActionView();
+        box.setChecked(true);
+        box.setText("网络");
+        box.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                hasNetWork = isChecked;
+            }
+        });
+        return true;
+    }
+
+    private void initView() {
+        top = findViewById(R.id.top);
+        recyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -107,53 +158,17 @@ public class RefreshAndMoreActivity extends AppCompatActivity implements SwipeRe
                 adapter.resumeMore();
             }
         });
+    }
 
+
+    private void initListener() {
+        recyclerView.setRefreshListener(this);
         top.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 recyclerView.scrollToPosition(0);
             }
         });
-
-        recyclerView.setRefreshListener(this);
-        onRefresh();
     }
-
-
-    @Override
-    public void onRefresh() {
-        page = 0;
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                adapter.clear();
-                //刷新
-                if (!hasNetWork) {
-                    adapter.pauseMore();
-                    return;
-                }
-                adapter.addAll(DataProvider.getPersonList(page));
-                page=1;
-            }
-        }, 2000);
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        MenuItem item = menu.findItem(R.id.checkbox);
-        CheckBox box = (CheckBox) item.getActionView();
-        box.setChecked(true);
-        box.setText("网络");
-        box.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                hasNetWork = isChecked;
-            }
-        });
-        return true;
-    }
-
 
 }
