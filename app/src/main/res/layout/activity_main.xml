@@ -1,105 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="10dp">
+    android:layout_height="match_parent">
 
 
-    <TextView
-        android:id="@+id/tv_1"
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/activity_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/darker_gray"
-        android:text="1.常用下拉刷新，上拉加载更多"/>
-
-    <TextView
-        android:id="@+id/tv_2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/darker_gray"
-        android:text="2.支持头部和底部自定义布局的刷新控件"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
 
 
-    <TextView
-        android:id="@+id/tv_3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/darker_gray"
-        android:text="3.支持插入或者删除数据"/>
+        <TextView
+            android:id="@+id/tv_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"
+            android:text="1.常用下拉刷新，上拉加载更多"/>
 
-    <TextView
-        android:id="@+id/tv_4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/darker_gray"
-        android:text="4.横向的滑动list"/>
-
-    <TextView
-        android:id="@+id/tv_5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/darker_gray"
-        android:text="5.支持不同类型布局，多种复杂类型页面"/>
-
-    <TextView
-        android:id="@+id/tv_6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/darker_gray"
-        android:text="6.粘贴头部list【类似微信好友分组】"/>
+        <TextView
+            android:id="@+id/tv_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"
+            android:text="2.支持头部和底部自定义布局的刷新控件"/>
 
 
-    <TextView
-        android:id="@+id/tv_7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/darker_gray"
-        android:text="7.不规则瀑布流效果【也可以定义为规则的】"/>
+        <TextView
+            android:id="@+id/tv_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"
+            android:text="3.支持插入或者删除数据"/>
 
-    <TextView
-        android:id="@+id/tv_8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/darker_gray"
-        android:text="8.与CoordinatorLayout结合创造炫酷的效果"/>
+        <TextView
+            android:id="@+id/tv_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"
+            android:text="4.横向的滑动list"/>
 
-    <TextView
-        android:id="@+id/tv_9"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/darker_gray"
-        android:text="9.RecyclerView实现条目Item拖拽排序与滑动删除"/>
+        <TextView
+            android:id="@+id/tv_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"
+            android:text="5.支持不同类型布局，多种复杂类型页面"/>
+
+        <TextView
+            android:id="@+id/tv_6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"
+            android:text="6.粘贴头部list【类似微信好友分组】"/>
 
 
-    <TextView
-        android:id="@+id/tv_10"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/darker_gray"
-        android:text="10.支持侧滑逻辑，左右滑动出现删除按钮"/>
+        <TextView
+            android:id="@+id/tv_7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"
+            android:text="7.不规则瀑布流效果【也可以定义为规则的】"/>
+
+        <TextView
+            android:id="@+id/tv_8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"
+            android:text="8.与CoordinatorLayout结合创造炫酷的效果"/>
+
+        <TextView
+            android:id="@+id/tv_9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"
+            android:text="9.RecyclerView实现条目Item拖拽排序与滑动删除"/>
 
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"
+            android:text="10.支持侧滑逻辑，左右滑动出现删除按钮"/>
+
+
+        <TextView
+            android:id="@+id/tv_11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"
+            android:text="11.原生recyclerView使用该库封装的adapter"/>
+
+
+
+    </LinearLayout>
+
+
+
+</ScrollView>
+

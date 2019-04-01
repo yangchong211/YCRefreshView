@@ -3,9 +3,11 @@ package org.yczbj.ycrefreshview;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import org.yczbj.ycrefreshview.eight.EightCollapsingActivity;
+import org.yczbj.ycrefreshview.eleven.NormalRecyclerViewActivity;
 import org.yczbj.ycrefreshview.first.RefreshAndMoreActivity;
 import org.yczbj.ycrefreshview.five.FiveMultiStyleActivity;
 import org.yczbj.ycrefreshview.four.FourHorizontalActivity;
@@ -15,6 +17,10 @@ import org.yczbj.ycrefreshview.seven.SevenStaggeredGridActivity;
 import org.yczbj.ycrefreshview.six.SixStickyHeaderActivity;
 import org.yczbj.ycrefreshview.ten.DeleteAndTopActivity;
 import org.yczbj.ycrefreshview.three.ThirdInsertActivity;
+import org.yczbj.ycrefreshviewlib.utils.RefreshLogUtils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -22,7 +28,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        RefreshLogUtils.setLog(true);
         init();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     private void init() {
@@ -36,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.tv_8).setOnClickListener(this);
         findViewById(R.id.tv_9).setOnClickListener(this);
         findViewById(R.id.tv_10).setOnClickListener(this);
+        findViewById(R.id.tv_11).setOnClickListener(this);
     }
 
 
@@ -72,12 +85,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.tv_10:
                 startActivity(new Intent(this, DeleteAndTopActivity.class));
                 break;
+            case R.id.tv_11:
+                startActivity(new Intent(this, NormalRecyclerViewActivity.class));
+                break;
             default:
                 break;
         }
     }
-
-
 
 
 }

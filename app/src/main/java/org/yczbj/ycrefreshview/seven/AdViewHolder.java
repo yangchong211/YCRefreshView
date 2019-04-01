@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide;
 import org.yczbj.ycrefreshview.R;
 import org.yczbj.ycrefreshview.data.AppUtils;
 import org.yczbj.ycrefreshview.data.AdData;
-import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
+import org.yczbj.ycrefreshviewlib.holder.BaseViewHolder;
 
 
 public class AdViewHolder extends BaseViewHolder<AdData> {

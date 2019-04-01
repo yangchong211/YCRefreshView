@@ -19,7 +19,7 @@ import org.yczbj.ycrefreshview.R;
 import org.yczbj.ycrefreshview.data.AppUtils;
 import org.yczbj.ycrefreshview.second.BannerAdapter;
 import org.yczbj.ycrefreshviewlib.view.YCRefreshView;
-import org.yczbj.ycrefreshviewlib.inter.ItemView;
+import org.yczbj.ycrefreshviewlib.inter.InterItemView;
 import org.yczbj.ycrefreshviewlib.inter.OnMoreListener;
 import org.yczbj.ycrefreshviewlib.item.SpaceViewItemLine;
 
@@ -38,7 +38,7 @@ public class SevenStaggeredGridActivity extends AppCompatActivity {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,4);
         gridLayoutManager.setSpanSizeLookup(adapter.obtainGridSpanSizeLookUp(4));
         recyclerView.setLayoutManager(gridLayoutManager);
-        adapter.addHeader(new ItemView() {
+        adapter.addHeader(new InterItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
                 BannerView header = new BannerView(SevenStaggeredGridActivity.this);

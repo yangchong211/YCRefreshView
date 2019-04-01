@@ -25,7 +25,7 @@ import org.yczbj.ycrefreshviewlib.inter.OnItemLongClickListener;
 import org.yczbj.ycrefreshviewlib.inter.OnLoadMoreListener;
 import org.yczbj.ycrefreshviewlib.inter.OnNoMoreListener;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
-import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
+import org.yczbj.ycrefreshviewlib.holder.BaseViewHolder;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 

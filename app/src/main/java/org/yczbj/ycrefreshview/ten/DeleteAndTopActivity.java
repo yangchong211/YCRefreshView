@@ -29,13 +29,13 @@ import org.yczbj.ycrefreshview.data.PersonData;
 import org.yczbj.ycrefreshview.second.BannerAdapter;
 import org.yczbj.ycrefreshview.second.NarrowImageAdapter;
 import org.yczbj.ycrefreshviewlib.view.YCRefreshView;
-import org.yczbj.ycrefreshviewlib.inter.ItemView;
+import org.yczbj.ycrefreshviewlib.inter.InterItemView;
 import org.yczbj.ycrefreshviewlib.inter.OnItemChildClickListener;
 import org.yczbj.ycrefreshviewlib.inter.OnLoadMoreListener;
 import org.yczbj.ycrefreshviewlib.item.DividerViewItemLine;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import org.yczbj.ycrefreshviewlib.item.SpaceViewItemLine;
-import org.yczbj.ycrefreshviewlib.swipeMenu.OnSwipeMenuListener;
+import org.yczbj.ycrefreshviewlib.swipe.OnSwipeMenuListener;
 
 
 public class DeleteAndTopActivity extends AppCompatActivity {
@@ -127,7 +127,7 @@ public class DeleteAndTopActivity extends AppCompatActivity {
 
 
     private void initHeader() {
-        adapter.addHeader(new ItemView() {
+        adapter.addHeader(new InterItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
                 BannerView header = new BannerView(DeleteAndTopActivity.this);
@@ -144,7 +144,7 @@ public class DeleteAndTopActivity extends AppCompatActivity {
 
             }
         });
-        adapter.addHeader(new ItemView() {
+        adapter.addHeader(new InterItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
                 View inflate = LayoutInflater.from(DeleteAndTopActivity.this).inflate(R.layout.header_view, null);
@@ -156,7 +156,7 @@ public class DeleteAndTopActivity extends AppCompatActivity {
 
             }
         });
-        adapter.addHeader(new ItemView() {
+        adapter.addHeader(new InterItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
                 RecyclerView recyclerView = new RecyclerView(parent.getContext()){
@@ -197,7 +197,7 @@ public class DeleteAndTopActivity extends AppCompatActivity {
                 ((ViewGroup)headerView).requestDisallowInterceptTouchEvent(true);
             }
         });
-        adapter.addFooter(new ItemView() {
+        adapter.addFooter(new InterItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
                 TextView tv = new TextView(DeleteAndTopActivity.this);

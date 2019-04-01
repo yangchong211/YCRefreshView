@@ -13,8 +13,8 @@ import com.bumptech.glide.Glide;
 import org.yczbj.ycrefreshview.R;
 import org.yczbj.ycrefreshview.data.PersonData;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
-import org.yczbj.ycrefreshviewlib.swipeMenu.OnSwipeMenuListener;
-import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
+import org.yczbj.ycrefreshviewlib.swipe.OnSwipeMenuListener;
+import org.yczbj.ycrefreshviewlib.holder.BaseViewHolder;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 

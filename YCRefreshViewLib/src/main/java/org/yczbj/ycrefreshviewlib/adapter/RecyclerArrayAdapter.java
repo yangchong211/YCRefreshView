@@ -1,14 +1,15 @@
 package org.yczbj.ycrefreshviewlib.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.yczbj.ycrefreshviewlib.inter.AbsEventDelegate;
-import org.yczbj.ycrefreshviewlib.inter.ItemView;
+import org.yczbj.ycrefreshviewlib.inter.InterEventDelegate;
+import org.yczbj.ycrefreshviewlib.inter.InterItemView;
 import org.yczbj.ycrefreshviewlib.inter.OnErrorListener;
 import org.yczbj.ycrefreshviewlib.inter.OnItemChildClickListener;
 import org.yczbj.ycrefreshviewlib.inter.OnItemClickListener;
@@ -17,7 +18,7 @@ import org.yczbj.ycrefreshviewlib.inter.OnLoadMoreListener;
 import org.yczbj.ycrefreshviewlib.inter.OnMoreListener;
 import org.yczbj.ycrefreshviewlib.inter.OnNoMoreListener;
 import org.yczbj.ycrefreshviewlib.utils.RefreshLogUtils;
-import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
+import org.yczbj.ycrefreshviewlib.holder.BaseViewHolder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -33,9 +34,9 @@ import java.util.List;
 public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseViewHolder>   {
 
     private List<T> mObjects;
-    private AbsEventDelegate mEventDelegate;
-    private ArrayList<ItemView> headers = new ArrayList<>();
-    private ArrayList<ItemView> footers = new ArrayList<>();
+    private InterEventDelegate mEventDelegate;
+    private ArrayList<InterItemView> headers = new ArrayList<>();
+    private ArrayList<InterItemView> footers = new ArrayList<>();
     private OnItemClickListener mItemClickListener;
     private OnItemLongClickListener mItemLongClickListener;
     private OnItemChildClickListener mOnItemChildClickListener;
@@ -64,64 +65,29 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         mObjects = new ArrayList<>(objects);
     }
 
+    /**
+     * 创建viewHolder
+     * @param parent                        parent
+     * @param viewType                      type类型
+     * @return
+     */
+    @NonNull
     @Override
-    public final BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public final BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = createSpViewByType(parent, viewType);
         if (view!=null){
-            return new StateViewHolder(view);
+            return new BaseViewHolder(view);
         }
         final BaseViewHolder viewHolder = OnCreateViewHolder(parent, viewType);
-        //itemView 的点击事件
-        if (mItemClickListener!=null) {
-            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mItemClickListener.onItemClick(
-                            viewHolder.getAdapterPosition()-headers.size());
-                }
-            });
-        }
-        if (mItemLongClickListener!=null){
-            viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    return mItemLongClickListener.onItemLongClick(
-                            viewHolder.getAdapterPosition()-headers.size());
-                }
-            });
-        }
+        setOnClickListener(viewHolder);
         return viewHolder;
     }
 
     /**
-     * 抽象方法，子类继承
+     * 获取类型
+     * @param position                      索引
+     * @return                              int
      */
-    public abstract BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType);
-
-
-    @Override
-    public final void onBindViewHolder(BaseViewHolder holder, int position) {
-        holder.itemView.setId(position);
-        if (headers.size()!=0 && position<headers.size()){
-            headers.get(position).onBindView(holder.itemView);
-            return ;
-        }
-
-        int i = position - headers.size() - mObjects.size();
-        if (footers.size()!=0 && i>=0){
-            footers.get(i).onBindView(holder.itemView);
-            return ;
-        }
-        OnBindViewHolder(holder,position-headers.size());
-    }
-
-
-    @SuppressWarnings("unchecked")
-    private void OnBindViewHolder(BaseViewHolder holder, final int position){
-        holder.setData(getItem(position));
-    }
-
-
     @Deprecated
     @Override
     public final int getItemViewType(int position) {
@@ -150,35 +116,66 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         return getViewType(position-headers.size());
     }
 
-    public int getViewType(int position){
+
+    /**
+     * 这个函数包含了头部和尾部view的个数，不是真正的item个数。
+     * 包含item+header头布局数量+footer底布局数量
+     */
+    @Deprecated
+    @Override
+    public final int getItemCount() {
+        return mObjects.size() + headers.size() + footers.size();
+    }
+
+
+    /**
+     * 绑定viewHolder
+     * @param holder                        holder
+     * @param position                      索引
+     */
+    @Override
+    public final void onBindViewHolder(BaseViewHolder holder, int position) {
+        holder.itemView.setId(position);
+        if (headers.size()!=0 && position<headers.size()){
+            headers.get(position).onBindView(holder.itemView);
+            return ;
+        }
+
+        int i = position - headers.size() - mObjects.size();
+        if (footers.size()!=0 && i>=0){
+            footers.get(i).onBindView(holder.itemView);
+            return ;
+        }
+
+
+        OnBindViewHolder(holder,position-headers.size());
+    }
+
+
+
+    /**---------------------------------子类需要重写的方法---------------------------------------*/
+
+
+    /**
+     * 抽象方法，子类继承
+     */
+    public abstract BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType);
+
+
+    @SuppressWarnings("unchecked")
+    private void OnBindViewHolder(BaseViewHolder holder, final int position){
+        holder.setData(getItem(position));
+    }
+
+
+
+    private int getViewType(int position){
         return 0;
     }
 
 
-    public class GridSpanSizeLookup extends GridLayoutManager.SpanSizeLookup{
-        private int mMaxCount;
-        GridSpanSizeLookup(int maxCount){
-            this.mMaxCount = maxCount;
-        }
-        @Override
-        public int getSpanSize(int position) {
-            if (headers.size()!=0){
-                if (position<headers.size()) {
-                    return mMaxCount;
-                }
-            }
-            if (footers.size()!=0) {
-                int i = position - headers.size() - mObjects.size();
-                if (i >= 0) {
-                    return mMaxCount;
-                }
-            }
-            return 1;
-        }
-    }
-
     public GridSpanSizeLookup obtainGridSpanSizeLookUp(int maxCount){
-        return new GridSpanSizeLookup(maxCount);
+        return new GridSpanSizeLookup(maxCount,headers,footers,mObjects);
     }
 
 
@@ -204,7 +201,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
     }
 
 
-    public void addHeader(ItemView view){
+    public void addHeader(InterItemView view){
         if (view==null) {
             throw new NullPointerException("ItemView can't be null");
         }
@@ -212,7 +209,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         notifyItemInserted(headers.size()-1);
     }
 
-    public void addFooter(ItemView view){
+    public void addFooter(InterItemView view){
         if (view==null) {
             throw new NullPointerException("ItemView can't be null");
         }
@@ -232,11 +229,11 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         notifyItemRangeRemoved(headers.size()+getCount(),count);
     }
 
-    public ItemView getHeader(int index){
+    public InterItemView getHeader(int index){
         return headers.get(index);
     }
 
-    public ItemView getFooter(int index){
+    public InterItemView getFooter(int index){
         return footers.get(index);
     }
 
@@ -244,27 +241,26 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
 
     public int getFooterCount(){return footers.size();}
 
-    public void removeHeader(ItemView view){
+    public void removeHeader(InterItemView view){
         int position = headers.indexOf(view);
         headers.remove(view);
         notifyItemRemoved(position);
     }
 
-    public void removeFooter(ItemView view){
+    public void removeFooter(InterItemView view){
         int position = headers.size()+getCount()+footers.indexOf(view);
         footers.remove(view);
         notifyItemRemoved(position);
     }
 
 
-    private AbsEventDelegate getEventDelegate(){
+    private InterEventDelegate getEventDelegate(){
         if (mEventDelegate == null) {
             mEventDelegate = new DefaultEventDelegate(this);
         }
         return mEventDelegate;
     }
 
-    @Deprecated
     public void setMore(final int res, final OnLoadMoreListener listener){
         getEventDelegate().setMore(res, new OnMoreListener() {
             @Override
@@ -570,19 +566,6 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         return mContext;
     }
 
-    public void setContext(Context ctx) {
-        mContext = ctx;
-    }
-
-    /**
-     * 这个函数包含了头部和尾部view的个数，不是真正的item个数。
-     */
-    @Deprecated
-    @Override
-    public final int getItemCount() {
-        return mObjects.size()+headers.size()+footers.size();
-    }
-
     /**
      * 应该使用这个获取item个数
      */
@@ -591,7 +574,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
     }
 
     private View createSpViewByType(ViewGroup parent, int viewType){
-        for (ItemView headerView : headers){
+        for (InterItemView headerView : headers){
             if (headerView.hashCode() == viewType){
                 View view = headerView.onCreateView(parent);
                 StaggeredGridLayoutManager.LayoutParams layoutParams;
@@ -605,7 +588,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
                 return view;
             }
         }
-        for (ItemView footerView : footers){
+        for (InterItemView footerView : footers){
             if (footerView.hashCode() == viewType){
                 View view = footerView.onCreateView(parent);
                 StaggeredGridLayoutManager.LayoutParams layoutParams;
@@ -633,7 +616,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
     /**
      * 获取item
      */
-    public T getItem(int position) {
+    protected T getItem(int position) {
         return mObjects.get(position);
     }
 
@@ -652,9 +635,62 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         return position;
     }
 
-    private class StateViewHolder extends BaseViewHolder{
-        StateViewHolder(View itemView) {
-            super(itemView);
+
+    public class GridSpanSizeLookup extends GridLayoutManager.SpanSizeLookup{
+
+        private int mMaxCount;
+        private ArrayList<InterItemView> headers;
+        private ArrayList<InterItemView> footers;
+        private List<T> mObjects;
+
+        GridSpanSizeLookup(int maxCount, ArrayList<InterItemView> headers,
+                           ArrayList<InterItemView> footers, List<T> mObjects){
+            this.mMaxCount = maxCount;
+            this.headers = headers;
+            this.footers = footers;
+            this.mObjects = mObjects;
+        }
+
+        @Override
+        public int getSpanSize(int position) {
+            if (headers.size()!=0){
+                if (position<headers.size()) {
+                    return mMaxCount;
+                }
+            }
+            if (footers.size()!=0) {
+                int i = position - headers.size() - mObjects.size();
+                if (i >= 0) {
+                    return mMaxCount;
+                }
+            }
+            return 1;
+        }
+    }
+
+
+
+    /**---------------------------------点击事件---------------------------------------------------*/
+
+    private void setOnClickListener(final BaseViewHolder viewHolder) {
+        //itemView 的点击事件
+        if (mItemClickListener!=null) {
+            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mItemClickListener.onItemClick(
+                            viewHolder.getAdapterPosition()-headers.size());
+                }
+            });
+        }
+        if (mItemLongClickListener!=null){
+            viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    return mItemLongClickListener.onItemLongClick(
+                            viewHolder.getAdapterPosition()-headers.size());
+                }
+            });
         }
     }
 

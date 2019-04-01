@@ -6,7 +6,7 @@ import android.widget.ImageView;
 
 import org.yczbj.ycrefreshview.data.AppUtils;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
-import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
+import org.yczbj.ycrefreshviewlib.holder.BaseViewHolder;
 
 
 public class NarrowImageAdapter extends RecyclerArrayAdapter<Integer> {

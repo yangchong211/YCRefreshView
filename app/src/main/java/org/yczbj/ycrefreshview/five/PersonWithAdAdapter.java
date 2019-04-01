@@ -9,7 +9,7 @@ import org.yczbj.ycrefreshview.data.PersonData;
 import org.yczbj.ycrefreshview.first.PersonViewHolder;
 import org.yczbj.ycrefreshview.seven.AdViewHolder;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
-import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
+import org.yczbj.ycrefreshviewlib.holder.BaseViewHolder;
 
 import java.security.InvalidParameterException;
 

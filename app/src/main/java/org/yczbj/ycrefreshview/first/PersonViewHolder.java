@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide;
 
 import org.yczbj.ycrefreshview.R;
 import org.yczbj.ycrefreshview.data.PersonData;
-import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
+import org.yczbj.ycrefreshviewlib.holder.BaseViewHolder;
 
 
 public class PersonViewHolder extends BaseViewHolder<PersonData> {

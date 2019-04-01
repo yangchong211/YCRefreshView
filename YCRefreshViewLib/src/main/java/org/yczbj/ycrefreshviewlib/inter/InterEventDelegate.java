@@ -10,7 +10,7 @@ import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
  * @date            2016/4/28
  *                  接口
  */
-public interface AbsEventDelegate {
+public interface InterEventDelegate {
 
     /**
      * 添加数据

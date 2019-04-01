@@ -59,8 +59,7 @@ public class NightTouchMoveActivity extends AppCompatActivity{
             public void onSwiped(int adapterPosition) {
                 // 滑动删除的时候，从数据库、数据源移除，并刷新UI
                 if (personList != null) {
-                    personList.remove(adapterPosition);
-                    adapter.notifyItemRemoved(adapterPosition);
+                    adapter.remove(adapterPosition);
                 }
             }
 

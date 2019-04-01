@@ -1,4 +1,4 @@
-package org.yczbj.ycrefreshviewlib.swipeMenu;
+package org.yczbj.ycrefreshviewlib.swipe;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

@@ -1,4 +1,4 @@
-package org.yczbj.ycrefreshviewlib.viewHolder;
+package org.yczbj.ycrefreshviewlib.holder;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -42,7 +42,7 @@ import java.lang.reflect.Field;
  *
  *                  具体可以参考我的adapter封装库：https://github.com/yangchong211/YCBaseAdapter
  */
-public abstract class BaseViewHolder<M> extends RecyclerView.ViewHolder {
+public class BaseViewHolder<M> extends RecyclerView.ViewHolder {
 
 
     // SparseArray 比 HashMap 更省内存，在某些条件下性能更好，只能存储 key 为 int 类型的数据，

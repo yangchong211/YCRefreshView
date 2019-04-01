@@ -5,7 +5,7 @@ import android.view.ViewGroup;
 
 import org.yczbj.ycrefreshview.data.PictureData;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
-import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
+import org.yczbj.ycrefreshviewlib.holder.BaseViewHolder;
 
 
 public class ImageAdapter extends RecyclerArrayAdapter<PictureData> {

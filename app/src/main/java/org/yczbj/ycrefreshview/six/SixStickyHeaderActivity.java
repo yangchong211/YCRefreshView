@@ -28,7 +28,7 @@ import org.yczbj.ycrefreshviewlib.inter.OnLoadMoreListener;
 import org.yczbj.ycrefreshviewlib.inter.OnNoMoreListener;
 import org.yczbj.ycrefreshviewlib.item.DividerViewItemLine;
 import org.yczbj.ycrefreshviewlib.item.StickyHeaderItemLine;
-import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
+import org.yczbj.ycrefreshviewlib.holder.BaseViewHolder;
 
 import java.util.ArrayList;
 

@@ -9,7 +9,8 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_empty="@layout/view_empty"
+        app:layout_empty="@layout/view_custom_empty_data"
+        app:layout_error="@layout/view_custom_data_error"
         app:layout_progress="@layout/view_progress" />
 
 </LinearLayout>

@@ -28,7 +28,7 @@ import org.yczbj.ycrefreshview.R;
 import org.yczbj.ycrefreshview.data.AppUtils;
 import org.yczbj.ycrefreshview.first.PersonAdapter;
 import org.yczbj.ycrefreshviewlib.view.YCRefreshView;
-import org.yczbj.ycrefreshviewlib.inter.ItemView;
+import org.yczbj.ycrefreshviewlib.inter.InterItemView;
 import org.yczbj.ycrefreshviewlib.inter.OnItemChildClickListener;
 import org.yczbj.ycrefreshviewlib.inter.OnLoadMoreListener;
 import org.yczbj.ycrefreshviewlib.item.DividerViewItemLine;
@@ -101,12 +101,12 @@ public class HeaderFooterActivity extends AppCompatActivity {
 
 
     private void initHeader() {
-        adapter.addHeader(new ItemView() {
+        InterItemView interItemView = new InterItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
                 BannerView header = new BannerView(HeaderFooterActivity.this);
                 header.setHintView(new ColorPointHintView(HeaderFooterActivity.this,
-                        Color.YELLOW,Color.GRAY));
+                        Color.YELLOW, Color.GRAY));
                 header.setHintPadding(0, 0, 0, (int) AppUtils.convertDpToPixel(
                         8, HeaderFooterActivity.this));
                 header.setPlayDelay(2000);
@@ -121,8 +121,9 @@ public class HeaderFooterActivity extends AppCompatActivity {
             public void onBindView(View headerView) {
 
             }
-        });
-        adapter.addHeader(new ItemView() {
+        };
+        adapter.addHeader(interItemView);
+        adapter.addHeader(new InterItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
                 View inflate = LayoutInflater.from(HeaderFooterActivity.this)
@@ -135,7 +136,7 @@ public class HeaderFooterActivity extends AppCompatActivity {
 
             }
         });
-        adapter.addHeader(new ItemView() {
+        adapter.addHeader(new InterItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
                 RecyclerView recyclerView = new RecyclerView(parent.getContext()){
@@ -179,7 +180,7 @@ public class HeaderFooterActivity extends AppCompatActivity {
                 ((ViewGroup)headerView).requestDisallowInterceptTouchEvent(true);
             }
         });
-        adapter.addFooter(new ItemView() {
+        adapter.addFooter(new InterItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
                 TextView tv = new TextView(HeaderFooterActivity.this);

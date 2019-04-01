@@ -1,14 +1,13 @@
 package org.yczbj.ycrefreshviewlib.adapter;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import org.yczbj.ycrefreshviewlib.view.YCRefreshView;
-import org.yczbj.ycrefreshviewlib.inter.AbsEventDelegate;
-import org.yczbj.ycrefreshviewlib.inter.ItemView;
+import org.yczbj.ycrefreshviewlib.utils.RefreshLogUtils;
+import org.yczbj.ycrefreshviewlib.inter.InterEventDelegate;
+import org.yczbj.ycrefreshviewlib.inter.InterItemView;
 import org.yczbj.ycrefreshviewlib.inter.OnErrorListener;
 import org.yczbj.ycrefreshviewlib.inter.OnMoreListener;
 import org.yczbj.ycrefreshviewlib.inter.OnNoMoreListener;
@@ -18,7 +17,7 @@ import org.yczbj.ycrefreshviewlib.inter.OnNoMoreListener;
  * @version         1.0
  * @date            2017/1/29
  */
-public class DefaultEventDelegate implements AbsEventDelegate {
+public class DefaultEventDelegate implements InterEventDelegate {
 
     private RecyclerArrayAdapter adapter;
     private EventFooter footer ;
@@ -35,7 +34,7 @@ public class DefaultEventDelegate implements AbsEventDelegate {
     private int status = STATUS_INITIAL;
     private static final int STATUS_INITIAL = 291;
     private static final int STATUS_MORE = 260;
-    private static final int STATUS_NOMORE = 408;
+    private static final int STATUS_NO_MORE = 408;
     private static final int STATUS_ERROR = 732;
 
     DefaultEventDelegate(RecyclerArrayAdapter adapter) {
@@ -45,7 +44,7 @@ public class DefaultEventDelegate implements AbsEventDelegate {
     }
 
     private void onMoreViewShowed() {
-        log("onMoreViewShowed");
+        RefreshLogUtils.d("onMoreViewShowed");
         if (!isLoadingMore&& onMoreListener !=null){
             isLoadingMore = true;
             onMoreListener.onMoreShow();
@@ -86,13 +85,13 @@ public class DefaultEventDelegate implements AbsEventDelegate {
 
     @Override
     public void addData(int length) {
-        log("addData" + length);
+        RefreshLogUtils.d("addData" + length);
         if (hasMore){
             if (length == 0){
                 //当添加0个时，认为已结束加载到底
                 if (status==STATUS_INITIAL || status == STATUS_MORE){
                     footer.showNoMore();
-                    status = STATUS_NOMORE;
+                    status = STATUS_NO_MORE;
                 }
             }else {
                 //当Error或初始时。添加数据，如果有More则还原。
@@ -103,7 +102,7 @@ public class DefaultEventDelegate implements AbsEventDelegate {
         }else{
             if (hasNoMore){
                 footer.showNoMore();
-                status = STATUS_NOMORE;
+                status = STATUS_NO_MORE;
             }
         }
         isLoadingMore = false;
@@ -111,7 +110,7 @@ public class DefaultEventDelegate implements AbsEventDelegate {
 
     @Override
     public void clear() {
-        log("clear");
+        RefreshLogUtils.d("clear");
         hasData = false;
         status = STATUS_INITIAL;
         footer.hide();
@@ -120,15 +119,15 @@ public class DefaultEventDelegate implements AbsEventDelegate {
 
     @Override
     public void stopLoadMore() {
-        log("stopLoadMore");
+        RefreshLogUtils.d("stopLoadMore");
         footer.showNoMore();
-        status = STATUS_NOMORE;
+        status = STATUS_NO_MORE;
         isLoadingMore = false;
     }
 
     @Override
     public void pauseLoadMore() {
-        log("pauseLoadMore");
+        RefreshLogUtils.d("pauseLoadMore");
         footer.showError();
         status = STATUS_ERROR;
         isLoadingMore = false;
@@ -153,7 +152,7 @@ public class DefaultEventDelegate implements AbsEventDelegate {
         if (adapter.getCount()>0){
             addData(adapter.getCount());
         }
-        log("setMore");
+        RefreshLogUtils.d("setMore");
     }
 
     @Override
@@ -161,7 +160,7 @@ public class DefaultEventDelegate implements AbsEventDelegate {
         this.footer.setNoMoreView(view);
         this.onNoMoreListener = listener;
         hasNoMore = true;
-        log("setNoMore");
+        RefreshLogUtils.d("setNoMore");
     }
 
     @Override
@@ -169,7 +168,7 @@ public class DefaultEventDelegate implements AbsEventDelegate {
         this.footer.setErrorView(view);
         this.onErrorListener = listener;
         hasError = true;
-        log("setErrorMore");
+        RefreshLogUtils.d("setErrorMore");
     }
 
     @Override
@@ -181,7 +180,7 @@ public class DefaultEventDelegate implements AbsEventDelegate {
         if (adapter.getCount()>0){
             addData(adapter.getCount());
         }
-        log("setMore");
+        RefreshLogUtils.d("setMore");
     }
 
     @Override
@@ -189,7 +188,7 @@ public class DefaultEventDelegate implements AbsEventDelegate {
         this.footer.setNoMoreViewRes(res);
         this.onNoMoreListener = listener;
         hasNoMore = true;
-        log("setNoMore");
+        RefreshLogUtils.d("setNoMore");
     }
 
     @Override
@@ -197,12 +196,12 @@ public class DefaultEventDelegate implements AbsEventDelegate {
         this.footer.setErrorViewRes(res);
         this.onErrorListener = listener;
         hasError = true;
-        log("setErrorMore");
+        RefreshLogUtils.d("setErrorMore");
     }
 
 
 
-    private class EventFooter implements ItemView {
+    private class EventFooter implements InterItemView {
 
         private View moreView = null;
         private View noMoreView = null;
@@ -222,13 +221,13 @@ public class DefaultEventDelegate implements AbsEventDelegate {
 
         @Override
         public View onCreateView(ViewGroup parent) {
-            log("onCreateView");
+            RefreshLogUtils.d("onCreateView");
             return refreshStatus(parent);
         }
 
         @Override
         public void onBindView(View headerView) {
-            log("onBindView");
+            RefreshLogUtils.d("onBindView");
             headerView.post(new Runnable() {
                 @Override
                 public void run() {
@@ -313,7 +312,7 @@ public class DefaultEventDelegate implements AbsEventDelegate {
         }
 
         void showError(){
-            log("footer showError");
+            RefreshLogUtils.d("footer showError");
             skipError = true;
             flag = ShowError;
             //noinspection deprecation
@@ -322,7 +321,7 @@ public class DefaultEventDelegate implements AbsEventDelegate {
             }
         }
         void showMore(){
-            log("footer showMore");
+            RefreshLogUtils.d("footer showMore");
             flag = ShowMore;
             //noinspection deprecation
             if (adapter.getItemCount()>0){
@@ -330,7 +329,7 @@ public class DefaultEventDelegate implements AbsEventDelegate {
             }
         }
         void showNoMore(){
-            log("footer showNoMore");
+            RefreshLogUtils.d("footer showNoMore");
             skipNoMore = true;
             flag = ShowNoMore;
             //noinspection deprecation
@@ -341,7 +340,7 @@ public class DefaultEventDelegate implements AbsEventDelegate {
 
         //初始化
         void hide(){
-            log("footer hide");
+            RefreshLogUtils.d("footer hide");
             flag = Hide;
             //noinspection deprecation
             if (adapter.getItemCount()>0){
@@ -382,14 +381,6 @@ public class DefaultEventDelegate implements AbsEventDelegate {
         @Override
         public int hashCode() {
             return flag+13589;
-        }
-    }
-
-
-
-    private static void log(String content){
-        if (YCRefreshView.DEBUG){
-            Log.i(YCRefreshView.TAG,content);
         }
     }
 

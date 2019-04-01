@@ -30,6 +30,7 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".night.NightTouchMoveActivity"/>
         <activity android:name=".ten.DeleteAndTopActivity"/>
+        <activity android:name=".eleven.NormalRecyclerViewActivity"/>
     </application>
 
 </manifest>

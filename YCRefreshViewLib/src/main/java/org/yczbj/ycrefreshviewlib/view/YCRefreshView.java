@@ -7,7 +7,6 @@ import android.support.annotation.ColorRes;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,20 +17,23 @@ import android.widget.FrameLayout;
 import org.yczbj.ycrefreshviewlib.R;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.observer.EasyDataObserver;
+import org.yczbj.ycrefreshviewlib.utils.RefreshLogUtils;
 
 import java.util.ArrayList;
 
 /**
- * @author          杨充
- * @version         1.0
- * @date            2017/4/22
- *                  支持多种状态切换；支持上拉加载更多，下拉刷新；支持添加头部或底部view
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://blog.csdn.net/m0_37700275/article/details/80863685
+ *     time  : 2017/4/22
+ *     desc  : 自定义控件
+ *     revise: 支持多种状态切换；支持上拉加载更多，下拉刷新；支持添加头部或底部view
+ * </pre>
  */
 public class YCRefreshView extends FrameLayout {
 
-    public static final String TAG = "YCRefreshView";
-    public static boolean DEBUG = false;
-    protected RecyclerView mRecycler;
+
+    protected RecyclerView mRecyclerView;
     protected ViewGroup mProgressView;
     protected ViewGroup mEmptyView;
     protected ViewGroup mErrorView;
@@ -72,13 +74,34 @@ public class YCRefreshView extends FrameLayout {
 
     /**
      * 事件的分发
-     * @param ev            时间
-     * @return              是否分发事件
+     * @param ev                事件
+     * @return                  是否分发事件
      */
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         return mPtrLayout.dispatchTouchEvent(ev);
     }
+
+    /**
+     * 事件的分发
+     * @param event             event
+     * @return                  是否自己处理触摸事件
+     */
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return super.onTouchEvent(event);
+    }
+
+    /**
+     * 拦截事件
+     * @param ev                event
+     * @return                  是否拦截事件
+     */
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        return super.onInterceptTouchEvent(ev);
+    }
+
 
     @Override
     protected void onAttachedToWindow() {
@@ -91,6 +114,13 @@ public class YCRefreshView extends FrameLayout {
         super.onDetachedFromWindow();
     }
 
+    /**
+     * 完成绘制会调用该方法
+     */
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+    }
 
     /**
      * 初始化资源
@@ -127,23 +157,23 @@ public class YCRefreshView extends FrameLayout {
         }
         //生成主View
         View v = LayoutInflater.from(getContext()).inflate(R.layout.refresh_recyclerview, this);
-        mPtrLayout = (SwipeRefreshLayout) v.findViewById(R.id.ptr_layout);
+        mPtrLayout = v.findViewById(R.id.ptr_layout);
         mPtrLayout.setEnabled(false);
 
         //加载进度view
-        mProgressView = (ViewGroup) v.findViewById(R.id.progress);
+        mProgressView = v.findViewById(R.id.progress);
         if (mProgressId!=0){
             LayoutInflater.from(getContext()).inflate(mProgressId,mProgressView);
         }
 
         //数据为空时view
-        mEmptyView = (ViewGroup) v.findViewById(R.id.empty);
+        mEmptyView = v.findViewById(R.id.empty);
         if (mEmptyId!=0){
             LayoutInflater.from(getContext()).inflate(mEmptyId,mEmptyView);
         }
 
         //数据加载错误view
-        mErrorView = (ViewGroup) v.findViewById(R.id.error);
+        mErrorView = v.findViewById(R.id.error);
         if (mErrorId!=0){
             LayoutInflater.from(getContext()).inflate(mErrorId,mErrorView);
         }
@@ -154,21 +184,21 @@ public class YCRefreshView extends FrameLayout {
 
 
     protected void initRecyclerView(View view) {
-        mRecycler = (RecyclerView) view.findViewById(android.R.id.list);
+        mRecyclerView = view.findViewById(android.R.id.list);
         setItemAnimator(null);
-        if (mRecycler != null) {
-            mRecycler.setHasFixedSize(true);
-            mRecycler.setClipToPadding(mClipToPadding);
+        if (mRecyclerView != null) {
+            mRecyclerView.setHasFixedSize(true);
+            mRecyclerView.setClipToPadding(mClipToPadding);
             initScrollListener();
             //添加滚动监听事件
-            mRecycler.addOnScrollListener(mInternalOnScrollListener);
-            if (mPadding != -1.0f) {
-                mRecycler.setPadding(mPadding, mPadding, mPadding, mPadding);
+            mRecyclerView.addOnScrollListener(mInternalOnScrollListener);
+            if (mPadding != -1) {
+                mRecyclerView.setPadding(mPadding, mPadding, mPadding, mPadding);
             } else {
-                mRecycler.setPadding(mPaddingLeft, mPaddingTop, mPaddingRight, mPaddingBottom);
+                mRecyclerView.setPadding(mPaddingLeft, mPaddingTop, mPaddingRight, mPaddingBottom);
             }
             if (mScrollbarStyle != -1) {
-                mRecycler.setScrollBarStyle(mScrollbarStyle);
+                mRecyclerView.setScrollBarStyle(mScrollbarStyle);
             }
             switch (mScrollbar){
                 case 0:
@@ -215,14 +245,14 @@ public class YCRefreshView extends FrameLayout {
         };
     }
 
-    /**--------------------------------------相关方法--------------------------------------------**/
+    /*--------------------------------------相关方法--------------------------------------------**/
 
     /**
      * 设置RecyclerView的LayoutManager
      * @param manager           LayoutManager
      */
     public void setLayoutManager(RecyclerView.LayoutManager manager) {
-        mRecycler.setLayoutManager(manager);
+        mRecyclerView.setLayoutManager(manager);
     }
 
     /**
@@ -238,7 +268,8 @@ public class YCRefreshView extends FrameLayout {
      * @return              RecyclerView对象
      */
     public RecyclerView getRecyclerView() {
-        return mRecycler;
+        //获取对象
+        return mRecyclerView;
     }
 
     /**
@@ -249,7 +280,7 @@ public class YCRefreshView extends FrameLayout {
         this.mPaddingTop = top;
         this.mPaddingRight = right;
         this.mPaddingBottom = bottom;
-        mRecycler.setPadding(mPaddingLeft, mPaddingTop, mPaddingRight, mPaddingBottom);
+        mRecyclerView.setPadding(mPaddingLeft, mPaddingTop, mPaddingRight, mPaddingBottom);
     }
 
     /**
@@ -258,7 +289,7 @@ public class YCRefreshView extends FrameLayout {
      */
     @Override
     public void setClipToPadding(boolean isClip){
-        mRecycler.setClipToPadding(isClip);
+        mRecyclerView.setClipToPadding(isClip);
     }
 
     /**
@@ -274,12 +305,12 @@ public class YCRefreshView extends FrameLayout {
 
     @Override
     public void setVerticalScrollBarEnabled(boolean verticalScrollBarEnabled) {
-        mRecycler.setVerticalScrollBarEnabled(verticalScrollBarEnabled);
+        mRecyclerView.setVerticalScrollBarEnabled(verticalScrollBarEnabled);
     }
 
     @Override
     public void setHorizontalScrollBarEnabled(boolean horizontalScrollBarEnabled) {
-        mRecycler.setHorizontalScrollBarEnabled(horizontalScrollBarEnabled);
+        mRecyclerView.setHorizontalScrollBarEnabled(horizontalScrollBarEnabled);
     }
 
     /**
@@ -347,7 +378,7 @@ public class YCRefreshView extends FrameLayout {
      * @param adapter               Adapter适配器
      */
     public void setAdapter(RecyclerView.Adapter adapter) {
-        mRecycler.setAdapter(adapter);
+        mRecyclerView.setAdapter(adapter);
         adapter.registerAdapterDataObserver(new EasyDataObserver(this));
         showRecycler();
     }
@@ -359,7 +390,7 @@ public class YCRefreshView extends FrameLayout {
      * @param adapter               Adapter适配器
      */
     public void setAdapterWithProgress(RecyclerView.Adapter adapter) {
-        mRecycler.setAdapter(adapter);
+        mRecyclerView.setAdapter(adapter);
         adapter.registerAdapterDataObserver(new EasyDataObserver(this));
         //只有Adapter为空时才显示ProgressView
         if (adapter instanceof RecyclerArrayAdapter){
@@ -382,7 +413,7 @@ public class YCRefreshView extends FrameLayout {
      * 从recycler清除adapter
      */
     public void clear() {
-        mRecycler.setAdapter(null);
+        mRecyclerView.setAdapter(null);
     }
 
 
@@ -394,7 +425,7 @@ public class YCRefreshView extends FrameLayout {
         mProgressView.setVisibility(View.GONE);
         mErrorView.setVisibility(GONE);
         mPtrLayout.setRefreshing(false);
-        mRecycler.setVisibility(View.INVISIBLE);
+        mRecyclerView.setVisibility(View.INVISIBLE);
     }
 
 
@@ -402,7 +433,7 @@ public class YCRefreshView extends FrameLayout {
      * 设置加载错误状态
      */
     public void showError() {
-        log("showError");
+        RefreshLogUtils.e("showError");
         if (mErrorView.getChildCount()>0){
             hideAll();
             mErrorView.setVisibility(View.VISIBLE);
@@ -416,7 +447,7 @@ public class YCRefreshView extends FrameLayout {
      * 设置加载数据为空状态
      */
     public void showEmpty() {
-        log("showEmpty");
+        RefreshLogUtils.e("showEmpty");
         if (mEmptyView.getChildCount()>0){
             hideAll();
             mEmptyView.setVisibility(View.VISIBLE);
@@ -430,7 +461,7 @@ public class YCRefreshView extends FrameLayout {
      * 设置加载数据中状态
      */
     public void showProgress() {
-        log("showProgress");
+        RefreshLogUtils.e("showProgress");
         if (mProgressView.getChildCount()>0){
             hideAll();
             mProgressView.setVisibility(View.VISIBLE);
@@ -444,9 +475,9 @@ public class YCRefreshView extends FrameLayout {
      * 设置加载数据完毕状态
      */
     public void showRecycler() {
-        log("showRecycler");
+        RefreshLogUtils.e("showRecycler");
         hideAll();
-        mRecycler.setVisibility(View.VISIBLE);
+        mRecyclerView.setVisibility(View.VISIBLE);
     }
 
 
@@ -546,14 +577,14 @@ public class YCRefreshView extends FrameLayout {
      * @param listener              OnItemTouchListener监听器
      */
     public void addOnItemTouchListener(RecyclerView.OnItemTouchListener listener) {
-        mRecycler.addOnItemTouchListener(listener);
+        mRecyclerView.addOnItemTouchListener(listener);
     }
 
     /**
      * 移除条目触摸监听器
      */
     public void removeOnItemTouchListener(RecyclerView.OnItemTouchListener listener) {
-        mRecycler.removeOnItemTouchListener(listener);
+        mRecyclerView.removeOnItemTouchListener(listener);
     }
 
     /**
@@ -561,14 +592,14 @@ public class YCRefreshView extends FrameLayout {
      * @return                      RecyclerView.Adapter对象
      */
     public RecyclerView.Adapter getAdapter() {
-        return mRecycler.getAdapter();
+        return mRecyclerView.getAdapter();
     }
 
 
     @Override
     @SuppressLint("ClickableViewAccessibility")
     public void setOnTouchListener(OnTouchListener listener) {
-        mRecycler.setOnTouchListener(listener);
+        mRecyclerView.setOnTouchListener(listener);
     }
 
     /**
@@ -576,7 +607,7 @@ public class YCRefreshView extends FrameLayout {
      * @param animator              ItemAnimator
      */
     public void setItemAnimator(RecyclerView.ItemAnimator animator) {
-        mRecycler.setItemAnimator(animator);
+        mRecyclerView.setItemAnimator(animator);
     }
 
 
@@ -585,7 +616,7 @@ public class YCRefreshView extends FrameLayout {
      * @param itemDecoration        分割线
      */
     public void addItemDecoration(RecyclerView.ItemDecoration itemDecoration) {
-        mRecycler.addItemDecoration(itemDecoration);
+        mRecyclerView.addItemDecoration(itemDecoration);
     }
 
     /**
@@ -594,7 +625,7 @@ public class YCRefreshView extends FrameLayout {
      * @param index                 索引
      */
     public void addItemDecoration(RecyclerView.ItemDecoration itemDecoration, int index) {
-        mRecycler.addItemDecoration(itemDecoration, index);
+        mRecyclerView.addItemDecoration(itemDecoration, index);
     }
 
 
@@ -603,7 +634,7 @@ public class YCRefreshView extends FrameLayout {
      * @param itemDecoration        分割线
      */
     public void removeItemDecoration(RecyclerView.ItemDecoration itemDecoration) {
-        mRecycler.removeItemDecoration(itemDecoration);
+        mRecyclerView.removeItemDecoration(itemDecoration);
     }
 
     /**
@@ -639,16 +670,5 @@ public class YCRefreshView extends FrameLayout {
         }
         return null;
     }
-
-    /**
-     * 日志打印
-     * @param content               打印内容
-     */
-    private static void log(String content){
-        if (DEBUG){
-            Log.i(TAG,content);
-        }
-    }
-
 
 }

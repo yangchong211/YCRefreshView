@@ -1,4 +1,4 @@
-package org.yczbj.ycrefreshviewlib.swipeMenu;
+package org.yczbj.ycrefreshviewlib.swipe;
 
 
 public interface OnSwipeMenuListener {
