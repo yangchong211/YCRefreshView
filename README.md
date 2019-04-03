@@ -4,8 +4,7 @@
     - 2.1 支持多种状态切换管理
     - 2.2 支持添加多个header和footer
     - 2.3 支持侧滑功能和拖拽移动
-    - 2.4 支持多功能复杂类型页面
-    - 2.5 其他亮点介绍
+    - 2.4 其他亮点介绍
 - 3.如何使用介绍
     - 3.1 最基础的使用
     - 3.2 添加下拉刷新和加载更多监听
@@ -13,11 +12,14 @@
     - 3.4 设置数据和刷新
     - 3.5 设置adapter
     - 3.6 设置条目点击事件
+    - 3.7 设置侧滑删除功能[QQ侧滑删除]
+    - 3.8 轻量级拖拽排序与滑动删除
 - 4.关于状态切换
     - 4.1 关于布局内容
     - 4.2 关于实现思路
     - 4.3 关于状态切换api调用
     - 4.4 关于自定义状态布局
+    - 4.5 关于自定义布局交互事件处理
 - 5.常用api介绍
     - 5.1 状态切换方法说明
     - 5.2 viewHolder方法说明
@@ -26,7 +28,12 @@
     - 5.5 swipe侧滑方法说明
     - 5.6 其他api说明
 - 6.优化实现点
-    - 6.1
+    - 6.1 viewHolder优化
+    - 6.2 状态管理器优化
+    - 6.3 recyclerView滑动卡顿优化
+    - 6.4 多线程下插入数据优化
+    - 6.5 rv四级缓存
+    - 6.6 异常情况下保存状态
 - 7.实现效果展示
 - 8.版本更新说明
 - 9.参考资料说明
@@ -36,8 +43,8 @@
 
 
 ### 1.复杂页面库介绍
-- **自定义支持上拉加载更多，下拉刷新，可以实现复杂的状态页面，支持自由切换状态【加载中，加载成功，加载失败，没网络等状态】的控件，拓展功能[支持长按拖拽，侧滑删除]可以选择性添加。具体使用方法，可以直接参考demo。**
-- 支持复杂type页面，例如添加自定义头部和底部布局，支持横向滑动list，还可以支持粘贴头部list[类似微信好友分组]，支持不规则瀑布流效果，支持侧滑删除功能。
+- **自定义支持上拉加载更多【加载中，加载失败[比如没有更多数据]，加载异常[无网络]，加载成功等多种状态】，下拉刷新，可以实现复杂的状态页面，支持自由切换状态【加载中，加载成功，加载失败，没网络等状态】的控件，拓展功能[支持长按拖拽，侧滑删除]可以选择性添加。具体使用方法，可以直接参考demo案例。**
+- 支持复杂type页面，例如添加自定义头部HeaderView和底部布局FooterView，支持横向滑动list，还可以支持粘贴头部list[类似微信好友分组]，支持不规则瀑布流效果，支持侧滑删除功能。
 
 
 ### 2.本库优势亮点
@@ -46,92 +53,33 @@
 
 
 #### 2.2 支持添加多个header和footer
-- 支持添加多个自定义header头部布局，可以自定义footer底部布局。
+- 支持添加多个自定义header头部布局，可以自定义footer底部布局。十分方便实现复杂type的布局页面，结构上层次分明，便于维护。
+- 支持复杂界面使用，比如有的页面包含有轮播图，按钮组合，横向滑动list，还有复杂list，那么用这个控件就可以搞定。
+
 
 
 #### 2.3 支持侧滑功能和拖拽移动
+- 轻量级侧滑删除菜单，直接嵌套item布局即可使用，使用十分简单
+- RecyclerView实现条目Item拖拽排序
+
+
+#### 2.4 其他亮点介绍
+- 支持上拉加载，下拉刷新。当上拉加载更多失败或者异常时，可以设置自定义加载更多失败或者异常布局(比如没有网络时的场景)，同时点击该异常或者失败布局可以恢复加载更多数据；当上拉加载更多没有更多数据时，可以设置自定义加载更多无数据布局。
+- 可以设置上拉加载更多后自动加载下一页数据，也可以上拉加载更多后手动触发加载下一页数据。在上拉加载更多时，可以设置加载更多的布局，支持加载监听。
+- 支持粘贴头部的需求效果，这种效果类似微信好友分组的那种功能界面。
+- 支持插入【插入指定索引】，更新【更新指定索引或者data数据】或者删除某条数据，支持删除所有数据。同时在多线程条件下，添加了锁机制避免数据错乱！
+- 支持横向滑动list效果，支持瀑布流的效果，还支持与CoordinatorLayout结合实现炫酷的效果。这种效果特别不错……
+- 已经用于实际开发项目投资界，新芽，沙丘大学中……且经过近三年时间的迭代与维护，持续更新维护中！
 
 
 
-#### 2.4 支持多功能复杂类型页面
-
-
-#### 2.5 其他亮点介绍
-- 支持上拉加载，下拉刷新。在上拉加载更多时，可以设置加载更多的布局，支持加载监听，当加载更多失败时，可以设置自定义加载更多失败布局
-
-
-###  1.关于复杂页面封装库介绍
-- 1.1
-- 1.2 支持切换不同的状态，比如加载中[目前是ProgressBar，加载成功，加载失败，加载错误等不同布局状态。当然也可以自定义这些状态的布局
-- 1.3 支持复杂界面使用，比如有的页面包含有轮播图，按钮组合，横向滑动，还有复杂list，那么用这个控件就可以搞定。
-- 1.4 已经用于实际开发项目投资界，新芽，沙丘大学中……
-- 1.5 轻量级侧滑删除菜单，直接嵌套item布局即可使用，使用十分简单。
-- 1.6 支持插入或者删除某条数据，支持CoordinatorLayout炫酷的效果
-- 1.7 支持粘贴头部的需求效果
-- 1.8 RecyclerView实现条目Item拖拽排序与滑动删除
-- 1.9 更多内容可以直接看案例代码
-
-
-###  2.关于该开源库的思路
-- 2.0 参考并借鉴了大量的优秀开源库，由于后期业务需求发生变化，因此做了一些功能的延伸与定制。继续完善并修改库bug！！！已经用于实际开发中。
-- 2.1 先来看看布局，实际上只是在recyclerView基础上做了大量拓展……
-
-```
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ptr_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <!--RecyclerView控件，支持添加头部和底部view-->
-        <android.support.v7.widget.RecyclerView
-            android:id="@android:id/list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical|horizontal"
-            android:clickable="true"
-            android:focusable="true" />
-
-        <!--加载数据为空时的布局-->
-        <FrameLayout
-            android:id="@+id/empty"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clickable="true"
-            android:focusable="true"/>
-
-        <!--正在加载数据中的布局-->
-        <FrameLayout
-            android:id="@+id/progress"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clickable="true"
-            android:focusable="true"/>
-
-        <!--加载错误时的布局：网络错误或者请求数据错误-->
-        <FrameLayout
-            android:id="@+id/error"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clickable="true"
-            android:focusable="true"/>
-
-    </FrameLayout>
-
-</android.support.v4.widget.SwipeRefreshLayout>
-```
-
-
-###  3.如何使用介绍
-- 3.1 首先在集成：compile 'org.yczbj:YCRefreshViewLib:2.5'
-- 3.2 在布局中：
-```
-  <org.yczbj.ycrefreshviewlib.YCRefreshView
+### 3.如何使用介绍
+#### 3.1 最基础的使用
+- 首先在集成：
+    - implementation 'org.yczbj:YCRefreshViewLib:2.6.5'
+- 在布局中
+    ```
+    <org.yczbj.ycrefreshviewlib.YCRefreshView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
@@ -139,268 +87,457 @@
         app:layout_progress="@layout/view_custom_loading_data"
         app:layout_empty="@layout/view_custom_empty_data"
         app:layout_error="@layout/view_custom_data_error"/>
-```
-- 3.3 在代码中
-```
-recyclerView.setLayoutManager(new FullyGridLayoutManager(activity, 3));
-        adapter = new DouBookAdapter(activity);
-        recyclerView.setAdapter(adapter);
-        //加载更多
-        adapter.setMore(R.layout.view_recycle_more, new RecyclerArrayAdapter.OnMoreListener() {
+    ```
+- 在代码中，初始化recyclerView
+    ```
+    adapter = new PersonAdapter(this);
+    recyclerView.setAdapter(adapter);
+    final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+    recyclerView.setLayoutManager(linearLayoutManager);
+    adapter.addAll(data);
+    ```
+- 在代码中，创建adapter实现RecyclerArrayAdapter<T>
+    ```
+    public class PersonAdapter extends RecyclerArrayAdapter<PersonData> {
+
+        public PersonAdapter(Context context) {
+            super(context);
+        }
+
+        @Override
+        public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
+            return new PersonViewHolder(parent);
+        }
+
+        public class PersonViewHolder extends BaseViewHolder<PersonData> {
+
+            private ImageView iv_news_image;
+
+            PersonViewHolder(ViewGroup parent) {
+                super(parent, R.layout.item_news);
+                iv_news_image = getView(R.id.iv_news_image);
+            }
+
             @Override
-            public void onMoreShow() {
-                if (NetworkUtils.isConnected()) {
-                    if (adapter.getAllData().size() > 0) {
-                        getTopMovieData(mType, adapter.getAllData().size(), adapter.getAllData().size() + 21);
-                    } else {
-                        adapter.pauseMore();
-                    }
-                } else {
-                    adapter.pauseMore();
-                    Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
+            public void setData(final PersonData person){
+
+            }
+        }
+    }
+    ```
+
+
+
+
+#### 3.2 添加下拉刷新和加载更多监听
+- 下拉刷新监听操作
+    ```
+    //设置刷新listener
+    recyclerView.setRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        @Override
+        public void onRefresh() {
+            //刷新操作
+        }
+    });
+    //设置是否刷新
+    recyclerView.setRefreshing(false);
+    //设置刷新颜色
+    recyclerView.setRefreshingColorResources(R.color.colorAccent);
+    ```
+- 上拉加载更多监听操作
+    - 第一种情况，上拉加载更多后自动加载下一页数据
+    ```
+    //设置上拉加载更多时布局，以及监听事件
+    adapter.setMore(R.layout.view_more, new OnLoadMoreListener() {
+        @Override
+        public void onLoadMore() {
+            //可以做请求下一页操作
+        }
+    });
+    ```
+    - 第二种情况，上拉加载更多后手动触发加载下一页数据
+    ```
+    adapter.setMore(R.layout.view_more2, new OnMoreListener() {
+        @Override
+        public void onMoreShow() {
+            //不做处理
+        }
+
+        @Override
+        public void onMoreClick() {
+            //点击触发加载下一页数据
+        }
+    });
+    ```
+- 在上拉加载更多时，可能出现没有更多数据，或者上拉加载失败，该如何处理呢？
+    ```
+    //设置上拉加载没有更多数据监听
+    adapter.setNoMore(R.layout.view_no_more, new OnNoMoreListener() {
+        @Override
+        public void onNoMoreShow() {
+            //上拉加载，没有更多数据展示，这个方法可以暂停或者停止加载数据
+            adapter.pauseMore();
+        }
+
+        @Override
+        public void onNoMoreClick() {
+            //这个方法是点击没有更多数据展示布局的操作，比如可以做吐司等等
+            Log.e("逗比","没有更多数据了");
+        }
+    });
+    //设置上拉加载更多异常监听数据监听
+    adapter.setError(R.layout.view_error, new OnErrorListener() {
+        @Override
+        public void onErrorShow() {
+            //上拉加载，加载更多数据异常展示，这个方法可以暂停或者停止加载数据
+            adapter.pauseMore();
+        }
+
+        @Override
+        public void onErrorClick() {
+            //这个方法是点击加载更多数据异常展示布局的操作，比如恢复加载更多等等
+            adapter.resumeMore();
+        }
+    });
+    ```
+
+
+
+#### 3.3 添加header和footer操作
+- 添加headerView操作。至于添加footerView的操作，几乎和添加header步骤是一样的。
+    - 添加普通的布局【非listView或者RecyclerView布局】
+    ```
+    adapter.addHeader(new InterItemView() {
+        @Override
+        public View onCreateView(ViewGroup parent) {
+            View inflate = LayoutInflater.from(context).inflate(R.layout.header_view, null);
+            return inflate;
+        }
+
+        @Override
+        public void onBindView(View headerView) {
+            TextView tvTitle = headerView.findViewById(R.id.tvTitle);
+        }
+    });
+    ```
+    - 添加list布局【以横向recyclerView为例子】
+    ```
+    adapter.addHeader(new InterItemView() {
+        @Override
+        public View onCreateView(ViewGroup parent) {
+            RecyclerView recyclerView = new RecyclerView(parent.getContext()){
+                //为了不打扰横向RecyclerView的滑动操作，可以这样处理
+                @SuppressLint("ClickableViewAccessibility")
+                @Override
+                public boolean onTouchEvent(MotionEvent event) {
+                    super.onTouchEvent(event);
+                    return true;
                 }
+            };
+            return recyclerView;
+        }
+
+        @Override
+        public void onBindView(View headerView) {
+            //这里的处理别忘了
+            ((ViewGroup)headerView).requestDisallowInterceptTouchEvent(true);
+        }
+    });
+    ```
+- 注意要点
+    - 如果添加了HeaderView，凡是通过ViewHolder拿到的position都要减掉HeaderView的数量才能得到正确的position。
+
+
+
+#### 3.4 设置数据和刷新
+- 添加所有数据，可以是集合，也可以是数组
+    ```
+    //添加所有数据
+    adapter.addAll(data);
+    //添加单挑数据
+    adapter.add(data);
+    ```
+- 插入，刷新和删除数据
+    ```
+    //插入指定索引数据，单个数据
+    adapter.insert(data, pos);
+    //插入指定索引数据，多个数据
+    adapter.insertAll(data, pos);
+    //刷新指定索引数据
+    adapter.update(data, pos);
+    //删除数据，指定数据
+    adapter.remove(data);
+    //删除数据，指定索引
+    adapter.remove(pos);
+    //清空所有数据
+    ```
+
+
+#### 3.5 设置adapter
+- 注意自定义adapter需要实现RecyclerArrayAdapter<T>，其中T是泛型，就是你要使用的bean数据类型
+    ```
+    public class PersonAdapter extends RecyclerArrayAdapter<PersonData> {
+
+        public PersonAdapter(Context context) {
+            super(context);
+        }
+
+        @Override
+        public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
+            return new PersonViewHolder(parent);
+        }
+
+        public class PersonViewHolder extends BaseViewHolder<PersonData> {
+
+            private TextView tv_title;
+            private ImageView iv_news_image;
+
+            PersonViewHolder(ViewGroup parent) {
+                super(parent, R.layout.item_news);
+                iv_news_image = getView(R.id.iv_news_image);
+                tv_title = getView(R.id.tv_title);
+
+                //添加孩子的点击事件
+                addOnClickListener(R.id.iv_news_image);
+                addOnClickListener(R.id.tv_title);
             }
 
             @Override
-            public void onMoreClick() {
-
+            public void setData(final PersonData person){
+                Log.i("ViewHolder","position"+getDataPosition());
+                tv_title.setText(person.getName());
             }
-        });
+        }
+    }
+    ```
 
-        //设置没有数据
-        adapter.setNoMore(R.layout.view_recycle_no_more, new RecyclerArrayAdapter.OnNoMoreListener() {
-            @Override
-            public void onNoMoreShow() {
-                if (NetworkUtils.isConnected()) {
-                    adapter.resumeMore();
-                } else {
-                    Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
-                }
+
+#### 3.6 设置条目点击事件
+- 条目单击点击事件，长按事件[省略，可以自己看代码]
+    ```
+    adapter.setOnItemClickListener(new OnItemClickListener() {
+        @Override
+        public void onItemClick(int position) {
+            if (adapter.getAllData().size()>position && position>=0){
+                //处理点击事件逻辑
             }
+        }
+    });
+    ```
+- 条目中孩子的点击事件
+    ```
+    //添加孩子的点击事件，可以看3.5设置adapter
+    addOnClickListener(R.id.iv_news_image);
+    addOnClickListener(R.id.tv_title);
 
-            @Override
-            public void onNoMoreClick() {
-                if (NetworkUtils.isConnected()) {
-                    adapter.resumeMore();
-                } else {
-                    Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
-                }
+    //设置孩子的点击事件
+    adapter.setOnItemChildClickListener(new OnItemChildClickListener() {
+        @Override
+        public void onItemChildClick(View view, int position) {
+            switch (view.getId()){
+                case R.id.iv_news_image:
+                    Toast.makeText(HeaderFooterActivity.this,
+                            "点击图片了",Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.tv_title:
+                    Toast.makeText(HeaderFooterActivity.this,
+                            "点击标题",Toast.LENGTH_SHORT).show();
+                    break;
+                default:
+                    break;
             }
-        });
-
-        //设置错误
-        adapter.setError(R.layout.view_recycle_error, new RecyclerArrayAdapter.OnErrorListener() {
-            @Override
-            public void onErrorShow() {
-                adapter.resumeMore();
-            }
-
-            @Override
-            public void onErrorClick() {
-                adapter.resumeMore();
-            }
-        });
-
-        //刷新
-        recyclerView.setRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                if (NetworkUtils.isConnected()) {
-                    getTopMovieData(mType , 0 , 30);
-                } else {
-                    recyclerView.setRefreshing(false);
-                    Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-```
-
-- **3.4 如何使用侧滑菜单删除功能呢？**
-- 3.4.1 在布局文件中
-
-```
-<?xml version="1.0" encoding="utf-8"?>
-<org.yczbj.ycrefreshviewlib.swipeMenu.YCSwipeMenu
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:layout_height="wrap_content"
-    android:layout_width="match_parent">
-
-    <!--item内容-->
-    <RelativeLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:gravity="center_vertical"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:background="@android:color/white">
-    </RelativeLayout>
+        }
+    });
+    ```
 
 
-    <!-- 侧滑菜单 -->
-    <Button
-        android:id="@+id/btn_del"
-        android:layout_width="70dp"
-        android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
-        android:text="删除"
-        android:textColor="@android:color/white"/>
-    <Button
-        android:id="@+id/btn_top"
-        android:layout_width="70dp"
-        android:layout_height="match_parent"
-        android:background="@color/colorAccent"
-        android:text="置顶"
-        android:textColor="@android:color/white"/>
 
-</org.yczbj.ycrefreshviewlib.swipeMenu.YCSwipeMenu>
-```
+#### 3.7 设置侧滑删除功能[QQ侧滑删除]
+- 在布局文件中，这里省略部分代码
+    ```
+    <org.yczbj.ycrefreshviewlib.swipeMenu.YCSwipeMenu
+        android:orientation="horizontal">
+        <!--item内容-->
+        <RelativeLayout
+        </RelativeLayout>
 
-- **3.4.2 在代码中设置**
-- 在adapter中定义接口
-```
-   private OnSwipeMenuListener listener;
+        <!-- 侧滑菜单 -->
+        <Button
+            android:id="@+id/btn_del"/>
+        <Button
+            android:id="@+id/btn_top"/>
+    </org.yczbj.ycrefreshviewlib.swipeMenu.YCSwipeMenu>
+    ```
+- 在代码中设置
+    - 在adapter中定义接口
+    ```
+    private OnSwipeMenuListener listener;
     public void setOnSwipeMenuListener(OnSwipeMenuListener listener) {
         this.listener = listener;
     }
-```
-
-- 在adapter设置点击事件
-
-```
-View.OnClickListener clickListener = new View.OnClickListener() {
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()){
-			case R.id.btn_del:
-				if (null != listener) {
-					listener.toDelete(getAdapterPosition());
-				}
-				break;
-			case R.id.btn_top:
-				if (null != listener) {
-					listener.toTop(getAdapterPosition());
-				}
-				break;
-		}
-	}
-};
-btn_del.setOnClickListener(clickListener);
-btn_top.setOnClickListener(clickListener);
-```
-
+    ```
+    - 在adapter设置点击事件
+    ```
+    View.OnClickListener clickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.btn_del:
+                    if (null != listener) {
+                        listener.toDelete(getAdapterPosition());
+                    }
+                    break;
+                case R.id.btn_top:
+                    if (null != listener) {
+                        listener.toTop(getAdapterPosition());
+                    }
+                    break;
+            }
+        }
+    };
+    btn_del.setOnClickListener(clickListener);
+    btn_top.setOnClickListener(clickListener);
+    ```
 - 处理置顶或者删除的功能
-```
-adapter.setOnSwipeMenuListener(new OnSwipeMenuListener() {
-	//删除功能
-	@Override
-	public void toDelete(int position) {
-		adapter.getAllData().remove(position);
-		adapter.notifyItemRemoved(position);//推荐用这个
-	}
+    ```
+    adapter.setOnSwipeMenuListener(new OnSwipeMenuListener() {
+        //删除功能
+        @Override
+        public void toDelete(int position) {
 
-	//置顶功能
-	@Override
-	public void toTop(int position) {
-		//先移除那个位置的数据，然后将其添加到索引为0的位置，然后刷新数据
-		if (position > 0 && adapter.getAllData().size()>position) {
-			Person person = adapter.getAllData().get(position);
-			adapter.getAllData().remove(person);
-			adapter.notifyItemInserted(0);
-			adapter.getAllData().add(0, person);
-			adapter.notifyItemRemoved(position + 1);
-			if (linearLayoutManager.findFirstVisibleItemPosition() == 0) {
-				recyclerView.scrollToPosition(0);
-			}
-		}
-	}
-});
-```
+        }
 
+        //置顶功能
+        @Override
+        public void toTop(int position) {
+
+        }
+    });
+    ```
+
+
+#### 3.8 轻量级拖拽排序与滑动删除
 - 处理长按拖拽，滑动删除的功能。轻量级，自由选择是否实现。
-```
-mCallback = new DefaultItemTouchHelpCallback(new DefaultItemTouchHelpCallback.OnItemTouchCallbackListener() {
-    @Override
-    public void onSwiped(int adapterPosition) {
-        // 滑动删除的时候，从数据库、数据源移除，并刷新UI
-        if (personList != null) {
-            personList.remove(adapterPosition);
-            adapter.notifyItemRemoved(adapterPosition);
+    ```
+    mCallback = new DefaultItemTouchHelpCallback(new DefaultItemTouchHelpCallback
+                            .OnItemTouchCallbackListener() {
+        @Override
+        public void onSwiped(int adapterPosition) {
+            // 滑动删除的时候，从数据库、数据源移除，并刷新UI
         }
-    }
 
-    @Override
-    public boolean onMove(int srcPosition, int targetPosition) {
-        if (personList != null) {
-            // 更换数据库中的数据Item的位置
-            boolean isPlus = srcPosition < targetPosition;
-            // 更换数据源中的数据Item的位置
-            Collections.swap(personList, srcPosition, targetPosition);
-            // 更新UI中的Item的位置，主要是给用户看到交互效果
-            adapter.notifyItemMoved(srcPosition, targetPosition);
-            return true;
+        @Override
+        public boolean onMove(int srcPosition, int targetPosition) {
+            return false;
         }
-        return false;
-    }
-});
-mCallback.setDragEnable(true);
-mCallback.setSwipeEnable(true);
-ItemTouchHelper itemTouchHelper = new ItemTouchHelper(mCallback);
-itemTouchHelper.attachToRecyclerView(recyclerView);
-```
+    });
+    mCallback.setDragEnable(true);
+    mCallback.setSwipeEnable(true);
+    ItemTouchHelper itemTouchHelper = new ItemTouchHelper(mCallback);
+    itemTouchHelper.attachToRecyclerView(recyclerView);
+    ```
 
-###  4.关于该状态切换工具优点分析
-- 4.1 不仅可以实现上拉加载，下拉刷新。还可以根据获取数据来切换页面的状态，可以自定义状态页面，如下所示：
 
-```
-//设置加载中
-recyclerView.showProgress();
 
-//设置有数据展示
-recyclerView.showRecycler();
 
-//设置为空
-recyclerView.setEmptyView(R.layout.view_custom_empty_data);
-recyclerView.showEmpty();
+### 4.关于状态切换
+#### 4.1 关于布局内容
+- YCRecyclerView是一个组合自定义控件，其布局如下所示
+    ```
+     <!--刷新控件    省略部分代码-->
+    <android.support.v4.widget.SwipeRefreshLayout>
+        <FrameLayout>
+            <!--RecyclerView控件-->
+            <android.support.v7.widget.RecyclerView/>
+            <!--加载数据为空时的布局-->
+            <FrameLayout/>
+            <!--正在加载数据中的布局-->
+            <FrameLayout/>
+            <!--加载错误时的布局：网络错误或者请求数据错误-->
+            <FrameLayout/>
+        </FrameLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
+    ```
 
-//设置错误
-recyclerView.setErrorView(R.layout.view_custom_data_error);
-recyclerView.showError();
-LinearLayout ll_error_view = (LinearLayout) recyclerView.findViewById(R.id.ll_error_view);
-ll_error_view.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
 
-    }
-});
 
-//设置网络错误
-recyclerView.setErrorView(R.layout.view_custom_network_error);
-recyclerView.showError();
-LinearLayout ll_set_network = (LinearLayout) recyclerView.findViewById(R.id.ll_set_network);
-ll_set_network.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        if(NetworkUtils.isConnected()){
-            initData();
-        }else {
-            Intent intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
-            startActivity(intent);
+#### 4.2 关于实现思路
+- 关于页面状态切换的思路
+    - 第一种方式：直接把这些界面include到main界面中，然后动态去切换界面，后来发现这样处理不容易复用到其他项目中，而且在activity中处理这些状态的显示和隐藏比较乱
+    - 第二种方式：利用子类继承父类特性，在父类中写切换状态，但有些界面如果没有继承父类，又该如何处理
+- 而本库采用的做法思路
+    - 一个帧布局FrameLayout里写上4种不同类型布局，正常布局，空布局，加载loading布局，错误布局[网络异常，加载数据异常]
+    - 当然也可以自定义这些状态的布局，通过addView的形式，将不同状态布局添加到对应的FrameLayout中。而切换状态，只需要设置布局展示或者隐藏即可。
+
+
+
+#### 4.3 关于状态切换api调用
+- 如下所示
+    ```
+    //设置加载数据完毕状态
+    recyclerView.showRecycler();
+    //设置加载数据为空状态
+    recyclerView.showEmpty();
+    //设置加载错误状态
+    recyclerView.showError();
+    //设置加载数据中状态
+    recyclerView.showProgress();
+    ```
+
+
+#### 4.4 关于自定义状态布局
+- 如下所示
+    ```
+    //设置空状态页面自定义布局
+    recyclerView.setEmptyView(R.layout.view_custom_empty_data);
+    recyclerView.setEmptyView(view);
+    //获取空页面自定义布局
+    View emptyView = recyclerView.getEmptyView();
+
+    //设置异常状态页面自定义布局
+    recyclerView.setErrorView(R.layout.view_custom_data_error);
+    recyclerView.setErrorView(view);
+
+    //设置加载loading状态页面自定义布局
+    recyclerView.setProgressView(R.layout.view_progress_loading);
+    recyclerView.setProgressView(view);
+    ```
+
+#### 4.5 关于自定义布局交互事件处理
+- 有时候，加载页面出现异常情况，比如没有网络会显示自定义的网络异常页面。现在需要点击异常页面按钮等等操作，那么该如何做呢？
+    ```
+    //注意需要
+    LinearLayout ll_error_view = (LinearLayout) recyclerView.findViewById(R.id.ll_error_view);
+    ll_error_view.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            //比如，跳转到网络设置页面，或者再次刷新数据，或者其他操作等等
         }
-    }
-});
-
-```
+    });
+    ```
 
 
-###  5.实现效果
-#### 5.1 使用过YCRefreshView库的案例代码
+
+### 5.常用api介绍
+#### 5.1 状态切换方法说明
+#### 5.2 viewHolder方法说明
+#### 5.3 adapter方法说明
+#### 5.4 分割线方法说明
+#### 5.5 swipe侧滑方法说明
+#### 5.6 其他api说明
+
+
+
+
+### 7.实现效果展示
+#### 7.1 使用过YCRefreshView库的案例代码
 - 可以直接参考demo，或者直接参考的我其他案例，其中这几个案例中使用到了该库
 - https://github.com/yangchong211/LifeHelper
 - https://github.com/yangchong211/YCVideoPlayer
-- https://github.com/yangchong211/YCAudioPlayer
 
-#### 5.2 图片展示效果
+
+
+#### 7.2 图片展示效果
 - demo效果图展示
 ![image](https://upload-images.jianshu.io/upload_images/4432347-9944435ab48a4142.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ![image](https://upload-images.jianshu.io/upload_images/4432347-dc19e3a6345c38b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
@@ -410,29 +547,96 @@ ll_set_network.setOnClickListener(new View.OnClickListener() {
 ![image](https://upload-images.jianshu.io/upload_images/4432347-6ed3754ba9d1bb95.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
-- 案例图展示
+#### 7.3 部分案例图展示
 ![image](https://upload-images.jianshu.io/upload_images/4432347-c3d1cd1c02f05be0.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/300)
 ![image](https://upload-images.jianshu.io/upload_images/4432347-321ca95b07ceaa6d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700)
 ![image](https://upload-images.jianshu.io/upload_images/4432347-ca314a2714877604.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/270)
 
 
-###  6.版本更新说明
-- v1.0 更新于2017年4月22日
-- v1.1 更新于2017年8月9日
+
+### 8.版本更新说明
+- v1.0 更新于2016年11月2日
+- v1.1 更新于2017年3月13日
+- v1.3 更新于2017年8月9日
 - v1.…… 更新于2018年1月5日
 - v2.2 更新于2018年1月17日
 - v2.3 更新于2018年2月9日
 - v2.4 更新于2018年3月19日
 - v2.5.6 更新于2018年8月6日
-    - 添加了item中的孩子点击事件，设置了侧滑通过开关 isLeftSwipe支持左滑右滑
-    
-    
 
-###  7.参考资料说明
+
+
+### 9.参考资料说明
 - **非常感谢前辈大神的封装思路和代码案例，感谢！！！**
-- https://github.com/XRecyclerView/XRecyclerView
-- 具体的使用可以直接参考Demo案例，非常感谢Jude大神的开源项目！
-- BGARefreshLayout-Android：https://github.com/bingoogolapple/BGARefreshLayout-Android
-- Android-PullToRefresh：https://github.com/chrisbanes/Android-PullToRefresh
-- Jude95/EasyRecyclerView：https://github.com/Jude95/EasyRecyclerView
-- 严正杰大神， RecyclerView实现条目Item拖拽排序与滑动删除：http://blog.csdn.net/yanzhenjie1003/article/details/51935982
+    - https://github.com/XRecyclerView/XRecyclerView
+    - BGARefreshLayout-Android：https://github.com/bingoogolapple/BGARefreshLayout-Android
+    - Android-PullToRefresh：https://github.com/chrisbanes/Android-PullToRefresh
+    - Jude95/EasyRecyclerView：https://github.com/Jude95/EasyRecyclerView
+    - UltimateRecyclerView：https://github.com/cymcsg/UltimateRecyclerView
+- 关于viewHolder的封装，参考是鸿洋大神的[baseAdapter](https://github.com/hongyangAndroid/baseAdapter)
+- 关于RecyclerView实现条目Item拖拽排序与滑动删除，参看是严正杰大神的博客，[拖拽排序](https://github.com/yanzhenjie/SwipeRecyclerView)
+- 关于仿照QQ侧滑删除，参考是SwipeMenu的案例，具体可以看：[SwipeMenu](https://github.com/TUBB/SwipeMenu/)
+
+
+
+
+### 10.其他内容介绍
+#### 关于其他内容介绍
+![image](https://upload-images.jianshu.io/upload_images/4432347-7100c8e5a455c3ee.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+#### 01.关于博客汇总链接
+- 1.[技术博客汇总](https://www.jianshu.com/p/614cb839182c)
+- 2.[开源项目汇总](https://blog.csdn.net/m0_37700275/article/details/80863574)
+- 3.[生活博客汇总](https://blog.csdn.net/m0_37700275/article/details/79832978)
+- 4.[喜马拉雅音频汇总](https://www.jianshu.com/p/f665de16d1eb)
+- 5.[其他汇总](https://www.jianshu.com/p/53017c3fc75d)
+
+
+
+#### 02.关于我的博客
+- 我的个人站点：www.yczbj.org，www.ycbjie.cn
+- github：https://github.com/yangchong211
+- 知乎：https://www.zhihu.com/people/yczbj/activities
+- 简书：http://www.jianshu.com/u/b7b2c6ed9284
+- csdn：http://my.csdn.net/m0_37700275
+- 喜马拉雅听书：http://www.ximalaya.com/zhubo/71989305/
+- 开源中国：https://my.oschina.net/zbj1618/blog
+- 泡在网上的日子：http://www.jcodecraeer.com/member/content_list.php?channelid=1
+- 邮箱：yangchong211@163.com
+- 阿里云博客：https://yq.aliyun.com/users/article?spm=5176.100- 239.headeruserinfo.3.dT4bcV
+- segmentfault头条：https://segmentfault.com/u/xiangjianyu/articles
+- 掘金：https://juejin.im/user/5939433efe88c2006afa0c6e
+
+
+
+#### 03.勘误及提问
+- 如果有疑问或者发现错误，可以在相应的 issues 进行提问或勘误。如果喜欢或者有所启发，欢迎star，对作者也是一种鼓励。
+
+
+#### 04.关于LICENSE
+```
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
+
+
+
+
+
+
+
+
+
+
+
+

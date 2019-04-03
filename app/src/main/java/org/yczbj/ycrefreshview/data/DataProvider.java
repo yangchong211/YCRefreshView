@@ -67,19 +67,21 @@ public class DataProvider {
 
     private static final PictureData[] VIRTUAL_PICTURE = {
             new PictureData(566,800,R.drawable.girl2),
-            new PictureData(2126,1181,R.drawable.girl2),
-            new PictureData(1142,800,R.drawable.girl2),
-            new PictureData(550,778,R.drawable.girl2),
-            new PictureData(1085,755,R.drawable.girl2),
-            new PictureData(656,550,R.drawable.girl2),
-            new PictureData(1920,938,R.drawable.girl2),
-            new PictureData(1024,683,R.drawable.girl2),
-            new PictureData(723,1000,R.drawable.girl2),
-            new PictureData(2000,1667,R.drawable.girl2),
+            new PictureData(2126,1181,R.drawable.girl11),
+            new PictureData(1142,800,R.drawable.girl12),
+            new PictureData(550,778,R.drawable.girl3),
+            new PictureData(1085,755,R.drawable.girl4),
+            new PictureData(656,550,R.drawable.girl5),
+            new PictureData(1920,938,R.drawable.girl6),
+            new PictureData(1024,683,R.drawable.girl7),
+            new PictureData(723,1000,R.drawable.girl9),
+            new PictureData(2000,1667,R.drawable.girl10),
+            new PictureData(723,1000,R.drawable.girl13),
+            new PictureData(2000,1667,R.drawable.girl14),
     };
 
 
-    public static ArrayList<PictureData> getPictures(int page){
+    public static ArrayList<PictureData> getPictures(){
         ArrayList<PictureData> arrayList = new ArrayList<>();
         arrayList.addAll(Arrays.asList(VIRTUAL_PICTURE));
         return arrayList;

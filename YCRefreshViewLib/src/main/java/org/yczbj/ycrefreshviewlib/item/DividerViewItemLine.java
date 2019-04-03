@@ -3,6 +3,7 @@ package org.yczbj.ycrefreshviewlib.item;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
@@ -12,11 +13,15 @@ import android.view.View;
 
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
+
 /**
- * @author          杨充
- * @version         1.0
- * @date            2017/5/2
- *                  list条目的分割线
+ * <pre>
+ *     @author 杨充
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/5/2
+ *     desc  : list条目的分割线
+ *     revise:
+ * </pre>
  */
 public class DividerViewItemLine extends RecyclerView.ItemDecoration{
 
@@ -31,6 +36,7 @@ public class DividerViewItemLine extends RecyclerView.ItemDecoration{
         this.mColorDrawable = new ColorDrawable(color);
         this.mHeight = height;
     }
+
     public DividerViewItemLine(int color, int height, int paddingLeft, int paddingRight) {
         this.mColorDrawable = new ColorDrawable(color);
         this.mHeight = height;
@@ -47,10 +53,14 @@ public class DividerViewItemLine extends RecyclerView.ItemDecoration{
     }
 
     @Override
-    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+    public void getItemOffsets(@NonNull Rect outRect, @NonNull View view,
+                               @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         int position = parent.getChildAdapterPosition(view);
         int orientation = 0;
         int headerCount = 0,footerCount = 0;
+        if (parent.getAdapter()==null){
+            return;
+        }
         if (parent.getAdapter() instanceof RecyclerArrayAdapter){
             headerCount = ((RecyclerArrayAdapter) parent.getAdapter()).getHeaderCount();
             footerCount = ((RecyclerArrayAdapter) parent.getAdapter()).getFooterCount();
@@ -64,8 +74,8 @@ public class DividerViewItemLine extends RecyclerView.ItemDecoration{
         }else if (layoutManager instanceof LinearLayoutManager){
             orientation = ((LinearLayoutManager) layoutManager).getOrientation();
         }
-
-        if (position>=headerCount&&position<parent.getAdapter().getItemCount()-footerCount||mDrawHeaderFooter){
+        int itemCount = parent.getAdapter().getItemCount();
+        if (position>=headerCount && position<itemCount-footerCount||mDrawHeaderFooter){
             if (orientation == OrientationHelper.VERTICAL){
                 outRect.bottom = mHeight;
             }else {
@@ -80,7 +90,7 @@ public class DividerViewItemLine extends RecyclerView.ItemDecoration{
             return;
         }
         int orientation = 0;
-        int headerCount = 0,footerCount = 0,dataCount;
+        int headerCount = 0, footerCount = 0 , dataCount;
         if (parent.getAdapter() instanceof RecyclerArrayAdapter){
             headerCount = ((RecyclerArrayAdapter) parent.getAdapter()).getHeaderCount();
             footerCount = ((RecyclerArrayAdapter) parent.getAdapter()).getFooterCount();

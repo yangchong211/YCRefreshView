@@ -12,11 +12,15 @@ import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 import static android.widget.LinearLayout.VERTICAL;
 
+
 /**
- * @author          杨充
- * @version         1.0
- * @date            2017/5/2
- *                  list条目的分割线
+ * <pre>
+ *     @author 杨充
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/5/2
+ *     desc  : list条目的分割线
+ *     revise:
+ * </pre>
  */
 public class SpaceViewItemLine extends RecyclerView.ItemDecoration {
 

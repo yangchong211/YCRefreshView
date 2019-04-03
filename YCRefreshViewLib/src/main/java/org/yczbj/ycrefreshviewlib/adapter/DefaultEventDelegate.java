@@ -12,10 +12,15 @@ import org.yczbj.ycrefreshviewlib.inter.OnErrorListener;
 import org.yczbj.ycrefreshviewlib.inter.OnMoreListener;
 import org.yczbj.ycrefreshviewlib.inter.OnNoMoreListener;
 
+
 /**
- * @author          杨充
- * @version         1.0
- * @date            2017/1/29
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/1/29
+ *     desc  : 默认设置数据和加载监听的类
+ *     revise:
+ * </pre>
  */
 public class DefaultEventDelegate implements InterEventDelegate {
 
@@ -209,11 +214,11 @@ public class DefaultEventDelegate implements InterEventDelegate {
         private int moreViewRes = 0;
         private int noMoreViewRes = 0;
         private int errorViewRes = 0;
-        private int flag = Hide;
-        private static final int Hide = 0;
-        private static final int ShowMore = 1;
-        private static final int ShowError = 2;
-        private static final int ShowNoMore = 3;
+        private int flag = HIDE;
+        private static final int HIDE = 0;
+        private static final int SHOW_MORE = 1;
+        private static final int SHOW_ERROR = 2;
+        private static final int SHOW_NO_MORE = 3;
         private boolean skipError = false;
         private boolean skipNoMore = false;
 
@@ -231,33 +236,37 @@ public class DefaultEventDelegate implements InterEventDelegate {
             headerView.post(new Runnable() {
                 @Override
                 public void run() {
-                    switch (flag){
-                        case ShowMore:
-                            onMoreViewShowed();
-                            break;
-                        case ShowNoMore:
-                            if (!skipNoMore) {
-                                onNoMoreViewShowed();
-                            }
-                            skipNoMore = false;
-                            break;
-                        case ShowError:
-                            if (!skipError) {
-                                onErrorViewShowed();
-                            }
-                            skipError = false;
-                            break;
-                        default:
-                            break;
-                    }
+                    running(flag);
                 }
             });
+        }
+
+        private void running(int flag) {
+            switch (flag){
+                case SHOW_MORE:
+                    onMoreViewShowed();
+                    break;
+                case SHOW_NO_MORE:
+                    if (!skipNoMore) {
+                        onNoMoreViewShowed();
+                    }
+                    skipNoMore = false;
+                    break;
+                case SHOW_ERROR:
+                    if (!skipError) {
+                        onErrorViewShowed();
+                    }
+                    skipError = false;
+                    break;
+                default:
+                    break;
+            }
         }
 
         View refreshStatus(ViewGroup parent){
             View view = null;
             switch (flag){
-                case ShowMore:
+                case SHOW_MORE:
                     if (moreView!=null) {
                         view = moreView;
                     } else if (moreViewRes!=0) {
@@ -272,7 +281,7 @@ public class DefaultEventDelegate implements InterEventDelegate {
                         });
                     }
                     break;
-                case ShowError:
+                case SHOW_ERROR:
                     if (errorView!=null) {
                         view = errorView;
                     } else if (errorViewRes!=0) {
@@ -287,7 +296,7 @@ public class DefaultEventDelegate implements InterEventDelegate {
                         });
                     }
                     break;
-                case ShowNoMore:
+                case SHOW_NO_MORE:
                     if (noMoreView!=null) {
                         view = noMoreView;
                     } else if (noMoreViewRes!=0) {
@@ -314,7 +323,7 @@ public class DefaultEventDelegate implements InterEventDelegate {
         void showError(){
             RefreshLogUtils.d("footer showError");
             skipError = true;
-            flag = ShowError;
+            flag = SHOW_ERROR;
             //noinspection deprecation
             if (adapter.getItemCount()>0){
                 adapter.notifyItemChanged(adapter.getItemCount()-1);
@@ -322,7 +331,7 @@ public class DefaultEventDelegate implements InterEventDelegate {
         }
         void showMore(){
             RefreshLogUtils.d("footer showMore");
-            flag = ShowMore;
+            flag = SHOW_MORE;
             //noinspection deprecation
             if (adapter.getItemCount()>0){
                 adapter.notifyItemChanged(adapter.getItemCount()-1);
@@ -331,7 +340,7 @@ public class DefaultEventDelegate implements InterEventDelegate {
         void showNoMore(){
             RefreshLogUtils.d("footer showNoMore");
             skipNoMore = true;
-            flag = ShowNoMore;
+            flag = SHOW_NO_MORE;
             //noinspection deprecation
             if (adapter.getItemCount()>0){
                 adapter.notifyItemChanged(adapter.getItemCount()-1);
@@ -341,7 +350,7 @@ public class DefaultEventDelegate implements InterEventDelegate {
         //初始化
         void hide(){
             RefreshLogUtils.d("footer hide");
-            flag = Hide;
+            flag = HIDE;
             //noinspection deprecation
             if (adapter.getItemCount()>0){
                 adapter.notifyItemChanged(adapter.getItemCount()-1);

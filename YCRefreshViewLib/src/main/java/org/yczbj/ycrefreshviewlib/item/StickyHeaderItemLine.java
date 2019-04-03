@@ -14,11 +14,15 @@ import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import java.util.HashMap;
 import java.util.Map;
 
+
 /**
- * @author          杨充
- * @version         1.0
- * @date            2017/5/2
- *                  list条目的分割线【粘贴头部】
+ * <pre>
+ *     @author 杨充
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/5/2
+ *     desc  : list条目的分割线【粘贴头部】
+ *     revise:
+ * </pre>
  */
 public class StickyHeaderItemLine extends RecyclerView.ItemDecoration {
 

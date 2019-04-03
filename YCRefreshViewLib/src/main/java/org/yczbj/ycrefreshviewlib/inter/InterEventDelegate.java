@@ -4,11 +4,15 @@ import android.view.View;
 
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
+
 /**
- * @author          杨充
- * @version         1.0
- * @date            2016/4/28
- *                  接口
+ * <pre>
+ *     @author 杨充
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2016/4/28
+ *     desc  : 数据处理和加载监听接口
+ *     revise:
+ * </pre>
  */
 public interface InterEventDelegate {
 

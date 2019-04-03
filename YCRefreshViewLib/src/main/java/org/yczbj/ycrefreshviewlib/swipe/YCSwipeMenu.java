@@ -17,33 +17,7 @@ import android.view.animation.OvershootInterpolator;
 
 import org.yczbj.ycrefreshviewlib.R;
 
-/**
- * Item侧滑删除菜单
- * 支持recyclerView，listView，直接嵌套布局即可使用
- * 继承自ViewGroup，实现滑动出现删除等选项的效果，
- * 思路：跟随手势将item向左滑动，
- * 在onMeasure时 将第一个Item设为屏幕宽度
- * 【解决屏幕上多个侧滑删除菜单】：内设一个类静态View类型变量 ViewCache，存储的是当前正处于右滑状态的CstSwipeMenuItemViewGroup，
- * 每次Touch时对比，如果两次Touch的不是一个View，那么令ViewCache恢复普通状态，并且设置新的CacheView
- * 只要有一个侧滑菜单处于打开状态， 就不给外层布局上下滑动了
- *
- * 注意要点：
- * 1 菜单处于侧滑时，拦截长按事件
- * 2 解决侧滑时 点击 的冲突
- * 3 通过 isIos 变量控制是否是IOS阻塞式交互，默认是打开的。
- * 4 通过 isSwipeEnable 变量控制是否开启右滑菜单，默认打开。（某些场景，复用item，没有编辑权限的用户不能右滑）
- * 5 通过开关 isLeftSwipe支持左滑右滑
- * 6 增加viewChache 的 get()方法，可以用在：当点击外部空白处时，关闭正在展开的侧滑菜单。
- * 7 仿QQ，侧滑菜单展开时，点击除侧滑菜单之外的区域，关闭侧滑菜单。
- * 8 判断手指起始落点，如果距离属于滑动了，就屏蔽一切点击事件。
- * 9 解决长按事件和侧滑的冲突。
- * 10 2配GridLayoutManager，将以第一个子Item(即ContentItem)的宽度为控件宽度。
- * 11 支持padding,且后续计划加入上滑下滑，因此不再支持ContentItem的margin属性。
- *      修改回弹的动画，更平滑。
- *      微小位移的move不回回弹的bug
- *      当ItemView存在高度可变的情况
- *      禁止侧滑时(isSwipeEnable false)，点击事件不受干扰。
- */
+
 public class YCSwipeMenu extends ViewGroup {
 
     //为了处理单击事件的冲突

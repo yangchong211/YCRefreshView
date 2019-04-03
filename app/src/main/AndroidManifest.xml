@@ -19,18 +19,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".first.RefreshAndMoreActivity"/>
-        <activity android:name=".second.HeaderFooterActivity"/>
-        <activity android:name=".three.ThirdInsertActivity"/>
-        <activity android:name=".four.FourHorizontalActivity"/>
-        <activity android:name=".five.FiveMultiStyleActivity"/>
-        <activity android:name=".six.SixStickyHeaderActivity"/>
-        <activity android:name=".seven.SevenStaggeredGridActivity"/>
-        <activity android:name=".eight.EightCollapsingActivity"
+        <activity android:name=".refresh.RefreshAndMoreActivity1"/>
+        <activity android:name=".refresh.RefreshAndMoreActivity2"/>
+        <activity android:name=".header.HeaderFooterActivity"/>
+        <activity android:name=".insert.ThirdInsertActivity"/>
+        <activity android:name=".horizontal.FourHorizontalActivity"/>
+        <activity android:name=".multistyle.FiveMultiStyleActivity"/>
+        <activity android:name=".sticky.SixStickyHeaderActivity"/>
+        <activity android:name=".staggered.SevenStaggeredGridActivity"/>
+        <activity android:name=".collapsing.EightCollapsingActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".night.NightTouchMoveActivity"/>
-        <activity android:name=".ten.DeleteAndTopActivity"/>
-        <activity android:name=".eleven.NormalRecyclerViewActivity"/>
+        <activity android:name=".touchmove.NightTouchMoveActivity"/>
+        <activity android:name=".delete.DeleteAndTopActivity"/>
+        <activity android:name=".normal.NormalRecyclerViewActivity"/>
     </application>
 
 </manifest>

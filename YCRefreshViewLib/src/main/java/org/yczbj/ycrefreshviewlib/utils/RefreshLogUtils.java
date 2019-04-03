@@ -11,7 +11,7 @@ import android.util.Log;
  *     revise: 支持多种状态切换；支持上拉加载更多，下拉刷新；支持添加头部或底部view
  * </pre>
  */
-public class RefreshLogUtils {
+public final class RefreshLogUtils {
 
     private static final String TAG = "RefreshLogUtils";
     private static boolean mIsLog = true;

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
  * </pre>
  */
 public interface InterItemView {
+
     /**
      * 创建view
      * @param parent            parent
@@ -24,4 +25,6 @@ public interface InterItemView {
      * @param headerView        headerView
      */
     void onBindView(View headerView);
+
+
 }

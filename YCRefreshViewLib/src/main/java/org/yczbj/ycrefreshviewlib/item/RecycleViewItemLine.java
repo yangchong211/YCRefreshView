@@ -11,14 +11,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2016/6/22
- * 描    述：自定义recycleView的分割线【可以是分割线，也可以是分割条】
- * 修订历史：
- * ================================================
+ * <pre>
+ *     @author 杨充
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/5/2
+ *     desc  : list条目的分割线
+ *     revise:
+ * </pre>
  */
 public class RecycleViewItemLine extends RecyclerView.ItemDecoration {
 

@@ -15,13 +15,23 @@
 
 
         <TextView
-            android:id="@+id/tv_1"
+            android:id="@+id/tv_1_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:layout_marginTop="10dp"
             android:background="@android:color/darker_gray"
-            android:text="1.常用下拉刷新，上拉加载更多"/>
+            android:text="1.1常用下拉刷新，上拉加载更多，自动加载下一页"/>
+
+        <TextView
+            android:id="@+id/tv_1_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"
+            android:text="1.2常用下拉刷新，上拉加载更多，手动加载下一页"/>
+
 
         <TextView
             android:id="@+id/tv_2"
@@ -117,6 +127,15 @@
             android:background="@android:color/darker_gray"
             android:text="11.原生recyclerView使用该库封装的adapter"/>
 
+
+        <TextView
+            android:id="@+id/tv_12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"
+            android:text="12.实现复杂type页面的UI效果"/>
 
 
     </LinearLayout>

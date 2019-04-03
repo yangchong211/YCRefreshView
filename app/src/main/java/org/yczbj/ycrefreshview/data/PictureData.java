@@ -7,6 +7,7 @@ public class PictureData {
     private int height;
     private int image;
 
+
     public PictureData(int width, int height, int image) {
         this.width = width;
         this.height = height;

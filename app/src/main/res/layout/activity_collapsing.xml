@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBar"
@@ -22,7 +23,7 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
 
-            <com.yc.cn.ycbannerlib.first.BannerView
+            <com.yc.cn.ycbannerlib.banner.BannerView
                 android:id="@+id/rollPagerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

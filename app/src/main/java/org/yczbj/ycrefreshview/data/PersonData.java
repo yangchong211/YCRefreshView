@@ -7,7 +7,6 @@ public class PersonData {
     private int image;
     private String sign;
 
-
     public PersonData(){
 
     }
@@ -35,4 +34,5 @@ public class PersonData {
     public void setImage(int image) {
         this.image = image;
     }
+
 }

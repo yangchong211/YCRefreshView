@@ -1,6 +1,7 @@
 package org.yczbj.ycrefreshviewlib.adapter;
 
 import android.content.Context;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,7 @@ import org.yczbj.ycrefreshviewlib.inter.OnItemLongClickListener;
 import org.yczbj.ycrefreshviewlib.inter.OnLoadMoreListener;
 import org.yczbj.ycrefreshviewlib.inter.OnMoreListener;
 import org.yczbj.ycrefreshviewlib.inter.OnNoMoreListener;
+import org.yczbj.ycrefreshviewlib.utils.RecyclerUtils;
 import org.yczbj.ycrefreshviewlib.utils.RefreshLogUtils;
 import org.yczbj.ycrefreshviewlib.holder.BaseViewHolder;
 import java.util.ArrayList;
@@ -26,10 +28,15 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+
 /**
- * @author          杨充
- * @version         1.0
- * @date            2017/5/2
+ * <pre>
+ *     @author 杨充
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/5/2
+ *     desc  : 自定义adapter
+ *     revise: 注意这里使用泛型数据类型
+ * </pre>
  */
 public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseViewHolder>   {
 
@@ -46,16 +53,19 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
 
 
     public RecyclerArrayAdapter(Context context) {
+        RecyclerUtils.checkContent(context);
         init(context,  new ArrayList<T>());
     }
 
 
     public RecyclerArrayAdapter(Context context, T[] objects) {
+        RecyclerUtils.checkContent(context);
         init(context, Arrays.asList(objects));
     }
 
 
     public RecyclerArrayAdapter(Context context, List<T> objects) {
+        RecyclerUtils.checkContent(context);
         init(context, objects);
     }
 
@@ -116,11 +126,15 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         return getViewType(position-headers.size());
     }
 
+    public int getViewType(int position){
+        return position;
+    }
 
     /**
      * 这个函数包含了头部和尾部view的个数，不是真正的item个数。
      * 包含item+header头布局数量+footer底布局数量
      */
+    @SuppressWarnings("DeprecatedIsStillUsed")
     @Deprecated
     @Override
     public final int getItemCount() {
@@ -167,13 +181,6 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         holder.setData(getItem(position));
     }
 
-
-
-    private int getViewType(int position){
-        return 0;
-    }
-
-
     public GridSpanSizeLookup obtainGridSpanSizeLookUp(int maxCount){
         return new GridSpanSizeLookup(maxCount,headers,footers,mObjects);
     }
@@ -203,26 +210,33 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
 
     public void addHeader(InterItemView view){
         if (view==null) {
-            throw new NullPointerException("ItemView can't be null");
+            throw new NullPointerException("InterItemView can't be null");
         }
         headers.add(view);
         notifyItemInserted(headers.size()-1);
     }
 
+
     public void addFooter(InterItemView view){
         if (view==null) {
-            throw new NullPointerException("ItemView can't be null");
+            throw new NullPointerException("InterItemView can't be null");
         }
         footers.add(view);
         notifyItemInserted(headers.size()+getCount()+footers.size()-1);
     }
 
+    /**
+     * 清除所有header
+     */
     public void removeAllHeader(){
         int count = headers.size();
         headers.clear();
         notifyItemRangeRemoved(0,count);
     }
 
+    /**
+     * 清除所有footer
+     */
     public void removeAllFooter(){
         int count = footers.size();
         footers.clear();
@@ -301,20 +315,34 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         getEventDelegate().setNoMore(res,null);
     }
 
+    /**
+     * 设置上拉加载没有更多数据监听
+     * @param view                  没有更多数据布局view
+     */
     public void setNoMore(final View view) {
         getEventDelegate().setNoMore(view,null);
     }
 
-    public void setNoMore(final View view,OnNoMoreListener listener) {
+    /**
+     * 设置上拉加载没有更多数据监听
+     * @param view                  没有更多数据布局
+     * @param listener              上拉加载没有更多数据监听
+     */
+    public void setNoMore(final View view , OnNoMoreListener listener) {
         getEventDelegate().setNoMore(view,listener);
     }
 
-    public void setNoMore(final int res,OnNoMoreListener listener) {
+    /**
+     * 设置上拉加载没有更多数据监听
+     * @param res                   没有更多数据布局res
+     * @param listener              上拉加载没有更多数据监听
+     */
+    public void setNoMore(final @LayoutRes int res , OnNoMoreListener listener) {
         getEventDelegate().setNoMore(res,listener);
     }
 
 
-    public void setError(final int res) {
+    public void setError(final @LayoutRes int res) {
         getEventDelegate().setErrorMore(res,null);
     }
 
@@ -322,7 +350,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         getEventDelegate().setErrorMore(view,null);
     }
 
-    public void setError(final int res,OnErrorListener listener) {
+    public void setError(final @LayoutRes int res,OnErrorListener listener) {
         getEventDelegate().setErrorMore(res,listener);
     }
 
@@ -331,7 +359,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
     }
 
     @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
         //增加对RecyclerArrayAdapter奇葩操作的修复措施
         registerAdapterDataObserver(new FixDataObserver(recyclerView));
@@ -455,7 +483,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         synchronized (mLock) {
             mObjects.addAll(index, object);
         }
-        int dataCount = object==null?0:object.size();
+        int dataCount = object.size();
         if (mNotifyOnChange) {
             notifyItemRangeInserted(headers.size() + index, dataCount);
         }
@@ -478,6 +506,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         RefreshLogUtils.d("insertAll notifyItemChanged "+pos);
     }
 
+
     /**
      * 删除，不会触发任何事情
      * @param object            要移除的数据
@@ -493,6 +522,28 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
             }
         }
     }
+
+
+    /**
+     * 将某个索引处的数据置顶
+     * @param position            要移除数据的索引
+     */
+    public void setTop(int position){
+        T t;
+        synchronized (mLock) {
+            t = mObjects.get(position);
+            mObjects.remove(position);
+        }
+        if (mNotifyOnChange) {
+            notifyItemInserted(headers.size());
+        }
+        mObjects.add(0,t);
+        if (mNotifyOnChange) {
+            notifyItemRemoved(headers.size() + 1);
+        }
+        RefreshLogUtils.d("remove notifyItemRemoved "+(headers.size()+1));
+    }
+
 
     /**
      * 删除，不会触发任何事情
@@ -512,8 +563,6 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
     /**
      * 触发清空
      * 与{@link #clear()}的不同仅在于这个使用notifyItemRangeRemoved.
-     * 猜测这个方法与add伪并发执行的时候会造成"Scrapped or attached views may not be recycled"的Crash.
-     * 所以建议使用{@link #clear()}
      */
     public void removeAll() {
         int count = mObjects.size();

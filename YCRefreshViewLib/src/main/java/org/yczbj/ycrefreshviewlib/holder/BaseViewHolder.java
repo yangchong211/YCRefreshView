@@ -29,18 +29,18 @@ import org.yczbj.ycrefreshviewlib.utils.RefreshLogUtils;
 
 import java.lang.reflect.Field;
 
+
 /**
- * @author          杨充
- * @version         1.0
- * @date            2017/4/22
- *                  M为这个itemView对应的model，使用RecyclerArrayAdapter就一定要用这个ViewHolder
- *                  推荐子类继承第二个构造函数。并将子类的构造函数设为一个ViewGroup parent
- *                  然后这个ViewHolder就完全独立。adapter在new的时候只需将parentView传进来。
- *                  View的生成与管理由ViewHolder执行。
- *                  实现setData来实现UI修改。Adapter会在onCreateViewHolder里自动调用。
- *                  目前findViewById有两种方式，建议使用第二种方式
- *
- *                  具体可以参考我的adapter封装库：https://github.com/yangchong211/YCBaseAdapter
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/4/22
+ *     desc  : ViewHolder的简单封装，M为这个itemView对应的model，使用RecyclerArrayAdapter就一定要用
+ *             这个ViewHolder
+ *             推荐子类继承第二个构造函数。并将子类的构造函数设为一个ViewGroup parent
+ *     revise: 参考鸿洋大神的baseAdapter封装库
+ *             具体可以参考我的adapter封装库：https://github.com/yangchong211/YCBaseAdapter
+ * </pre>
  */
 public class BaseViewHolder<M> extends RecyclerView.ViewHolder {
 
@@ -66,7 +66,7 @@ public class BaseViewHolder<M> extends RecyclerView.ViewHolder {
 
     /**
      * 子类设置数据方法
-     * @param data
+     * @param data                 data
      */
     public void setData(M data) {}
 
@@ -92,7 +92,7 @@ public class BaseViewHolder<M> extends RecyclerView.ViewHolder {
 
     /**
      * 获取上下文context
-     * @return          context
+     * @return                  context
      */
     protected Context getContext(){
         return itemView.getContext();
@@ -101,7 +101,7 @@ public class BaseViewHolder<M> extends RecyclerView.ViewHolder {
 
     /**
      * 获取数据索引的位置
-     * @return          position
+     * @return                  position
      */
     protected int getDataPosition(){
         RecyclerView.Adapter adapter = getOwnerAdapter();
@@ -116,7 +116,7 @@ public class BaseViewHolder<M> extends RecyclerView.ViewHolder {
 
     /**
      * 获取adapter对象
-     * @param <T>
+     * @param <T>               adapter
      * @return                  adapter
      */
     @Nullable

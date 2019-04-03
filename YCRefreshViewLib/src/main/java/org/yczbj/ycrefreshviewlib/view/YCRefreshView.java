@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.ColorRes;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -16,7 +17,7 @@ import android.widget.FrameLayout;
 
 import org.yczbj.ycrefreshviewlib.R;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
-import org.yczbj.ycrefreshviewlib.observer.EasyDataObserver;
+import org.yczbj.ycrefreshviewlib.observer.ViewDataObserver;
 import org.yczbj.ycrefreshviewlib.utils.RefreshLogUtils;
 
 import java.util.ArrayList;
@@ -223,7 +224,7 @@ public class YCRefreshView extends FrameLayout {
     private void initScrollListener() {
         mInternalOnScrollListener = new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 if (mExternalOnScrollListener != null){
                     mExternalOnScrollListener.onScrolled(recyclerView, dx, dy);
@@ -233,7 +234,7 @@ public class YCRefreshView extends FrameLayout {
                 }
             }
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (mExternalOnScrollListener != null){
                     mExternalOnScrollListener.onScrollStateChanged(recyclerView, newState);
@@ -379,7 +380,7 @@ public class YCRefreshView extends FrameLayout {
      */
     public void setAdapter(RecyclerView.Adapter adapter) {
         mRecyclerView.setAdapter(adapter);
-        adapter.registerAdapterDataObserver(new EasyDataObserver(this));
+        adapter.registerAdapterDataObserver(new ViewDataObserver(this));
         showRecycler();
     }
 
@@ -391,7 +392,7 @@ public class YCRefreshView extends FrameLayout {
      */
     public void setAdapterWithProgress(RecyclerView.Adapter adapter) {
         mRecyclerView.setAdapter(adapter);
-        adapter.registerAdapterDataObserver(new EasyDataObserver(this));
+        adapter.registerAdapterDataObserver(new ViewDataObserver(this));
         //只有Adapter为空时才显示ProgressView
         if (adapter instanceof RecyclerArrayAdapter){
             if (((RecyclerArrayAdapter) adapter).getCount() == 0){
@@ -440,7 +441,6 @@ public class YCRefreshView extends FrameLayout {
         }else {
             showRecycler();
         }
-
     }
 
     /**
@@ -514,7 +514,7 @@ public class YCRefreshView extends FrameLayout {
             @Override
             public void run() {
                 mPtrLayout.setRefreshing(isRefreshing);
-                if (isRefreshing&&isCallbackListener&&mRefreshListener!=null){
+                if (isRefreshing && isCallbackListener && mRefreshListener!=null){
                     mRefreshListener.onRefresh();
                 }
             }
