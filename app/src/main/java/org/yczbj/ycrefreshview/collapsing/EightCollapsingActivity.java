@@ -38,7 +38,7 @@ public class EightCollapsingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collapsing);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
-        recyclerView = (YCRefreshView) findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter = new PersonAdapter(this));
         adapter.setMore(R.layout.view_more, new OnLoadMoreListener() {
