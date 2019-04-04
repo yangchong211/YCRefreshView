@@ -662,7 +662,6 @@
 
 
 #### 7.2 图片展示效果
-- demo效果图展示
 ![1.jpg](https://upload-images.jianshu.io/upload_images/4432347-3487797e987afe9e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ![2.jpg](https://upload-images.jianshu.io/upload_images/4432347-29784cfd264833de.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ![3.jpg](https://upload-images.jianshu.io/upload_images/4432347-811e2e10ccd621ac.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
@@ -682,7 +681,6 @@
 
 #### 7.3 部分案例图展示[部分案例图可以参考7.1]
 ![image](https://upload-images.jianshu.io/upload_images/4432347-c3d1cd1c02f05be0.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/300)
-![image](https://upload-images.jianshu.io/upload_images/4432347-321ca95b07ceaa6d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700)
 ![image](https://upload-images.jianshu.io/upload_images/4432347-ca314a2714877604.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/270)
 
 
