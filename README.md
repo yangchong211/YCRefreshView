@@ -702,6 +702,8 @@
     - https://github.com/XRecyclerView/XRecyclerView
     - BGARefreshLayout-Android：https://github.com/bingoogolapple/BGARefreshLayout-Android
     - Android-PullToRefresh：https://github.com/chrisbanes/Android-PullToRefresh
+    - adapter：https://github.com/CymChad/BaseRecyclerViewAdapterHelper
+    - fastAdapter：https://github.com/mikepenz/FastAdapter
     - Jude95/EasyRecyclerView：https://github.com/Jude95/EasyRecyclerView
     - UltimateRecyclerView：https://github.com/cymcsg/UltimateRecyclerView
 - 关于viewHolder的封装，参考是鸿洋大神的[baseAdapter](https://github.com/hongyangAndroid/baseAdapter)
