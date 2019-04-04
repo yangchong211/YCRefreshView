@@ -4,7 +4,10 @@ import android.app.Person;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 
 import org.yczbj.ycrefreshview.collapsing.EightCollapsingActivity;
 import org.yczbj.ycrefreshview.normal.NormalRecyclerViewActivity;
@@ -18,6 +21,7 @@ import org.yczbj.ycrefreshview.staggered.SevenStaggeredGridActivity;
 import org.yczbj.ycrefreshview.sticky.SixStickyHeaderActivity;
 import org.yczbj.ycrefreshview.delete.DeleteAndTopActivity;
 import org.yczbj.ycrefreshview.insert.ThirdInsertActivity;
+import org.yczbj.ycrefreshview.type.TypeActivity;
 import org.yczbj.ycrefreshviewlib.utils.RefreshLogUtils;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -93,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(this, NormalRecyclerViewActivity.class));
                 break;
             case R.id.tv_12:
-
+                startActivity(new Intent(this, TypeActivity.class));
                 break;
             default:
                 break;

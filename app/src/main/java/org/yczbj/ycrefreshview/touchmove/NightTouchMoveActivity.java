@@ -58,7 +58,12 @@ public class NightTouchMoveActivity extends AppCompatActivity{
             public void onSwiped(int adapterPosition) {
                 // 滑动删除的时候，从数据库、数据源移除，并刷新UI
                 if (personList != null) {
-                    adapter.remove(adapterPosition);
+                    //adapter.remove(adapterPosition);
+
+                    //1、删除数据
+                    personList.remove(adapterPosition);
+                    //2、刷新
+                    adapter.notifyItemRemoved(adapterPosition);
                 }
             }
 
@@ -71,12 +76,15 @@ public class NightTouchMoveActivity extends AppCompatActivity{
                     adapter.notifyItemMoved(srcPosition, targetPosition);
                     return true;
                 }
-                return false;
+                return true;
             }
         });
         callback.setDragEnable(true);
         callback.setSwipeEnable(true);
+        callback.setColor(this.getResources().getColor(R.color.colorAccent));
+        //创建helper对象，callback监听recyclerView item 的各种状态
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
+        //关联recyclerView，一个helper对象只能对应一个recyclerView
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 }

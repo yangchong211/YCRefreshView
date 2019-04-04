@@ -17,13 +17,20 @@ import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 public class PersonAdapter extends RecyclerArrayAdapter<PersonData> {
 
+    private PersonViewHolder viewHolder;
+
     public PersonAdapter(Context context) {
         super(context);
     }
 
     @Override
     public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-        return new PersonViewHolder(parent);
+        viewHolder = new PersonViewHolder(parent);
+        return viewHolder;
+    }
+
+    public PersonViewHolder getViewHolder() {
+        return viewHolder;
     }
 
     public class PersonViewHolder extends BaseViewHolder<PersonData> {

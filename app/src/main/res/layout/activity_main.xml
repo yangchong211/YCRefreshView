@@ -135,7 +135,17 @@
             android:padding="10dp"
             android:layout_marginTop="10dp"
             android:background="@android:color/darker_gray"
-            android:text="12.实现复杂type页面的UI效果"/>
+            android:text="12.实现复杂type页面的UI效果，支持ItemTouchHelper"/>
+
+
+        <TextView
+            android:id="@+id/tv_13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"
+            android:text="13.使用recyclerView复用池"/>
 
 
     </LinearLayout>

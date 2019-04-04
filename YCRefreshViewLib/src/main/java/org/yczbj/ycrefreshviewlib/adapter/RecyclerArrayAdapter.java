@@ -126,8 +126,9 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         return getViewType(position-headers.size());
     }
 
+
     public int getViewType(int position){
-        return position;
+        return 0;
     }
 
     /**
@@ -185,6 +186,11 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         holder.setData(getItem(position));
     }
 
+    /**
+     *
+     * @param maxCount
+     * @return
+     */
     public GridSpanSizeLookup obtainGridSpanSizeLookUp(int maxCount){
         return new GridSpanSizeLookup(maxCount,headers,footers,mObjects);
     }
