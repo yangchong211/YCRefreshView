@@ -625,18 +625,31 @@
     adapter.setOnItemLongClickListener(listener);
     ```
 - 分割线方法说明
-```
+    ```
+    //可以设置线条颜色和宽度的分割线
+    //四个参数，上下文，方向，线宽，颜色
+    final RecycleViewItemLine line = new RecycleViewItemLine(this, LinearLayout.HORIZONTAL,
+            (int)AppUtils.convertDpToPixel(1,this),
+            this.getResources().getColor(R.color.color_f9f9f9));
+    recyclerView.addItemDecoration(line);
 
-```
-- swipe侧滑方法说明
-```
+    //适用于瀑布流中的间距设置
+    SpaceViewItemLine itemDecoration = new SpaceViewItemLine(
+            (int) AppUtils.convertDpToPixel(8,this));
+    itemDecoration.setPaddingEdgeSide(true);
+    itemDecoration.setPaddingStart(true);
+    itemDecoration.setPaddingHeaderFooter(true);
+    recyclerView.addItemDecoration(itemDecoration);
 
-```
+    //可以设置线条颜色和宽度，并且可以设置距离左右的间距
+    DividerViewItemLine itemDecoration = new
+            DividerViewItemLine( this.getResources().getColor(R.color.color_f9f9f9)
+            , LibUtils.dip2px(this, 1f),
+            LibUtils.dip2px(this, 72), 0);
+    itemDecoration.setDrawLastItem(false);
+    recyclerView.addItemDecoration(itemDecoration);
+    ```
 - 其他api说明
-```
-
-```
-
 
 
 
@@ -650,15 +663,24 @@
 
 #### 7.2 图片展示效果
 - demo效果图展示
-![image](https://upload-images.jianshu.io/upload_images/4432347-9944435ab48a4142.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![image](https://upload-images.jianshu.io/upload_images/4432347-dc19e3a6345c38b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![image](https://upload-images.jianshu.io/upload_images/4432347-ee2678e74b0e5ead.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![image](https://upload-images.jianshu.io/upload_images/4432347-a7661526c66a8a7b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![image](https://upload-images.jianshu.io/upload_images/4432347-629e88c4e0437966.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![image](https://upload-images.jianshu.io/upload_images/4432347-6ed3754ba9d1bb95.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![1.jpg](https://upload-images.jianshu.io/upload_images/4432347-3487797e987afe9e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![2.jpg](https://upload-images.jianshu.io/upload_images/4432347-29784cfd264833de.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![3.jpg](https://upload-images.jianshu.io/upload_images/4432347-811e2e10ccd621ac.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![4.jpg](https://upload-images.jianshu.io/upload_images/4432347-b1901773a339486f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![5.jpg](https://upload-images.jianshu.io/upload_images/4432347-5d113487d837c954.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![6.jpg](https://upload-images.jianshu.io/upload_images/4432347-ab9506e693299ee6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![7.jpg](https://upload-images.jianshu.io/upload_images/4432347-62d5cc1d9e56dedd.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![8.jpg](https://upload-images.jianshu.io/upload_images/4432347-352c6362cf171a8a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![9.jpg](https://upload-images.jianshu.io/upload_images/4432347-d7e215f6ee4142a3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![10.jpg](https://upload-images.jianshu.io/upload_images/4432347-e1f7c2ae45c8756c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![11.jpg](https://upload-images.jianshu.io/upload_images/4432347-a21e54beb8710c3e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![12.jpg](https://upload-images.jianshu.io/upload_images/4432347-903a177bc62da545.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
-#### 7.3 部分案例图展示
+
+
+
+#### 7.3 部分案例图展示[部分案例图可以参考7.1]
 ![image](https://upload-images.jianshu.io/upload_images/4432347-c3d1cd1c02f05be0.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/300)
 ![image](https://upload-images.jianshu.io/upload_images/4432347-321ca95b07ceaa6d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700)
 ![image](https://upload-images.jianshu.io/upload_images/4432347-ca314a2714877604.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/270)

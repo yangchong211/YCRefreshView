@@ -37,7 +37,6 @@ import org.yczbj.ycrefreshviewlib.item.DividerViewItemLine;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import org.yczbj.ycrefreshviewlib.item.SpaceViewItemLine;
 
-import java.util.List;
 
 
 public class HeaderFooterActivity extends AppCompatActivity {

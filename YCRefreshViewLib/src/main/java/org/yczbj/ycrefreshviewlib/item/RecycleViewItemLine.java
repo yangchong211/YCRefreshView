@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,7 +19,7 @@ import android.view.View;
  *     blog  : https://github.com/yangchong211
  *     time  : 2017/5/2
  *     desc  : list条目的分割线
- *     revise:
+ *     revise: 可以设置线条颜色和宽度
  * </pre>
  */
 public class RecycleViewItemLine extends RecyclerView.ItemDecoration {
@@ -28,12 +29,13 @@ public class RecycleViewItemLine extends RecyclerView.ItemDecoration {
     /**
      * 分割线高度，默认为1px
      */
-    private int mDividerHeight = 2;
+    private int mDividerHeight = 1;
     /**
      * 列表的方向：LinearLayoutManager.VERTICAL或LinearLayoutManager.HORIZONTAL
      */
     private int mOrientation;
     private static int[] ATTRS = new int[]{android.R.attr.listDivider};
+
 
     /**
      * 默认分割线：高度为2px，颜色为灰色
@@ -41,7 +43,8 @@ public class RecycleViewItemLine extends RecyclerView.ItemDecoration {
      * @param orientation 列表方向
      */
     public RecycleViewItemLine(Context context, int orientation) {
-        if (orientation != LinearLayoutManager.VERTICAL && orientation != LinearLayoutManager.HORIZONTAL) {
+        if (orientation != LinearLayoutManager.VERTICAL &&
+                orientation != LinearLayoutManager.HORIZONTAL) {
             throw new IllegalArgumentException("请输入正确的参数！");
         }
         mOrientation = orientation;
@@ -71,7 +74,8 @@ public class RecycleViewItemLine extends RecyclerView.ItemDecoration {
      * @param dividerHeight 分割线高度
      * @param dividerColor  分割线颜色
      */
-    public RecycleViewItemLine(Context context, int orientation, int dividerHeight, int dividerColor) {
+    public RecycleViewItemLine(Context context, int orientation,
+                               int dividerHeight, int dividerColor) {
         this(context, orientation);
         mDividerHeight = dividerHeight;
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -84,7 +88,8 @@ public class RecycleViewItemLine extends RecyclerView.ItemDecoration {
      * 获取分割线尺寸
      */
     @Override
-    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+    public void getItemOffsets(@NonNull Rect outRect, @NonNull View view,
+                               @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
         outRect.set(0, 0, 0, mDividerHeight);
     }
@@ -93,7 +98,8 @@ public class RecycleViewItemLine extends RecyclerView.ItemDecoration {
      * 绘制分割线
      */
     @Override
-    public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+    public void onDraw(@NonNull Canvas c, @NonNull RecyclerView parent,
+                       @NonNull RecyclerView.State state) {
         super.onDraw(c, parent, state);
         if (mOrientation == LinearLayoutManager.VERTICAL) {
             drawVertical(c, parent);

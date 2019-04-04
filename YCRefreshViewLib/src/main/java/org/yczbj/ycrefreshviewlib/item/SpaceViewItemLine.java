@@ -1,6 +1,7 @@
 package org.yczbj.ycrefreshviewlib.item;
 
 import android.graphics.Rect;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,7 +20,7 @@ import static android.widget.LinearLayout.VERTICAL;
  *     blog  : https://github.com/yangchong211
  *     time  : 2017/5/2
  *     desc  : list条目的分割线
- *     revise:
+ *     revise: 使用默认的分割线颜色，且分割线宽度也是默认值，适用于瀑布流中的间距设置
  * </pre>
  */
 public class SpaceViewItemLine extends RecyclerView.ItemDecoration {
@@ -28,7 +29,6 @@ public class SpaceViewItemLine extends RecyclerView.ItemDecoration {
     private boolean mPaddingEdgeSide = true;
     private boolean mPaddingStart = true;
     private boolean mPaddingHeaderFooter = false;
-
 
     public SpaceViewItemLine(int space) {
         this.space = space ;
@@ -47,15 +47,20 @@ public class SpaceViewItemLine extends RecyclerView.ItemDecoration {
     }
 
     @Override
-    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+    public void getItemOffsets(@NonNull Rect outRect, @NonNull View view,
+                               @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         int position = parent.getChildAdapterPosition(view);
         int spanCount = 0;
         int orientation = 0;
         int spanIndex = 0;
         int headerCount = 0,footerCount = 0;
-        if (parent.getAdapter() instanceof RecyclerArrayAdapter){
-            headerCount = ((RecyclerArrayAdapter) parent.getAdapter()).getHeaderCount();
-            footerCount = ((RecyclerArrayAdapter) parent.getAdapter()).getFooterCount();
+        RecyclerView.Adapter adapter = parent.getAdapter();
+        if (adapter==null){
+            return;
+        }
+        if (adapter instanceof RecyclerArrayAdapter){
+            headerCount = ((RecyclerArrayAdapter) adapter).getHeaderCount();
+            footerCount = ((RecyclerArrayAdapter) adapter).getFooterCount();
         }
 
         RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
@@ -74,7 +79,7 @@ public class SpaceViewItemLine extends RecyclerView.ItemDecoration {
         }
 
         //普通Item的尺寸
-        if ((position>=headerCount&&position<parent.getAdapter().getItemCount()-footerCount)) {
+        if ((position>=headerCount&&position<adapter.getItemCount()-footerCount)) {
             if (orientation == VERTICAL) {
                 float expectedWidth = (float) (parent.getWidth() - space * (spanCount + (mPaddingEdgeSide ? 1 : -1))) / spanCount;
                 float originWidth = (float) parent.getWidth() / spanCount;

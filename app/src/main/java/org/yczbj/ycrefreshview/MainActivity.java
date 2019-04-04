@@ -18,7 +18,6 @@ import org.yczbj.ycrefreshview.staggered.SevenStaggeredGridActivity;
 import org.yczbj.ycrefreshview.sticky.SixStickyHeaderActivity;
 import org.yczbj.ycrefreshview.delete.DeleteAndTopActivity;
 import org.yczbj.ycrefreshview.insert.ThirdInsertActivity;
-import org.yczbj.ycrefreshview.type.TypeActivity;
 import org.yczbj.ycrefreshviewlib.utils.RefreshLogUtils;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -91,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(this, DeleteAndTopActivity.class));
                 break;
             case R.id.tv_11:
-                startActivity(new Intent(this, TypeActivity.class));
+                startActivity(new Intent(this, NormalRecyclerViewActivity.class));
                 break;
             case R.id.tv_12:
 

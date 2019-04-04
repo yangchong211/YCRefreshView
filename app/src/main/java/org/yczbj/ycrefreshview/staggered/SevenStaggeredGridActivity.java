@@ -56,7 +56,8 @@ public class SevenStaggeredGridActivity extends AppCompatActivity {
 
             }
         });
-        SpaceViewItemLine itemDecoration = new SpaceViewItemLine((int) AppUtils.convertDpToPixel(8,this));
+        SpaceViewItemLine itemDecoration = new SpaceViewItemLine(
+                (int) AppUtils.convertDpToPixel(8,this));
         itemDecoration.setPaddingEdgeSide(true);
         itemDecoration.setPaddingStart(true);
         itemDecoration.setPaddingHeaderFooter(true);

@@ -20,7 +20,7 @@ import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
  *     blog  : https://github.com/yangchong211
  *     time  : 2017/5/2
  *     desc  : list条目的分割线
- *     revise:
+ *     revise: 可以设置线条颜色和宽度，并且可以设置距离左右的间距
  * </pre>
  */
 public class DividerViewItemLine extends RecyclerView.ItemDecoration{
@@ -75,17 +75,21 @@ public class DividerViewItemLine extends RecyclerView.ItemDecoration{
             orientation = ((LinearLayoutManager) layoutManager).getOrientation();
         }
         int itemCount = parent.getAdapter().getItemCount();
-        if (position>=headerCount && position<itemCount-footerCount||mDrawHeaderFooter){
-            if (orientation == OrientationHelper.VERTICAL){
-                outRect.bottom = mHeight;
-            }else {
-                outRect.right = mHeight;
+        if (mDrawHeaderFooter){
+            if (position>=headerCount && position<itemCount-footerCount){
+                if (orientation == OrientationHelper.VERTICAL){
+                    outRect.bottom = mHeight;
+                }else {
+                    //noinspection SuspiciousNameCombination
+                    outRect.right = mHeight;
+                }
             }
         }
     }
 
     @Override
-    public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
+    public void onDrawOver(@NonNull Canvas c, @NonNull RecyclerView parent,
+                           @NonNull RecyclerView.State state) {
         if (parent.getAdapter() == null){
             return;
         }

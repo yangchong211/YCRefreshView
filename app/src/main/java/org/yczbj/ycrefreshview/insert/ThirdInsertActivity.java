@@ -36,7 +36,7 @@ public class ThirdInsertActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         DividerViewItemLine itemDecoration = new
                 DividerViewItemLine( this.getResources().getColor(R.color.color_f9f9f9)
-                , LibUtils.dip2px(this, 0.5f),
+                , LibUtils.dip2px(this, 1f),
                 LibUtils.dip2px(this, 72), 0);
         itemDecoration.setDrawLastItem(false);
         recyclerView.addItemDecoration(itemDecoration);

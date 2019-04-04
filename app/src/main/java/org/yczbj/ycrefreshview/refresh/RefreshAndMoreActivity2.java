@@ -105,7 +105,7 @@ public class RefreshAndMoreActivity2 extends AppCompatActivity implements SwipeR
 
         final RecycleViewItemLine line = new RecycleViewItemLine(this, LinearLayout.HORIZONTAL,
                 (int)AppUtils.convertDpToPixel(1,this),
-                this.getResources().getColor(R.color.color_f9f9f9));
+                this.getResources().getColor(R.color.color_666666));
         recyclerView.addItemDecoration(line);
 
         recyclerView.setAdapterWithProgress(adapter = new RecyclerArrayAdapter<PersonData>(this) {
