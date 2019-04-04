@@ -519,12 +519,123 @@
 
 
 ### 5.常用api介绍
-#### 5.1 状态切换方法说明
-#### 5.2 viewHolder方法说明
-#### 5.3 adapter方法说明
-#### 5.4 分割线方法说明
-#### 5.5 swipe侧滑方法说明
-#### 5.6 其他api说明
+- 状态切换方法说明
+    ```
+    //设置加载数据完毕状态
+    recyclerView.showRecycler();
+    //设置加载数据为空状态
+    recyclerView.showEmpty();
+    //设置加载错误状态
+    recyclerView.showError();
+    //设置加载数据中状态
+    recyclerView.showProgress();
+    //设置自定义布局，其他几个方法同理
+    recyclerView.setEmptyView(R.layout.view_custom_empty_data);
+    ```
+- viewHolder方法说明
+    ```
+    //子类设置数据方法
+    setData方法
+    //findViewById方式
+    iv_news_image = getView(R.id.iv_news_image);
+    //获取上下文
+    Context context = getContext();
+    //获取数据索引的位置
+    int dataPosition = getDataPosition();
+    //添加item中子控件的点击事件
+    addOnClickListener(R.id.tv_title);
+    ```
+- adapter方法说明
+    ```
+    //删除索引处的数据
+    adapter.remove(0);
+    //触发清空所有数据
+    adapter.removeAll();
+    //添加数据，注意这个是在最后索引处添加
+    adapter.add(new PersonData());
+    //添加所有数据
+    adapter.addAll(DataProvider.getPersonList(0));
+    //插入数据
+    adapter.insert(data,3);
+    //在某个索引处插入集合数据
+    adapter.insertAll(data,3);
+    //获取item索引位置
+    adapter.getPosition(data);
+    //触发清空所有的数据
+    adapter.clear();
+    //获取所有的数据
+    adapter.getAllData();
+
+    //清除所有footer
+    adapter.removeAllFooter();
+    //清除所有header
+    adapter.removeAllHeader();
+    //添加footerView
+    adapter.addFooter(view);
+    //添加headerView
+    adapter.addHeader(view);
+    //移除某个headerView
+    adapter.removeHeader(view);
+    //移除某个footerView
+    adapter.removeFooter(view);
+    //获取某个索引处的headerView
+    adapter.getHeader(0);
+    //获取某个索引处的footerView
+    adapter.getFooter(0);
+    //获取footer的数量
+    adapter.getFooterCount();
+    //获取header的数量
+    adapter.getHeaderCount();
+
+    //设置上拉加载更多的自定义布局和监听
+    adapter.setMore(R.layout.view_more,listener);
+    //设置上拉加载更多的自定义布局和监听
+    adapter.setMore(view,listener);
+    //设置上拉加载没有更多数据布局
+    adapter.setNoMore(R.layout.view_nomore);
+    //设置上拉加载没有更多数据布局
+    adapter.setNoMore(view);
+    //设置上拉加载没有更多数据监听
+    adapter.setNoMore(R.layout.view_nomore,listener);
+    //设置上拉加载异常的布局
+    adapter.setError(R.layout.view_error);
+    //设置上拉加载异常的布局
+    adapter.setError(view);
+    //设置上拉加载异常的布局和异常监听
+    adapter.setError(R.layout.view_error,listener);
+    //暂停上拉加载更多
+    adapter.pauseMore();
+    //停止上拉加载更多
+    adapter.stopMore();
+    //恢复上拉加载更多
+    adapter.resumeMore();
+
+    //获取上下文
+    adapter.getContext();
+    //应该使用这个获取item个数
+    adapter.getCount();
+    //设置操作数据[增删改查]后，是否刷新adapter
+    adapter.setNotifyOnChange(true);
+
+    //设置孩子点击事件
+    adapter.setOnItemChildClickListener(listener);
+    //设置条目点击事件
+    adapter.setOnItemClickListener(listener);
+    //设置条目长按事件
+    adapter.setOnItemLongClickListener(listener);
+    ```
+- 分割线方法说明
+```
+
+```
+- swipe侧滑方法说明
+```
+
+```
+- 其他api说明
+```
+
+```
 
 
 

@@ -1,28 +1,14 @@
 package org.yczbj.ycrefreshviewlib.holder;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Paint;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
-import android.text.util.Linkify;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
-import android.widget.Checkable;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.RatingBar;
-import android.widget.TextView;
-
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.inter.OnItemChildClickListener;
 import org.yczbj.ycrefreshviewlib.utils.RefreshLogUtils;
@@ -71,7 +57,7 @@ public class BaseViewHolder<M> extends RecyclerView.ViewHolder {
     public void setData(M data) {}
 
     /**
-     * 第二种findViewById方式
+     * findViewById方式
      * 根据 ID 来获取 View
      * @param viewId viewID
      * @param <T>    泛型
@@ -167,170 +153,6 @@ public class BaseViewHolder<M> extends RecyclerView.ViewHolder {
                 }
             });
         }
-    }
-
-
-
-    /**
-     * 设置TextView的值
-     */
-    public BaseViewHolder setText(int viewId, String text) {
-        TextView tv = getView(viewId);
-        tv.setText(text);
-        return this;
-    }
-
-
-    /**
-     * 设置imageView图片
-     */
-    public BaseViewHolder setImageResource(int viewId, int resId) {
-        ImageView view = getView(viewId);
-        view.setImageResource(resId);
-        return this;
-    }
-
-
-    /**
-     * 设置imageView图片
-     */
-    public BaseViewHolder setImageBitmap(int viewId, Bitmap bitmap) {
-        ImageView view = getView(viewId);
-        view.setImageBitmap(bitmap);
-        return this;
-    }
-
-
-    /**
-     * 设置imageView图片
-     */
-    public BaseViewHolder setImageDrawable(int viewId, Drawable drawable) {
-        ImageView view = getView(viewId);
-        view.setImageDrawable(drawable);
-        return this;
-    }
-
-
-    /**
-     * 设置背景颜色
-     */
-    public BaseViewHolder setBackgroundColor(int viewId, int color) {
-        View view = getView(viewId);
-        view.setBackgroundColor(color);
-        return this;
-    }
-
-
-    /**
-     * 设置背景颜色
-     */
-    public BaseViewHolder setBackgroundRes(int viewId, int backgroundRes) {
-        View view = getView(viewId);
-        view.setBackgroundResource(backgroundRes);
-        return this;
-    }
-
-
-    /**
-     * 设置text颜色
-     */
-    public BaseViewHolder setTextColor(int viewId, int textColor) {
-        TextView view = getView(viewId);
-        view.setTextColor(textColor);
-        return this;
-    }
-
-    /**
-     * 设置透明度
-     */
-    @SuppressLint({"NewApi", "ObsoleteSdkInt"})
-    public BaseViewHolder setAlpha(int viewId, float value) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            getView(viewId).setAlpha(value);
-        } else {
-            // Pre-honeycomb hack to set Alpha value
-            AlphaAnimation alpha = new AlphaAnimation(value, value);
-            alpha.setDuration(0);
-            alpha.setFillAfter(true);
-            getView(viewId).startAnimation(alpha);
-        }
-        return this;
-    }
-
-
-    /**
-     * 设置是否可见
-     */
-    public BaseViewHolder setVisible(int viewId, boolean visible) {
-        View view = getView(viewId);
-        view.setVisibility(visible ? View.VISIBLE : View.GONE);
-        return this;
-    }
-
-
-    public BaseViewHolder linkify(int viewId) {
-        TextView view = getView(viewId);
-        Linkify.addLinks(view, Linkify.ALL);
-        return this;
-    }
-
-    public BaseViewHolder setTypeface(Typeface typeface, int... viewIds) {
-        for (int viewId : viewIds) {
-            TextView view = getView(viewId);
-            view.setTypeface(typeface);
-            view.setPaintFlags(view.getPaintFlags() | Paint.SUBPIXEL_TEXT_FLAG);
-        }
-        return this;
-    }
-
-    public BaseViewHolder setProgress(int viewId, int progress) {
-        ProgressBar view = getView(viewId);
-        view.setProgress(progress);
-        return this;
-    }
-
-    public BaseViewHolder setProgress(int viewId, int progress, int max) {
-        ProgressBar view = getView(viewId);
-        view.setMax(max);
-        view.setProgress(progress);
-        return this;
-    }
-
-    public BaseViewHolder setMax(int viewId, int max) {
-        ProgressBar view = getView(viewId);
-        view.setMax(max);
-        return this;
-    }
-
-    public BaseViewHolder setRating(int viewId, float rating) {
-        RatingBar view = getView(viewId);
-        view.setRating(rating);
-        return this;
-    }
-
-    public BaseViewHolder setRating(int viewId, float rating, int max) {
-        RatingBar view = getView(viewId);
-        view.setMax(max);
-        view.setRating(rating);
-        return this;
-    }
-
-    public BaseViewHolder setTag(int viewId, Object tag) {
-        View view = getView(viewId);
-        view.setTag(tag);
-        return this;
-    }
-
-    public BaseViewHolder setTag(int viewId, int key, Object tag) {
-        View view = getView(viewId);
-        view.setTag(key, tag);
-        return this;
-    }
-
-    public BaseViewHolder setChecked(int viewId, boolean checked) {
-        Checkable view = getView(viewId);
-        view.setChecked(checked);
-        return this;
     }
 
 }

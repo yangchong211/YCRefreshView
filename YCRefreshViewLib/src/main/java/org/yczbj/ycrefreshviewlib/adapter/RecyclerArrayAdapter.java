@@ -165,6 +165,10 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         OnBindViewHolder(holder,position-headers.size());
     }
 
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
 
     /**---------------------------------子类需要重写的方法---------------------------------------*/
@@ -186,6 +190,9 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
     }
 
 
+    /**
+     * 停止加载更多
+     */
     public void stopMore(){
         if (mEventDelegate == null) {
             throw new NullPointerException("You should invoking setLoadMore() first");
@@ -193,6 +200,9 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         mEventDelegate.stopLoadMore();
     }
 
+    /**
+     * 暂停加载更多
+     */
     public void pauseMore(){
         if (mEventDelegate == null) {
             throw new NullPointerException("You should invoking setLoadMore() first");
@@ -200,6 +210,9 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         mEventDelegate.pauseLoadMore();
     }
 
+    /**
+     * 恢复加载更多
+     */
     public void resumeMore(){
         if (mEventDelegate == null) {
             throw new NullPointerException("You should invoking setLoadMore() first");
@@ -207,7 +220,10 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         mEventDelegate.resumeLoadMore();
     }
 
-
+    /**
+     * 添加headerView
+     * @param view                      view
+     */
     public void addHeader(InterItemView view){
         if (view==null) {
             throw new NullPointerException("InterItemView can't be null");
@@ -217,6 +233,10 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
     }
 
 
+    /**
+     * 添加footerView
+     * @param view                      view
+     */
     public void addFooter(InterItemView view){
         if (view==null) {
             throw new NullPointerException("InterItemView can't be null");
@@ -243,24 +263,50 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         notifyItemRangeRemoved(headers.size()+getCount(),count);
     }
 
+    /**
+     * 获取某个索引处的headerView
+     * @param index                 索引
+     * @return                      InterItemView
+     */
     public InterItemView getHeader(int index){
         return headers.get(index);
     }
 
+    /**
+     * 获取某个索引处的footerView
+     * @param index                 索引
+     * @return                      InterItemView
+     */
     public InterItemView getFooter(int index){
         return footers.get(index);
     }
 
+    /**
+     * 获取header的数量
+     * @return                      数量
+     */
     public int getHeaderCount(){return headers.size();}
 
+    /**
+     * 获取footer的数量
+     * @return                      数量
+     */
     public int getFooterCount(){return footers.size();}
 
+    /**
+     * 移除某个headerView
+     * @param view                  view
+     */
     public void removeHeader(InterItemView view){
         int position = headers.indexOf(view);
         headers.remove(view);
         notifyItemRemoved(position);
     }
 
+    /**
+     * 移除某个footerView
+     * @param view                  view
+     */
     public void removeFooter(InterItemView view){
         int position = headers.size()+getCount()+footers.indexOf(view);
         footers.remove(view);
@@ -275,6 +321,12 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         return mEventDelegate;
     }
 
+
+    /**
+     * 设置上拉加载更多的自定义布局和监听
+     * @param res                   res布局
+     * @param listener              listener
+     */
     public void setMore(final int res, final OnLoadMoreListener listener){
         getEventDelegate().setMore(res, new OnMoreListener() {
             @Override
@@ -289,6 +341,12 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         });
     }
 
+
+    /**
+     * 设置上拉加载更多的自定义布局和监听
+     * @param view                  view布局
+     * @param listener              listener
+     */
     public void setMore(final View view,final OnLoadMoreListener listener){
         getEventDelegate().setMore(view, new OnMoreListener() {
             @Override
@@ -303,20 +361,34 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         });
     }
 
+    /**
+     * 设置上拉加载更多的自定义布局和
+     * @param res                   res布局
+     * @param listener              listener
+     */
     public void setMore(final int res, final OnMoreListener listener){
         getEventDelegate().setMore(res, listener);
     }
 
+    /**
+     * 设置上拉加载更多的自定义布局和
+     * @param view                  view布局
+     * @param listener              listener
+     */
     public void setMore(final View view,OnMoreListener listener){
         getEventDelegate().setMore(view, listener);
     }
 
+    /**
+     * 设置上拉加载没有更多数据布局
+     * @param res                   res布局
+     */
     public void setNoMore(final int res) {
         getEventDelegate().setNoMore(res,null);
     }
 
     /**
-     * 设置上拉加载没有更多数据监听
+     * 设置上拉加载没有更多数据布局
      * @param view                  没有更多数据布局view
      */
     public void setNoMore(final View view) {
@@ -342,14 +414,27 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
     }
 
 
+    /**
+     * 设置上拉加载异常的布局
+     * @param res                   view
+     */
     public void setError(final @LayoutRes int res) {
         getEventDelegate().setErrorMore(res,null);
     }
 
+    /**
+     * 设置上拉加载异常的布局
+     * @param view                  view
+     */
     public void setError(final View view) {
         getEventDelegate().setErrorMore(view,null);
     }
 
+    /**
+     * 设置上拉加载异常的布局和异常监听
+     * @param res                   view
+     * @param listener              上拉加载更多异常监听
+     */
     public void setError(final @LayoutRes int res,OnErrorListener listener) {
         getEventDelegate().setErrorMore(res,listener);
     }
@@ -579,7 +664,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
     }
 
     /**
-     * 触发清空
+     * 触发清空所有的数据
      */
     public void clear() {
         int count = mObjects.size();
@@ -607,10 +692,18 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         }
     }
 
+    /**
+     * 设置操作数据[增删改查]后，是否刷新adapter
+     * @param notifyOnChange                默认是刷新的true
+     */
     public void setNotifyOnChange(boolean notifyOnChange) {
         mNotifyOnChange = notifyOnChange;
     }
 
+    /**
+     * 获取上下文
+     * @return
+     */
     public Context getContext() {
         return mContext;
     }
@@ -656,7 +749,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
 
     /**
      * 获取所有的数据list集合
-     * @return
+     * @return                      list结合
      */
     public List<T> getAllData(){
         return new ArrayList<>(mObjects);
@@ -671,17 +764,11 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
 
     /**
      * 获取item索引位置
-     * @param item      item
-     * @return          索引位置
+     * @param item                  item
+     * @return                      索引位置
      */
     public int getPosition(T item) {
         return mObjects.indexOf(item);
-    }
-
-
-    @Override
-    public long getItemId(int position) {
-        return position;
     }
 
 

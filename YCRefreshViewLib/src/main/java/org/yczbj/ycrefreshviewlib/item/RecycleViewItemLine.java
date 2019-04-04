@@ -59,7 +59,9 @@ public class RecycleViewItemLine extends RecyclerView.ItemDecoration {
     public RecycleViewItemLine(Context context, int orientation, int drawableId) {
         this(context, orientation);
         mDivider = ContextCompat.getDrawable(context, drawableId);
-        mDividerHeight = mDivider.getIntrinsicHeight();
+        if (mDivider != null) {
+            mDividerHeight = mDivider.getIntrinsicHeight();
+        }
     }
 
     /**
