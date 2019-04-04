@@ -49,6 +49,8 @@
 
 ### 2.本库优势亮点
 #### 2.1 支持多种状态切换管理
+- 支持在布局中或者代码设置自定义不同状态的view，一行代码既可以切换不同的状态，十分方便。
+- 针对自定义状态view或者layout，可以实现交互功能，比如当切换到网络异常的页面，可以点击页面控件取刷新数据或者跳转设置网络页面
 
 
 
@@ -60,7 +62,8 @@
 
 #### 2.3 支持侧滑功能和拖拽移动
 - 轻量级侧滑删除菜单，直接嵌套item布局即可使用，使用十分简单
-- RecyclerView实现条目Item拖拽排序
+- 通过自定义ItemTouchHelper实现RecyclerView条目Item拖拽排序，只是设置是否拖拽，设置拖拽item的背景颜色，优化了拖拽效果，比如在拖拽过程中设置item的缩放和渐变效果
+
 
 
 #### 2.4 其他亮点介绍
@@ -76,7 +79,7 @@
 ### 3.如何使用介绍
 #### 3.1 最基础的使用
 - 首先在集成：
-    - implementation 'org.yczbj:YCRefreshViewLib:2.5.7'
+    - implementation 'org.yczbj:YCRefreshViewLib:2.5.8'
 - 在布局中
     ```
     <org.yczbj.ycrefreshviewlib.YCRefreshView
@@ -433,6 +436,7 @@
     });
     mCallback.setDragEnable(true);
     mCallback.setSwipeEnable(true);
+    mCallback.setColor(this.getResources().getColor(R.color.colorAccent));
     ItemTouchHelper itemTouchHelper = new ItemTouchHelper(mCallback);
     itemTouchHelper.attachToRecyclerView(recyclerView);
     ```
