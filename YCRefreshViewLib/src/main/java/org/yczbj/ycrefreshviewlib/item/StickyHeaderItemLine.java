@@ -3,6 +3,7 @@ package org.yczbj.ycrefreshviewlib.item;
 import android.annotation.SuppressLint;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.support.annotation.NonNull;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -58,7 +59,8 @@ public class StickyHeaderItemLine extends RecyclerView.ItemDecoration {
 
 
     @Override
-    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+    public void getItemOffsets(@NonNull Rect outRect, @NonNull View view,
+                               @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         int position = parent.getChildAdapterPosition(view);
         int headerHeight = 0;
         if (!mIncludeHeader){
@@ -78,7 +80,8 @@ public class StickyHeaderItemLine extends RecyclerView.ItemDecoration {
             }
         }
 
-        if (position != RecyclerView.NO_POSITION && hasHeader(position) && showHeaderAboveItem(position)) {
+        if (position != RecyclerView.NO_POSITION && hasHeader(position)
+                && showHeaderAboveItem(position)) {
             View header = getHeader(parent, position).itemView;
             headerHeight = getHeaderHeightForLayout(header);
         }
@@ -89,7 +92,8 @@ public class StickyHeaderItemLine extends RecyclerView.ItemDecoration {
         if (itemAdapterPosition == 0) {
             return true;
         }
-        return mAdapter.getHeaderId(itemAdapterPosition - 1) != mAdapter.getHeaderId(itemAdapterPosition);
+        return mAdapter.getHeaderId(itemAdapterPosition - 1)
+                != mAdapter.getHeaderId(itemAdapterPosition);
     }
 
 
@@ -126,12 +130,16 @@ public class StickyHeaderItemLine extends RecyclerView.ItemDecoration {
             final View header = holder.itemView;
             //noinspection unchecked
             mAdapter.onBindHeaderViewHolder(holder, position);
-            int widthSpec = View.MeasureSpec.makeMeasureSpec(parent.getMeasuredWidth(), View.MeasureSpec.EXACTLY);
-            int heightSpec = View.MeasureSpec.makeMeasureSpec(parent.getMeasuredHeight(), View.MeasureSpec.UNSPECIFIED);
+            int widthSpec = View.MeasureSpec.makeMeasureSpec(parent.getMeasuredWidth(),
+                    View.MeasureSpec.EXACTLY);
+            int heightSpec = View.MeasureSpec.makeMeasureSpec(parent.getMeasuredHeight(),
+                    View.MeasureSpec.UNSPECIFIED);
             int childWidth = ViewGroup.getChildMeasureSpec(widthSpec,
-                    parent.getPaddingLeft() + parent.getPaddingRight(), header.getLayoutParams().width);
+                    parent.getPaddingLeft() + parent.getPaddingRight(),
+                    header.getLayoutParams().width);
             int childHeight = ViewGroup.getChildMeasureSpec(heightSpec,
-                    parent.getPaddingTop() + parent.getPaddingBottom(), header.getLayoutParams().height);
+                    parent.getPaddingTop() + parent.getPaddingBottom(),
+                    header.getLayoutParams().height);
             header.measure(childWidth, childHeight);
             header.layout(0, 0, header.getMeasuredWidth(), header.getMeasuredHeight());
             mHeaderCache.put(key, holder);
@@ -141,7 +149,8 @@ public class StickyHeaderItemLine extends RecyclerView.ItemDecoration {
 
 
     @Override
-    public void onDrawOver(Canvas canvas, RecyclerView parent, RecyclerView.State state) {
+    public void onDrawOver(@NonNull Canvas canvas, @NonNull RecyclerView parent,
+                           @NonNull RecyclerView.State state) {
         if (parent.getAdapter() == null){
             return;
         }
@@ -186,7 +195,8 @@ public class StickyHeaderItemLine extends RecyclerView.ItemDecoration {
     }
 
 
-    private int getHeaderTop(RecyclerView parent, View child, View header, int adapterPos, int layoutPos) {
+    private int getHeaderTop(RecyclerView parent, View child, View header,
+                             int adapterPos, int layoutPos) {
         int headerHeight = getHeaderHeightForLayout(header);
         int top = ((int) child.getY()) - headerHeight;
         if (layoutPos == 0) {
@@ -199,7 +209,8 @@ public class StickyHeaderItemLine extends RecyclerView.ItemDecoration {
                     long nextId = mAdapter.getHeaderId(adapterPosHere);
                     if (nextId != currentId) {
                         final View next = parent.getChildAt(i);
-                        final int offset = ((int) next.getY()) - (headerHeight + getHeader(parent, adapterPosHere).itemView.getHeight());
+                        final int offset = ((int) next.getY()) - (headerHeight +
+                                getHeader(parent, adapterPosHere).itemView.getHeight());
                         if (offset < 0) {
                             return offset;
                         } else {

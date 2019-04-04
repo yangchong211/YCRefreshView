@@ -125,6 +125,7 @@ public class ItemTouchHelpCallback extends ItemTouchHelper.Callback {
                 dragFlag = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
                 swipeFlag = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
             }
+            //第一个参数是拖拽flag，第二个是滑动的flag
             return makeMovementFlags(dragFlag, swipeFlag);
         }
         return 0;

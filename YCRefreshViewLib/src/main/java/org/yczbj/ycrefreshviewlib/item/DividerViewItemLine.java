@@ -26,10 +26,25 @@ import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 public class DividerViewItemLine extends RecyclerView.ItemDecoration{
 
     private ColorDrawable mColorDrawable;
+    /**
+     * 分割线的高度，单位是像素px
+     */
     private int mHeight;
+    /**
+     * 距离左边的padding值
+     */
     private int mPaddingLeft;
+    /**
+     * 距离右边的padding值
+     */
     private int mPaddingRight;
+    /**
+     * 设置是否绘制最后一条item的分割线
+     */
     private boolean mDrawLastItem = true;
+    /**
+     * 设置是否绘制header和footer的分割线
+     */
     private boolean mDrawHeaderFooter = false;
 
     public DividerViewItemLine(int color, int height) {
@@ -52,6 +67,16 @@ public class DividerViewItemLine extends RecyclerView.ItemDecoration{
         this.mDrawHeaderFooter = mDrawHeaderFooter;
     }
 
+    /**
+     * 调用的是getItemOffsets会被多次调用，在layoutManager每次测量可摆放的view的时候回调用一次，
+     * 在当前状态下需要摆放多少个view这个方法就会回调多少次。
+     * @param outRect                   核心参数，这个rect相当于item摆放的时候设置的margin，
+     *                                  rect的left相当于item的marginLeft，
+     *                                  rect的right相当于item的marginRight
+     * @param view                      当前绘制的view，可以用来获取它在adapter中的位置
+     * @param parent                    recyclerView
+     * @param state                     状态，用的很少
+     */
     @Override
     public void getItemOffsets(@NonNull Rect outRect, @NonNull View view,
                                @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
@@ -61,6 +86,7 @@ public class DividerViewItemLine extends RecyclerView.ItemDecoration{
         if (parent.getAdapter()==null){
             return;
         }
+        //获取header和footer的数量
         if (parent.getAdapter() instanceof RecyclerArrayAdapter){
             headerCount = ((RecyclerArrayAdapter) parent.getAdapter()).getHeaderCount();
             footerCount = ((RecyclerArrayAdapter) parent.getAdapter()).getFooterCount();
@@ -75,9 +101,13 @@ public class DividerViewItemLine extends RecyclerView.ItemDecoration{
             orientation = ((LinearLayoutManager) layoutManager).getOrientation();
         }
         int itemCount = parent.getAdapter().getItemCount();
+        int count = itemCount-footerCount;
+
+        //下面代码才是重点，更多内容可以看我的GitHub博客汇总：https://github.com/yangchong211/YCBlogs
         if (mDrawHeaderFooter){
-            if (position>=headerCount && position<itemCount-footerCount){
+            if (position >= headerCount && position<count){
                 if (orientation == OrientationHelper.VERTICAL){
+                    //当是竖直方向的时候，距离底部marginBottom是分割线的高度
                     outRect.bottom = mHeight;
                 }else {
                     //noinspection SuspiciousNameCombination
@@ -128,23 +158,27 @@ public class DividerViewItemLine extends RecyclerView.ItemDecoration{
             int position = parent.getChildAdapterPosition(child);
             //数据项除了最后一项 数据项最后一项
             //header&footer且可绘制
-            if (position>=dataStartPosition&&position<dataEndPosition-1
-                    ||(position == dataEndPosition-1&&mDrawLastItem)
-                    ||(!(position>=dataStartPosition&&position<dataEndPosition)&&mDrawHeaderFooter)
-                    ){
-
-                if (orientation == OrientationHelper.VERTICAL){
-                    RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
-                    int top = child.getBottom() + params.bottomMargin;
-                    int bottom = top + mHeight;
-                    mColorDrawable.setBounds(start,top,end,bottom);
-                    mColorDrawable.draw(c);
-                }else {
-                    RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
-                    int left = child.getRight() + params.rightMargin;
-                    int right = left + mHeight;
-                    mColorDrawable.setBounds(left,start,right,end);
-                    mColorDrawable.draw(c);
+            boolean a = position >= dataStartPosition;
+            boolean b = position<dataEndPosition-1;
+            boolean d = position == dataEndPosition-1 && mDrawLastItem;
+            boolean f = !(position>=dataStartPosition&&position<dataEndPosition)&&mDrawHeaderFooter;
+            if (a){
+                if (b ||d ||f){
+                    if (orientation == OrientationHelper.VERTICAL){
+                        RecyclerView.LayoutParams params = (RecyclerView.LayoutParams)
+                                child.getLayoutParams();
+                        int top = child.getBottom() + params.bottomMargin;
+                        int bottom = top + mHeight;
+                        mColorDrawable.setBounds(start,top,end,bottom);
+                        mColorDrawable.draw(c);
+                    }else {
+                        RecyclerView.LayoutParams params = (RecyclerView.LayoutParams)
+                                child.getLayoutParams();
+                        int left = child.getRight() + params.rightMargin;
+                        int right = left + mHeight;
+                        mColorDrawable.setBounds(left,start,right,end);
+                        mColorDrawable.draw(c);
+                    }
                 }
             }
         }
