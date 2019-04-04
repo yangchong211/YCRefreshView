@@ -32,6 +32,7 @@
         <activity android:name=".touchmove.NightTouchMoveActivity"/>
         <activity android:name=".delete.DeleteAndTopActivity"/>
         <activity android:name=".normal.NormalRecyclerViewActivity"/>
+        <activity android:name=".type.TypeActivity"/>
     </application>
 
 </manifest>
