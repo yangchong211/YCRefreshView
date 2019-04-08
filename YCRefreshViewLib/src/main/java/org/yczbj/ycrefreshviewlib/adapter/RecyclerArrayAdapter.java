@@ -105,7 +105,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
      * 创建viewHolder
      * @param parent                        parent
      * @param viewType                      type类型
-     * @return
+     * @return                              返回viewHolder
      */
     @NonNull
     @Override
@@ -301,7 +301,11 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
      * @return                      InterItemView
      */
     public InterItemView getHeader(int index){
-        return headers.get(index);
+        if (headers!=null && headers.size()>0){
+            return headers.get(index);
+        }else {
+            return null;
+        }
     }
 
     /**
@@ -310,7 +314,11 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
      * @return                      InterItemView
      */
     public InterItemView getFooter(int index){
-        return footers.get(index);
+        if (footers!=null && footers.size()>0){
+            return footers.get(index);
+        }else {
+            return null;
+        }
     }
 
     /**

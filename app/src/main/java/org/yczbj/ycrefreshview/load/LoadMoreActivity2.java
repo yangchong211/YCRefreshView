@@ -81,7 +81,7 @@ public class LoadMoreActivity2 extends AppCompatActivity {
                                 updateRecyclerView(adapter.getRealLastPosition(),
                                         adapter.getRealLastPosition() + PAGE_COUNT);
                             }
-                        }, 500);
+                        }, 2500);
                     }
 
                     // 如果隐藏了提示条，我们又上拉加载时，那么最后一个条目就要比getItemCount要少2
@@ -92,7 +92,7 @@ public class LoadMoreActivity2 extends AppCompatActivity {
                                 updateRecyclerView(adapter.getRealLastPosition(),
                                         adapter.getRealLastPosition() + PAGE_COUNT);
                             }
-                        }, 500);
+                        }, 2500);
                     }
                 }
             }
@@ -104,7 +104,6 @@ public class LoadMoreActivity2 extends AppCompatActivity {
                 lastVisibleItem = layoutManager.findLastVisibleItemPosition();
             }
         });
-
     }
 
 
@@ -112,7 +111,7 @@ public class LoadMoreActivity2 extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                adapter.setData(DataProvider.getPersonList(0));
+                adapter.setData(DataProvider.getPersonList(16));
             }
         }, 50);
     }

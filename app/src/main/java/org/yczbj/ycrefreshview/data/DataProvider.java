@@ -18,7 +18,7 @@ public class DataProvider {
     private static ArrayList<Integer> getData(){
         ArrayList<Integer> data = new ArrayList<>();
         TypedArray bannerImage = BaseApp.getApp().getResources().obtainTypedArray(R.array.image_girls);
-        for (int i = 0; i < 12 ; i++) {
+        for (int i = 0; i < 16 ; i++) {
             int image = bannerImage.getResourceId(i, R.drawable.girl2);
             data.add(image);
         }
@@ -26,10 +26,13 @@ public class DataProvider {
         return data;
     }
 
-    public static List<PersonData> getPersonList(int page){
+    public static List<PersonData> getPersonList(int size){
+        if (size==0){
+            size = 16;
+        }
         ArrayList<PersonData> arr = new ArrayList<>();
         ArrayList<Integer> data = getData();
-        for (int i=0 ; i<10 ; i++){
+        for (int i=0 ; i< size ; i++){
             PersonData person = new PersonData();
             person.setName("小杨逗比"+i);
             person.setImage(data.get(i));

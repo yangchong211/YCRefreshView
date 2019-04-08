@@ -110,10 +110,15 @@ public class YCRefreshView extends FrameLayout {
         super.onAttachedToWindow();
     }
 
-
+    /**
+     * 当view销毁时会调用该方法
+     */
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
+        if (mRecyclerView!=null){
+            mRecyclerView.removeOnScrollListener(mInternalOnScrollListener);
+        }
     }
 
     /**
