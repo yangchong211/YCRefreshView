@@ -662,6 +662,64 @@
 
 
 
+### 6.recyclerView的wiki文档【更新中】
+#### 6.1 封装库部分思路介绍
+- 01.整体封装思路
+- 02.添加下拉刷新
+- 03.添加header和footer
+- 04.添加上拉加载
+- 05.接口分离法则
+- 06.泛型在框架中应用
+- 07.封装adapter
+- 08.封装ViewHolder
+- 09.状态管理切换
+- 10.View事件分发运用
+- 11.侧滑删除功能
+- 12.Item拖拽排序与滑动删除
+- 13.自定义ItemDecoration
+
+
+#### 6.2 优化处理逻辑介绍
+- 01.接口分离优化
+- 02.去除淡黄色警告
+- 03.SparseArray替代HashMap
+- 04.瀑布流图片错乱问题解决
+- 05.关于点击事件放在哪里优化
+- 06.ViewHolder优化
+- 07.连续上拉加载更多优化
+- 08.拖拽排序与滑动删除优化
+- 09.暂停或停止加载数据优化
+- 10.状态切换交互优化
+- 11.异常情况下保存状态
+- 12.多线程下插入数据优化
+- 13.recyclerView滑动卡顿优化
+
+#### 6.3 recyclerView相关类
+- 01.recyclerView
+- 02.layoutManager
+- 03.adapter
+- 04.viewHolder
+- 05.SnapHelper
+- 06.ItemTouchHelper
+- 07.SpanSizeLookup
+- 08.ItemDecoration
+
+
+
+#### 6.4 recyclerView滑动冲突
+- 01.如何判断RecyclerView控件滑动到顶部和底部
+- 02.RecyclerView嵌套RecyclerView 条目自动上滚的Bug
+- 03.ScrollView嵌套RecyclerView滑动冲突
+- 04.ViewPager嵌套水平RecyclerView横向滑动到底后不滑动ViewPager
+- 05.RecyclerView嵌套RecyclerView的滑动冲突问题
+- 06.RecyclerView使用Glide加载图片导致图片错乱问题解决
+
+
+
+#### 6.5 recyclerView相关博客
+
+
+
 ### 7.实现效果展示
 #### 7.1 使用过YCRefreshView库的案例代码
 - 可以直接参考demo，或者直接参考的我其他案例，其中这几个案例中使用到了该库
