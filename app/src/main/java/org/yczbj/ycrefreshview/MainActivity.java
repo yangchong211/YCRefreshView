@@ -11,11 +11,13 @@ import android.widget.TextView;
 
 import org.yczbj.ycrefreshview.collapsing.EightCollapsingActivity;
 import org.yczbj.ycrefreshview.load.LoadMoreActivity;
+import org.yczbj.ycrefreshview.load.LoadMoreActivity2;
 import org.yczbj.ycrefreshview.normal.NormalRecyclerViewActivity;
 import org.yczbj.ycrefreshview.refresh.RefreshAndMoreActivity1;
 import org.yczbj.ycrefreshview.refresh.RefreshAndMoreActivity2;
 import org.yczbj.ycrefreshview.multistyle.FiveMultiStyleActivity;
 import org.yczbj.ycrefreshview.horizontal.FourHorizontalActivity;
+import org.yczbj.ycrefreshview.refresh.RefreshAndMoreActivity3;
 import org.yczbj.ycrefreshview.touchmove.NightTouchMoveActivity;
 import org.yczbj.ycrefreshview.header.HeaderFooterActivity;
 import org.yczbj.ycrefreshview.staggered.SevenStaggeredGridActivity;
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void init() {
         findViewById(R.id.tv_1_1).setOnClickListener(this);
         findViewById(R.id.tv_1_2).setOnClickListener(this);
+        findViewById(R.id.tv_1_3).setOnClickListener(this);
         findViewById(R.id.tv_2).setOnClickListener(this);
         findViewById(R.id.tv_3).setOnClickListener(this);
         findViewById(R.id.tv_4).setOnClickListener(this);
@@ -54,7 +57,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.tv_10).setOnClickListener(this);
         findViewById(R.id.tv_11).setOnClickListener(this);
         findViewById(R.id.tv_12).setOnClickListener(this);
-        findViewById(R.id.tv_13).setOnClickListener(this);
+        findViewById(R.id.tv_13_1).setOnClickListener(this);
+        findViewById(R.id.tv_13_2).setOnClickListener(this);
         test1();
     }
 
@@ -67,6 +71,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.tv_1_2:
                 startActivity(new Intent(this, RefreshAndMoreActivity2.class));
+                break;
+            case R.id.tv_1_3:
+                startActivity(new Intent(this, RefreshAndMoreActivity3.class));
                 break;
             case R.id.tv_2:
                 startActivity(new Intent(this, HeaderFooterActivity.class));
@@ -101,8 +108,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.tv_12:
                 startActivity(new Intent(this, TypeActivity.class));
                 break;
-            case R.id.tv_13:
+            case R.id.tv_13_1:
                 startActivity(new Intent(this, LoadMoreActivity.class));
+                break;
+            case R.id.tv_13_2:
+                startActivity(new Intent(this, LoadMoreActivity2.class));
                 break;
             default:
                 break;

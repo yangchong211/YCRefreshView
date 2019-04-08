@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -103,6 +104,34 @@ public class YCRefreshView extends FrameLayout {
         return super.onInterceptTouchEvent(ev);
     }
 
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+    }
+
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+    }
+
+    /**
+     * 完成绘制会调用该方法
+     */
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+        //int childCount = getChildCount();
+        RecyclerView recyclerView = getRecyclerView();
+        if (recyclerView!=null){
+            initScrollListener();
+            //添加滚动监听事件
+            recyclerView.addOnScrollListener(mInternalOnScrollListener);
+        }
+    }
+
+
     /**
      * 初始化资源
      * @param attrs         attrs
@@ -171,9 +200,6 @@ public class YCRefreshView extends FrameLayout {
         if (mRecyclerView != null) {
             mRecyclerView.setHasFixedSize(true);
             mRecyclerView.setClipToPadding(mClipToPadding);
-            initScrollListener();
-            //添加滚动监听事件
-            mRecyclerView.addOnScrollListener(mInternalOnScrollListener);
             //设置recyclerView的padding值
             if (mPadding != -1) {
                 mRecyclerView.setPadding(mPadding, mPadding, mPadding, mPadding);

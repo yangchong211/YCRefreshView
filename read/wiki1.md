@@ -33,6 +33,10 @@
 - recyclerView在上拉的时候，可以定义一个footerView，而这个view就可以设置上拉加载布局
     - 具体可以看view_more布局
 - 在adapter中，可以上拉加载时处理footerView的逻辑
+    - 在getItemViewType方法中设置最后一个Item为FooterView
+    - 在onCreateViewHolder方法中根据viewType来加载不同的布局
+    - 最后在onBindViewHolder方法中设置一下加载的状态显示就可以
+    - 由于多了一个FooterView，所以要记得在getItemCount方法的返回值中加上1。
     ```
     @NonNull
     @Override
@@ -110,9 +114,33 @@
     });
     ```
 - 那么既然知道了最简单的recyclerView设置上拉加载逻辑，如何优化一下，并封装成库呢？
-
-
-
+    - 如果是要封装的话，则使用者应该可以很方便的设置监听事件和设置自定义加载更多View。可以自定义一个FooterView继承InterItemView接口，然后重写两个方法！
+    - 同时，关于上拉刷新，可以自动上拉刷新，可以手动触发上拉刷新，则可以自定义一个上拉加载更多的listener，同时里面包含这两个方法。
+- 如何控制上拉刷新view的显示与隐藏
+    - 给RecyclerView增加一个FooterView，然后通过判断是否滑动到了最后一条Item，来控制FooterView的显示和隐藏。
+- 网格布局上拉刷新优化
+    - 如果是网格布局，那么上拉刷新的view则不是居中显示，到加载更多的进度条显示在了一个Item上，如果想要正常显示的话，进度条需要横跨两个Item，这该怎么办呢？
+    - 在adapter中的onAttachedToRecyclerView方法中处理网格布局情况，代码如下所示，主要逻辑是如果当前是footer的位置，那么该item占据2个单元格，正常情况下占据1个单元格。
+    ```
+    @Override
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
+        if (manager instanceof GridLayoutManager) {
+            final GridLayoutManager gridManager = ((GridLayoutManager) manager);
+            gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    // 如果当前是footer的位置，那么该item占据2个单元格，正常情况下占据1个单元格
+                    return getItemViewType(position) == footType ? gridManager.getSpanCount() : 1;
+                }
+            });
+        }
+    }
+    ```
+- 那么如何实现自动进行上拉刷新？
+    -
+- 那么如何实现手动上拉刷新呢？
 
 
 ### 05.接口分离法则
@@ -200,7 +228,6 @@
 
 #### 参考博客
 - https://segmentfault.com/a/1190000007771723
--
 
 
 

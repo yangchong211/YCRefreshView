@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class LoadMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class LoadMoreAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
     private Context mContext;
@@ -50,7 +51,7 @@ public class LoadMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
 
 
-    public LoadMoreAdapter(Context context,boolean hasMore) {
+    public LoadMoreAdapter2(Context context, boolean hasMore) {
         this.mContext = context;
         this.hasMore = hasMore;
     }
@@ -90,6 +91,23 @@ public class LoadMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      */
     public int getRealLastPosition() {
         return data.size();
+    }
+
+
+    @Override
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
+        if (manager instanceof GridLayoutManager) {
+            final GridLayoutManager gridManager = ((GridLayoutManager) manager);
+            gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    // 如果当前是footer的位置，那么该item占据2个单元格，正常情况下占据1个单元格
+                    return getItemViewType(position) == footType ? gridManager.getSpanCount() : 1;
+                }
+            });
+        }
     }
 
 

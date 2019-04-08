@@ -18,6 +18,7 @@ import org.yczbj.ycrefreshviewlib.inter.OnItemLongClickListener;
 import org.yczbj.ycrefreshviewlib.inter.OnLoadMoreListener;
 import org.yczbj.ycrefreshviewlib.inter.OnMoreListener;
 import org.yczbj.ycrefreshviewlib.inter.OnNoMoreListener;
+import org.yczbj.ycrefreshviewlib.observer.FixDataObserver;
 import org.yczbj.ycrefreshviewlib.utils.RecyclerUtils;
 import org.yczbj.ycrefreshviewlib.utils.RefreshLogUtils;
 import org.yczbj.ycrefreshviewlib.holder.BaseViewHolder;
@@ -73,6 +74,31 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
     private void init(Context context , List<T> objects) {
         mContext = context;
         mObjects = new ArrayList<>(objects);
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        //增加对RecyclerArrayAdapter奇葩操作的修复措施
+        registerAdapterDataObserver(new FixDataObserver(recyclerView));
+        RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
+        if (manager instanceof GridLayoutManager) {
+            final GridLayoutManager gridManager = ((GridLayoutManager) manager);
+            gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    // 如果当前是footer的位置，那么该item占据2个单元格，正常情况下占据1个单元格
+                    int itemViewType = getItemViewType(position);
+                    //注意，具体可以看DefaultEventDelegate类中的EventFooter类代码
+                    if (itemViewType>=DefaultEventDelegate.EventFooter.HIDE &&
+                            itemViewType<=DefaultEventDelegate.EventFooter.SHOW_NO_MORE){
+                        return gridManager.getSpanCount();
+                    }else {
+                        return 1;
+                    }
+                }
+            });
+        }
     }
 
     /**
@@ -447,31 +473,6 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
 
     public void setError(final View view,OnErrorListener listener) {
         getEventDelegate().setErrorMore(view,listener);
-    }
-
-    @Override
-    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
-        //增加对RecyclerArrayAdapter奇葩操作的修复措施
-        registerAdapterDataObserver(new FixDataObserver(recyclerView));
-    }
-
-    private class FixDataObserver extends RecyclerView.AdapterDataObserver {
-
-        private RecyclerView recyclerView;
-        FixDataObserver(RecyclerView recyclerView) {
-            this.recyclerView = recyclerView;
-        }
-
-        @Override
-        public void onItemRangeInserted(int positionStart, int itemCount) {
-            if (recyclerView.getAdapter() instanceof RecyclerArrayAdapter) {
-                RecyclerArrayAdapter adapter = (RecyclerArrayAdapter) recyclerView.getAdapter();
-                if (adapter.getFooterCount() > 0 && adapter.getCount() == itemCount) {
-                    recyclerView.scrollToPosition(0);
-                }
-            }
-        }
     }
 
     /**

@@ -21,6 +21,7 @@
         </activity>
         <activity android:name=".refresh.RefreshAndMoreActivity1"/>
         <activity android:name=".refresh.RefreshAndMoreActivity2"/>
+        <activity android:name=".refresh.RefreshAndMoreActivity3"/>
         <activity android:name=".header.HeaderFooterActivity"/>
         <activity android:name=".insert.ThirdInsertActivity"/>
         <activity android:name=".horizontal.FourHorizontalActivity"/>
@@ -34,6 +35,7 @@
         <activity android:name=".normal.NormalRecyclerViewActivity"/>
         <activity android:name=".type.TypeActivity"/>
         <activity android:name=".load.LoadMoreActivity"/>
+        <activity android:name=".load.LoadMoreActivity2"/>
     </application>
 
 </manifest>

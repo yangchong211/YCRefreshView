@@ -34,6 +34,16 @@
 
 
         <TextView
+            android:id="@+id/tv_1_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"
+            android:text="1.2常用下拉刷新，上拉加载更多，双列数据"/>
+
+
+        <TextView
             android:id="@+id/tv_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -139,13 +149,24 @@
 
 
         <TextView
-            android:id="@+id/tv_13"
+            android:id="@+id/tv_13_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:layout_marginTop="10dp"
             android:background="@android:color/darker_gray"
-            android:text="13.使用recyclerView实现简单的上拉加载更多操作"/>
+            android:text="13.1 使用recyclerView实现简单的上拉加载更多操作"/>
+
+
+        <TextView
+            android:id="@+id/tv_13_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"
+            android:text="13.2 使用recyclerView上拉加载更多操作，双列数据"/>
+
 
 
         <TextView

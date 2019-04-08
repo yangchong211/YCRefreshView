@@ -29,7 +29,7 @@ public class DataProvider {
     public static List<PersonData> getPersonList(int page){
         ArrayList<PersonData> arr = new ArrayList<>();
         ArrayList<Integer> data = getData();
-        for (int i=0 ; i<data.size() ; i++){
+        for (int i=0 ; i<10 ; i++){
             PersonData person = new PersonData();
             person.setName("小杨逗比"+i);
             person.setImage(data.get(i));

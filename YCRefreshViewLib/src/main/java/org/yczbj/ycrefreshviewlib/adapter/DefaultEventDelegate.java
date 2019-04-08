@@ -208,7 +208,7 @@ public class DefaultEventDelegate implements InterEventDelegate {
     /**
      * 这个是设置上拉加载footer
      */
-    private class EventFooter implements InterItemView {
+    public class EventFooter implements InterItemView {
 
         private View moreView = null;
         private View noMoreView = null;
@@ -217,10 +217,10 @@ public class DefaultEventDelegate implements InterEventDelegate {
         private int noMoreViewRes = 0;
         private int errorViewRes = 0;
         private int flag = HIDE;
-        private static final int HIDE = 0;
-        private static final int SHOW_MORE = 1;
-        private static final int SHOW_ERROR = 2;
-        private static final int SHOW_NO_MORE = 3;
+        static final int HIDE = 520;
+        private static final int SHOW_MORE = 521;
+        private static final int SHOW_ERROR = 522;
+        static final int SHOW_NO_MORE = 523;
         /**
          * 是否展示error的view
          */
@@ -399,7 +399,7 @@ public class DefaultEventDelegate implements InterEventDelegate {
 
         @Override
         public int hashCode() {
-            return flag+13589;
+            return flag;
         }
     }
 
