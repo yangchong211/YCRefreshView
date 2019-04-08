@@ -205,7 +205,9 @@ public class DefaultEventDelegate implements InterEventDelegate {
     }
 
 
-
+    /**
+     * 这个是设置上拉加载footer
+     */
     private class EventFooter implements InterItemView {
 
         private View moreView = null;
@@ -219,7 +221,13 @@ public class DefaultEventDelegate implements InterEventDelegate {
         private static final int SHOW_MORE = 1;
         private static final int SHOW_ERROR = 2;
         private static final int SHOW_NO_MORE = 3;
+        /**
+         * 是否展示error的view
+         */
         private boolean skipError = false;
+        /**
+         * 是否展示noMore的view
+         */
         private boolean skipNoMore = false;
 
         private EventFooter(){}
@@ -270,7 +278,8 @@ public class DefaultEventDelegate implements InterEventDelegate {
                     if (moreView!=null) {
                         view = moreView;
                     } else if (moreViewRes!=0) {
-                        view = LayoutInflater.from(parent.getContext()).inflate(moreViewRes, parent, false);
+                        view = LayoutInflater.from(parent.getContext())
+                                .inflate(moreViewRes, parent, false);
                     }
                     if (view!=null) {
                         view.setOnClickListener(new View.OnClickListener() {
@@ -285,7 +294,8 @@ public class DefaultEventDelegate implements InterEventDelegate {
                     if (errorView!=null) {
                         view = errorView;
                     } else if (errorViewRes!=0) {
-                        view = LayoutInflater.from(parent.getContext()).inflate(errorViewRes, parent, false);
+                        view = LayoutInflater.from(parent.getContext())
+                                .inflate(errorViewRes, parent, false);
                     }
                     if (view!=null) {
                         view.setOnClickListener(new View.OnClickListener() {
@@ -300,7 +310,8 @@ public class DefaultEventDelegate implements InterEventDelegate {
                     if (noMoreView!=null) {
                         view = noMoreView;
                     } else if (noMoreViewRes!=0) {
-                        view = LayoutInflater.from(parent.getContext()).inflate(noMoreViewRes, parent, false);
+                        view = LayoutInflater.from(parent.getContext())
+                                .inflate(noMoreViewRes, parent, false);
                     }
                     if (view!=null) {
                         view.setOnClickListener(new View.OnClickListener() {
@@ -347,7 +358,6 @@ public class DefaultEventDelegate implements InterEventDelegate {
             }
         }
 
-        //初始化
         void hide(){
             RefreshLogUtils.d("footer hide");
             flag = HIDE;

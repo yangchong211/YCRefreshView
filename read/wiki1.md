@@ -17,8 +17,6 @@
 
 
 
-
-
 ### 01.整体封装思路
 
 
@@ -32,6 +30,88 @@
 
 
 ### 04.添加上拉加载
+- recyclerView在上拉的时候，可以定义一个footerView，而这个view就可以设置上拉加载布局
+    - 具体可以看view_more布局
+- 在adapter中，可以上拉加载时处理footerView的逻辑
+    ```
+    @NonNull
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // 根据返回的ViewType，绑定不同的布局文件，这里只有两种
+        if (viewType == normalType) {
+            return new MyViewHolder(LayoutInflater.from(mContext)
+                    .inflate(R.layout.item_news, parent,false));
+        } else {
+            //这个是上拉加载更多的view
+            return new FootHolder(LayoutInflater.from(mContext)
+                    .inflate(R.layout.view_more, parent,false));
+        }
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof MyViewHolder){
+            PersonData person = data.get(position);
+            setBindViewHolder((MyViewHolder)holder,person,position);
+        }else {
+            setFootBindViewHolder((FootHolder)holder ,position);
+        }
+    }
+
+
+    /**
+     * 获取条目数量，之所以要加1是因为增加了一条footView
+     */
+    @Override
+    public int getItemCount() {
+        return data == null ? 0 : data.size()+1;
+    }
+
+
+    /**
+     * 根据条目位置返回ViewType，以供onCreateViewHolder方法内获取不同的Holder
+     */
+    @Override
+    public int getItemViewType(int position) {
+        if (position == getItemCount() - 1) {
+            return footType;
+        } else {
+            return normalType;
+        }
+    }
+    ```
+- 接着设置滑动监听器，也就是RecyclerView自带的ScrollListener
+    ```
+    // 实现上拉加载重要步骤，设置滑动监听器，RecyclerView自带的ScrollListener
+    recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+            super.onScrollStateChanged(recyclerView, newState);
+            // 在newState为滑到底部时
+            if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                // 如果没有隐藏footView，那么最后一个条目的位置就比我们的getItemCount少1
+                if (!adapter.isFadeTips() && lastVisibleItem + 1 == adapter.getItemCount()) {
+                    //加载下一页数据
+                }
+
+                // 如果隐藏了提示条，我们又上拉加载时，那么最后一个条目就要比getItemCount要少2
+                if (adapter.isFadeTips() && lastVisibleItem + 2 == adapter.getItemCount()) {
+
+                }
+            }
+        }
+
+        @Override
+        public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
+            // 在滑动完成后，拿到最后一个可见的item的位置
+            lastVisibleItem = layoutManager.findLastVisibleItemPosition();
+        }
+    });
+    ```
+- 那么既然知道了最简单的recyclerView设置上拉加载逻辑，如何优化一下，并封装成库呢？
+
+
 
 
 

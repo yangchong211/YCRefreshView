@@ -9,6 +9,7 @@
         android:layout_height="28dp"
         android:indeterminate="false"/>
     <TextView
+        android:id="@+id/tv_more"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="更多加载中……"/>

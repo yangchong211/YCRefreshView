@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import org.yczbj.ycrefreshview.collapsing.EightCollapsingActivity;
+import org.yczbj.ycrefreshview.load.LoadMoreActivity;
 import org.yczbj.ycrefreshview.normal.NormalRecyclerViewActivity;
 import org.yczbj.ycrefreshview.refresh.RefreshAndMoreActivity1;
 import org.yczbj.ycrefreshview.refresh.RefreshAndMoreActivity2;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.tv_10).setOnClickListener(this);
         findViewById(R.id.tv_11).setOnClickListener(this);
         findViewById(R.id.tv_12).setOnClickListener(this);
+        findViewById(R.id.tv_13).setOnClickListener(this);
         test1();
     }
 
@@ -98,6 +100,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.tv_12:
                 startActivity(new Intent(this, TypeActivity.class));
+                break;
+            case R.id.tv_13:
+                startActivity(new Intent(this, LoadMoreActivity.class));
                 break;
             default:
                 break;

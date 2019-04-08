@@ -33,6 +33,7 @@
         <activity android:name=".delete.DeleteAndTopActivity"/>
         <activity android:name=".normal.NormalRecyclerViewActivity"/>
         <activity android:name=".type.TypeActivity"/>
+        <activity android:name=".load.LoadMoreActivity"/>
     </application>
 
 </manifest>

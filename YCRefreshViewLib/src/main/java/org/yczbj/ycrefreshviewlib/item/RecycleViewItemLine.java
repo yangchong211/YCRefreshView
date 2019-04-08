@@ -104,6 +104,7 @@ public class RecycleViewItemLine extends RecyclerView.ItemDecoration {
         //给bottom留出一个高度为mDividerHeight的空白
         //这样做的目的是什么呢？就是为下面onDraw方法绘制高度为mDividerHeight的分割线做准备用的
         outRect.set(0, 0, 0, mDividerHeight);
+        RefreshLogUtils.d("RecycleViewItemLine-------"+"getItemOffsets");
     }
 
     /**
@@ -124,6 +125,7 @@ public class RecycleViewItemLine extends RecyclerView.ItemDecoration {
         } else {
             drawHorizontal(c, parent);
         }
+        RefreshLogUtils.d("RecycleViewItemLine-------"+"onDraw");
     }
 
     /**
@@ -138,6 +140,7 @@ public class RecycleViewItemLine extends RecyclerView.ItemDecoration {
     public void onDrawOver(@NonNull Canvas c, @NonNull RecyclerView parent,
                            @NonNull RecyclerView.State state) {
         super.onDrawOver(c, parent, state);
+        RefreshLogUtils.d("RecycleViewItemLine-------"+"onDrawOver");
     }
 
     /**

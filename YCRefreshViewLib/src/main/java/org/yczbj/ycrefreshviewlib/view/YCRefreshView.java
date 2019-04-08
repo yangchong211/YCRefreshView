@@ -103,31 +103,12 @@ public class YCRefreshView extends FrameLayout {
         return super.onInterceptTouchEvent(ev);
     }
 
-
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-    }
-
-
-    @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-    }
-
-    /**
-     * 完成绘制会调用该方法
-     */
-    @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
-    }
-
     /**
      * 初始化资源
      * @param attrs         attrs
      */
     protected void initAttrs(AttributeSet attrs) {
+        //加载attr属性
         TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.YCRefreshView);
         try {
             mClipToPadding = a.getBoolean(R.styleable.YCRefreshView_recyclerClipToPadding, false);
@@ -193,6 +174,7 @@ public class YCRefreshView extends FrameLayout {
             initScrollListener();
             //添加滚动监听事件
             mRecyclerView.addOnScrollListener(mInternalOnScrollListener);
+            //设置recyclerView的padding值
             if (mPadding != -1) {
                 mRecyclerView.setPadding(mPadding, mPadding, mPadding, mPadding);
             } else {
@@ -201,6 +183,7 @@ public class YCRefreshView extends FrameLayout {
             if (mScrollbarStyle != -1) {
                 mRecyclerView.setScrollBarStyle(mScrollbarStyle);
             }
+            //这个是滑动区分滑动方向
             switch (mScrollbar){
                 case 0:
                     setVerticalScrollBarEnabled(false);
@@ -223,6 +206,12 @@ public class YCRefreshView extends FrameLayout {
      */
     private void initScrollListener() {
         mInternalOnScrollListener = new RecyclerView.OnScrollListener() {
+            /**
+             *
+             * @param recyclerView                      recyclerView
+             * @param dx                                x
+             * @param dy                                y
+             */
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -233,6 +222,12 @@ public class YCRefreshView extends FrameLayout {
                     listener.onScrolled(recyclerView, dx, dy);
                 }
             }
+
+            /**
+             *
+             * @param recyclerView                      recyclerView
+             * @param newState                          newState
+             */
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
