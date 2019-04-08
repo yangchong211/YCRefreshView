@@ -32,6 +32,7 @@
     - 6.2 优化处理逻辑介绍
     - 6.3 recyclerView相关类
     - 6.4 recyclerView滑动冲突
+    - 6.5 recyclerView相关博客
 - 7.实现效果展示
     - 7.1 下拉刷新，上拉加载
     - 7.2 添加多个headerView和FooterView
@@ -319,7 +320,7 @@
     ```
 
 
-#### 3.6 设置条目点击事件
+#### 3.6 设置条目点击事件[item条目点击事件，item条目孩子view点击事件]
 - 条目单击点击事件，长按事件[省略，可以自己看代码]
     ```
     adapter.setOnItemClickListener(new OnItemClickListener() {
