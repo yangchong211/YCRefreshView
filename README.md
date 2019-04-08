@@ -663,7 +663,7 @@
 
 
 ### 6.recyclerView的wiki文档【更新中】
-#### 6.1 封装库部分思路介绍
+#### [6.1 封装库部分思路介绍](https://github.com/yangchong211/YCRefreshView/blob/master/read/wiki1.md)
 - 01.整体封装思路
 - 02.添加下拉刷新
 - 03.添加header和footer
@@ -679,7 +679,7 @@
 - 13.自定义ItemDecoration
 
 
-#### 6.2 优化处理逻辑介绍
+#### [6.2 优化处理逻辑介绍](https://github.com/yangchong211/YCRefreshView/blob/master/read/wiki2.md)
 - 01.接口分离优化
 - 02.去除淡黄色警告
 - 03.SparseArray替代HashMap
@@ -706,7 +706,7 @@
 
 
 
-#### 6.4 recyclerView滑动冲突
+#### [6.4 recyclerView滑动冲突](https://github.com/yangchong211/YCRefreshView/blob/master/read/wiki4.md)
 - 01.如何判断RecyclerView控件滑动到顶部和底部
 - 02.RecyclerView嵌套RecyclerView 条目自动上滚的Bug
 - 03.ScrollView嵌套RecyclerView滑动冲突
