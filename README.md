@@ -718,7 +718,7 @@
 - 06.RecyclerView使用Glide加载图片导致图片错乱问题解决
 
 
-#### [6.5 recyclerView缓存机制]()
+#### [6.5 recyclerView缓存机制](https://github.com/yangchong211/YCRefreshView/blob/master/read/wiki5.md)
 - 01.性能如何优化
 - 02.RecyclerView绘制原理图
 - 03.绘制原理分析过程
