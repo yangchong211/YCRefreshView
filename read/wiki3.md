@@ -185,7 +185,21 @@
 
 
 
+
 ### 08.ItemDecoration
+- 作用
+    - 通过设置recyclerView.addItemDecoration(new DividerDecoration(this));来改变Item之间的偏移量或者对Item进行装饰。
+    - 当然，你也可以对RecyclerView设置多个ItemDecoration，列表展示的时候会遍历所有的ItemDecoration并调用里面的绘制方法，对Item进行装饰。
+- RecyclerView.ItemDecoration是一个抽象类
+    - 该抽象类常见的方法如下所示：
+    ```
+    public void onDraw(Canvas c, RecyclerView parent)
+    装饰的绘制在Item条目绘制之前调用，所以这有可能被Item的内容所遮挡
+    public void onDrawOver(Canvas c, RecyclerView parent)
+    装饰的绘制在Item条目绘制之后调用，因此装饰将浮于Item之上
+    public void getItemOffsets(Rect outRect, int itemPosition, RecyclerView parent)
+    与padding或margin类似，LayoutManager在测量阶段会调用该方法，计算出每一个Item的正确尺寸并设置偏移量。
+    ```
 
 
 
