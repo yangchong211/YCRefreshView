@@ -106,7 +106,6 @@ public class ItemTouchHelpCallback extends ItemTouchHelper.Callback {
             int dragFlag = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT
                     | ItemTouchHelper.UP | ItemTouchHelper.DOWN;
             int swipeFlag = 0;
-            // create make
             return makeMovementFlags(dragFlag, swipeFlag);
         } else if (layoutManager instanceof LinearLayoutManager) {
             LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;

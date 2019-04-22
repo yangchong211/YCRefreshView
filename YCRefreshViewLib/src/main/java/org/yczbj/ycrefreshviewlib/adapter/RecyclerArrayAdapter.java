@@ -102,7 +102,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
     }
 
     /**
-     * 创建viewHolder
+     * 创建viewHolder，主要作用是创建Item视图，并返回相应的ViewHolder
      * @param parent                        parent
      * @param viewType                      type类型
      * @return                              返回viewHolder
@@ -120,7 +120,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
     }
 
     /**
-     * 获取类型
+     * 获取类型，主要作用是用来获取当前项Item(position参数)是哪种类型的布局
      * @param position                      索引
      * @return                              int
      */
@@ -152,12 +152,12 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         return getViewType(position-headers.size());
     }
 
-
     public int getViewType(int position){
         return 0;
     }
 
     /**
+     * 重写该方法的作用主要是返回该Adapter所持有的Item数量
      * 这个函数包含了头部和尾部view的个数，不是真正的item个数。
      * 包含item+header头布局数量+footer底布局数量
      */
@@ -170,7 +170,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
 
 
     /**
-     * 绑定viewHolder
+     * 绑定viewHolder，主要作用是绑定数据到正确的Item视图上
      * @param holder                        holder
      * @param position                      索引
      */
@@ -187,8 +187,6 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
             footers.get(i).onBindView(holder.itemView);
             return ;
         }
-
-
         OnBindViewHolder(holder,position-headers.size());
     }
 
@@ -197,6 +195,14 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         return position;
     }
 
+    /**
+     * 通过重写 RecyclerView.onViewRecycled(holder) 来回收资源。
+     * @param holder                        holder
+     */
+    @Override
+    public void onViewRecycled(@NonNull BaseViewHolder holder) {
+        super.onViewRecycled(holder);
+    }
 
     /**---------------------------------子类需要重写的方法---------------------------------------*/
 
@@ -213,8 +219,8 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
     }
 
     /**
-     *
-     * @param maxCount
+     * 设置多列数据上拉加载更多时
+     * @param maxCount                  count
      * @return
      */
     public GridSpanSizeLookup obtainGridSpanSizeLookUp(int maxCount){

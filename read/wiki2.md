@@ -11,8 +11,9 @@
 - 10.状态切换交互优化
 - 11.异常情况下保存状态
 - 12.多线程下插入数据优化
-- 13.recyclerView滑动卡顿优化
-
+- 13.recyclerView滑动卡顿
+- 14.recyclerView优化处理
+- 15.adapter优化
 
 
 
@@ -84,6 +85,64 @@
 
 
 ### 10.状态切换交互优化
+
+
+
+### 13.recyclerView滑动卡顿
+- 第一种：嵌套布局滑动冲突
+    - 导致嵌套滑动难处理的关键原因在于当子控件消费了事件, 那么父控件就不会再有机会处理这个事件了, 所以一旦内部的滑动控件消费了滑动操作, 外部的滑动控件就再也没机会响应这个滑动操作了.
+
+
+### 14.recyclerView优化
+#### 14.1 DiffUtil刷新优化
+- 分页拉取远端数据，对拉取下来的远端数据进行缓存，提升二次加载速度；对于新增或者删除数据通过 DiffUtil 来进行局部刷新数据，而不是一味地全局刷新数据。
+
+
+
+#### 14.2 布局优化
+- 减少 xml 文件 inflate 时间
+    - 这里的 xml 文件不仅包括 layout 的 xml，还包括 drawable 的 xml，xml 文件 inflate 出 ItemView 是通过耗时的 IO 操作，尤其当 Item 的复用几率很低的情况下，随着 Type 的增多，这种 inflate 带来的损耗是相当大的，此时我们可以用代码去生成布局，即 new View() 的方式，只要搞清楚 xml 中每个节点的属性对应的 API 即可。
+- 减少 View 对象的创建
+    - 一个稍微复杂的 Item 会包含大量的 View，而大量的 View 的创建也会消耗大量时间，所以要尽可能简化 ItemView；设计 ItemType 时，对多 ViewType 能够共用的部分尽量设计成自定义 View，减少 View 的构造和嵌套。
+
+
+#### 14.3 对itemView中孩子View的点击事件优化
+- 对于每个ViewHolder都要设置子View点击监听器怎么办？
+    - 全局new一个Listener，通过view.getId与view.getTag取到对应View的id和数据，避免对每个新创建的ViewHolder都new出一个监听器，优化了对象的频繁创建带来的资源消耗。
+
+
+
+#### 14.4 复用RecycledViewPool
+- 如果RecycledView的adapter是一样的话可以考虑共享一个对象池。 比如说：RecycledView嵌套RecycledView，里面的RecycledView大部分都adapter都一样。
+    - 具体该怎么封装？？？
+
+
+#### 14.5 RecyclerView预加载优化
+
+
+
+#### 14.6 RecyclerView嵌套滑动卡顿优化
+- RecycleView与NestedScrollView的嵌套
+    - RecycleView滑动会感觉到卡顿，可以通过mRecyclerView.setNestedScrollingEnabled(false)解决这个问题
+    - 解决方案[RecyclerView和NestedScrollView嵌套导致滑动卡顿](https://stackoverflow.com/questions/37301724/recyclerview-inside-nested-scrollview-scroll-but-does-not-fast-scroll-like-norma)
+    - 这个方法是如何解决滑动卡顿的，深入理解没？？？？
+
+
+
+#### 14.3 其他整理
+- 如果 Item 高度是固定的话，可以使用 RecyclerView.setHasFixedSize(true); 来避免 requestLayout 浪费资源；
+    - 具体看[Understanding RecyclerView setHasFixedSize](https://stackoverflow.com/questions/28709220/understanding-recyclerview-sethasfixedsize)
+- 设置 RecyclerView.addOnScrollListener(listener); 来对滑动过程中停止加载的操作。
+- 如果不要求动画，可以通过 ((SimpleItemAnimator) rv.getItemAnimator()).setSupportsChangeAnimations(false); 把默认动画关闭来提神效率。
+- 通过重写 RecyclerView.onViewRecycled(holder) 来回收资源。
+- 通过 RecycleView.setItemViewCacheSize(size); 来加大 RecyclerView 的缓存，用空间换时间来提高滚动的流畅性。
+- 如果多个 RecycledView 的 Adapter 是一样的，比如嵌套的 RecyclerView 中存在一样的 Adapter，可以通过设置 RecyclerView.setRecycledViewPool(pool); 来共用一个 RecycledViewPool。
+
+
+
+
+
+
 
 
 

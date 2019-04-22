@@ -775,6 +775,7 @@
     - fastAdapter：https://github.com/mikepenz/FastAdapter
     - Jude95/EasyRecyclerView：https://github.com/Jude95/EasyRecyclerView
     - UltimateRecyclerView：https://github.com/cymcsg/UltimateRecyclerView
+    - MultiType：https://github.com/drakeet/MultiType
 - 关于viewHolder的封装，参考是鸿洋大神的[baseAdapter](https://github.com/hongyangAndroid/baseAdapter)
 - 关于RecyclerView实现条目Item拖拽排序与滑动删除，参看是严正杰大神的博客，[拖拽排序](https://github.com/yanzhenjie/SwipeRecyclerView)
 - 关于仿照QQ侧滑删除，参考是SwipeMenu的案例，具体可以看：[SwipeMenu](https://github.com/TUBB/SwipeMenu/)

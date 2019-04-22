@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.ColorRes;
+import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -81,16 +82,18 @@ public class YCRefreshView extends FrameLayout {
      */
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
+        //交给父类去处理
         return mPtrLayout.dispatchTouchEvent(ev);
     }
 
     /**
-     * 事件的分发
+     * 事件的触摸
      * @param event             event
      * @return                  是否自己处理触摸事件
      */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        //暂不处理
         return super.onTouchEvent(event);
     }
 
@@ -101,6 +104,7 @@ public class YCRefreshView extends FrameLayout {
      */
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
+        //事件拦截，暂不处理
         return super.onInterceptTouchEvent(ev);
     }
 
@@ -292,11 +296,21 @@ public class YCRefreshView extends FrameLayout {
 
     /**
      * 获取RecyclerView对象
-     * @return              RecyclerView对象
+     * @return                              RecyclerView对象
      */
     public RecyclerView getRecyclerView() {
         //获取对象
         return mRecyclerView;
+    }
+
+    /**
+     * 设置预加载itemView数目
+     * @param size                          size
+     */
+    public void setCacheSize(@IntRange  int size){
+        if (getRecyclerView()!=null){
+            getRecyclerView().setItemViewCacheSize(size);
+        }
     }
 
     /**
@@ -316,7 +330,9 @@ public class YCRefreshView extends FrameLayout {
      */
     @Override
     public void setClipToPadding(boolean isClip){
-        mRecyclerView.setClipToPadding(isClip);
+        if (getRecyclerView()!=null){
+            getRecyclerView().setClipToPadding(isClip);
+        }
     }
 
     /**

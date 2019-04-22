@@ -140,19 +140,21 @@ public class BaseViewHolder<M> extends RecyclerView.ViewHolder {
             if (!view.isClickable()) {
                 view.setClickable(true);
             }
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(getOwnerAdapter()!=null){
-                        OnItemChildClickListener onItemChildClickListener = ((RecyclerArrayAdapter)
-                                getOwnerAdapter()).getOnItemChildClickListener();
-                        if (onItemChildClickListener != null) {
-                            onItemChildClickListener.onItemChildClick(v, getDataPosition());
-                        }
-                    }
-                }
-            });
+            view.setOnClickListener(listener);
         }
     }
+
+    private View.OnClickListener listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if(getOwnerAdapter()!=null){
+                OnItemChildClickListener onItemChildClickListener = ((RecyclerArrayAdapter)
+                        getOwnerAdapter()).getOnItemChildClickListener();
+                if (onItemChildClickListener != null) {
+                    onItemChildClickListener.onItemChildClick(v, getDataPosition());
+                }
+            }
+        }
+    };
 
 }
