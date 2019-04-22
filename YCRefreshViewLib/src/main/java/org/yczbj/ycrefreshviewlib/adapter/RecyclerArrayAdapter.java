@@ -793,6 +793,9 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
     }
 
 
+    /**
+     * 自定义SpanSizeLookup
+     */
     public class GridSpanSizeLookup extends GridLayoutManager.SpanSizeLookup{
 
         private int mMaxCount;
@@ -829,6 +832,10 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
 
     /**---------------------------------点击事件---------------------------------------------------*/
 
+    /**
+     * 设置item条目点击事件，注意在onCreateViewHolder中设置要优于onBindViewHolder
+     * @param viewHolder                viewHolder
+     */
     private void setOnClickListener(final BaseViewHolder viewHolder) {
         //itemView 的点击事件
         if (mItemClickListener!=null) {

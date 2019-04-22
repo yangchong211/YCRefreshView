@@ -32,6 +32,7 @@
     - 6.2 优化处理逻辑介绍
     - 6.3 recyclerView相关类
     - 6.4 recyclerView滑动冲突
+    - 6.5 recyclerView缓存机制
     - 6.5 recyclerView相关博客
 - 7.实现效果展示
     - 7.1 下拉刷新，上拉加载
@@ -716,6 +717,13 @@
 - 05.RecyclerView嵌套RecyclerView的滑动冲突问题
 - 06.RecyclerView使用Glide加载图片导致图片错乱问题解决
 
+
+#### [6.5 recyclerView缓存机制]()
+- 01.性能如何优化
+- 02.RecyclerView绘制原理图
+- 03.绘制原理分析过程
+- 04.缓存机制
+- 05.屏幕滑动时分析
 
 
 #### 6.5 recyclerView相关博客
