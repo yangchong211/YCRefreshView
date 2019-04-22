@@ -694,7 +694,9 @@
 - 12.多线程下插入数据优化
 - 13.recyclerView滑动卡顿优化
 
-#### 6.3 recyclerView相关类
+
+
+#### [6.3 recyclerView相关类](https://github.com/yangchong211/YCRefreshView/blob/master/read/wiki3.md)
 - 01.recyclerView
 - 02.layoutManager
 - 03.adapter
