@@ -7,6 +7,7 @@
 - 06.ItemTouchHelper
 - 07.SpanSizeLookup
 - 08.ItemDecoration
+- 09.ItemAnimator
 
 
 

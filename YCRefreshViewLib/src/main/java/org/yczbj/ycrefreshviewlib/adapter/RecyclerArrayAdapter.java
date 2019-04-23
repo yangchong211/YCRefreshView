@@ -81,6 +81,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         super.onAttachedToRecyclerView(recyclerView);
         //增加对RecyclerArrayAdapter奇葩操作的修复措施
         registerAdapterDataObserver(new FixDataObserver(recyclerView));
+        //下面是处理grid试图上拉加载的问题
         RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
         if (manager instanceof GridLayoutManager) {
             final GridLayoutManager gridManager = ((GridLayoutManager) manager);
