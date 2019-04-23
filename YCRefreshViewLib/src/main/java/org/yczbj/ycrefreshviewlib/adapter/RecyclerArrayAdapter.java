@@ -171,7 +171,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
 
 
     /**
-     * 绑定viewHolder，主要作用是绑定数据到正确的Item视图上
+     * 绑定viewHolder，主要作用是绑定数据到正确的Item视图上。当视图从不可见到可见的时候，会调用这个方法。
      * @param holder                        holder
      * @param position                      索引
      */
