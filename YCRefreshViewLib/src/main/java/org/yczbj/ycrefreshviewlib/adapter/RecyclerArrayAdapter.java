@@ -52,6 +52,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
     private final Object mLock = new Object();
     private boolean mNotifyOnChange = true;
     private Context mContext;
+    private boolean mSetHeaderAndFooterSpan = false;
 
 
     public RecyclerArrayAdapter(Context context) {
@@ -82,24 +83,29 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         super.onAttachedToRecyclerView(recyclerView);
         //增加对RecyclerArrayAdapter奇葩操作的修复措施
         registerAdapterDataObserver(new FixDataObserver(recyclerView));
-        //下面是处理grid试图上拉加载的问题
-        RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
-        if (manager instanceof GridLayoutManager) {
-            final GridLayoutManager gridManager = ((GridLayoutManager) manager);
-            gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-                @Override
-                public int getSpanSize(int position) {
-                    // 如果当前是footer的位置，那么该item占据2个单元格，正常情况下占据1个单元格
-                    int itemViewType = getItemViewType(position);
-                    //注意，具体可以看DefaultEventDelegate类中的EventFooter类代码
-                    if (itemViewType>=DefaultEventDelegate.EventFooter.HIDE &&
-                            itemViewType<=DefaultEventDelegate.EventFooter.SHOW_NO_MORE){
-                        return gridManager.getSpanCount();
-                    }else {
-                        return 1;
+        if (mSetHeaderAndFooterSpan){
+            //下面是处理grid试图上拉加载的问题
+            RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
+            if (manager instanceof GridLayoutManager) {
+                final GridLayoutManager gridManager = ((GridLayoutManager) manager);
+                gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                    @Override
+                    public int getSpanSize(int position) {
+                        // 如果当前是footer的位置，那么该item占据2个单元格，正常情况下占据1个单元格
+                        int itemViewType = getItemViewType(position);
+                        //注意，具体可以看DefaultEventDelegate类中的EventFooter类代码
+                        //如果是头部header或者底部footer，则直接
+                        if (itemViewType>=DefaultEventDelegate.EventFooter.HIDE &&
+                                itemViewType<=DefaultEventDelegate.EventFooter.SHOW_NO_MORE){
+                            RefreshLogUtils.d("onAttachedToRecyclerView----这个是header和footer");
+                            return gridManager.getSpanCount();
+                        }else {
+                            RefreshLogUtils.d("onAttachedToRecyclerView----");
+                            return 1;
+                        }
                     }
-                }
-            });
+                });
+            }
         }
     }
 
@@ -226,9 +232,18 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
      * @return
      */
     public GridSpanSizeLookup obtainGridSpanSizeLookUp(int maxCount){
-        return new GridSpanSizeLookup(maxCount,headers,footers,mObjects.size());
+        return new GridSpanSizeLookup(maxCount,headers,footers, (List<Object>) mObjects);
     }
 
+
+    /**
+     * 设置多列的gridView时候，需要设置header和footer，以及上拉加载item占一行操作
+     * 这个方法需要在setAdapter之前设置
+     * @param isHeaderAndFooterSpan     isHeaderAndFooterSpan
+     */
+    public void setHeaderAndFooterSpan(boolean isHeaderAndFooterSpan){
+        this.mSetHeaderAndFooterSpan = isHeaderAndFooterSpan;
+    }
 
     /**
      * 停止加载更多

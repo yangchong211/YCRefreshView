@@ -5,6 +5,7 @@ import android.support.v7.widget.GridLayoutManager;
 import org.yczbj.ycrefreshviewlib.inter.InterItemView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <pre>
@@ -20,18 +21,15 @@ public class GridSpanSizeLookup extends GridLayoutManager.SpanSizeLookup{
     private int mMaxCount;
     private ArrayList<InterItemView> headers;
     private ArrayList<InterItemView> footers;
-    /**
-     * 这个是所有数据的size
-     */
-    private int mSize;
+    private List<Object> mObjects;
 
 
     public GridSpanSizeLookup(int maxCount, ArrayList<InterItemView> headers,
-                       ArrayList<InterItemView> footers, int size){
+                       ArrayList<InterItemView> footers, List<Object> objects){
         this.mMaxCount = maxCount;
         this.headers = headers;
         this.footers = footers;
-        this.mSize = size;
+        this.mObjects = objects;
     }
 
     /**
@@ -49,7 +47,7 @@ public class GridSpanSizeLookup extends GridLayoutManager.SpanSizeLookup{
         }
         //如果有footerView，则
         if (footers.size()!=0) {
-            int i = position - headers.size() - mSize;
+            int i = position - headers.size() - mObjects.size();
             if (i >= 0) {
                 return mMaxCount;
             }

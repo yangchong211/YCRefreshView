@@ -40,7 +40,6 @@ public class RefreshAndMoreActivity3 extends AppCompatActivity implements SwipeR
     private RecyclerArrayAdapter<PersonData> adapter;
     private Handler handler = new Handler();
 
-    private int page = 0;
     private boolean hasNetWork = true;
 
     @Override
@@ -65,7 +64,6 @@ public class RefreshAndMoreActivity3 extends AppCompatActivity implements SwipeR
 
     @Override
     public void onRefresh() {
-        page = 0;
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -76,8 +74,7 @@ public class RefreshAndMoreActivity3 extends AppCompatActivity implements SwipeR
                     return;
                 }
                 adapter.add(new PersonData());
-                adapter.addAll(DataProvider.getPersonList(page));
-                page=1;
+                adapter.addAll(DataProvider.getPersonList(15));
                 recyclerView.showRecycler();
             }
         }, 2000);
@@ -111,14 +108,14 @@ public class RefreshAndMoreActivity3 extends AppCompatActivity implements SwipeR
                 (int)AppUtils.convertDpToPixel(1,this),
                 this.getResources().getColor(R.color.color_f9f9f9));
         recyclerView.addItemDecoration(line);
-
-        recyclerView.setAdapterWithProgress(adapter =
-                new RecyclerArrayAdapter<PersonData>(this) {
-            @Override
-            public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-                return new PersonViewHolder(parent);
-            }
-        });
+        adapter = new RecyclerArrayAdapter<PersonData>(this) {
+                    @Override
+                    public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
+                        return new PersonViewHolder(parent);
+                    }
+                };
+        adapter.setHeaderAndFooterSpan(true);
+        recyclerView.setAdapterWithProgress(adapter);
         adapter.setMore(R.layout.view_more, new OnMoreListener() {
             @Override
             public void onMoreShow() {
@@ -131,8 +128,7 @@ public class RefreshAndMoreActivity3 extends AppCompatActivity implements SwipeR
                             adapter.pauseMore();
                             return;
                         }
-                        adapter.addAll(DataProvider.getPersonList(page));
-                        page++;
+                        adapter.addAll(DataProvider.getPersonList(10));
                     }
                 }, 2000);
             }

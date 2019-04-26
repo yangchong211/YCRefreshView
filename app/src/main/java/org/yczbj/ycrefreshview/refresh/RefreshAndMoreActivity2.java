@@ -72,7 +72,7 @@ public class RefreshAndMoreActivity2 extends AppCompatActivity implements SwipeR
                     return;
                 }
                 adapter.add(new PersonData());
-                adapter.addAll(DataProvider.getPersonList(page));
+                adapter.addAll(DataProvider.getPersonList(10));
                 page=1;
                 recyclerView.showRecycler();
             }
@@ -131,7 +131,7 @@ public class RefreshAndMoreActivity2 extends AppCompatActivity implements SwipeR
                             adapter.pauseMore();
                             return;
                         }
-                        adapter.addAll(DataProvider.getPersonList(page));
+                        adapter.addAll(DataProvider.getPersonList(10));
                         page++;
                     }
                 }, 200);
