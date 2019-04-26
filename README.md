@@ -33,7 +33,7 @@
     - 6.3 recyclerView相关类
     - 6.4 recyclerView滑动冲突
     - 6.5 recyclerView缓存机制
-    - 6.5 recyclerView相关博客
+    - **6.5 recyclerView相关博客(25篇)**
 - 7.实现效果展示
     - 7.1 下拉刷新，上拉加载
     - 7.2 添加多个headerView和FooterView
@@ -726,7 +726,24 @@
 - 05.屏幕滑动时分析
 
 
-#### 6.5 recyclerView相关博客
+#### 6.6 recyclerView相关博客
+- [01.RecyclerView](https://github.com/yangchong211/YCBlogs/blob/master/android/recyclerView/01.RecyclerView.md)
+- [02.Adapter](https://github.com/yangchong211/YCBlogs/blob/master/android/recyclerView/02.Adapter.md)
+- [03.ViewHolder](https://github.com/yangchong211/YCBlogs/blob/master/android/recyclerView/03.ViewHolder.md)
+- [04.LayoutManager](https://github.com/yangchong211/YCBlogs/blob/master/android/recyclerView/04.LayoutManager.md)
+- [05.SnapHelper](https://github.com/yangchong211/YCBlogs/blob/master/android/recyclerView/05.SnapHelper.md)
+- [06.ItemTouchHelper](https://github.com/yangchong211/YCBlogs/blob/master/android/recyclerView/06.ItemTouchHelper.md)
+- [07.SpanSizeLookup](https://github.com/yangchong211/YCBlogs/blob/master/android/recyclerView/07.SpanSizeLookup.md)
+- [08.ItemDecoration](https://github.com/yangchong211/YCBlogs/blob/master/android/recyclerView/08.ItemDecoration.md)
+- [09.RecycledViewPool](https://github.com/yangchong211/YCBlogs/blob/master/android/recyclerView/09.RecycledViewPool.md)
+- [11.RecyclerView上拉加载](https://github.com/yangchong211/YCBlogs/blob/master/android/recyclerView/11.RecyclerView%E4%B8%8A%E6%8B%89%E5%8A%A0%E8%BD%BD.md)
+- [12.RecyclerView缓存原理](https://github.com/yangchong211/YCBlogs/blob/master/android/recyclerView/12.RecyclerView%E7%BC%93%E5%AD%98%E5%8E%9F%E7%90%86.md)
+- [13.SnapHelper源码分析](https://github.com/yangchong211/YCBlogs/blob/master/android/recyclerView/13.SnapHelper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90.md)
+- [16.自定义SnapHelper](https://github.com/yangchong211/YCBlogs/blob/master/android/recyclerView/16.%E8%87%AA%E5%AE%9A%E4%B9%89SnapHelper.md)
+- [19.自定义ItemDecoration分割线](https://github.com/yangchong211/YCBlogs/blob/master/android/recyclerView/19.%E8%87%AA%E5%AE%9A%E4%B9%89ItemDecoration%E5%88%86%E5%89%B2%E7%BA%BF.md)
+- [22.RecyclerView问题汇总](https://github.com/yangchong211/YCBlogs/blob/master/android/recyclerView/22.RecyclerView%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB.md)
+- [23.RecyclerView滑动冲突](https://github.com/yangchong211/YCBlogs/blob/master/android/recyclerView/23.RecyclerView%E6%BB%91%E5%8A%A8%E5%86%B2%E7%AA%81.md)
+- [24.ScrollView嵌套RecyclerView问题](https://github.com/yangchong211/YCBlogs/blob/master/android/recyclerView/24.ScrollView%E5%B5%8C%E5%A5%97RecyclerView%E9%97%AE%E9%A2%98.md)
 
 
 
