@@ -21,7 +21,7 @@
         android:layout_toEndOf="@+id/iv_news_image"
         android:layout_marginStart="10dp"
         android:textSize="14sp"
-        android:text="吴文杰是个大神级别的人物"/>
+        android:text="杨充是个大神级别的人物"/>
 
     <TextView
         android:id="@+id/tv_content"
@@ -32,7 +32,7 @@
         android:layout_below="@+id/tv_title"
         android:layout_marginTop="5dp"
         android:textSize="12sp"
-        android:text="吴文杰是个大神级别的人物吴文杰是个大神级别的人物"/>
+        android:text="杨充是个大神级别的人物杨充是个大神级别的人物"/>
     <TextView
         android:id="@+id/tv_time"
         android:layout_width="wrap_content"

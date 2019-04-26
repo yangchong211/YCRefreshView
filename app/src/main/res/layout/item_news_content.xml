@@ -7,13 +7,6 @@
     android:background="@android:color/white"
     android:padding="10dp">
 
-    <ImageView
-        android:id="@+id/iv_news_image"
-        android:layout_width="100dp"
-        android:layout_height="80dp"
-        android:scaleType="fitXY"
-        android:layout_gravity="center_vertical"
-        android:background="@drawable/bg_small_tree_min"/>
 
     <TextView
         android:id="@+id/tv_title"
@@ -29,11 +22,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/iv_news_image"
+        android:maxLines="1"
         android:layout_marginStart="10dp"
         android:layout_below="@+id/tv_title"
         android:layout_marginTop="5dp"
         android:textSize="12sp"
-        android:text="杨充是个大神级别的人物杨充是个大神级别的人物"/>
+        android:text="杨充是个大神级别的人物"/>
     <TextView
         android:id="@+id/tv_time"
         android:layout_width="wrap_content"

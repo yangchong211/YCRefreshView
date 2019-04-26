@@ -19,6 +19,7 @@ import org.yczbj.ycrefreshviewlib.inter.OnLoadMoreListener;
 import org.yczbj.ycrefreshviewlib.inter.OnMoreListener;
 import org.yczbj.ycrefreshviewlib.inter.OnNoMoreListener;
 import org.yczbj.ycrefreshviewlib.observer.FixDataObserver;
+import org.yczbj.ycrefreshviewlib.span.GridSpanSizeLookup;
 import org.yczbj.ycrefreshviewlib.utils.RecyclerUtils;
 import org.yczbj.ycrefreshviewlib.utils.RefreshLogUtils;
 import org.yczbj.ycrefreshviewlib.holder.BaseViewHolder;
@@ -225,7 +226,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
      * @return
      */
     public GridSpanSizeLookup obtainGridSpanSizeLookUp(int maxCount){
-        return new GridSpanSizeLookup(maxCount,headers,footers,mObjects);
+        return new GridSpanSizeLookup(maxCount,headers,footers,mObjects.size());
     }
 
 
@@ -791,42 +792,6 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
      */
     public int getPosition(T item) {
         return mObjects.indexOf(item);
-    }
-
-
-    /**
-     * 自定义SpanSizeLookup
-     */
-    public class GridSpanSizeLookup extends GridLayoutManager.SpanSizeLookup{
-
-        private int mMaxCount;
-        private ArrayList<InterItemView> headers;
-        private ArrayList<InterItemView> footers;
-        private List<T> mObjects;
-
-        GridSpanSizeLookup(int maxCount, ArrayList<InterItemView> headers,
-                           ArrayList<InterItemView> footers, List<T> mObjects){
-            this.mMaxCount = maxCount;
-            this.headers = headers;
-            this.footers = footers;
-            this.mObjects = mObjects;
-        }
-
-        @Override
-        public int getSpanSize(int position) {
-            if (headers.size()!=0){
-                if (position<headers.size()) {
-                    return mMaxCount;
-                }
-            }
-            if (footers.size()!=0) {
-                int i = position - headers.size() - mObjects.size();
-                if (i >= 0) {
-                    return mMaxCount;
-                }
-            }
-            return 1;
-        }
     }
 
 

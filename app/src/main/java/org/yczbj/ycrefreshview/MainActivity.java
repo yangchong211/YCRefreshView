@@ -1,18 +1,15 @@
 package org.yczbj.ycrefreshview;
 
-import android.app.Person;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.TextView;
 
 import org.yczbj.ycrefreshview.collapsing.EightCollapsingActivity;
 import org.yczbj.ycrefreshview.load.LoadMoreActivity;
 import org.yczbj.ycrefreshview.load.LoadMoreActivity2;
 import org.yczbj.ycrefreshview.normal.NormalRecyclerViewActivity;
+import org.yczbj.ycrefreshview.normal.SpanRecyclerViewActivity;
 import org.yczbj.ycrefreshview.refresh.RefreshAndMoreActivity1;
 import org.yczbj.ycrefreshview.refresh.RefreshAndMoreActivity2;
 import org.yczbj.ycrefreshview.multistyle.FiveMultiStyleActivity;
@@ -56,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.tv_9).setOnClickListener(this);
         findViewById(R.id.tv_10).setOnClickListener(this);
         findViewById(R.id.tv_11).setOnClickListener(this);
+        findViewById(R.id.tv_11_2).setOnClickListener(this);
         findViewById(R.id.tv_12).setOnClickListener(this);
         findViewById(R.id.tv_13_1).setOnClickListener(this);
         findViewById(R.id.tv_13_2).setOnClickListener(this);
@@ -103,6 +101,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.tv_11:
                 startActivity(new Intent(this, NormalRecyclerViewActivity.class));
+                break;
+            case R.id.tv_11_2:
+                startActivity(new Intent(this, SpanRecyclerViewActivity.class));
                 break;
             case R.id.tv_12:
                 startActivity(new Intent(this, TypeActivity.class));

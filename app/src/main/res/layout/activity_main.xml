@@ -135,7 +135,26 @@
             android:padding="10dp"
             android:layout_marginTop="10dp"
             android:background="@android:color/darker_gray"
-            android:text="11.原生recyclerView使用该库封装的adapter"/>
+            android:text="11.1原生recyclerView使用该库封装的adapter"/>
+
+
+        <TextView
+            android:id="@+id/tv_11_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"
+            android:text="11.2原生recyclerView设置setSpanSizeLookup"/>
+
+        <TextView
+            android:id="@+id/tv_11_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"
+            android:text="11.3使用封装库实现网格复杂布局"/>
 
 
         <TextView
