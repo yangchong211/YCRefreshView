@@ -183,7 +183,51 @@
 
 
 ### 07.SpanSizeLookup
+- 该页面中，同时包含列表，2列的网格，3列的网格如何优雅实现？
+    - ![image](https://upload-images.jianshu.io/upload_images/4432347-293040ce3bfc192c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+- RecyclerView 可以通过 GridLayoutManager 实现网格布局， 但是很少有人知道GridLayoutManager 还可以用来设置网格中指定Item的列数，类似于合并单元格的功能，而所有的这些我们仅仅只需通过定义一个RecycleView列表就可以完成，要实现指定某个item所占列数的功能我们需要用到GridLayoutManager.SpanSizeLookup这个类，该类是一个抽象类，里面包含了一个getSpanSize(int position)的抽象方法，该方法的返回值就是指定position所占的列数
+- SpanSizeLookup如何使用，如下所示
+    - 先是定义了一个6列的网格布局，然后通过GridLayoutManager.SpanSizeLookup这个类来动态的指定某个item应该占多少列。
+    - 比如getSpanSize返回6，就表示当前position索引处的item占用6列，那么显示就只会展示一个ItemView【占用6列】。
+    - 比如getSpanSize返回3，就表示当前position索引处的item占用3列
+    ```
+    mDataList = new ArrayList<>();
+    for (int i = 0; i < 50; i++) {
+        SpanModel model = new SpanModel();
+        model.setName(i + "");
+        if (i == 0) {
+            model.setType(1);
+        } else if (i < 7) {
+            model.setType(2);
+        } else if (i>=8 && i<11){
+            model.setType(3);
+        } else if (i>=13 && i<16){
+            model.setType(4);
+        } else {
+            model.setType(1);
+        }
+        mDataList.add(model);
+    }
 
+    GridLayoutManager manager = new GridLayoutManager(this, 6);
+    manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+        @Override
+        public int getSpanSize(int position) {
+            SpanModel model = mDataList.get(position);
+            if (model.getType() == 1) {
+                return 6;
+            } else if(model.getType() == 2){
+                return 3;
+            }else if (model.getType() == 3){
+                return 2;
+            }else if (model.getType() == 4){
+                return 2;
+            } else {
+                return 1;
+            }
+        }
+    });
+    ```
 
 
 ### 08.ItemDecoration
