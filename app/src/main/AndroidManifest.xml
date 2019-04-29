@@ -37,6 +37,7 @@
         <activity android:name=".type.TypeActivity"/>
         <activity android:name=".load.LoadMoreActivity"/>
         <activity android:name=".load.LoadMoreActivity2"/>
+        <activity android:name=".layout.LayoutActivity"/>
     </application>
 
 </manifest>

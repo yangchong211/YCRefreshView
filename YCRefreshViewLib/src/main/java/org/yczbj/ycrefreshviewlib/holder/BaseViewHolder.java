@@ -9,6 +9,8 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.inter.OnItemChildClickListener;
 import org.yczbj.ycrefreshviewlib.utils.RefreshLogUtils;
@@ -64,7 +66,7 @@ public class BaseViewHolder<M> extends RecyclerView.ViewHolder {
      * @return 将结果强转为 View 或 View 的子类型
      */
     @SuppressWarnings("unchecked")
-    protected <T extends View> T getView(int viewId) {
+    public <T extends View> T getView(int viewId) {
         // 先从缓存中找，找打的话则直接返回
         // 如果找不到则 findViewById ，再把结果存入缓存中
         View view = viewSparseArray.get(viewId);
@@ -156,5 +158,15 @@ public class BaseViewHolder<M> extends RecyclerView.ViewHolder {
             }
         }
     };
+
+    /**
+     * 设置TextView的值
+     */
+    public BaseViewHolder setText(int viewId, String text) {
+        TextView tv = getView(viewId);
+        tv.setText(text);
+        return this;
+    }
+
 
 }

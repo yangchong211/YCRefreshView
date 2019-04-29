@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import org.yczbj.ycrefreshview.collapsing.EightCollapsingActivity;
+import org.yczbj.ycrefreshview.layout.LayoutActivity;
 import org.yczbj.ycrefreshview.load.LoadMoreActivity;
 import org.yczbj.ycrefreshview.load.LoadMoreActivity2;
 import org.yczbj.ycrefreshview.normal.NormalRecyclerViewActivity;
@@ -46,7 +47,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.tv_2).setOnClickListener(this);
         findViewById(R.id.tv_3).setOnClickListener(this);
         findViewById(R.id.tv_4).setOnClickListener(this);
-        findViewById(R.id.tv_5).setOnClickListener(this);
+        findViewById(R.id.tv_5_1).setOnClickListener(this);
+        findViewById(R.id.tv_5_2).setOnClickListener(this);
         findViewById(R.id.tv_6).setOnClickListener(this);
         findViewById(R.id.tv_7).setOnClickListener(this);
         findViewById(R.id.tv_8).setOnClickListener(this);
@@ -57,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.tv_12).setOnClickListener(this);
         findViewById(R.id.tv_13_1).setOnClickListener(this);
         findViewById(R.id.tv_13_2).setOnClickListener(this);
+        findViewById(R.id.tv_14).setOnClickListener(this);
     }
 
 
@@ -81,7 +84,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.tv_4:
                 startActivity(new Intent(this, FourHorizontalActivity.class));
                 break;
-            case R.id.tv_5:
+            case R.id.tv_5_1:
+                startActivity(new Intent(this, FiveMultiStyleActivity.class));
+                break;
+            case R.id.tv_5_2:
                 startActivity(new Intent(this, FiveMultiStyleActivity.class));
                 break;
             case R.id.tv_6:
@@ -114,13 +120,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.tv_13_2:
                 startActivity(new Intent(this, LoadMoreActivity2.class));
                 break;
+            case R.id.tv_14:
+                startActivity(new Intent(this, LayoutActivity.class));
+                break;
             default:
                 break;
         }
-    }
-
-    private void test1() {
-
     }
 
 }
