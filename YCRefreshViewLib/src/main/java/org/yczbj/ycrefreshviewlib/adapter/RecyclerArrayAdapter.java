@@ -118,7 +118,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
     @NonNull
     @Override
     public final BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = createSpViewByType(parent, viewType);
+        View view = createViewByType(parent, viewType);
         if (view!=null){
             return new BaseViewHolder(view);
         }
@@ -753,7 +753,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         return mObjects.size();
     }
 
-    private View createSpViewByType(ViewGroup parent, int viewType){
+    private View createViewByType(ViewGroup parent, int viewType){
         for (InterItemView headerView : headers){
             if (headerView.hashCode() == viewType){
                 View view = headerView.onCreateView(parent);
@@ -761,7 +761,8 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
                 if (view.getLayoutParams()!=null) {
                     layoutParams = new StaggeredGridLayoutManager.LayoutParams(view.getLayoutParams());
                 } else {
-                    layoutParams = new StaggeredGridLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    layoutParams = new StaggeredGridLayoutManager.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 }
                 layoutParams.setFullSpan(true);
                 view.setLayoutParams(layoutParams);
@@ -775,7 +776,8 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
                 if (view.getLayoutParams()!=null) {
                     layoutParams = new StaggeredGridLayoutManager.LayoutParams(view.getLayoutParams());
                 } else {
-                    layoutParams = new StaggeredGridLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    layoutParams = new StaggeredGridLayoutManager.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 }
                 layoutParams.setFullSpan(true);
                 view.setLayoutParams(layoutParams);

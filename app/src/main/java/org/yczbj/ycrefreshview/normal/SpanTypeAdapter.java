@@ -3,18 +3,14 @@ package org.yczbj.ycrefreshview.normal;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
 import org.yczbj.ycrefreshview.R;
-import org.yczbj.ycrefreshview.data.PersonData;
 import org.yczbj.ycrefreshviewlib.inter.OnItemClickListener;
 
 import java.util.ArrayList;
@@ -57,23 +53,35 @@ public class SpanTypeAdapter extends RecyclerView.Adapter<SpanTypeAdapter.MyView
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         SpanModel person = data.get(position);
         if (person.getName()==null || person.getName().length()==0){
-            holder.tv_content.setText("小杨逗比"+position);
+            holder.tvContent.setText("小杨逗比"+position);
         }else {
-            holder.tv_title.setText(person.getName());
+            holder.tvTitle.setText(person.getName());
         }
     }
 
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView tv_title;
-        private TextView tv_content;
+        private SparseArray<View> viewSparseArray;
+        private TextView tvTitle;
+        private TextView tvContent;
 
         MyViewHolder(final View itemView) {
             super(itemView);
+            if(viewSparseArray==null){
+                viewSparseArray = new SparseArray<>();
+            }
             itemView.setBackgroundResource(R.color.colorAccent);
-            tv_title = itemView.findViewById(R.id.tv_title);
-            tv_content = itemView.findViewById(R.id.tv_content);
+            tvTitle = (TextView) viewSparseArray.get(R.id.tv_title);
+            tvContent = (TextView) viewSparseArray.get(R.id.tv_content);
+            if (tvTitle == null) {
+                tvTitle = itemView.findViewById(R.id.tv_title);
+                viewSparseArray.put(R.id.tv_title, tvTitle);
+            }
+            if (tvContent == null) {
+                tvContent = itemView.findViewById(R.id.tv_content);
+                viewSparseArray.put(R.id.tv_content, tvContent);
+            }
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
