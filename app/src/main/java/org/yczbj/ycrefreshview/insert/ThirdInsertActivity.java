@@ -45,7 +45,9 @@ public class ThirdInsertActivity extends AppCompatActivity {
 
         List<PersonData> persons = DataProvider.getPersonList(0);
         adapter.addAll(persons.subList(0, 3));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        //设置默认的动画模式
+        DefaultItemAnimator defaultItemAnimator = new DefaultItemAnimator();
+        recyclerView.setItemAnimator(defaultItemAnimator);
     }
 
     @Override
