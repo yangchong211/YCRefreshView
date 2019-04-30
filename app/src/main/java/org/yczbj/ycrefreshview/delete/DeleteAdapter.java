@@ -1,6 +1,7 @@
 package org.yczbj.ycrefreshview.delete;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,7 @@ import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.swipe.OnSwipeMenuListener;
 import org.yczbj.ycrefreshviewlib.holder.BaseViewHolder;
 
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
+import java.util.List;
 
 
 public class DeleteAdapter extends RecyclerArrayAdapter<PersonData> {

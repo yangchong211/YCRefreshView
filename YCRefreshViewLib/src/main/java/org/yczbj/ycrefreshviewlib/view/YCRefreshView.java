@@ -283,7 +283,11 @@ public class YCRefreshView extends FrameLayout {
      * @param manager           LayoutManager
      */
     public void setLayoutManager(RecyclerView.LayoutManager manager) {
-        mRecyclerView.setLayoutManager(manager);
+        if (manager!=null){
+            mRecyclerView.setLayoutManager(manager);
+        } else {
+            throw new NullPointerException("un find no manager , please set manager must be null");
+        }
     }
 
     /**

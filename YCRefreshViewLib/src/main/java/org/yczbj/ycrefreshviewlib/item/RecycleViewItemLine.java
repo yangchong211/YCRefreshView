@@ -11,6 +11,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 
 import org.yczbj.ycrefreshviewlib.utils.RefreshLogUtils;
 
@@ -103,6 +104,7 @@ public class RecycleViewItemLine extends RecyclerView.ItemDecoration {
         super.getItemOffsets(outRect, view, parent, state);
         //给bottom留出一个高度为mDividerHeight的空白
         //这样做的目的是什么呢？就是为下面onDraw方法绘制高度为mDividerHeight的分割线做准备用的
+        //set方法作用：将矩形的坐标设置为指定的值
         outRect.set(0, 0, 0, mDividerHeight);
         RefreshLogUtils.d("RecycleViewItemLine-------"+"getItemOffsets");
     }

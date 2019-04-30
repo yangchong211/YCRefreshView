@@ -189,7 +189,6 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
             headers.get(position).onBindView(holder.itemView);
             return ;
         }
-
         int i = position - headers.size() - mObjects.size();
         if (footers.size()!=0 && i>=0){
             footers.get(i).onBindView(holder.itemView);

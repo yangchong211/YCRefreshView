@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import org.yczbj.ycrefreshview.R;
 import org.yczbj.ycrefreshview.data.PersonData;
 import org.yczbj.ycrefreshviewlib.inter.OnItemClickListener;
+import org.yczbj.ycrefreshviewlib.utils.RefreshLogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,6 +98,7 @@ public class LoadMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        RefreshLogUtils.d("Adapter------onCreateViewHolder");
         // 根据返回的ViewType，绑定不同的布局文件，这里只有两种
         if (viewType == normalType) {
             return new MyViewHolder(LayoutInflater.from(mContext)
@@ -116,6 +118,7 @@ public class LoadMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }else {
             setFootBindViewHolder((FootHolder)holder ,position);
         }
+        RefreshLogUtils.d("Adapter------onBindViewHolder---"+position);
     }
 
 
@@ -133,6 +136,7 @@ public class LoadMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      */
     @Override
     public int getItemViewType(int position) {
+        RefreshLogUtils.d("Adapter------getItemViewType---"+position);
         if (position == getItemCount() - 1) {
             return footType;
         } else {
@@ -151,6 +155,7 @@ public class LoadMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         MyViewHolder(final View itemView) {
             super(itemView);
+            RefreshLogUtils.d("Adapter------ViewHolder----getAdapterPosition---"+getAdapterPosition());
             tv_title = itemView.findViewById(R.id.tv_title);
             iv_news_image = itemView.findViewById(R.id.iv_news_image);
             tv_content = itemView.findViewById(R.id.tv_content);

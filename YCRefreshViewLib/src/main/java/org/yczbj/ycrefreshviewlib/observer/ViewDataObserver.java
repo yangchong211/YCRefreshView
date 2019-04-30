@@ -20,6 +20,10 @@ public class ViewDataObserver extends RecyclerView.AdapterDataObserver {
     private YCRefreshView recyclerView;
     private RecyclerArrayAdapter adapter;
 
+    /**
+     * 构造方法
+     * @param recyclerView                  recyclerView
+     */
     public ViewDataObserver(YCRefreshView recyclerView) {
         this.recyclerView = recyclerView;
         if (recyclerView.getAdapter() instanceof RecyclerArrayAdapter) {
@@ -27,6 +31,11 @@ public class ViewDataObserver extends RecyclerView.AdapterDataObserver {
         }
     }
 
+    /**
+     * 判断是否是header或者footer
+     * @param position                      索引
+     * @return                              true表示是header或者footer
+     */
     private boolean isHeaderFooter(int position) {
         return adapter != null && (position < adapter.getHeaderCount()
                 || position >= adapter.getHeaderCount() + adapter.getCount());
