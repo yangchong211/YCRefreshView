@@ -224,7 +224,6 @@ public class HeaderFooterActivity extends AppCompatActivity {
         //删除索引处的数据
         adapter.remove(0);
         //触发清空所有数据
-        adapter.removeAll();
         //添加数据，注意这个是在最后索引处添加
         adapter.add(new PersonData());
         //添加所有数据

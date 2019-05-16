@@ -38,6 +38,7 @@
         <activity android:name=".load.LoadMoreActivity"/>
         <activity android:name=".load.LoadMoreActivity2"/>
         <activity android:name=".layout.LayoutActivity"/>
+        <activity android:name=".type.HomePageActivity"/>
     </application>
 
 </manifest>

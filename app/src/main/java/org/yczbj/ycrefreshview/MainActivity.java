@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.bumptech.glide.load.engine.Resource;
+
 import org.yczbj.ycrefreshview.collapsing.EightCollapsingActivity;
 import org.yczbj.ycrefreshview.layout.LayoutActivity;
 import org.yczbj.ycrefreshview.load.LoadMoreActivity;
@@ -22,8 +24,12 @@ import org.yczbj.ycrefreshview.staggered.SevenStaggeredGridActivity;
 import org.yczbj.ycrefreshview.sticky.SixStickyHeaderActivity;
 import org.yczbj.ycrefreshview.delete.DeleteAndTopActivity;
 import org.yczbj.ycrefreshview.insert.ThirdInsertActivity;
+import org.yczbj.ycrefreshview.type.HomePageActivity;
 import org.yczbj.ycrefreshview.type.TypeActivity;
 import org.yczbj.ycrefreshviewlib.utils.RefreshLogUtils;
+
+import java.io.InputStream;
+import java.sql.Statement;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -48,7 +54,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.tv_3).setOnClickListener(this);
         findViewById(R.id.tv_4).setOnClickListener(this);
         findViewById(R.id.tv_5_1).setOnClickListener(this);
-        findViewById(R.id.tv_5_2).setOnClickListener(this);
         findViewById(R.id.tv_6).setOnClickListener(this);
         findViewById(R.id.tv_7).setOnClickListener(this);
         findViewById(R.id.tv_8).setOnClickListener(this);
@@ -60,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.tv_13_1).setOnClickListener(this);
         findViewById(R.id.tv_13_2).setOnClickListener(this);
         findViewById(R.id.tv_14).setOnClickListener(this);
+        findViewById(R.id.tv_15).setOnClickListener(this);
     }
 
 
@@ -85,9 +91,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(this, FourHorizontalActivity.class));
                 break;
             case R.id.tv_5_1:
-                startActivity(new Intent(this, FiveMultiStyleActivity.class));
-                break;
-            case R.id.tv_5_2:
                 startActivity(new Intent(this, FiveMultiStyleActivity.class));
                 break;
             case R.id.tv_6:
@@ -123,9 +126,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.tv_14:
                 startActivity(new Intent(this, LayoutActivity.class));
                 break;
+            case R.id.tv_15:
+                startActivity(new Intent(this, HomePageActivity.class));
+                break;
             default:
                 break;
         }
     }
+
 
 }

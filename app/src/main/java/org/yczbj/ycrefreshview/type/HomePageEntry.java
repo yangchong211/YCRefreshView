@@ -14,22 +14,21 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package org.yczbj.ycrefreshviewlib.inter;
+package org.yczbj.ycrefreshview.type;
 
-/**
- * <pre>
- *     @author 杨充
- *     blog  : https://github.com/yangchong211
- *     time  : 2016/4/28
- *     desc  : item中长按点击监听接口
- *     revise:
- * </pre>
- */
-public interface OnItemLongClickListener {
-    /**
-     * item中长按点击监听接口
-     * @param position              索引
-     * @return
-     */
-    boolean onItemLongClick(int position);
+public class HomePageEntry {
+
+    private int type;
+
+    public HomePageEntry(int type) {
+        this.type = type;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
 }

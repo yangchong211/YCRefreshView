@@ -80,15 +80,6 @@
             android:background="@android:color/darker_gray"
             android:text="5.1 使用封装库实现多种type复杂类型页面"/>
 
-        <TextView
-            android:id="@+id/tv_5_2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@android:color/darker_gray"
-            android:text="5.2 使用原生实现多种type复杂类型页面"/>
-
 
         <TextView
             android:id="@+id/tv_6"
@@ -207,6 +198,14 @@
             android:background="@android:color/darker_gray"
             android:text="14.使用阿里vlayout控件实现复杂页面"/>
 
+        <TextView
+            android:id="@+id/tv_15"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"
+            android:text="15.使用原生控件实现14类型中复杂页面"/>
 
     </LinearLayout>
 

@@ -1,3 +1,19 @@
+/*
+Copyright 2017 yangchong211（github.com/yangchong211）
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
 package org.yczbj.ycrefreshviewlib.adapter;
 
 import android.content.Context;
@@ -78,6 +94,11 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         mObjects = new ArrayList<>(objects);
     }
 
+    /**
+     * 页面进入时，显示RecyclerView，调用onAttachedToRecyclerView，做一些注册工作；
+     * 页面退出时，销毁RecyclerView，调用onDetachedFromRecyclerView，做一些解注册和其他资源回收的操作。
+     * @param recyclerView                      recyclerView
+     */
     @Override
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
@@ -110,6 +131,17 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
     }
 
     /**
+     * 页面进入时，显示RecyclerView，调用onAttachedToRecyclerView，做一些注册工作；
+     * 页面退出时，销毁RecyclerView，调用onDetachedFromRecyclerView，做一些解注册和其他资源回收的操作。
+     * @param recyclerView                      recyclerView
+     */
+    @Override
+    public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView);
+    }
+
+    /**
+     * https://www.jianshu.com/p/4f66c2c71d8c
      * 创建viewHolder，主要作用是创建Item视图，并返回相应的ViewHolder
      * @param parent                        parent
      * @param viewType                      type类型
@@ -681,24 +713,6 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         RefreshLogUtils.d("remove notifyItemRemoved "+(headers.size()+position));
     }
 
-
-    /**
-     * 触发清空
-     * 与{@link #clear()}的不同仅在于这个使用notifyItemRangeRemoved.
-     */
-    public void removeAll() {
-        int count = mObjects.size();
-        if (mEventDelegate!=null) {
-            mEventDelegate.clear();
-        }
-        synchronized (mLock) {
-            mObjects.clear();
-        }
-        if (mNotifyOnChange) {
-            notifyItemRangeRemoved(headers.size(), count);
-        }
-        RefreshLogUtils.d("clear notifyItemRangeRemoved "+(headers.size())+","+(count));
-    }
 
     /**
      * 触发清空所有的数据

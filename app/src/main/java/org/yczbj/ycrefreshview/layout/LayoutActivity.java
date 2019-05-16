@@ -98,7 +98,9 @@ public class LayoutActivity extends AppCompatActivity {
         arrayList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505470629546&di=194a9a92bfcb7754c5e4d19ff1515355&imgtype=0&src=http%3A%2F%2Fpics.jiancai.com%2Fimgextra%2Fimg01%2F656928666%2Fi1%2FT2_IffXdxaXXXXXXXX_%2521%2521656928666.jpg");
         //banner
         //banner
-        BaseDelegateAdapter adapter = new BaseDelegateAdapter(LayoutActivity.this, new LinearLayoutHelper(), R.layout.view_vlayout_banner, 1, Constant.viewType.typeBanner) {
+        BaseDelegateAdapter adapter = new BaseDelegateAdapter(LayoutActivity.this,
+                new LinearLayoutHelper(), R.layout.view_vlayout_banner,
+                1, Constant.viewType.typeBanner) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
@@ -176,7 +178,8 @@ public class LayoutActivity extends AppCompatActivity {
         linearLayoutHelper.setDividerHeight(5);
         linearLayoutHelper.setMargin(0, 0, 0, 0);
         linearLayoutHelper.setPadding(0, 0, 0, 10);
-        BaseDelegateAdapter adapter = new BaseDelegateAdapter(LayoutActivity.this, linearLayoutHelper, R.layout.view_vlayout_news, 3, Constant.viewType.typeList2) {
+        BaseDelegateAdapter adapter = new BaseDelegateAdapter(LayoutActivity.this,
+                linearLayoutHelper, R.layout.view_vlayout_news, 3, Constant.viewType.typeList2) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
@@ -230,7 +233,8 @@ public class LayoutActivity extends AppCompatActivity {
         linearLayoutHelper.setDividerHeight(5);
         linearLayoutHelper.setMargin(0, 0, 0, 0);
         linearLayoutHelper.setPadding(0, 0, 0, 10);
-        BaseDelegateAdapter adapter = new BaseDelegateAdapter(LayoutActivity.this, linearLayoutHelper, R.layout.view_vlayout_news, 3, Constant.viewType.typeList4) {
+        BaseDelegateAdapter adapter = new BaseDelegateAdapter(LayoutActivity.this,
+                linearLayoutHelper, R.layout.view_vlayout_news, 3, Constant.viewType.typeList4) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
@@ -251,7 +255,8 @@ public class LayoutActivity extends AppCompatActivity {
         // 控制子元素之间的水平间距
         gridLayoutHelper.setHGap(0);
         gridLayoutHelper.setBgColor(Color.WHITE);
-        BaseDelegateAdapter adapter = new BaseDelegateAdapter(LayoutActivity.this, gridLayoutHelper, R.layout.view_vlayout_grid, 6, Constant.viewType.typeGvBottom) {
+        BaseDelegateAdapter adapter = new BaseDelegateAdapter(LayoutActivity.this,
+                gridLayoutHelper, R.layout.view_vlayout_grid, 6, Constant.viewType.typeGvBottom) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
@@ -271,7 +276,8 @@ public class LayoutActivity extends AppCompatActivity {
         linearLayoutHelper.setDividerHeight(5);
         linearLayoutHelper.setMargin(0, 0, 0, 0);
         linearLayoutHelper.setPadding(0, 0, 0, 10);
-        BaseDelegateAdapter adapter = new BaseDelegateAdapter(LayoutActivity.this, linearLayoutHelper, R.layout.view_vlayout_news, 3, Constant.viewType.typeList5) {
+        BaseDelegateAdapter adapter = new BaseDelegateAdapter(LayoutActivity.this,
+                linearLayoutHelper, R.layout.view_vlayout_news, 3, Constant.viewType.typeList5) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
@@ -284,7 +290,8 @@ public class LayoutActivity extends AppCompatActivity {
 
 
     private void initTitleView(final int type) {
-        BaseDelegateAdapter titleAdapter = new BaseDelegateAdapter(LayoutActivity.this, new LinearLayoutHelper(), R.layout.view_vlayout_title, 1, Constant.viewType.typeTitle) {
+        BaseDelegateAdapter titleAdapter = new BaseDelegateAdapter(LayoutActivity.this,
+                new LinearLayoutHelper(), R.layout.view_vlayout_title, 1, Constant.viewType.typeTitle) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);

@@ -12,6 +12,7 @@
         android:id="@+id/iv_image"
         android:layout_width="match_parent"
         android:layout_height="105dp"
+        android:background="@drawable/bg_autumn_tree_min"
         android:scaleType="fitXY"/>
 
     <TextView
