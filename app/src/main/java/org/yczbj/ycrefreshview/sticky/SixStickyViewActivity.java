@@ -32,7 +32,6 @@ public class SixStickyViewActivity extends AppCompatActivity {
     private AppBarLayout appbar;
     private RecyclerView recyclerView;
     private RecyclerArrayAdapter<PersonData> adapter;
-    private int page = 0;
     private boolean hasNetWork = true;
     private Handler handler = new Handler();
     @Retention(RetentionPolicy.SOURCE)
@@ -123,8 +122,7 @@ public class SixStickyViewActivity extends AppCompatActivity {
                             adapter.pauseMore();
                             return;
                         }
-                        adapter.addAll(DataProvider.getPersonList(page));
-                        page++;
+                        adapter.addAll(DataProvider.getPersonList(10));
                     }
                 }, 2000);
             }
@@ -162,7 +160,6 @@ public class SixStickyViewActivity extends AppCompatActivity {
 
 
     private void initData() {
-        page = 0;
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -172,8 +169,7 @@ public class SixStickyViewActivity extends AppCompatActivity {
                     adapter.pauseMore();
                     return;
                 }
-                adapter.addAll(DataProvider.getPersonList(page));
-                page=1;
+                adapter.addAll(DataProvider.getPersonList(10));
             }
         }, 50);
     }
