@@ -18,6 +18,7 @@ import org.yczbj.ycrefreshview.refresh.RefreshAndMoreActivity2;
 import org.yczbj.ycrefreshview.multistyle.FiveMultiStyleActivity;
 import org.yczbj.ycrefreshview.horizontal.FourHorizontalActivity;
 import org.yczbj.ycrefreshview.refresh.RefreshAndMoreActivity3;
+import org.yczbj.ycrefreshview.sticky.SixStickyViewActivity;
 import org.yczbj.ycrefreshview.touchmove.NightTouchMoveActivity;
 import org.yczbj.ycrefreshview.header.HeaderFooterActivity;
 import org.yczbj.ycrefreshview.staggered.SevenStaggeredGridActivity;
@@ -54,7 +55,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.tv_3).setOnClickListener(this);
         findViewById(R.id.tv_4).setOnClickListener(this);
         findViewById(R.id.tv_5_1).setOnClickListener(this);
-        findViewById(R.id.tv_6).setOnClickListener(this);
+        findViewById(R.id.tv_6_1).setOnClickListener(this);
+        findViewById(R.id.tv_6_2).setOnClickListener(this);
         findViewById(R.id.tv_7).setOnClickListener(this);
         findViewById(R.id.tv_8).setOnClickListener(this);
         findViewById(R.id.tv_9).setOnClickListener(this);
@@ -93,8 +95,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.tv_5_1:
                 startActivity(new Intent(this, FiveMultiStyleActivity.class));
                 break;
-            case R.id.tv_6:
+            case R.id.tv_6_1:
                 startActivity(new Intent(this, SixStickyHeaderActivity.class));
+                break;
+            case R.id.tv_6_2:
+                startActivity(new Intent(this, SixStickyViewActivity.class));
                 break;
             case R.id.tv_7:
                 startActivity(new Intent(this, SevenStaggeredGridActivity.class));

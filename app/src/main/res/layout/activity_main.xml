@@ -82,13 +82,23 @@
 
 
         <TextView
-            android:id="@+id/tv_6"
+            android:id="@+id/tv_6_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:layout_marginTop="10dp"
             android:background="@android:color/darker_gray"
-            android:text="6.粘贴头部list【类似微信好友分组】"/>
+            android:text="6.1 粘贴头部list，采用ItemDecoration实现"/>
+
+
+        <TextView
+            android:id="@+id/tv_6_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"
+            android:text="6.2 粘贴头部list，采用CoordinatorLayout实现"/>
 
 
         <TextView

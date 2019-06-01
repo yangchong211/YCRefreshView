@@ -133,6 +133,7 @@ public class DividerViewItemLine extends RecyclerView.ItemDecoration{
         }
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public void onDrawOver(@NonNull Canvas c, @NonNull RecyclerView parent,
                            @NonNull RecyclerView.State state) {

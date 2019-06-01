@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@drawable/bg_autumn_tree_min"/>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/iv_news_image"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:scaleType="fitXY"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/bg_small_tree_min"/>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/iv_news_image"
+            android:layout_marginStart="10dp"
+            android:textSize="14sp"
+            android:text="杨充是个大神级别的人物"/>
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/iv_news_image"
+            android:layout_marginStart="10dp"
+            android:layout_below="@+id/tv_title"
+            android:layout_marginTop="5dp"
+            android:textSize="12sp"
+            android:text="杨充是个大神级别的人物杨充是个大神级别的人物"/>
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/iv_news_image"
+            android:layout_marginStart="10dp"
+            android:layout_below="@+id/tv_content"
+            android:layout_marginTop="3dp"
+            android:textSize="11sp"
+            android:text="15分30秒"/>
+
+        <TextView
+            android:id="@+id/tv_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_below="@+id/tv_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="3dp"
+            android:textSize="11sp"
+            android:text="15人命币"/>
+
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>

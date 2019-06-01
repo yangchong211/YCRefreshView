@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--这个是滚动头部-->
+        <include layout="@layout/include_header"/>
+
+        <!--这个是吸顶布局-->
+        <include layout="@layout/include_sticky_header"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <!--app:layout_behavior 属性-->
+    <!--如果你使用CoordinatorLayout来实现Toolbar滚动渐变消失动画效果，那就必须在它下面的那个控件中加入-->
+    <include layout="@layout/include_scroll_bottom" />
+
+
+</android.support.design.widget.CoordinatorLayout>
+
+
+
+
+

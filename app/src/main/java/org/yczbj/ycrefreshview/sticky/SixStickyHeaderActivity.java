@@ -97,8 +97,9 @@ public class SixStickyHeaderActivity extends AppCompatActivity implements OnLoad
             }
         });
         // StickyHeader
-        StickyHeaderItemLine decoration = new StickyHeaderItemLine(new StickyHeaderAdapter(this));
-        decoration.setIncludeHeader(false);
+        StickyHeaderItemLine decoration = new StickyHeaderItemLine(
+                new StickyHeaderAdapter(this));
+        decoration.setIncludeHeader(true);
         recyclerView.addItemDecoration(decoration);
         top.setOnClickListener(new View.OnClickListener() {
             @Override

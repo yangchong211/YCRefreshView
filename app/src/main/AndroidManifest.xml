@@ -39,6 +39,7 @@
         <activity android:name=".load.LoadMoreActivity2"/>
         <activity android:name=".layout.LayoutActivity"/>
         <activity android:name=".type.HomePageActivity"/>
+        <activity android:name=".sticky.SixStickyViewActivity"/>
     </application>
 
 </manifest>
