@@ -71,20 +71,20 @@ public class SixStickyViewActivity extends AppCompatActivity {
                 if (state != STATES.EXPANDED) {
                     //修改状态标记为展开
                     state = STATES.EXPANDED;
-                    RefreshLogUtils.e("CustomScrollView"+ "修改状态标记为展开");
+                    RefreshLogUtils.e("OnOffsetChangedListener"+ "修改状态标记为展开");
                 }
             } else if (Math.abs(verticalOffset) >= totalScrollRange) {
                 if (state != STATES.COLLAPSED) {
                     //修改状态标记为折叠
                     state = STATES.COLLAPSED;
-                    RefreshLogUtils.e("CustomScrollView"+ "修改状态标记为折叠");
+                    RefreshLogUtils.e("OnOffsetChangedListener"+ "修改状态标记为折叠");
                 }
             } else {
                 if (state != STATES.INTERMEDIATE) {
                     //修改状态标记为中间
                     state = STATES.INTERMEDIATE;
                     //代码设置是否拦截事件
-                    RefreshLogUtils.e("CustomScrollView"+ "修改状态标记为中间");
+                    RefreshLogUtils.e("OnOffsetChangedListener"+ "修改状态标记为中间");
                 }
                 
             }

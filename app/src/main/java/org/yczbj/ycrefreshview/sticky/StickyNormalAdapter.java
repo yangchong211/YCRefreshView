@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.yczbj.ycrefreshview.R;
-import org.yczbj.ycrefreshviewlib.item.StickyHeaderItemLine;
-import org.yczbj.ycrefreshviewlib.item.StickyNormalItemLine;
 
 
 /**

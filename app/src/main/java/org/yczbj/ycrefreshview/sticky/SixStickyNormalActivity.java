@@ -22,12 +22,9 @@ import org.yczbj.ycrefreshview.data.PersonData;
 import org.yczbj.ycrefreshview.refresh.PersonViewHolder;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.holder.BaseViewHolder;
-import org.yczbj.ycrefreshviewlib.inter.OnErrorListener;
 import org.yczbj.ycrefreshviewlib.inter.OnItemLongClickListener;
 import org.yczbj.ycrefreshviewlib.inter.OnLoadMoreListener;
 import org.yczbj.ycrefreshviewlib.item.DividerViewItemLine;
-import org.yczbj.ycrefreshviewlib.item.StickyHeaderItemLine;
-import org.yczbj.ycrefreshviewlib.item.StickyNormalItemLine;
 import org.yczbj.ycrefreshviewlib.view.YCRefreshView;
 
 import java.util.ArrayList;
