@@ -10,6 +10,7 @@
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
+        app:layout_behavior="org.yczbj.ycrefreshview.sticky.AppBarLayoutBehavior"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
