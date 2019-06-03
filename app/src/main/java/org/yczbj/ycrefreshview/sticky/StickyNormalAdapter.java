@@ -43,6 +43,7 @@ public class StickyNormalAdapter implements
         Log.d("getHeaderId---","第"+getHeaderId(position)+"组");
     }
 
+
     class HeaderHolder extends RecyclerView.ViewHolder {
         TextView header;
         HeaderHolder(View itemView) {
