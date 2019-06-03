@@ -26,6 +26,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.utils.RefreshLogUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -83,11 +84,14 @@ public class StickyNormalItemLine extends RecyclerView.ItemDecoration {
                                @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         int position = parent.getChildAdapterPosition(view);
         int headerHeight = 0;
-        if (position != RecyclerView.NO_POSITION && hasHeader(position)
-                && showHeaderAboveItem(position)) {
+        //判断是否有header
+        boolean hasHeader = hasHeader(position);
+        boolean showHeaderAboveItem = showHeaderAboveItem(position);
+        if (position != RecyclerView.NO_POSITION && hasHeader && showHeaderAboveItem) {
             View header = getHeader(parent, position).itemView;
             headerHeight = getHeaderHeightForLayout(header);
         }
+        RefreshLogUtils.d("StickyNormalItemLine------headerHeight---"+headerHeight);
         outRect.set(0, headerHeight, 0, 0);
     }
 
@@ -119,6 +123,11 @@ public class StickyNormalItemLine extends RecyclerView.ItemDecoration {
     }
 
 
+    /**
+     * 判断是否有header
+     * @param position                  索引
+     * @return
+     */
     private boolean hasHeader(int position) {
         return mAdapter.getHeaderId(position) != NO_HEADER_ID;
     }
@@ -143,7 +152,9 @@ public class StickyNormalItemLine extends RecyclerView.ItemDecoration {
             int childHeight = ViewGroup.getChildMeasureSpec(heightSpec,
                     parent.getPaddingTop() + parent.getPaddingBottom(),
                     header.getLayoutParams().height);
+            //测量
             header.measure(childWidth, childHeight);
+            //布局
             header.layout(0, 0, header.getMeasuredWidth(), header.getMeasuredHeight());
             mHeaderCache.put(key, holder);
             return holder;

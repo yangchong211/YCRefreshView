@@ -27,6 +27,7 @@ import android.view.ViewGroup;
 
 
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.utils.RefreshLogUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -105,12 +106,13 @@ public class StickyHeaderItemLine extends RecyclerView.ItemDecoration {
                 }
             }
         }
-
-        if (position != RecyclerView.NO_POSITION && hasHeader(position)
-                && showHeaderAboveItem(position)) {
+        boolean hasHeader = hasHeader(position);
+        boolean showHeaderAboveItem = showHeaderAboveItem(position);
+        if (position != RecyclerView.NO_POSITION && hasHeader && showHeaderAboveItem) {
             View header = getHeader(parent, position).itemView;
             headerHeight = getHeaderHeightForLayout(header);
         }
+        RefreshLogUtils.d("StickyItemLine------headerHeight---"+headerHeight);
         outRect.set(0, headerHeight, 0, 0);
     }
 
@@ -141,7 +143,11 @@ public class StickyHeaderItemLine extends RecyclerView.ItemDecoration {
         return null;
     }
 
-
+    /**
+     * 判断是否有header
+     * @param position                  索引
+     * @return
+     */
     private boolean hasHeader(int position) {
         return mAdapter.getHeaderId(position) != NO_HEADER_ID;
     }

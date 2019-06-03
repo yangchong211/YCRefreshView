@@ -39,8 +39,6 @@ public class SixStickyHeaderActivity extends AppCompatActivity implements OnLoad
     private FloatingActionButton top;
     private RecyclerArrayAdapter<PersonData> adapter;
     private Handler handler = new Handler();
-
-    private int page = 0;
     private boolean hasNetWork = true;
     private ArrayList<Integer> list;
 
@@ -124,15 +122,13 @@ public class SixStickyHeaderActivity extends AppCompatActivity implements OnLoad
                     adapter.pauseMore();
                     return;
                 }
-                adapter.addAll(DataProvider.getPersonList(page));
-                page++;
+                adapter.addAll(DataProvider.getPersonList(10));
             }
         }, 2000);
     }
 
     @Override
     public void onRefresh() {
-        page = 0;
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -142,8 +138,7 @@ public class SixStickyHeaderActivity extends AppCompatActivity implements OnLoad
                     adapter.pauseMore();
                     return;
                 }
-                adapter.addAll(DataProvider.getPersonList(page));
-                page = 1;
+                adapter.addAll(DataProvider.getPersonList(10));
             }
         }, 2000);
     }

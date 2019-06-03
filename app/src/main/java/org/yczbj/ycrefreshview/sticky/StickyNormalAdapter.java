@@ -4,6 +4,7 @@ package org.yczbj.ycrefreshview.sticky;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ public class StickyNormalAdapter implements
 
     @Override
     public long getHeaderId(int position) {
+        Log.d("getHeaderId---",position+"");
         return position / 3;
     }
 
@@ -38,6 +40,7 @@ public class StickyNormalAdapter implements
     @Override
     public void onBindHeaderViewHolder(HeaderHolder viewholder, int position) {
         viewholder.header.setText("第"+getHeaderId(position)+"组");
+        Log.d("getHeaderId---","第"+getHeaderId(position)+"组");
     }
 
     class HeaderHolder extends RecyclerView.ViewHolder {
