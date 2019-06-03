@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -99,6 +98,16 @@
             android:layout_marginTop="10dp"
             android:background="@android:color/darker_gray"
             android:text="6.2 粘贴头部list，采用CoordinatorLayout实现"/>
+
+
+        <TextView
+            android:id="@+id/tv_6_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"
+            android:text="6.3 原生控件实现，采用ItemDecoration实现"/>
 
 
         <TextView

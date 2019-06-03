@@ -40,6 +40,7 @@
         <activity android:name=".layout.LayoutActivity"/>
         <activity android:name=".type.HomePageActivity"/>
         <activity android:name=".sticky.SixStickyViewActivity"/>
+        <activity android:name=".sticky.SixStickyNormalActivity"/>
     </application>
 
 </manifest>

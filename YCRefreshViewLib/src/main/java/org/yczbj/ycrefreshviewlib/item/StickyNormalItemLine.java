@@ -25,7 +25,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 import java.util.HashMap;
@@ -41,13 +40,12 @@ import java.util.Map;
  *     revise:
  * </pre>
  */
-public class StickyHeaderItemLine extends RecyclerView.ItemDecoration {
+public class StickyNormalItemLine extends RecyclerView.ItemDecoration {
 
     private static final long NO_HEADER_ID = -1L;
     private Map<Long, RecyclerView.ViewHolder> mHeaderCache;
     private IStickyHeaderAdapter mAdapter;
     private boolean mRenderInline;
-    private boolean mIncludeHeader = false;
 
     public interface IStickyHeaderAdapter<T extends RecyclerView.ViewHolder> {
         long getHeaderId(int position);
@@ -56,21 +54,17 @@ public class StickyHeaderItemLine extends RecyclerView.ItemDecoration {
     }
 
 
-    public StickyHeaderItemLine(IStickyHeaderAdapter adapter) {
+    public StickyNormalItemLine(IStickyHeaderAdapter adapter) {
         this(adapter, false);
     }
 
 
     @SuppressLint("UseSparseArrays")
-    public StickyHeaderItemLine(IStickyHeaderAdapter adapter, boolean renderInline) {
+    public StickyNormalItemLine(IStickyHeaderAdapter adapter, boolean renderInline) {
         mAdapter = adapter;
         mHeaderCache = new HashMap<>();
         //mHeaderCache = new LongSparseArray<>();
         mRenderInline = renderInline;
-    }
-
-    public void setIncludeHeader(boolean mIncludeHeader) {
-        this.mIncludeHeader = mIncludeHeader;
     }
 
 
@@ -89,23 +83,6 @@ public class StickyHeaderItemLine extends RecyclerView.ItemDecoration {
                                @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         int position = parent.getChildAdapterPosition(view);
         int headerHeight = 0;
-        if (!mIncludeHeader){
-            if (parent.getAdapter() instanceof RecyclerArrayAdapter){
-                int headerCount = ((RecyclerArrayAdapter) parent.getAdapter()).getHeaderCount();
-                int footerCount = ((RecyclerArrayAdapter) parent.getAdapter()).getFooterCount();
-                int dataCount = ((RecyclerArrayAdapter) parent.getAdapter()).getCount();
-                if (position<headerCount){
-                    return;
-                }
-                if (position>=headerCount+dataCount){
-                    return ;
-                }
-                if (position>=headerCount){
-                    position-=headerCount;
-                }
-            }
-        }
-
         if (position != RecyclerView.NO_POSITION && hasHeader(position)
                 && showHeaderAboveItem(position)) {
             View header = getHeader(parent, position).itemView;
@@ -192,23 +169,6 @@ public class StickyHeaderItemLine extends RecyclerView.ItemDecoration {
         for (int layoutPos = 0; layoutPos < count; layoutPos++) {
             final View child = parent.getChildAt(layoutPos);
             int adapterPos = parent.getChildAdapterPosition(child);
-            if (!mIncludeHeader){
-                if (parent.getAdapter() instanceof RecyclerArrayAdapter){
-                    int headerCount = ((RecyclerArrayAdapter) parent.getAdapter()).getHeaderCount();
-                    int footerCount = ((RecyclerArrayAdapter) parent.getAdapter()).getFooterCount();
-                    int dataCount = ((RecyclerArrayAdapter) parent.getAdapter()).getCount();
-                    if (adapterPos<headerCount){
-                        continue;
-                    }
-                    if (adapterPos>=headerCount+dataCount){
-                        continue ;
-                    }
-                    if (adapterPos>=headerCount){
-                        adapterPos-=headerCount;
-                    }
-                }
-            }
-
             if (adapterPos != RecyclerView.NO_POSITION && hasHeader(adapterPos)) {
                 long headerId = mAdapter.getHeaderId(adapterPos);
                 if (headerId != previousHeaderId) {

@@ -11,17 +11,18 @@ import android.widget.TextView;
 
 import org.yczbj.ycrefreshview.R;
 import org.yczbj.ycrefreshviewlib.item.StickyHeaderItemLine;
+import org.yczbj.ycrefreshviewlib.item.StickyNormalItemLine;
 
 
 /**
  * @author yc
  */
-public class StickyHeaderAdapter implements
-        StickyHeaderItemLine.IStickyHeaderAdapter<StickyHeaderAdapter.HeaderHolder> {
+public class StickyNormalAdapter implements
+        StickyNormalItemLine.IStickyHeaderAdapter<StickyNormalAdapter.HeaderHolder> {
 
     private LayoutInflater mInflater;
 
-    public StickyHeaderAdapter(Context context) {
+    public StickyNormalAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
     }
 
