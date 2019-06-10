@@ -28,13 +28,26 @@ public class AppBarLayoutBehavior extends AppBarLayout.Behavior {
 
     private static final String TAG = "AppbarLayoutBehavior";
     private static final int TYPE_FLING = 1;
+    /**
+     * 记录是否有fling
+     */
     private boolean isFlinging;
+    /**
+     * 记录是否
+     */
     private boolean shouldBlockNestedScroll;
 
     public AppBarLayoutBehavior(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
+    /**
+     * 是否拦截触摸事件
+     * @param parent                        CoordinatorLayout
+     * @param child                         AppBarLayout
+     * @param ev                            ev
+     * @return
+     */
     @Override
     public boolean onInterceptTouchEvent(CoordinatorLayout parent, AppBarLayout child, MotionEvent ev) {
         LogUtil.d(TAG, "onInterceptTouchEvent:" + child.getTotalScrollRange());
@@ -61,9 +74,13 @@ public class AppBarLayoutBehavior extends AppBarLayout.Behavior {
             // support design 27及一下版本
             Class<?> headerBehaviorType = null;
             if (superclass != null) {
+                String name = superclass.getName();
+                LogUtil.d("AppBarLayout.Behavior父类",name);
                 headerBehaviorType = superclass.getSuperclass();
             }
             if (headerBehaviorType != null) {
+                String name = headerBehaviorType.getName();
+                LogUtil.d("AppBarLayout.Behavior父类的父类1",name);
                 return headerBehaviorType.getDeclaredField("mFlingRunnable");
             }else {
                 return null;
@@ -73,6 +90,8 @@ public class AppBarLayoutBehavior extends AppBarLayout.Behavior {
             // 可能是28及以上版本
             Class<?> headerBehaviorType = superclass.getSuperclass().getSuperclass();
             if (headerBehaviorType != null) {
+                String name = headerBehaviorType.getName();
+                LogUtil.d("AppBarLayout.Behavior父类的父类2",name);
                 return headerBehaviorType.getDeclaredField("flingRunnable");
             } else {
                 return null;
@@ -129,7 +148,11 @@ public class AppBarLayoutBehavior extends AppBarLayout.Behavior {
             if (flingRunnableField != null) {
                 flingRunnable = (Runnable) flingRunnableField.get(this);
             }
-            OverScroller overScroller = (OverScroller) scrollerField.get(this);
+            OverScroller overScroller = null;
+            if (scrollerField != null) {
+                overScroller = (OverScroller) scrollerField.get(this);
+            }
+            //下面是关键点
             if (flingRunnable != null) {
                 LogUtil.d(TAG, "存在flingRunnable");
                 appBarLayout.removeCallbacks(flingRunnable);
@@ -145,6 +168,9 @@ public class AppBarLayoutBehavior extends AppBarLayout.Behavior {
         }
     }
 
+    /**
+     * 嵌套滑动开始（ACTION_DOWN），确定Behavior是否要监听此次事件
+     */
     @Override
     public boolean onStartNestedScroll(CoordinatorLayout parent, AppBarLayout child,
                                        View directTargetChild, View target,
@@ -155,6 +181,9 @@ public class AppBarLayoutBehavior extends AppBarLayout.Behavior {
                 nestedScrollAxes, type);
     }
 
+    /**
+     * 嵌套滑动进行中，要监听的子 View将要滑动，滑动事件即将被消费（但最终被谁消费，可以通过代码控制）
+     */
     @Override
     public void onNestedPreScroll(CoordinatorLayout coordinatorLayout,
                                   AppBarLayout child, View target,
@@ -173,6 +202,9 @@ public class AppBarLayoutBehavior extends AppBarLayout.Behavior {
         }
     }
 
+    /**
+     * 嵌套滑动进行中，要监听的子 View的滑动事件已经被消费
+     */
     @Override
     public void onNestedScroll(CoordinatorLayout coordinatorLayout, AppBarLayout child,
                                View target, int dxConsumed, int dyConsumed, int
@@ -186,6 +218,9 @@ public class AppBarLayoutBehavior extends AppBarLayout.Behavior {
         }
     }
 
+    /**
+     * 嵌套滑动结束（ACTION_UP或ACTION_CANCEL）
+     */
     @Override
     public void onStopNestedScroll(CoordinatorLayout coordinatorLayout, AppBarLayout abl,
                                    View target, int type) {
