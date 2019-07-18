@@ -11,23 +11,22 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.cn.ycbannerlib.banner.hintview.ColorPointHintView;
 
-import org.yczbj.ycrefreshview.data.DataProvider;
 import org.yczbj.ycrefreshview.R;
 import org.yczbj.ycrefreshview.data.AppUtils;
+import org.yczbj.ycrefreshview.data.DataProvider;
 import org.yczbj.ycrefreshview.header.BannerAdapter;
-import org.yczbj.ycrefreshviewlib.view.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.inter.InterItemView;
 import org.yczbj.ycrefreshviewlib.inter.OnMoreListener;
 import org.yczbj.ycrefreshviewlib.item.SpaceViewItemLine;
+import org.yczbj.ycrefreshviewlib.view.YCRefreshView;
 
-public class SevenStaggeredGridActivity extends AppCompatActivity {
+public class SevenStaggeredActivity extends AppCompatActivity {
 
     private YCRefreshView recyclerView;
-    private ImageAdapter adapter;
+    private ImageStageredAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,11 +34,11 @@ public class SevenStaggeredGridActivity extends AppCompatActivity {
         setContentView(R.layout.activity_refresh_view);
         recyclerView = findViewById(R.id.recyclerView);
 
-        adapter = new ImageAdapter(this);
+        adapter = new ImageStageredAdapter(this);
         recyclerView.setAdapter(adapter);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,3);
-        gridLayoutManager.setSpanSizeLookup(adapter.obtainGridSpanSizeLookUp(3));
-        recyclerView.setLayoutManager(gridLayoutManager);
+        StaggeredGridLayoutManager staggeredGridLayoutManager =
+                new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(staggeredGridLayoutManager);
         SpaceViewItemLine itemDecoration = new SpaceViewItemLine(20);
         recyclerView.addItemDecoration(itemDecoration);
 
@@ -47,12 +46,12 @@ public class SevenStaggeredGridActivity extends AppCompatActivity {
         adapter.addHeader(new InterItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
-                BannerView header = new BannerView(SevenStaggeredGridActivity.this);
-                header.setHintView(new ColorPointHintView(SevenStaggeredGridActivity.this, Color.YELLOW,Color.GRAY));
-                header.setHintPadding(0, 0, 0, (int) AppUtils.convertDpToPixel(8, SevenStaggeredGridActivity.this));
+                BannerView header = new BannerView(SevenStaggeredActivity.this);
+                header.setHintView(new ColorPointHintView(SevenStaggeredActivity.this, Color.YELLOW,Color.GRAY));
+                header.setHintPadding(0, 0, 0, (int) AppUtils.convertDpToPixel(8, SevenStaggeredActivity.this));
                 header.setPlayDelay(2000);
-                header.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) AppUtils.convertDpToPixel(200, SevenStaggeredGridActivity.this)));
-                header.setAdapter(new BannerAdapter(SevenStaggeredGridActivity.this));
+                header.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) AppUtils.convertDpToPixel(200, SevenStaggeredActivity.this)));
+                header.setAdapter(new BannerAdapter(SevenStaggeredActivity.this));
                 return header;
             }
 
@@ -96,4 +95,6 @@ public class SevenStaggeredGridActivity extends AppCompatActivity {
             }
         },300);
     }
+
+
 }

@@ -117,7 +117,29 @@
             android:padding="10dp"
             android:layout_marginTop="10dp"
             android:background="@android:color/darker_gray"
-            android:text="7.不规则瀑布流效果【也可以定义为规则的】"/>
+            android:text="7.1 规则瀑布流效果"/>
+
+        <TextView
+            android:id="@+id/tv_7_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"
+            android:text="7.2 不规则瀑布流效果【也可以定义为规则的】"/>
+
+
+        <TextView
+            android:id="@+id/tv_7_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"
+            android:text="7.3 不规则瀑布流效果【原生实现】"/>
+
+
+
 
         <TextView
             android:id="@+id/tv_8"
