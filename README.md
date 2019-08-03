@@ -94,7 +94,7 @@
 ### 3.如何使用介绍
 #### 3.1 最基础的使用
 - 首先在集成：
-    - implementation 'org.yczbj:YCRefreshViewLib:2.5.9'
+    - implementation 'org.yczbj:YCRefreshViewLib:2.5.8'
 - 在布局中
     ```
     <org.yczbj.ycrefreshviewlib.YCRefreshView

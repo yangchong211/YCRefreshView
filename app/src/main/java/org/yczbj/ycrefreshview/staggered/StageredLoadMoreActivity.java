@@ -147,13 +147,6 @@ public class StageredLoadMoreActivity extends AppCompatActivity {
         });
         adapter = new StageredLoadMoreAdapter(this,false);
         recyclerView.setAdapter(adapter);
-        adapter.setOnClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-
-            }
-        });
-
         // 实现上拉加载重要步骤，设置滑动监听器，RecyclerView自带的ScrollListener
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override

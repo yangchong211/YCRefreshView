@@ -78,12 +78,14 @@ public class LoadMoreAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHold
      * 暴露接口，更新数据源，并修改hasMore的值，如果有增加数据，hasMore为true，否则为false
      */
     public void updateList(List<PersonData> newDatas, boolean hasMore) {
+        int start = data.size();
         // 在原有的数据之上增加新数据
         if (newDatas != null) {
             data.addAll(newDatas);
         }
+        int end = data.size();
         this.hasMore = hasMore;
-        notifyDataSetChanged();
+        notifyItemRangeInserted(start,end);
     }
 
     /**

@@ -79,12 +79,13 @@ public class StageredLoadMoreAdapter extends RecyclerView.Adapter<RecyclerView.V
      * 暴露接口，更新数据源，并修改hasMore的值，如果有增加数据，hasMore为true，否则为false
      */
     public void updateList(List<PersonData> newDatas, boolean hasMore) {
+        int size = data.size();
         // 在原有的数据之上增加新数据
         if (newDatas != null) {
             data.addAll(newDatas);
+            this.hasMore = hasMore;
+            notifyItemRangeInserted(size,newDatas.size());
         }
-        this.hasMore = hasMore;
-        notifyDataSetChanged();
     }
 
     /**
