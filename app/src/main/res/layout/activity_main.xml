@@ -248,6 +248,15 @@
             android:background="@android:color/darker_gray"
             android:text="15.使用原生控件实现14类型中复杂页面"/>
 
+        <TextView
+            android:id="@+id/tv_16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"
+            android:text="16.使用recyclerView实现流失标签布局"/>
+
     </LinearLayout>
 
 

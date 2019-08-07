@@ -43,6 +43,7 @@
         <activity android:name=".sticky.SixStickyNormalActivity"/>
         <activity android:name=".staggered.SevenStaggeredActivity"/>
         <activity android:name=".staggered.StageredLoadMoreActivity"/>
+        <activity android:name=".tag.TagRecyclerViewActivity"/>
     </application>
 
 </manifest>

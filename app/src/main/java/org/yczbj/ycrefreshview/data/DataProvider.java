@@ -113,4 +113,30 @@ public class DataProvider {
         return arrayList;
     }
 
+    public static ArrayList<String> getTag(){
+        ArrayList<String> list = new ArrayList<>();
+        list.add("杨充");
+        list.add("小样逗比");
+        list.add("你过得怎样");
+        list.add("996加班");
+        list.add("工作太辛苦");
+        list.add("潇湘剑雨");
+        list.add("充哥");
+        list.add("GitHub");
+        list.add("你是个傻逼");
+        list.add("逗比哈");
+        list.add("为什么这样");
+        list.add("工作太辛苦");
+        list.add("潇湘剑雨");
+        list.add("充哥");
+        list.add("GitHub");
+        list.add("你过得怎样");
+        list.add("996加班");
+        list.add("工作太辛苦");
+        list.add("潇湘剑雨");
+        list.add("充哥");
+        list.add("GitHub");
+        return list;
+    }
+
 }
