@@ -155,6 +155,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
             return new BaseViewHolder(view);
         }
         final BaseViewHolder viewHolder = OnCreateViewHolder(parent, viewType);
+        //注意：点击事件放到onCreateViewHolder更好一些，不要放到onBindViewHolder或者ViewHolder中
         setOnClickListener(viewHolder);
         return viewHolder;
     }
@@ -243,7 +244,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         super.onViewRecycled(holder);
     }
 
-    /**---------------------------------子类需要重写的方法---------------------------------------*/
+    /*---------------------------------子类需要重写的方法---------------------------------------*/
 
 
     /**
@@ -260,7 +261,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
     /**
      * 设置多列数据上拉加载更多时
      * @param maxCount                  count
-     * @return
+     * @return                          span
      */
     public GridSpanSizeLookup obtainGridSpanSizeLookUp(int maxCount){
         return new GridSpanSizeLookup(maxCount,headers,footers, (List<Object>) mObjects);
@@ -336,6 +337,9 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
      */
     public void removeAllHeader(){
         int count = headers.size();
+        if (count==0){
+            return;
+        }
         headers.clear();
         notifyItemRangeRemoved(0,count);
     }
@@ -345,6 +349,9 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
      */
     public void removeAllFooter(){
         int count = footers.size();
+        if (count==0){
+            return;
+        }
         footers.clear();
         notifyItemRangeRemoved(headers.size()+getCount(),count);
     }
@@ -821,6 +828,7 @@ public abstract class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
      * @return                      索引位置
      */
     public int getPosition(T item) {
+        //搜索
         return mObjects.indexOf(item);
     }
 

@@ -6,6 +6,9 @@ import java.util.List;
 
 public class DiffCallBack<T> extends DiffUtil.Callback {
 
+    /**
+     * 分别是旧数据和新数据集合，这里使用泛型
+     */
     private List<T> oldList , newList;
 
     public DiffCallBack(List<T> oldList , List<T> newList){

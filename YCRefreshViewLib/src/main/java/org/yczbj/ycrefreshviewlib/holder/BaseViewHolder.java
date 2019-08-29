@@ -156,12 +156,16 @@ public class BaseViewHolder<M> extends RecyclerView.ViewHolder {
         final View view = getView(viewId);
         if (view != null) {
             if (!view.isClickable()) {
+                //如果是不可点击，则需要手动设置可以点击
                 view.setClickable(true);
             }
             view.setOnClickListener(listener);
         }
     }
 
+    /**
+     * 创建listener监听，主要是item中的child点击监听
+     */
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {

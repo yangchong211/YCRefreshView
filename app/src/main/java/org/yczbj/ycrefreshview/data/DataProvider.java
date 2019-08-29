@@ -18,7 +18,18 @@ public class DataProvider {
     private static ArrayList<Integer> getData(){
         ArrayList<Integer> data = new ArrayList<>();
         TypedArray bannerImage = BaseApp.getApp().getResources().obtainTypedArray(R.array.image_girls);
-        for (int i = 0; i < 16 ; i++) {
+        for (int i = 0; i < 30 ; i++) {
+            int image = bannerImage.getResourceId(i, R.drawable.girl2);
+            data.add(image);
+        }
+        bannerImage.recycle();
+        return data;
+    }
+
+    private static ArrayList<Integer> getData2(){
+        ArrayList<Integer> data = new ArrayList<>();
+        TypedArray bannerImage = BaseApp.getApp().getResources().obtainTypedArray(R.array.data_narrow_Image);
+        for (int i = 0; i < 30 ; i++) {
             int image = bannerImage.getResourceId(i, R.drawable.girl2);
             data.add(image);
         }
@@ -32,6 +43,22 @@ public class DataProvider {
         }
         ArrayList<PersonData> arr = new ArrayList<>();
         ArrayList<Integer> data = getData();
+        for (int i=0 ; i< size ; i++){
+            PersonData person = new PersonData();
+            person.setName("小杨逗比"+i);
+            person.setImage(data.get(i));
+            person.setSign("杨充"+i);
+            arr.add(person);
+        }
+        return arr;
+    }
+
+    public static List<PersonData> getList(int size){
+        if (size==0){
+            size = 16;
+        }
+        ArrayList<PersonData> arr = new ArrayList<>();
+        ArrayList<Integer> data = getData2();
         for (int i=0 ; i< size ; i++){
             PersonData person = new PersonData();
             person.setName("小杨逗比"+i);

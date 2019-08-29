@@ -18,6 +18,7 @@ import org.yczbj.ycrefreshview.refresh.RefreshAndMoreActivity2;
 import org.yczbj.ycrefreshview.multistyle.FiveMultiStyleActivity;
 import org.yczbj.ycrefreshview.horizontal.FourHorizontalActivity;
 import org.yczbj.ycrefreshview.refresh.RefreshAndMoreActivity3;
+import org.yczbj.ycrefreshview.scroll.ScrollActivity;
 import org.yczbj.ycrefreshview.staggered.SevenStaggeredActivity;
 import org.yczbj.ycrefreshview.staggered.StageredLoadMoreActivity;
 import org.yczbj.ycrefreshview.sticky.SixStickyNormalActivity;
@@ -76,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.tv_14).setOnClickListener(this);
         findViewById(R.id.tv_15).setOnClickListener(this);
         findViewById(R.id.tv_16).setOnClickListener(this);
+        findViewById(R.id.tv_17).setOnClickListener(this);
     }
 
 
@@ -153,6 +155,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.tv_16:
                 startActivity(new Intent(this, TagRecyclerViewActivity.class));
+                break;
+            case R.id.tv_17:
+                startActivity(new Intent(this, ScrollActivity.class));
                 break;
             default:
                 break;

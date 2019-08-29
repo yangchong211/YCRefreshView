@@ -44,6 +44,7 @@ public class SevenStaggeredGridActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(itemDecoration);
 
 
+
         adapter.addHeader(new InterItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
