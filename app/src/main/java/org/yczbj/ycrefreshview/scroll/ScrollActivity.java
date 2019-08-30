@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 
 import org.yczbj.ycrefreshview.R;
 import org.yczbj.ycrefreshview.data.DataProvider;
-import org.yczbj.ycrefreshview.scroll.recycler.OnPagerListener;
+import org.yczbj.ycrefreshview.scroll.inter.OnPagerListener;
 import org.yczbj.ycrefreshview.scroll.recycler.PagerLayoutManager;
 import org.yczbj.ycrefreshviewlib.utils.RefreshLogUtils;
 

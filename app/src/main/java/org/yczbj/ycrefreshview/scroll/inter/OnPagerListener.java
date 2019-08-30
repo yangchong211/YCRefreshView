@@ -1,4 +1,4 @@
-package org.yczbj.ycrefreshview.scroll.recycler;
+package org.yczbj.ycrefreshview.scroll.inter;
 
 /**
  * <pre>

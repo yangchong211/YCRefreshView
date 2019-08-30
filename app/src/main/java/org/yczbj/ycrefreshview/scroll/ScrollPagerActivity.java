@@ -2,7 +2,6 @@ package org.yczbj.ycrefreshview.scroll;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,7 @@ import org.yczbj.ycrefreshview.data.DataProvider;
 import org.yczbj.ycrefreshview.data.PersonData;
 import org.yczbj.ycrefreshview.scroll.pager.LayoutViewPager;
 import org.yczbj.ycrefreshview.scroll.pager.AbsPagerAdapter;
-import org.yczbj.ycrefreshview.scroll.recycler.OnPagerListener;
+import org.yczbj.ycrefreshview.scroll.inter.OnPagerListener;
 
 import java.util.List;
 

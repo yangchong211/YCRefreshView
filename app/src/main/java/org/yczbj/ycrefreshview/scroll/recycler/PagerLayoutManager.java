@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
 
+import org.yczbj.ycrefreshview.scroll.inter.OnPagerListener;
+
 
 /**
  * <pre>

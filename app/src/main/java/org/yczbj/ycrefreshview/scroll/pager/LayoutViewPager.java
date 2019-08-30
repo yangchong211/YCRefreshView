@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.animation.Interpolator;
 import android.widget.Scroller;
 
-import org.yczbj.ycrefreshview.scroll.recycler.OnPagerListener;
+import org.yczbj.ycrefreshview.scroll.inter.OnPagerListener;
 
 import java.lang.reflect.Field;
 
