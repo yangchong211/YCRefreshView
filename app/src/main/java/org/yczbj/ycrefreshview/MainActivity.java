@@ -30,6 +30,7 @@ import org.yczbj.ycrefreshview.staggered.SevenStaggeredGridActivity;
 import org.yczbj.ycrefreshview.sticky.SixStickyHeaderActivity;
 import org.yczbj.ycrefreshview.delete.DeleteAndTopActivity;
 import org.yczbj.ycrefreshview.insert.ThirdInsertActivity;
+import org.yczbj.ycrefreshview.touchmove.NightTouchMoveActivity2;
 import org.yczbj.ycrefreshview.type.HomePageActivity;
 import org.yczbj.ycrefreshview.type.TypeActivity;
 import org.yczbj.ycrefreshviewlib.utils.RefreshLogUtils;
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.tv_7_3).setOnClickListener(this);
         findViewById(R.id.tv_8).setOnClickListener(this);
         findViewById(R.id.tv_9).setOnClickListener(this);
+        findViewById(R.id.tv_9_2).setOnClickListener(this);
         findViewById(R.id.tv_10).setOnClickListener(this);
         findViewById(R.id.tv_11).setOnClickListener(this);
         findViewById(R.id.tv_11_2).setOnClickListener(this);
@@ -128,6 +130,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.tv_9:
                 startActivity(new Intent(this, NightTouchMoveActivity.class));
+                break;
+            case R.id.tv_9_2:
+                startActivity(new Intent(this, NightTouchMoveActivity2.class));
                 break;
             case R.id.tv_10:
                 startActivity(new Intent(this, DeleteAndTopActivity.class));

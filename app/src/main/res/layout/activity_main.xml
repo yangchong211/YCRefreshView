@@ -159,6 +159,15 @@
             android:background="@android:color/darker_gray"
             android:text="9.RecyclerView实现条目Item拖拽排序与滑动删除"/>
 
+        <TextView
+            android:id="@+id/tv_9_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"
+            android:text="9.RecyclerView九宫格实现条目Item拖拽排序与滑动删除"/>
+
 
         <TextView
             android:id="@+id/tv_10"
