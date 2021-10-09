@@ -238,7 +238,6 @@
             android:text="13.2 使用recyclerView上拉加载更多操作，双列数据"/>
 
 
-
         <TextView
             android:id="@+id/tv_14"
             android:layout_width="match_parent"
@@ -246,7 +245,7 @@
             android:padding="10dp"
             android:layout_marginTop="10dp"
             android:background="@android:color/darker_gray"
-            android:text="14.使用阿里vlayout控件实现复杂页面"/>
+            android:text="14.整体侧滑小案例"/>
 
         <TextView
             android:id="@+id/tv_15"
@@ -255,7 +254,7 @@
             android:padding="10dp"
             android:layout_marginTop="10dp"
             android:background="@android:color/darker_gray"
-            android:text="15.使用原生控件实现14类型中复杂页面"/>
+            android:text="15."/>
 
         <TextView
             android:id="@+id/tv_16"
@@ -275,6 +274,15 @@
             android:layout_marginTop="10dp"
             android:background="@android:color/darker_gray"
             android:text="17.一次滑动一页"/>
+
+        <TextView
+            android:id="@+id/tv_18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"
+            android:text="18.画廊浏览相册"/>
 
     </LinearLayout>
 

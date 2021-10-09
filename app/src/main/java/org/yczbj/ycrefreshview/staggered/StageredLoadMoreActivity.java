@@ -3,24 +3,17 @@ package org.yczbj.ycrefreshview.staggered;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.view.View;
-
-import com.yc.cn.ycbannerlib.LibUtils;
 
 import org.yczbj.ycrefreshview.R;
 import org.yczbj.ycrefreshview.data.DataProvider;
 import org.yczbj.ycrefreshview.data.PersonData;
-import org.yczbj.ycrefreshview.load.LoadMoreAdapter2;
-import org.yczbj.ycrefreshviewlib.inter.OnItemClickListener;
-import org.yczbj.ycrefreshviewlib.item.DividerViewItemLine;
-import org.yczbj.ycrefreshviewlib.item.SpaceViewItemLine;
 import org.yczbj.ycrefreshviewlib.utils.RefreshLogUtils;
 
 import java.util.List;

@@ -1,8 +1,8 @@
 package org.yczbj.ycrefreshview.multistyle;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 
 import com.yc.cn.ycbannerlib.LibUtils;

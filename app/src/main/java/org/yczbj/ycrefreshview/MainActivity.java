@@ -1,14 +1,11 @@
 package org.yczbj.ycrefreshview;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-
-import com.bumptech.glide.load.engine.Resource;
-
 import org.yczbj.ycrefreshview.collapsing.EightCollapsingActivity;
-import org.yczbj.ycrefreshview.layout.LayoutActivity;
+import org.yczbj.ycrefreshview.cover.CoverActivity;
 import org.yczbj.ycrefreshview.load.LoadMoreActivity;
 import org.yczbj.ycrefreshview.load.LoadMoreActivity2;
 import org.yczbj.ycrefreshview.normal.NormalRecyclerViewActivity;
@@ -19,6 +16,7 @@ import org.yczbj.ycrefreshview.multistyle.FiveMultiStyleActivity;
 import org.yczbj.ycrefreshview.horizontal.FourHorizontalActivity;
 import org.yczbj.ycrefreshview.refresh.RefreshAndMoreActivity3;
 import org.yczbj.ycrefreshview.scroll.ScrollActivity;
+import org.yczbj.ycrefreshview.slide.SlideViewActivity;
 import org.yczbj.ycrefreshview.staggered.SevenStaggeredActivity;
 import org.yczbj.ycrefreshview.staggered.StageredLoadMoreActivity;
 import org.yczbj.ycrefreshview.sticky.SixStickyNormalActivity;
@@ -31,12 +29,8 @@ import org.yczbj.ycrefreshview.sticky.SixStickyHeaderActivity;
 import org.yczbj.ycrefreshview.delete.DeleteAndTopActivity;
 import org.yczbj.ycrefreshview.insert.ThirdInsertActivity;
 import org.yczbj.ycrefreshview.touchmove.NightTouchMoveActivity2;
-import org.yczbj.ycrefreshview.type.HomePageActivity;
 import org.yczbj.ycrefreshview.type.TypeActivity;
 import org.yczbj.ycrefreshviewlib.utils.RefreshLogUtils;
-
-import java.io.InputStream;
-import java.sql.Statement;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -80,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.tv_15).setOnClickListener(this);
         findViewById(R.id.tv_16).setOnClickListener(this);
         findViewById(R.id.tv_17).setOnClickListener(this);
+        findViewById(R.id.tv_18).setOnClickListener(this);
     }
 
 
@@ -153,16 +148,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(this, LoadMoreActivity2.class));
                 break;
             case R.id.tv_14:
-                startActivity(new Intent(this, LayoutActivity.class));
+                startActivity(new Intent(this, SlideViewActivity.class));
                 break;
             case R.id.tv_15:
-                startActivity(new Intent(this, HomePageActivity.class));
                 break;
             case R.id.tv_16:
                 startActivity(new Intent(this, TagRecyclerViewActivity.class));
                 break;
             case R.id.tv_17:
                 startActivity(new Intent(this, ScrollActivity.class));
+                break;
+            case R.id.tv_18:
+                startActivity(new Intent(this, CoverActivity.class));
                 break;
             default:
                 break;

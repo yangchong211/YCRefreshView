@@ -1,1 +1,3 @@
-include ':app', ':YCRefreshViewLib'
+include ':app', ':RefreshViewLib'
+include ':SlideViewLib'
+include ':PhotoCoverLib'

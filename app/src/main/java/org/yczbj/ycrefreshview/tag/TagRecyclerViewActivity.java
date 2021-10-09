@@ -1,38 +1,23 @@
 package org.yczbj.ycrefreshview.tag;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import org.yczbj.ycrefreshview.R;
 import org.yczbj.ycrefreshview.app.SysUtils;
-import org.yczbj.ycrefreshview.data.AppUtils;
 import org.yczbj.ycrefreshview.data.DataProvider;
-import org.yczbj.ycrefreshview.data.PersonData;
-import org.yczbj.ycrefreshview.refresh.PersonAdapter;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.holder.BaseViewHolder;
-import org.yczbj.ycrefreshviewlib.inter.OnErrorListener;
-import org.yczbj.ycrefreshviewlib.inter.OnItemLongClickListener;
-import org.yczbj.ycrefreshviewlib.inter.OnLoadMoreListener;
-import org.yczbj.ycrefreshviewlib.inter.OnNoMoreListener;
-import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 /**
  * @author yc

@@ -2,6 +2,10 @@ package org.yczbj.ycrefreshview.app;
 
 import android.app.Application;
 
+import com.bumptech.glide.request.target.ViewTarget;
+
+import org.yczbj.ycrefreshview.R;
+
 public class BaseApp extends Application {
 
     private static Application application;
@@ -21,6 +25,7 @@ public class BaseApp extends Application {
     public void onCreate() {
         super.onCreate();
         application = this;
+        ViewTarget.setTagId(R.id.glide_tag);
     }
 
 

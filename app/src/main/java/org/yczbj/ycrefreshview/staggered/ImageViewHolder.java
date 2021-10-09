@@ -28,9 +28,6 @@ public class ImageViewHolder extends BaseViewHolder<PictureData> {
         int height = 300;
         params.height = height;
         imgPicture.setLayoutParams(params);
-        Glide.with(getContext())
-                .load(data.getImage())
-                .placeholder(R.drawable.bg_small_tree_min)
-                .into(imgPicture);
+        imgPicture.setImageResource(data.getImage());
     }
 }

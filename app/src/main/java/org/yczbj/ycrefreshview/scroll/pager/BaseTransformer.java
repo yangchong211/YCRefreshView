@@ -1,8 +1,8 @@
 
 package org.yczbj.ycrefreshview.scroll.pager;
 
-import android.support.annotation.NonNull;
-import android.support.v4.view.ViewPager.PageTransformer;
+import androidx.annotation.NonNull;
+import androidx.viewpager.widget.ViewPager.PageTransformer;
 import android.view.View;
 
 

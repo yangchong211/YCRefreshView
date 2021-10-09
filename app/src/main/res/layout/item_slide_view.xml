@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="horizontal"
+                android:id="@+id/rl_item"
+                android:layout_width="match_parent"
+                android:layout_height="144dp"
+                android:foreground="?android:attr/selectableItemBackground">
+
+    <!--左边侧滑的菜单-->
+    <FrameLayout
+        android:id="@+id/fl_menu"
+        android:layout_width="70dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="-75dp"
+        android:visibility="visible"
+        android:background="@color/colorAccent">
+        <TextView
+            android:id="@+id/item_tv_delete"
+            android:visibility="visible"
+            android:text="删 除"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_height="match_parent"/>
+    </FrameLayout>
+
+
+    <!--正文内容部分-->
+    <LinearLayout
+        android:id="@+id/ll_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/iv_project_logo"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_marginTop="0dp"
+                android:scaleType="fitXY"
+                android:background="@mipmap/ic_launcher"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+                    <TextView
+                        android:id="@+id/tv_project_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:maxEms="10"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:text="标题内容"/>
+
+                    <TextView
+                        android:id="@+id/tv_project_small_title"
+                        android:layout_width="65dp"
+                        android:layout_height="25dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="农业"
+                        android:textColor="@color/colorAccent" />
+                </RelativeLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="visible"
+                    android:layout_marginTop="5dp">
+                    <TextView
+                        android:id="@+id/tv_project_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="种子"/>
+                    <TextView
+                        android:id="@+id/tv_project_money"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="100万"/>
+                    <TextView
+                        android:id="@+id/tv_project_arm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="人民币"/>
+                </LinearLayout>
+
+                <!--下面还有标签-->
+                <!--<com.zhy.view.flowlayout.TagFlowLayout
+                    xmlns:zhy="http://schemas.android.com/apk/res-auto"
+                    android:visibility="gone"
+                    android:id="@+id/tfl_tag"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_height="20dp"
+                    zhy:max_select="-1"/>-->
+                <!--下面还有标签-->
+                <TextView
+                    android:visibility="visible"
+                    android:id="@+id/tv_tag"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_height="20dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="标签  流逝布局  哈哈   哈哈"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_state"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="正在审核"/>
+            <TextView
+                android:id="@+id/tv_go_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:paddingLeft="20dp"
+                android:gravity="center"
+                android:text="修改"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

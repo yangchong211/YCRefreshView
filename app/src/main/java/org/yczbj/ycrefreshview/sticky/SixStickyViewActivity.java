@@ -2,13 +2,14 @@ package org.yczbj.ycrefreshview.sticky;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.widget.LinearLayout;
+
+import com.google.android.material.appbar.AppBarLayout;
 
 import org.yczbj.ycrefreshview.R;
 import org.yczbj.ycrefreshview.data.AppUtils;

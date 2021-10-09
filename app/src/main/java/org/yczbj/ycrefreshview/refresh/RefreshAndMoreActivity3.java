@@ -2,11 +2,10 @@ package org.yczbj.ycrefreshview.refresh;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,7 +15,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 
-import com.yc.cn.ycbannerlib.gallery.GalleryLayoutManager;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.yczbj.ycrefreshview.R;
 import org.yczbj.ycrefreshview.data.AppUtils;
@@ -26,7 +25,6 @@ import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.holder.BaseViewHolder;
 import org.yczbj.ycrefreshviewlib.inter.OnErrorListener;
 import org.yczbj.ycrefreshviewlib.inter.OnItemLongClickListener;
-import org.yczbj.ycrefreshviewlib.inter.OnLoadMoreListener;
 import org.yczbj.ycrefreshviewlib.inter.OnMoreListener;
 import org.yczbj.ycrefreshviewlib.inter.OnNoMoreListener;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
@@ -114,7 +112,7 @@ public class RefreshAndMoreActivity3 extends AppCompatActivity implements SwipeR
                         return new PersonViewHolder(parent);
                     }
                 };
-        adapter.setHeaderAndFooterSpan(true);
+//        adapter.setHeaderAndFooterSpan(true);
         recyclerView.setAdapterWithProgress(adapter);
         adapter.setMore(R.layout.view_more, new OnMoreListener() {
             @Override

@@ -3,7 +3,7 @@
 package org.yczbj.ycrefreshview.sticky;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +12,6 @@ import android.widget.TextView;
 
 import org.yczbj.ycrefreshview.R;
 import org.yczbj.ycrefreshviewlib.item.StickyHeaderItemLine;
-
-import java.util.logging.Logger;
 
 
 /**

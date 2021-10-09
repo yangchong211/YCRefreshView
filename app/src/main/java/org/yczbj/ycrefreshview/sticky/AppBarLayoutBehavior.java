@@ -1,13 +1,14 @@
 package org.yczbj.ycrefreshview.sticky;
 
 import android.content.Context;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CoordinatorLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.OverScroller;
+
+import com.google.android.material.appbar.AppBarLayout;
 
 import java.lang.reflect.Field;
 

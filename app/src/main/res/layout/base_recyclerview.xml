@@ -16,7 +16,7 @@
         app:layout_empty="@layout/view_custom_empty_data"
         app:layout_error="@layout/view_custom_data_error"/>
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

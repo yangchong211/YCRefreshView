@@ -38,8 +38,6 @@
         <activity android:name=".type.TypeActivity"/>
         <activity android:name=".load.LoadMoreActivity"/>
         <activity android:name=".load.LoadMoreActivity2"/>
-        <activity android:name=".layout.LayoutActivity"/>
-        <activity android:name=".type.HomePageActivity"/>
         <activity android:name=".sticky.SixStickyViewActivity"/>
         <activity android:name=".sticky.SixStickyNormalActivity"/>
         <activity android:name=".staggered.SevenStaggeredActivity"/>
@@ -47,6 +45,10 @@
         <activity android:name=".tag.TagRecyclerViewActivity"/>
         <activity android:name=".scroll.ScrollActivity"/>
         <activity android:name=".scroll.ScrollPagerActivity"/>
+        <activity android:name=".slide.SlideViewActivity"/>
+        <activity android:name=".cover.CoverActivity"/>
+        <activity android:name=".cover.CoverFirstActivity"/>
+        <activity android:name=".cover.CoverSecondActivity"/>
     </application>
 
 </manifest>
