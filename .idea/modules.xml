@@ -5,6 +5,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/YCRefreshView.iml" filepath="$PROJECT_DIR$/.idea/modules/YCRefreshView.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/PhotoCoverLib/YCRefreshView.PhotoCoverLib.iml" filepath="$PROJECT_DIR$/.idea/modules/PhotoCoverLib/YCRefreshView.PhotoCoverLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/YCRefreshViewLib/YCRefreshView.RefreshViewLib.iml" filepath="$PROJECT_DIR$/.idea/modules/YCRefreshViewLib/YCRefreshView.RefreshViewLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SelectViewLib/YCRefreshView.SelectViewLib.iml" filepath="$PROJECT_DIR$/.idea/modules/SelectViewLib/YCRefreshView.SelectViewLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/YCShopCatLib/YCRefreshView.ShopCatLib.iml" filepath="$PROJECT_DIR$/.idea/modules/YCShopCatLib/YCRefreshView.ShopCatLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/YCSlideViewLib/YCRefreshView.SlideViewLib.iml" filepath="$PROJECT_DIR$/.idea/modules/YCSlideViewLib/YCRefreshView.SlideViewLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/YCRefreshView.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/YCRefreshView.app.iml" />
     </modules>

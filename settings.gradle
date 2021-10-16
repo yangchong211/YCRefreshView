@@ -1,3 +1,5 @@
 include ':app', ':RefreshViewLib'
 include ':SlideViewLib'
 include ':PhotoCoverLib'
+include ':ShopCatLib'
+include ':SelectViewLib'

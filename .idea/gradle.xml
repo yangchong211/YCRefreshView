@@ -12,6 +12,8 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/PhotoCoverLib" />
             <option value="$PROJECT_DIR$/RefreshViewLib" />
+            <option value="$PROJECT_DIR$/SelectViewLib" />
+            <option value="$PROJECT_DIR$/ShopCatLib" />
             <option value="$PROJECT_DIR$/SlideViewLib" />
             <option value="$PROJECT_DIR$/app" />
           </set>

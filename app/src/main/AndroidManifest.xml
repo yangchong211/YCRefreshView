@@ -49,6 +49,7 @@
         <activity android:name=".cover.CoverActivity"/>
         <activity android:name=".cover.CoverFirstActivity"/>
         <activity android:name=".cover.CoverSecondActivity"/>
+        <activity android:name=".select.SelectFollowActivity"/>
     </application>
 
 </manifest>

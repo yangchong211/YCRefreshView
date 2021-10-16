@@ -284,6 +284,14 @@
             android:background="@android:color/darker_gray"
             android:text="18.画廊浏览相册"/>
 
+        <TextView
+            android:id="@+id/tv_19"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"
+            android:text="19.recycler实现item多选和单选"/>
     </LinearLayout>
 
 
