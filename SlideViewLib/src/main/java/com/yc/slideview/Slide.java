@@ -1,4 +1,4 @@
-package com.yc.cn.slideview;
+package com.yc.slideview;
 
 /**
  * ================================================

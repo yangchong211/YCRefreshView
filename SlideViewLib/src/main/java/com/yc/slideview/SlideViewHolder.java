@@ -1,4 +1,4 @@
-package com.yc.cn.slideview;
+package com.yc.slideview;
 
 import android.animation.ValueAnimator;
 import android.view.View;

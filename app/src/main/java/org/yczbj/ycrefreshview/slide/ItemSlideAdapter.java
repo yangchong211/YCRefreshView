@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.yc.cn.slideview.SlideHelper;
-import com.yc.cn.slideview.SlideViewHolder;
+import com.yc.slideview.SlideHelper;
+import com.yc.slideview.SlideViewHolder;
 
 import org.yczbj.ycrefreshview.R;
 

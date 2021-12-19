@@ -8,8 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.yc.cn.cover.CoverLayoutManger;
-import com.yc.cn.cover.CoverRecyclerView;
+import com.yc.cover.CoverLayoutManger;
+import com.yc.cover.CoverRecyclerView;
 
 import org.yczbj.ycrefreshview.R;
 

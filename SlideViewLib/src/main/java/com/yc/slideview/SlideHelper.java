@@ -1,4 +1,4 @@
-package com.yc.cn.slideview;
+package com.yc.slideview;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -11,7 +11,7 @@
         android:layout_height="match_parent" />
 
 
-        <com.yc.cn.cover.CoverRecyclerView
+        <com.yc.cover.CoverRecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="70dp"
