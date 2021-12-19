@@ -94,7 +94,16 @@
 ### 3.如何使用介绍
 #### 3.1 最基础的使用
 - 首先在集成：
-    - implementation 'org.yczbj:YCRefreshViewLib:2.5.8'
+    ``` java
+    //recyclerView封装库
+    implementation 'com.github.yangchong211.YCRefreshView:RefreshViewLib:3.0.1'
+    //整体item侧滑库
+    implementation 'com.github.yangchong211.YCRefreshView:SlideViewLib:3.0.1'
+    //仿汽车之家画廊库
+    implementation 'com.github.yangchong211.YCRefreshView:PhotoCoverLib:3.0.1'
+    //标签多选单选库
+    implementation 'com.github.yangchong211.YCRefreshView:SelectViewLib:3.0.1'
+    ```
 - 在布局中
     ```
     <org.yczbj.ycrefreshviewlib.YCRefreshView

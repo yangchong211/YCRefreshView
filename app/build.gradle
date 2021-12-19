@@ -27,11 +27,19 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'jp.wasabeef:glide-transformations:1.3.1'
     implementation 'cn.yc:YCBannerLib:1.4.0'
-    implementation project(':RefreshViewLib')
-    //implementation 'org.yczbj:YCRefreshViewLib:2.5.8'
-    implementation project(path: ':SlideViewLib')
-    implementation project(path: ':PhotoCoverLib')
-    implementation project(path: ':SelectViewLib')
+
+    //recyclerView封装库
+    implementation 'com.github.yangchong211.YCRefreshView:RefreshViewLib:3.0.1'
+    //整体item侧滑库
+    implementation 'com.github.yangchong211.YCRefreshView:SlideViewLib:3.0.1'
+    //仿汽车之家画廊库
+    implementation 'com.github.yangchong211.YCRefreshView:PhotoCoverLib:3.0.1'
+    //标签多选单选库
+    implementation 'com.github.yangchong211.YCRefreshView:SelectViewLib:3.0.1'
+//    implementation project(path: ':RefreshViewLib')
+//    implementation project(path: ':SlideViewLib')
+//    implementation project(path: ':PhotoCoverLib')
+//    implementation project(path: ':SelectViewLib')
     implementation 'cn.yc:GroupAdapterLib:1.0.1'
     //glide
     implementation 'cn.yc:zoomImageLib:1.0.1'
