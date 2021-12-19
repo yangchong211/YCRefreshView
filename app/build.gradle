@@ -40,7 +40,7 @@ dependencies {
 //    implementation project(path: ':SlideViewLib')
 //    implementation project(path: ':PhotoCoverLib')
 //    implementation project(path: ':SelectViewLib')
-    implementation 'cn.yc:GroupAdapterLib:1.0.1'
+    implementation 'com.github.yangchong211:YCGroupAdapter:1.0.6'
     //glide
     implementation 'cn.yc:zoomImageLib:1.0.1'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
