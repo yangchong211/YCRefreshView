@@ -10,6 +10,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/EastAdapterLib" />
             <option value="$PROJECT_DIR$/PhotoCoverLib" />
             <option value="$PROJECT_DIR$/RefreshViewLib" />
             <option value="$PROJECT_DIR$/SelectViewLib" />

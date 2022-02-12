@@ -4,13 +4,13 @@ apply plugin: 'com.github.dcendents.android-maven'
 
 android {
     compileSdkVersion project.ext.androidCompileSdkVersion
-    buildToolsVersion project.ext.androidBuildToolsVersion
+    //buildToolsVersion project.ext.androidBuildToolsVersion
 
     defaultConfig {
         minSdkVersion project.ext.androidMinSdkVersion
         targetSdkVersion project.ext.androidTargetSdkVersion
-        versionCode 13
-        versionName "2.5.9"
+        versionCode 32
+        versionName "3.0.2"
     }
 
     buildTypes {

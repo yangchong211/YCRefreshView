@@ -78,10 +78,10 @@ public class CoverLayoutManger extends RecyclerView.LayoutManager {
     private int mLastSelectPosition = 0;
 
     /**滑动的方向：左*/
-    private static int SCROLL_LEFT = 1;
+    private static final int SCROLL_LEFT = 1;
 
     /**滑动的方向：右*/
-    private static int SCROLL_RIGHT = 2;
+    private static final int SCROLL_RIGHT = 2;
 
     /**
      * 选中监听
@@ -112,7 +112,8 @@ public class CoverLayoutManger extends RecyclerView.LayoutManager {
 
     @Override
     public RecyclerView.LayoutParams generateDefaultLayoutParams() {
-        return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
     @Override

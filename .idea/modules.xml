@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/YCRefreshView.iml" filepath="$PROJECT_DIR$/.idea/modules/YCRefreshView.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/EastAdapterLib/YCRefreshView.EastAdapterLib.iml" filepath="$PROJECT_DIR$/.idea/modules/EastAdapterLib/YCRefreshView.EastAdapterLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/PhotoCoverLib/YCRefreshView.PhotoCoverLib.iml" filepath="$PROJECT_DIR$/.idea/modules/PhotoCoverLib/YCRefreshView.PhotoCoverLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/YCRefreshViewLib/YCRefreshView.RefreshViewLib.iml" filepath="$PROJECT_DIR$/.idea/modules/YCRefreshViewLib/YCRefreshView.RefreshViewLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/SelectViewLib/YCRefreshView.SelectViewLib.iml" filepath="$PROJECT_DIR$/.idea/modules/SelectViewLib/YCRefreshView.SelectViewLib.iml" />
