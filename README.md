@@ -96,13 +96,15 @@
 - 首先在集成：
     ``` java
     //recyclerView封装库
-    implementation 'com.github.yangchong211.YCRefreshView:RefreshViewLib:3.0.1'
+    implementation 'com.github.yangchong211.YCRefreshView:RefreshViewLib:3.0.2'
     //整体item侧滑库
-    implementation 'com.github.yangchong211.YCRefreshView:SlideViewLib:3.0.1'
+    implementation 'com.github.yangchong211.YCRefreshView:SlideViewLib:3.0.2'
     //仿汽车之家画廊库
-    implementation 'com.github.yangchong211.YCRefreshView:PhotoCoverLib:3.0.1'
+    implementation 'com.github.yangchong211.YCRefreshView:PhotoCoverLib:3.0.2'
     //标签多选单选库
-    implementation 'com.github.yangchong211.YCRefreshView:SelectViewLib:3.0.1'
+    implementation 'com.github.yangchong211.YCRefreshView:SelectViewLib:3.0.2'
+    //之前简单型adapter
+    implementation 'com.github.yangchong211.YCRefreshView:EastAdapterLib:3.0.2'
     ```
 - 在布局中
     ```
